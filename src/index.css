@@ -1,0 +1,251 @@
+
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen","Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: white !important; 
+}
+
+.curptr{
+  cursor: pointer;
+}
+
+.curptr:hover{
+  font-weight:bold;
+  color: #08478c;
+}
+
+/* .sidebar .nav-link {
+  padding: 0.5rem 1rem !important;
+} */
+
+.container-fluid > .h2, h2 {
+  font-size: larger !important;
+}
+
+.container-fluid>.nav-link {
+  padding: 10px 0px !important; 
+}
+
+.btn {
+  padding: 0.2rem 0.7rem !important; 
+}
+
+.table td {
+  padding: 0.5rem !important; 
+}
+
+textarea {
+  width: 100%  !important; 
+}
+
+.MuiTreeView-root {
+  padding-top: 20px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.clrcode{
+  color: #48c7ec !important; 
+}
+
+.app-header .navbar-brand {
+  height: 35px !important;
+}
+
+.wid50{
+  width: 33% !important;
+  background: #f5f4f4;
+  border: 1px solid #c9c5c5;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.wid80{
+  width: 66% !important;
+  background: #f5f4f4;
+  border: 1px solid #c9c5c5;
+  border-radius: 5px;
+  padding: 20px;
+}
+.wid100{
+  width: 100% !important;
+  background: #f5f4f4;
+  border: 1px solid #c9c5c5;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+/* .brdrds{
+  border-radius: 35px !important;
+} */
+
+.paddg{
+  padding: 7px 35px !important;
+}
+
+.app-header .navbar-brand {
+  width: 165px;
+}
+
+.table {
+  margin-bottom: 0rem !important;
+}
+
+.MuiFormControl-marginNormal {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  border: 1px solid #ced4da !important;
+  padding-left: 10px !important;
+}
+
+.MuiInput-underline:before {
+  border: none !important;
+}
+
+.no {
+  margin-bottom: 0 !important;
+  padding: 10px 15px;
+}
+
+.txUp{
+  text-transform: uppercase;
+}
+
+.lnkbtn{
+  float: right;
+  padding: 0px 0px 10px !important;
+}
+
+.lnkbtn1{
+  float: right;
+  padding: 0px 0px 0px !important;
+}
+
+.fcol{
+  width: 7%;
+  text-align: center;
+}
+
+.lcol{
+  width: 15%;
+  text-align: center;
+}
+
+.tbtn{
+  padding: 0px 5px 0px 5px !important;
+}
+
+td{
+  vertical-align: middle !important;
+}
+
+textarea{
+  border: 1px solid #cecccc !important;
+}
+
+.MuiTypography-body1 {
+  font-size: 0.8rem !important;
+  padding: 2px 6px !important;
+}
+/* .pagination{
+  padding-left: 28% !important;
+  margin-top: 15px;
+} */
+
+@media only screen and (max-width: 768px) {
+  .mres {
+    width: 100% !important;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .mres1 {
+    margin-bottom: 50px;
+  }
+  .colm{
+    display: none;
+  }
+}
+
+.modal-backdrop {
+  background-color: #0101013d !important;
+}
+
+.prms{
+    color: #083e7a;
+    text-transform: uppercase;
+    font-size: small;
+    font-weight: 700;
+}
+
+
+.ullist{
+  list-style: none;
+  margin: 6px;
+  padding: 0px 5px;
+}
+
+.lilist{
+  display: inline;
+  padding: 5px 8px;
+  color: #08478c;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+
+.frm-lbl{
+  margin-top: 6px;
+}
+.flt-r{
+  float :right;
+}
+
+.tright{
+  text-align: right;
+}
+
+.medica{
+  text-align: justify;
+  line-height: 1.8;
+  margin-bottom: 10px;
+}
+
+.MuiTreeItem-label {
+  width: 100%;
+  border: 1px solid #b9b9b9;
+  margin: 2px 2px !important;
+  font-weight: 700;
+}
+
+.MuiTreeItem-root > ul{
+  background:rgb(238, 238, 238);
+}
+
+.topmenus{
+  flex-direction: row !important;
+  align-items: center !important;
+}
+
+.nvlink{
+  cursor: pointer !important;
+  font-weight: 500 !important;
+  color: #08478c !important;
+}
+
+.nvlink:hover{
+  font-weight: 600 !important;
+  color: #20a8d8 !important;
+}
+
+
+
+.app-header .dropdown-item {
+  min-width: 50% !important;
+  padding: 5px 20px !important;
+}

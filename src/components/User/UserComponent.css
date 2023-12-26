@@ -1,0 +1,49 @@
+@media all and (min-width: 480px) {
+    .Signup {
+      padding: 60px 0;
+      /* background-image: url(../../../src/assets/img/homeopathy.jpg); */
+    
+    }
+  
+    .Signup form {
+      margin: 0 auto;
+      max-width: 55%;
+    }
+  }
+  
+  .Signup form span.help-block {
+    font-size: 14px;
+    padding-bottom: 10px;
+    color: #999;
+  }
+
+  .form-control {
+    border-radius: 0rem !important;
+  }
+
+  hr{
+    background: #48c7ec;
+    margin-top: 30px !important;
+    margin-bottom: 25px !important;
+  }
+
+  h4{
+    text-transform: uppercase;
+  }
+
+  .clrcode {
+    color: #30aed3 !important;
+}
+
+.wid50 {
+  background: #f5f4f4a3;
+}
+
+.btn_Cancel{
+    background-color: rgb(216 32 32 / 73%);
+    border-radius: 50px;
+    text-transform: uppercase;
+    padding: 8px 25px;
+    border-color: red;
+    font-weight: 400;
+}

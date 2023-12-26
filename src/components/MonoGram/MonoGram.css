@@ -1,0 +1,56 @@
+@media all and (min-width: 480px) {
+    .CaseEntry {
+      padding: 60px 0;
+    }
+  
+    .CaseEntry form {
+      margin: 0 auto;
+      max-width: 55%;
+    }
+  }
+  
+  .CaseEntry form span.help-block {
+    font-size: 14px;
+    padding-bottom: 10px;
+    color: #999;
+  }
+  
+  .add{
+    float: right;
+    margin-top: 10px;
+  }
+  .table-bordered {
+    border: 2px solid burlywood;
+  }
+  .textArea{
+    width: 100%;
+  }
+  .detailsTable{
+    border-style: groove;
+  }
+  .btnQuestions{
+    float: right;
+  }
+
+  
+.brdtop{
+  border-top: 1.5px solid gainsboro;
+}
+
+.hrc{
+  background: #e5e5e5;
+  margin-top: 12px !important;
+  margin-bottom: 25px !important;
+}
+
+.fxscroll{
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.alignc{
+  text-align: center;
+}
+
+
+

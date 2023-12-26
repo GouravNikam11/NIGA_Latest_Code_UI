@@ -1,0 +1,148 @@
+.btn_Appointment{
+    background: rgb(0, 181, 233);
+    color: white;
+    display: inline-block;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    border: 1px solid rgb(0, 181, 233);
+    padding: .375rem 1.75rem;
+    font-size: 16px;
+    line-height: 1.5;
+    border-radius: .25rem;
+  }
+  .btn_Cancel{
+    background: #FFA500;
+    color: white;
+    display: inline-block;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    border: 1px solid rgb(0, 181, 233);
+    padding: .375rem 1.75rem;
+    font-size: 16px;
+    line-height: 1.5;
+    border-radius: .25rem;
+  }
+
+  .main .container-fluid {
+ 
+    padding: 7px !important;
+}
+
+.breadcrumb {
+  margin-bottom: 10px !important;
+}
+
+/* .grade1css{
+  font-family: 'Times New Roman';
+  color: black;
+
+}
+.grade2css{
+  font-family: 'Times New Roman';
+  color:blue;
+  font-style: italic;
+
+}
+.grade3css{
+  font-family: 'Times New Roman';
+  color:red;
+  text-transform: uppercase;
+
+}
+.grade4css{
+  font-family: 'Times New Roman';
+  color:red;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-decoration-line: underline;
+
+} */
+
+.fltr{
+  float: right;
+  font-size: 13px;
+  position: initial;
+  text-align: right;
+  margin-right: 1.5rem;
+}
+
+.flt{
+  float: right;
+  font-size: 13px;
+  position: initial !important;
+  text-align: right;
+  accent-color: #20a8d8;
+}
+
+.fltcnt{
+  float: left;
+  font-size: 13px;
+  position: initial !important;
+}
+
+.sidebar .nav-dropdown-toggle::before {
+  width: 11px !important;
+  height: 12px !important;
+}
+
+.mgt-8{
+  margin-top: 8px !important;
+}
+
+.mgt-10{
+  margin-top: 15px !important;
+}
+
+.txt{
+  font-size: inherit !important;
+  padding-left: 5px !important;
+}
+
+.itlc{
+  font-style: italic !important ;
+} 
+
+.bld{
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+} 
+
+.c-blue{
+  color: blue !important;
+} 
+
+.c-red{
+  color: red !important;
+}
+
+.app-header .navbar-toggler {
+  position: absolute;
+  margin-left: 15%;
+}
+
+.form-check-input-check {
+    margin-top: 0.5rem;
+    margin-left: 0rem;
+    zoom: 1.2;
+}
+
+.sidebar .nav-link {
+  font-size: 11px;
+  padding: 0.4rem 0.1rem !important;
+}
+
+.sidebar .nav-dropdown.open {
+  width: 216px;
+}
+
+.sidebar .sidebar-minimizer {
+  display: none;
+}

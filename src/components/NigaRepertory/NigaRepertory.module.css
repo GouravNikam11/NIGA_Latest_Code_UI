@@ -1,0 +1,73 @@
+.modal-header{
+    width: 100%;
+    display: block;
+}
+
+.modal-dialog {
+    max-width: 700px;
+}
+
+.bottom {
+    top: 25px;
+    /* left: -50%; */
+}
+
+.tooltip-text1 {
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+    width: 100px;
+    color: white;
+    background-color: #192733;
+    padding: 5px;
+    margin-top: 7px;
+    right: 10%;
+    font-size: 12px;
+}
+  
+.hover-text1:hover .tooltip-text1 {
+    visibility: visible;
+}
+
+.hover-text1 {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+    text-align: center;
+}
+  
+
+.tooltip-text2 {
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+    width: 100px;
+    color: white;
+    background-color: #192733;
+    padding: 5px;
+    margin-top: 7px;
+    right: 10%;
+    font-size: 12px;
+}
+  
+.hover-text2:hover .tooltip-text2 {
+    visibility: visible;
+}
+
+.hover-text2 {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+    text-align: center;
+}
+
+.auth{
+    display: inline;
+    float: left;
+    cursor: pointer !important;
+    font-size: 16px;
+    color: #6354b1;
+    border: 2px solid;
+    padding: 0px 6px;
+    margin: 12px;
+}

@@ -1,0 +1,50 @@
+
+
+.label {
+    font-weight: 400;
+}
+
+.required {
+    color: rgb(219, 30, 30);
+}
+
+.error {
+    color: rgb(219, 30, 30);
+    font-size: 12px;
+}
+
+.crdhd{
+    padding: 0.2rem 1.25rem !important;
+}
+
+.cmpbtn{
+    background: #dc5454 !important;
+    border-color: #f43535 !important;
+}
+
+.bhbtn{
+    background: #269763 !important;
+    border-color: #269763 !important;
+}
+
+.hthead{
+    font-weight: 600;
+    color: #08478c;
+    padding-bottom: 7px !important;
+    text-transform: uppercase;
+}
+
+.table td, .table th {
+    padding: 0.5rem !important;
+}
+
+.btncons{
+    font-size: 12px;
+    float: right;
+    margin-bottom: 8px !important;
+}
+
+.ck.ck-editor {
+    position: relative;
+    margin-top: 16px;
+}

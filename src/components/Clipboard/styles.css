@@ -1,0 +1,146 @@
+
+
+.navbar-brand-full{
+    margin-left: 30px;
+}
+
+.app-header .navbar-toggler {
+    padding: 0.25rem 25px;
+}
+
+.navbar {
+    padding: 0.1rem 0.2rem !important ;
+}
+
+.breadcrumb {
+    background-color: #f0f3f5;
+    border-radius: 0rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: red;
+    font-size: 16px;
+    padding: 0.7rem 1rem !important;
+}
+
+.breadcrumb-item.active {
+    color: #08478c !important;
+    font-weight: 700;
+}
+
+.table thead th{
+    color: #083e7a;
+    background: #e9ecef;
+}
+
+
+.rubric:hover button{
+    display: block;
+}
+
+/* .main{
+    margin-left: 188px;
+} */
+
+
+
+.btn-clipboard {
+    display: none;
+    float: right;
+    font-size: 12px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.react-datepicker.floating {
+    right: -50px;
+}
+
+.headerIcon{
+    color: #08478c;
+    font-size: larger !important;
+}
+
+.card-header{
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #08478c;
+    letter-spacing: 1px;
+    background: #e9ecef;
+}
+
+.card {
+    margin-bottom: 0.7rem;
+    border: 1px solid #cfc8c8 !important;
+}
+
+datepicker-input {
+    height: 30px;
+}
+
+.profile-text {
+    font-size: 20px !important;
+    color: #08478c !important;
+    text-transform: uppercase;
+}
+
+.pull-left{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen","Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",sans-serif;
+}
+
+.nav-tabs .nav-item {
+    margin-bottom: 0px !important;
+    text-transform: capitalize;
+}
+
+.card-body {
+    padding: 10px !important;
+    background: #fbfbfbed;
+}
+
+.table>p{
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-size: 0.9rem !important;
+}
+
+.form-control {
+    font-size: 0.9rem !important;
+}
+
+.fa-sort{
+    border: 1px solid gray;
+    float: right;
+}
+
+.btn {
+    padding: 4px 8px 5px !important;
+}
+
+.btn_Cancel {
+    background: #dd6262 !important;
+    border-color: #dd6262 !important;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px !important;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
