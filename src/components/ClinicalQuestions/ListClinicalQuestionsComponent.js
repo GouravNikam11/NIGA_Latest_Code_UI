@@ -39,7 +39,7 @@ export class ListClinicalQuestionsComponent extends Component {
                 <td>{c.questionGroupName}</td>
                 <td>{c.questionSubgroupName}</td>
                 <td  className='lcol'>
-                    <Link to={"/EditClinicalQuestions/" + c.questionGroupId}>
+                    <Link to={"/EditClinicalQuestions/" + c.questionsId + "/" + (c.questionSubgroupName === "LOCATION" ? 0 : 1)}>
                         <Button ><i className="fa fa-pencil"></i></Button> 
                     </Link>
                     <Button style={{marginLeft:8}} variant="danger" onClick={() => this.deleteQuestionGroup(c.questionGroupId)} ><i className="fa fa-trash"></i></Button>

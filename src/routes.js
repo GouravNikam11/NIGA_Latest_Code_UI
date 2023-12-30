@@ -289,7 +289,7 @@ const routes = [
   /* Clinical Questions*/
   { path: '/ListClinicalQuestions', name: 'List Clinical Questions', component: ListClinicalQuestionsComponent },
   { path: '/AddClinicalQuestions', name: 'Add Clinical Questions', component: AddClinicalQuestionsComponent },
-  { path: '/EditClinicalQuestions/:id', name: 'Edit Clinical Questions', component: EditClinicalQuestionsComponent },
+  { path: '/EditClinicalQuestions/:id/:QBType', name: 'Edit Clinical Questions', component: EditClinicalQuestionsComponent },
 
   /* Diagnosis Group */
   { path: '/ListDiagnosisGroup', name: 'List Diagnosis Group', component: ListDiagnosisGroupComponent },
