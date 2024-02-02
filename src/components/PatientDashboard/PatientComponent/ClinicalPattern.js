@@ -56,6 +56,7 @@ class HomeComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            diagnosisSystemList:[],
             toggleOrderModel: false,
             allopathicMedicines: "",
             diagnosisID: 0,
@@ -220,6 +221,7 @@ class HomeComponent extends React.Component {
                     this.setState({
                         allopathicMedicines: res.data.allopathicMedicines,
                         diagnosisID: res.data.diagnosisID,
+                        diagnosisSystemList:res.data.diagnosisSystemList,
                         diagnosisName: res.data.diagnosisName,
                         diagnosisNameAlias: res.data.diagnosisNameAlias,
                         diagnosisRemediesModels: res.data.diagnosisRemediesModels,
@@ -658,7 +660,16 @@ class HomeComponent extends React.Component {
                                                         <td className='p-2'>{this.state.investigations}</td>
                                                         <td className='p-2'>{this.state.allopathicMedicines}</td>
                                                         <td className='p-2'>{this.state.examiniations}</td>
-                                                        <td className='p-2'></td>
+                                                        <span>
+                                                        {
+                                                            this.state.diagnosisSystemList.map((s, index) => {
+                                                             return <span key={index}>
+                                                        
+                                                        <td className='p-2'>{s.diagnosisSystemName}</td>
+                                                                </span>
+                                                            })
+                                                        }
+                                                        </span>
                                                     </tr>
                                                 </table>
 

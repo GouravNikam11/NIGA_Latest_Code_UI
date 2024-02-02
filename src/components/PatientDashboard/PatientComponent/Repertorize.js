@@ -836,7 +836,7 @@ class RepertorizePage extends React.Component {
             <div responsive="true" style={{ height: '430px' }}>
                 {this.state.NewDifferentialMateriaMedica.map((item, index) => (
                     <div key={index}>
-                        <span className="divdet">  <strong>{item.remedyName}</strong></span> [{item.score}] |
+                        <span className="divdet">  <strong>{item.remedyName}</strong></span> [{item.score}] 
                         <p dangerouslySetInnerHTML={{ __html: item.materiaMedica }} ></p>
                         {/* <div dangerouslySetInnerHTML={{ __html: item.materiaMedica }} /> */}
                     </div>

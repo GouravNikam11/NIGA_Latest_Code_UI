@@ -84,7 +84,7 @@ class SummaryComponent extends React.Component {
             pageSize: 20,
             searchQuery: '',
             searchQuery2: '',
-            SelectedSectionId:0,
+            SelectedSectionId: 0,
             // ShowAuthorAlias:false
         }
         this.searchSubsections = debounce(this.searchSubsections, 200)
@@ -117,33 +117,33 @@ class SummaryComponent extends React.Component {
      * render sections
      */
     handleChange2(sectionId) {
-        this.state.SelectedSectionId=sectionId
-        this.state.searchQuery2=''
+        this.state.SelectedSectionId = sectionId
+        this.state.searchQuery2 = ''
         // this.setState({
         //     [e.target.name]: e.target.value,
         //     isLoading: true
         // }, () => {
-            this.setState({
-                searchQuery: '',
-            })
-            this.GetSubSection(1,'', sectionId)
+        this.setState({
+            searchQuery: '',
+        })
+        this.GetSubSection(1, '', sectionId)
         // })
-        this.state.RubricNameForPopUp=''
-        this.state.RemedyDtailsList= []
-        this.state.remedyCount= 0
-        this.state.marathiArray=[]
-        this.state.englishArray=[]
-        this.state.referencerubric=[]
+        this.state.RubricNameForPopUp = ''
+        this.state.RemedyDtailsList = []
+        this.state.remedyCount = 0
+        this.state.marathiArray = []
+        this.state.englishArray = []
+        this.state.referencerubric = []
     }
     handleChange3(referencerubric) {
         // this.setState({
         //     [e.target.name]: e.target.value,
         //     isLoading: true
         // }, () => {
-            this.setState({
-                searchQuery: '',
-            })
-            this.GetSubSection(1,referencerubric, this.state.SelectedSectionId)
+        this.setState({
+            searchQuery: '',
+        })
+        this.GetSubSection(1, referencerubric, this.state.SelectedSectionId)
         // })
     }
     renderSections = () => {
@@ -228,15 +228,15 @@ class SummaryComponent extends React.Component {
 
     RemedyDetailsByID(subSectionId) {
         debugger
-        this.state.RubricNameForPopUp=''
-        this.state.RemedyDtailsList= []
-        this.state.remedyCount= 0
-        this.state.marathiArray=[]
-        this.state.englishArray=[]
-        this.state.referencerubric=[]
+        this.state.RubricNameForPopUp = ''
+        this.state.RemedyDtailsList = []
+        this.state.remedyCount = 0
+        this.state.marathiArray = []
+        this.state.englishArray = []
+        this.state.referencerubric = []
 
         CommonServices.getDataById(parseInt(subSectionId), `/RubricRemedy/GetRubricDetails`).then((temp) => {
-            console.log("rubric details t===",temp)
+            console.log("rubric details t===", temp)
 
             temp.subSectionLanguageDetails.forEach((item) => {
                 if (item.languageName.trim() === "English") {
@@ -246,8 +246,8 @@ class SummaryComponent extends React.Component {
                 }
             });
 
-console.log("this.state.marathiArray",this.state.marathiArray)
-console.log("this.state.englishArray",this.state.englishArray)
+            console.log("this.state.marathiArray", this.state.marathiArray)
+            console.log("this.state.englishArray", this.state.englishArray)
 
             this.setState({
                 // isloding: true,
@@ -381,12 +381,12 @@ console.log("this.state.englishArray",this.state.englishArray)
                             <CardHeader>
                                 <CardText>Sub Sections</CardText>
                                 {this.state.SelectedSectionId !== 0 && (
-                                <Input type="text"
-                                    placeholder="Sub Sections Search..."
-                                    name='searchQuery'
-                                    value={this.state.searchQuery2}
-                                    onChange={this.handleChangeSubSection.bind(this)}
-                                />
+                                    <Input type="text"
+                                        placeholder="Sub Sections Search..."
+                                        name='searchQuery'
+                                        value={this.state.searchQuery2}
+                                        onChange={this.handleChangeSubSection.bind(this)}
+                                    />
                                 )}
                             </CardHeader>
 
@@ -418,23 +418,23 @@ console.log("this.state.englishArray",this.state.englishArray)
 
                                         <div>
                                             <span className="auth"
-                                            onClick={() => this.ToggleAuthorAlias()}
+                                                onClick={() => this.ToggleAuthorAlias()}
                                             ><i class="fa fa-user" aria-hidden="true"></i></span>
                                         </div>
 
                                         <div class="hover-text1"><span className=""><img src={engs} className="langicon" alt="English" /></span>
                                             <span class="tooltip-text1 bottom">
                                                 <div class="">
-                                                {
+                                                    {
                                                         this.state.englishArray.length > 0 ?
-                                                        this.state.englishArray.map((c, index) => {
-                                                        return <tr key={index}>
-                                                            <td>{c.subSectionDetails}</td>
-                                                        </tr>
-                                                        }) :
-                                                        <tr>
-                                                            <td colSpan="4">No data to display</td>
-                                                        </tr>}
+                                                            this.state.englishArray.map((c, index) => {
+                                                                return <tr key={index}>
+                                                                    <td>{c.subSectionDetails}</td>
+                                                                </tr>
+                                                            }) :
+                                                            <tr>
+                                                                <td colSpan="4">No data to display</td>
+                                                            </tr>}
                                                 </div>
                                             </span>
                                         </div>
@@ -442,7 +442,7 @@ console.log("this.state.englishArray",this.state.englishArray)
                                         <div class="hover-text2"><span className=""><img src={mart} className="langicon" alt="Marathi" /></span>
                                             <span class="tooltip-text2 bottom">
                                                 <div class="">
-                                                {/* {
+                                                    {/* {
                                                     
                                                     this.state.marathiArray.length > 0 ?
                                                         this.state.marathiArray.map((c, index) => {
@@ -453,16 +453,16 @@ console.log("this.state.englishArray",this.state.englishArray)
                                                         <tr>
                                                             <td colSpan="4">No data to display</td>
                                                         </tr>} */}
-                                                        {
+                                                    {
                                                         this.state.marathiArray.length > 0 ?
-                                                        this.state.marathiArray.map((c, index) => {
-                                                            return <tr key={index}>
-                                                                <td>{c.subSectionDetails}</td>
-                                                            </tr>
-                                                        }) :
-                                                        <tr>
-                                                            <td colSpan="4">No data to display</td>
-                                                        </tr>}
+                                                            this.state.marathiArray.map((c, index) => {
+                                                                return <tr key={index}>
+                                                                    <td>{c.subSectionDetails}</td>
+                                                                </tr>
+                                                            }) :
+                                                            <tr>
+                                                                <td colSpan="4">No data to display</td>
+                                                            </tr>}
                                                 </div>
                                             </span>
                                         </div>
@@ -471,7 +471,12 @@ console.log("this.state.englishArray",this.state.englishArray)
 
                                 <Row style={{ padding: '6px' }}>
                                     <Col md="12" className="txtleft">
-                                        <strong className="h6">{this.state.RubricNameForPopUp}</strong>
+                                        {/* <strong className="h6">{this.state.RubricNameForPopUp} ({this.state.remedyCount})</strong> */}
+                                        {this.state.RubricNameForPopUp && (
+                                            <strong className="h6">
+                                                {this.state.RubricNameForPopUp} [{this.state.remedyCount}]
+                                            </strong>
+                                        )}
                                         <hr></hr>
                                         <strong className="h6">
                                             {
@@ -486,15 +491,15 @@ console.log("this.state.englishArray",this.state.englishArray)
                                                     </tr>
                                             }</strong>
                                         <hr></hr>
-                                        <strong className="h6">Remedy Count : ({this.state.remedyCount}) </strong>
-                                        <hr></hr>
+                                        {/* <strong className="h6">Remedy Count : ({this.state.remedyCount}) </strong> */}
+                                        {/* <hr></hr> */}
                                         {this.state.RemedyDtailsList.length > 0 ?
                                             <div>
                                                 {this.state.RemedyDtailsList?.map((item, index) => {
                                                     {/* <Link to={"/PatientDashboard/" + this.props.patientId + "/" + this.props.caseId + "/" + this.props.patientAppId + "/" + this.props.doctorId} */ }
                                                     const NewTab = 5
                                                     return (
-                                                        <span key={index} style={{display: 'inline-block'}} class="remhov">
+                                                        <span key={index} style={{ display: 'inline-block' }} class="remhov">
                                                             {/* { */}
                                                             {/* item.remediesModels.map((author, index) => {
                                                                         return  */}
@@ -505,7 +510,7 @@ console.log("this.state.englishArray",this.state.englishArray)
                                                                     // fontFamily: item.fontName,
                                                                     color: item.fontColor,
                                                                     fontStyle: item.fontStyle,
-                                                                    textDecoration : 'none',
+                                                                    textDecoration: 'none',
                                                                     cursor: 'pointer',
                                                                 }}>
                                                                 <span onClick={() => this.handleAddRubricClick(item.remedyId)}>
@@ -639,16 +644,16 @@ console.log("this.state.englishArray",this.state.englishArray)
     /**
      * handleChange
      */
-    handleChange(e){
+    handleChange(e) {
         debugger
         // this.setState({ [e.target.name]: e.target.value });
         // if (e.target.value != undefined) {
         //     this.searchSubsections(e.target.value)
         // }
-        this.state.searchQuery=""
-        this.state.searchQuery2=""
-        this.state.SelectedSectionId=0
-        this.state.SubSectionList=[]
+        this.state.searchQuery = ""
+        this.state.searchQuery2 = ""
+        this.state.SelectedSectionId = 0
+        this.state.SubSectionList = []
 
         this.setState({
             searchQuery: e.target.value,
@@ -662,7 +667,7 @@ console.log("this.state.englishArray",this.state.englishArray)
 
         this.GetSubSection(1, e.target.value, this.state.SelectedSectionId)
     }
-    
+
     handleColor = (event) => {
         const id = event.target.id;
         // this.setState({
@@ -738,8 +743,8 @@ console.log("this.state.englishArray",this.state.englishArray)
      * Select Rubrics
      */
     selectRubrics = async (rubric, intensity, id) => {
-        this.state.searchQuery=""
-        this.state.searchQuery2=""
+        this.state.searchQuery = ""
+        this.state.searchQuery2 = ""
         const remedyCount = await this.props.getRemedyCounts(rubric.subSectionId);
         const remedyName = await this.props.getRemedyName(rubric.subSectionId);
         this.setState({
@@ -756,15 +761,14 @@ console.log("this.state.englishArray",this.state.englishArray)
         if (isExist === -1) {
             const { remedyCount } = this.props.state;
             rubric.remedyCount = remedyCount;
-            if(this.props.state.selectedRubrics?.length<20)
-            {
-            this.props.addRubrics(rubric)
+            if (this.props.state.selectedRubrics?.length < 20) {
+                this.props.addRubrics(rubric)
             }
-            else{
-            this.props.enqueueSnackbarAction("Whoops! You've hit the max limit of 20 rubrics.", "warning");
+            else {
+                this.props.enqueueSnackbarAction("Whoops! You've hit the max limit of 20 rubrics.", "warning");
             }
         }
-        else{
+        else {
             this.props.enqueueSnackbarAction("This rubric is already added for Repertorization", "warning");
         }
     }
@@ -804,20 +808,20 @@ console.log("this.state.englishArray",this.state.englishArray)
         })
     }
 
-    GetSubSection(pageNumber, searchQuery,sectionId) {
+    GetSubSection(pageNumber, searchQuery, sectionId) {
         // this.setState({
         //     SubSectionList: []
         // })
-        this.state.SelectedSectionId=sectionId;
+        this.state.SelectedSectionId = sectionId;
         // if (this.state.SelectedSectionId > 0) {
-            this.state.currentPage = pageNumber
-        this.state.SubSectionList=[]
-            CommonServices.getData(`/Pagination/GetSubsectionBySectionIdOrQueryString?sectionId=${this.state.SelectedSectionId}${searchQuery ? `&queryString=${searchQuery}` : ''}&PageNumber=${pageNumber}&PageSize=${this.state.pageSize}`).then((temp) => {
-                this.setState({
-                    SubSectionList: temp,
-                    isLoading: false
-                })
-            });
+        this.state.currentPage = pageNumber
+        this.state.SubSectionList = []
+        CommonServices.getData(`/Pagination/GetSubsectionBySectionIdOrQueryString?sectionId=${this.state.SelectedSectionId}${searchQuery ? `&queryString=${searchQuery}` : ''}&PageNumber=${pageNumber}&PageSize=${this.state.pageSize}`).then((temp) => {
+            this.setState({
+                SubSectionList: temp,
+                isLoading: false
+            })
+        });
     }
 
     handleAddRubricClick = (remedyId) => {
@@ -827,7 +831,7 @@ console.log("this.state.englishArray",this.state.englishArray)
     renderNewSubsections = () => {
         // const { currentPage, pageSize, searchQuery } = this.state;
         const { Intensities } = this.props.intensity;
-    
+
         // Apply search filtering
         // let filteredSubsectionList = this.state.NewSubsectionlist;
         // if (searchQuery) {
@@ -835,12 +839,12 @@ console.log("this.state.englishArray",this.state.englishArray)
         //         subSection.subSectionName.toLowerCase().includes(searchQuery.toLowerCase())
         //     );
         // }
-    
+
         // const paginatedSubsections = filteredSubsectionList.slice(
         //     (currentPage - 1) * pageSize,
         //     currentPage * pageSize
         // );
-    
+
         // if (this.state.NewSubsectionlist.resultObject?.length === 0) {
         //     return (
         //         <tr>
@@ -850,7 +854,7 @@ console.log("this.state.englishArray",this.state.englishArray)
         //         </tr>
         //     );
         // }
-    
+
         return this.state.SubSectionList?.resultObject?.map((subSection, index) => (
             <tr className="rubric" key={subSection.subSectionId}>
                 <td onClick={() => this.RemedyDetailsByID(subSection.subSectionId)}>
@@ -874,11 +878,11 @@ console.log("this.state.englishArray",this.state.englishArray)
             </tr>
         ));
     }
-    
+
     renderPagination = () => {
         const totalRecords = this.state.SubSectionList?.totalCount;
         // const { currentPage, pageSize } = this.state;
-    
+
         return totalRecords > 25 && (
             <Pagination
                 itemClass="page-item"
@@ -901,21 +905,21 @@ console.log("this.state.englishArray",this.state.englishArray)
         }));
     }
 
-    handleChangeSubSection(e){
+    handleChangeSubSection(e) {
         debugger
         // this.setState({ [e.target.name]: e.target.value });
         // if (e.target.value != undefined) {
         //     this.searchSubsections(e.target.value)
         // }
-   
+
         this.setState({
             searchQuery2: e.target.value,
             // SubSectionList: []
         })
         // if(e.target.value=="")
         // {
-            // this.state.SelectedSectionId=0
-            // this.state.SubSectionList=[]
+        // this.state.SelectedSectionId=0
+        // this.state.SubSectionList=[]
         // }
 
         this.GetSubSection(1, e.target.value, this.state.SelectedSectionId)

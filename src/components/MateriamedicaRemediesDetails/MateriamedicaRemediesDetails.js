@@ -113,21 +113,21 @@ export class MateriamedicaRemediesDetails extends Component {
                 <Row>
                   <Col md="6">
                     <Row>
-                      <Col md="2">
+                      {/* <Col md="2">
                         <FormLabel className='frm-lbl'>Remedy: </FormLabel>
-                      </Col>
-                      <Col md="4">
+                      </Col> */}
+                      <Col md="6">
                         <FormLabel className='frm-lbl' name="RemedyName"
                         > {this.state.RemedyName}</FormLabel>
                       </Col>
 
-                      <Col md="4">
+                      {/* <Col md="4">
                         <FormLabel className='frm-lbl'>Remedy Alias :</FormLabel>
-                      </Col>
-                      <Col md="2">
+                      </Col> */}
+                      {/* <Col md="2">
                         <FormLabel className='frm-lbl' name="remedyAlias"
                         > {this.state.remedyAlias}</FormLabel>
-                      </Col>
+                      </Col> */}
 
                     </Row>
                   </Col>

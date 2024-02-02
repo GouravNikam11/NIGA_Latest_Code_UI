@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
+
+
+
 import { Table, Col, FormGroup, Form, Row } from 'react-bootstrap';
 import { Button, Card, CardBody, CardFooter, CardHeader, } from 'reactstrap';
 import { Input, Label, Select } from 'reactstrap';
@@ -211,6 +214,10 @@ export class AddMateriaMedicaComponent extends Component {
 
                         </Row>
 
+
+
+
+                      
                     </Form>
                 </CardBody>
                 <CardFooter>

@@ -184,7 +184,7 @@ class ClinicalSummary extends React.Component {
                         <Col xs="12" md="12">
 
                             <Row>
-                                <Col sm="12" md="3">
+                                <Col sm="12" md="4">
                                     {/* <Input type="text"
                                         placeholder="Search..."
                                     /> */}
@@ -197,29 +197,50 @@ class ClinicalSummary extends React.Component {
                                     onChange={this.RemedyChanged.bind(this)}
                                 />
                                 </Col>
+
+                                <Col sm="12" md="8">
+                                <Row>
+                                        <Col md="4" className='tright'>
+                                            <FormLabel className='hthead1'><i className="fa fa-user"></i> | Author  </FormLabel>
+                                        </Col>
+
+                                        <Col md="8">
+                                            <Form.Control as="select"
+                                                onChange={this.handleSectionChanges.bind(this)}
+                                                value={this.state.authorId}>
+                                                <option value="0">
+                                                    Select Author
+                                                </option>
+                                                {
+                                                    this.renderauthorList()
+                                                }
+                                            </Form.Control>
+                                        </Col>
+                                    </Row>
+                                    </Col>
                             </Row>
 
                             <Row>
                                 <Col md="6">
                                     <Row>
                                         <Col md="6">
-                                            <FormLabel className='hthead1'>Remedy : &nbsp;&nbsp;</FormLabel>
+                                            {/* <FormLabel className='hthead1'>Remedy : &nbsp;&nbsp;</FormLabel> */}
 
                                             <FormLabel className='hthead1' name="RemedyName"
                                             >{this.state.RemedyName}</FormLabel>
                                         </Col>
 
-                                        <Col md="6">
+                                        {/* <Col md="6">
                                             <FormLabel className='hthead1'>Remedy Alias : &nbsp;&nbsp;</FormLabel>
 
                                             <FormLabel className='hthead1' name="remedyAlias"
                                             >{this.state.remedyAlias}</FormLabel>
-                                        </Col>
+                                        </Col> */}
 
                                     </Row>
                                 </Col>
 
-                                <Col md="6">
+                                {/* <Col md="6">
 
                                     <Row>
                                         <Col md="4" className='tright'>
@@ -239,7 +260,7 @@ class ClinicalSummary extends React.Component {
                                             </Form.Control>
                                         </Col>
                                     </Row>
-                                </Col>
+                                </Col> */}
                             </Row>
 
                             <Row className="mt-0">

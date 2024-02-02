@@ -23,7 +23,7 @@ export class AddSubSectionComponent extends Component {
 
             sectionId: 0,
             parentSubSectionId: null,
-            SubSectionId:0,
+            SubSectionId: 0,
             SubSectionName: '',
             SubSectionNameAlias: '',
             Description: '',
@@ -45,13 +45,13 @@ export class AddSubSectionComponent extends Component {
             LanguageList: [],
             SubSectionDetails: '',
             SubSectionDetailsList: [],
-            subSectionLanguageDetails:[]
+            subSectionLanguageDetails: []
 
         }
         // this.SubsectionAlieshandleChange=this.SubsectionAlieshandleChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.submitForm = this.submitForm.bind(this);
-      
+
     }
 
     componentDidMount() {
@@ -69,26 +69,26 @@ export class AddSubSectionComponent extends Component {
             sectionId: e.target.value,
             SubSectionId: null,
         })
-       
+
     }
 
     addLanguageDetails() {
         debugger
         const selectedLanguage = this.state.LanguageList.find(
             (language) => language.languageId === parseInt(this.state.languageId)
-          );
-          console.log('selectedLanguage=',selectedLanguage)
+        );
+        console.log('selectedLanguage=', selectedLanguage)
         var obj = {
-           
+
             languageId: this.state.languageId,
-            languageName:selectedLanguage.languageName,
+            languageName: selectedLanguage.languageName,
             SubSectionDetails: this.state.SubSectionDetails,
         }
         this.state.SubSectionDetailsList.push(obj);
         console.log('SubSectionDetailsList==', this.state.SubSectionDetailsList)
         this.setState({
-            languageId:0,
-            SubSectionDetails:''
+            languageId: 0,
+            SubSectionDetails: ''
         })
     }
 
@@ -138,7 +138,7 @@ export class AddSubSectionComponent extends Component {
 
     loadParentSubOptions = async (search, prevOptions) => {
         const options = [];
-        var subsectionList 
+        var subsectionList
         await this.GetParentSubsections(this.state.sectionId).then((result) => {
             subsectionList = result;
         })
@@ -236,9 +236,26 @@ export class AddSubSectionComponent extends Component {
         }
     }
 
+
+
     render() {
         const ReferenceSubSectionId = this.state.referencesectionId;
         const counter = this.state.sectionId;
+
+        // const CustomOption = ({ label, value, isSelected, selectOption }) => (
+        //     <div>
+        //         <label>
+        //             <input
+        //                 type="checkbox"
+        //                 checked={isSelected}
+        //                 onChange={() => selectOption({ label, value })}
+        //             />
+        //             {label}
+        //         </label>
+        //     </div>
+        // );
+
+
         return (
             <Card>
                 <CardHeader>
@@ -321,15 +338,15 @@ export class AddSubSectionComponent extends Component {
                                     </Form.Control> */}
 
                                     <AsyncPaginate isClearable
-                                    key={counter}
-                                    cacheOptions={counter}
-                                    labelKey="value"
-                                    labelValue="subSectionId"
-                                    placeholder="Type Sub-Section"
-                                    value={this.state.subSectionId}
-                                    loadOptions={this.loadParentSubOptions.bind(this)}
-                                    onChange={this.SubsectionChanged.bind(this)}
-                                />
+                                        key={counter}
+                                        cacheOptions={counter}
+                                        labelKey="value"
+                                        labelValue="subSectionId"
+                                        placeholder="Type Sub-Section"
+                                        value={this.state.subSectionId}
+                                        loadOptions={this.loadParentSubOptions.bind(this)}
+                                        onChange={this.SubsectionChanged.bind(this)}
+                                    />
                                 </FormGroup>
                             </Col>
                         </Row>
@@ -385,33 +402,33 @@ export class AddSubSectionComponent extends Component {
                                     </Col>
                                 </Row>
                                 <Table style={{ width: '100%' }} striped bordered hover>
-                                        <thead>
-                                            <tr>
-                                                {/* <th className='fcol'>Sr.No</th> */}
-                                                <th>Language</th>
-                                                <th>Language Details</th>
-                                                <th className='lcol'>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {
-                                                this.state.SubSectionDetailsList.map((s, index) => {
-                                                    return <tr key={index}>
-                                                        {/* <td className='fcol'>{s.SubSectionId}</td> */}
-                                                        <td>{s.languageName}</td>
-                                                        <td>{s.SubSectionDetails}</td>
-                                                        <td className='lcol'>
-                                                            {/* <Link to={"/EditAuthorComponent/" + s.authorId}>
+                                    <thead>
+                                        <tr>
+                                            {/* <th className='fcol'>Sr.No</th> */}
+                                            <th>Language</th>
+                                            <th>Language Details</th>
+                                            <th className='lcol'>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            this.state.SubSectionDetailsList.map((s, index) => {
+                                                return <tr key={index}>
+                                                    {/* <td className='fcol'>{s.SubSectionId}</td> */}
+                                                    <td>{s.languageName}</td>
+                                                    <td>{s.SubSectionDetails}</td>
+                                                    <td className='lcol'>
+                                                        {/* <Link to={"/EditAuthorComponent/" + s.authorId}>
                                                               <Button onClick={() => this.editAuthor(s.authorId)} ><i className="fa fa-pencil"></i></Button> 
                                                              </Link> */}
-                                                            <Button style={{ marginLeft: 8 }} variant="danger" color="danger" onClick={() => this.deleteLanguageName(index)} ><i className="fa fa-trash"></i></Button>
-                                                        </td>
-                                                    </tr>
-                                                })
-                                            }
-                                        </tbody>
-                                    </Table>
-                               
+                                                        <Button style={{ marginLeft: 8 }} variant="danger" color="danger" onClick={() => this.deleteLanguageName(index)} ><i className="fa fa-trash"></i></Button>
+                                                    </td>
+                                                </tr>
+                                            })
+                                        }
+                                    </tbody>
+                                </Table>
+
                             </CardBody>
                         </Card>
 
@@ -456,6 +473,24 @@ export class AddSubSectionComponent extends Component {
                                             loadOptions={this.loadOptions}
                                             onChange={this.ReferenceSubSectionChanged.bind(this)}
                                         />
+
+
+                                        {/* <AsyncPaginate
+                                            isClearable
+                                            isMulti
+                                            key={ReferenceSubSectionId}
+                                            cacheOptions={ReferenceSubSectionId}
+                                            placeholder="Type Reference Sub Section"
+                                            value={this.state.referenceSubSectionIds}
+                                            loadOptions={this.loadOptions}
+                                            components={{
+                                                Option: CustomOption,
+                                            }}
+                                            menuIsOpen={this.state.menuIsOpen}
+                                            onMenuOpen={() => this.setState({ menuIsOpen: true })}
+                                            onMenuClose={() => this.setState({ menuIsOpen: false })}
+                                            onChange={this.ReferenceSubSectionChanged.bind(this)}
+                                        /> */}
                                     </Col>
                                     <Col md="3">
                                         <FormGroup >
@@ -501,8 +536,8 @@ export class AddSubSectionComponent extends Component {
 
                         </tbody>}
                     </Table>
-      
-                             
+
+
                 </CardBody>
                 <CardFooter>
                     <Row>
@@ -539,7 +574,7 @@ export class AddSubSectionComponent extends Component {
             this.setState({ SubSectionDetailsList: array });
         }
     }
-   
+
 
     addSelectedSubSectionQuestions() {
         var copyTableData = [this.state.referencesection];
@@ -572,13 +607,13 @@ export class AddSubSectionComponent extends Component {
         })
         console.log('selectedauthorandremedy===', this.state.selectedreference)
     }
-    
+
 
     handleChange(e) {
         debugger
         //console.log('lable==',)
         this.setState({ [e.target.name]: e.target.value })
-        
+
     }
 
     validateForm() {
@@ -647,8 +682,8 @@ export class AddSubSectionComponent extends Component {
                 });
             });
 
-          
-          
+
+
             this.state.SubSectionDetailsList.forEach(element => {
                 debugger;
                 let languageobj = {
@@ -667,7 +702,7 @@ export class AddSubSectionComponent extends Component {
                 "enteredBy": localStorage.getItem("UserId"),
                 "deleteStatus": false,
                 "referencerubric": this.state.referencerubric,
-                "subSectionLanguageDetails":this.state.subSectionLanguageDetails
+                "subSectionLanguageDetails": this.state.subSectionLanguageDetails
             }
 
             debugger
