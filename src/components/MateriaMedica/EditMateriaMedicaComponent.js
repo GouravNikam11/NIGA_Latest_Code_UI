@@ -7,6 +7,13 @@ import '../../components/CommanStyle.css';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import axios from 'axios'
+import { Editor } from 'react-draft-wysiwyg';
+import { convertToRaw, convertFromRaw, EditorState, ContentState, convertFromHTML } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+import { stateFromHTML } from 'draft-js-import-html';
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import htmlToDraft from 'html-to-draftjs';
+
 
 export class EditMateriaMedicaComponent extends Component {
 
@@ -19,7 +26,7 @@ export class EditMateriaMedicaComponent extends Component {
 
         super(props);
         this.state = {
-            dose:'',
+            dose: '',
             enteredBy: '',
             enteredDate: "",
             changedBy: '',
@@ -37,7 +44,8 @@ export class EditMateriaMedicaComponent extends Component {
             modelEx: [],
             details: '',
             authourList: [],
-            IsDeleted: false
+            IsDeleted: false,
+            editorState: undefined,
         }
         this.handleChange = this.handleChange.bind(this);
         this.submitForm = this.submitForm.bind(this);
@@ -75,6 +83,7 @@ export class EditMateriaMedicaComponent extends Component {
         })
     }
     render() {
+        const { editorState } = this.state;
         return (
 
             <Card>
@@ -138,7 +147,7 @@ export class EditMateriaMedicaComponent extends Component {
 
                             <Col xs="12" >
                                 <br></br>
-                                <CKEditor
+                                {/* <CKEditor
                                     editor={ClassicEditor}
                                     data={this.state.details}
                                     onReady={editor => {
@@ -157,7 +166,31 @@ export class EditMateriaMedicaComponent extends Component {
                                         editor.ui.view.editable.element.style.minHeight = "300px";
                                         console.log('Focus.', editor);
                                     }}
-                                />
+                                /> */}
+                                {editorState !== undefined && <div>
+                                    <Editor
+                                        wrapperClassName="demo-wrapper"
+                                        editorClassName="demo-editor"
+                                        onEditorStateChange={editorState => {
+                                            this.handleChangeforeditor(editorState);
+                                        }}
+                                        toolbarClassName="toolbar-class"
+                                        defaultEditorState={editorState}
+                                        wrapperStyle={{
+                                            borderRadius: 5,
+                                            borderWidth: 1,
+                                            borderColor: '#0000'
+                                        }}
+                                        editorStyle={{
+                                            borderRadius: 2,
+                                            border: '1px solid lightgrey',
+                                            backgroundColor: '#FFFFFF',
+                                            height: '300px'
+                                        }}
+
+                                    />
+
+                                </div>}
                             </Col>
 
                         </Row>
@@ -203,6 +236,23 @@ export class EditMateriaMedicaComponent extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
 
+    handleChangeforeditor = (rawDraftContentState) => {
+        // no need for convertToRaw or stateToHtml anymore
+
+        // console.log('test = ',stateToHTML(rawDraftContentState.getCurrentContent()))
+        console.log('test = ', draftToHtml(convertToRaw(rawDraftContentState.getCurrentContent())))
+        this.setState({ rawDraftContentState });
+        this.setState({
+            details: draftToHtml(convertToRaw(rawDraftContentState.getCurrentContent())),
+            modelEx: [{
+                "matriaMedicaDetailId": this.state.matriaMedicaDetailId,
+                "materiaMedicaId": this.state.materiaMedicaId,
+                "details": draftToHtml(convertToRaw(rawDraftContentState.getCurrentContent()))
+            }]
+
+        })
+    }
+
 
     /**
          * will call when page rendered.
@@ -228,7 +278,7 @@ export class EditMateriaMedicaComponent extends Component {
 
     editorhandlechanges(e, details) {
         debugger;
-        console.log('details+++=====>>>>>',details)
+        console.log('details+++=====>>>>>', details)
         /*  this.data = details.getData();
          this.addData(e.data); */
 
@@ -291,7 +341,7 @@ export class EditMateriaMedicaComponent extends Component {
             this.props.history.push('/ListMateriaMedicaComponent');
         });
         this.setState({
-            materiaMedicaId:0,
+            materiaMedicaId: 0,
             materiaMedicaHeadId: 0,
             remedyId: 0,
             authorId: 0,
@@ -321,17 +371,30 @@ export class EditMateriaMedicaComponent extends Component {
                 var copyTableData = this.state.modelEx;
                 debugger;
                 copyTableData.forEach(element => {
-                    console.log("printed====>>>>", element)
+                    console.log("printed====>>>>", element.details)
                     debugger;
                     let obj = {
 
                         details: element.details,
                     }
+                    const blocksFromHTML = htmlToDraft(element.details)
+                    //  console.log('blocksFromHTML.contentBlocks ', blocksFromHTML.contentBlocks)
+                    //  console.log('blocksFromHTML.entityMap ', blocksFromHTML.entityMap)
+                    const contentState = ContentState.createFromBlockArray(
+                        blocksFromHTML.contentBlocks,
+                        blocksFromHTML.entityMap
+                    );
+                    // console.log('contentState =', contentState);
+                    const editorState = EditorState.createWithContent(contentState);
+                    // console.log('editorState =', editorState);
+                    //this.state.editorState=EditorState.createWithContent(stateFromHTML(element.details)),
                     this.setState(
                         {
+                            editorState: editorState,
                             details: element.details,
                             matriaMedicaDetailId: element.matriaMedicaDetailId
                         })
+
                     //this.state.Editordetails.push(obj)
                 });
             });

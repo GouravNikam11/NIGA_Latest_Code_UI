@@ -216,6 +216,33 @@ hr {
     /* left: -50%; */
 }
 
+.tooltip-text3 {
+    visibility: hidden;
+    display: inline;
+    position: fixed;
+    z-index: 9;
+    width: 60%;
+    border-radius: 5px;
+    color: #000;
+    background-color: #acc7de;
+    padding: 5px;
+    margin: auto; /* Centering horizontally */
+    top: 50%; /* Positioning vertically at the center */
+    left: 50%; /* Positioning horizontally at the center */
+    transform: translate(-50%, -50%); /* Centering trick */
+}
+
+  
+.hover-text3:hover .tooltip-text3 {
+    visibility: visible;
+}
+
+.hover-text3 {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
 .tooltip-text1 {
     visibility: hidden;
     position: absolute;
@@ -2094,8 +2121,10 @@ hr {
     color: #000;
     background-color: #acc7de;
     padding: 5px;
-    margin-top: 20px;
-    top: 10rem;
+    margin: auto; /* Centering horizontally */
+    top: 50%; /* Positioning vertically at the center */
+    left: 50%; /* Positioning horizontally at the center */
+    transform: translate(-50%, -50%); /* Centering trick */
 }
 
 .dvUncommhide {

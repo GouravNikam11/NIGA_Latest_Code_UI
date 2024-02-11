@@ -366,7 +366,7 @@ remedyId: 0,
                         <AdverseEffect />
                         <Repertorize updatePassedId={this.updatePassedId} />
                         <LabsAndImaging patientId={this.props.match.params.id} caseId={this.state.caseId} />
-<Prescription patientId={this.state.patientId} caseId={this.state.caseId} doctorId={this.props.match.params.doctorId} patientAppId={this.props.match.params.patientAppId} />
+                        <Prescription patientId={this.state.patientId} caseId={this.state.caseId} doctorId={this.props.match.params.doctorId} patientAppId={this.props.match.params.patientAppId} />
                     </React.Suspense>
                 </TabContent>
             </div>

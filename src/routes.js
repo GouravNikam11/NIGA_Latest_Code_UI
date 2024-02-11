@@ -20,7 +20,7 @@ import AddAuthorComponent from './components/Author/AddAuthorComponent';
 import ListAuthorComponent from './components/Author/ListAuthorComponent';
 import EditAuthorComponent from './components/Author/EditAuthorComponent';
 
-import ListNigaRepertoryComponent from './components/NigaRepertory/ListNigaRepertoryComponent';
+//import ListNigaRepertoryComponent from './components/NigaRepertory/ListNigaRepertoryComponent';
 
 
 import AddDiagnosisSystem from './components/DiagnosisSystem/AddDiagnosisSystem';
@@ -44,7 +44,7 @@ import ListMateriaMedicaHeadComponent from './components/MateriaMedicaHead/ListM
 import materiamedicaremedies from './components/materiamedicaremedies/materiamedicaremedies';
 
 import MateriamedicaRemediesDetails from './components/MateriamedicaRemediesDetails/MateriamedicaRemediesDetails';
-import ListNigaRepertoryAuthorAndRemedyDetailsComponent from './components/NigaRepertory/ListNigaRepertoryAuthorAndRemedyDetailsComponent';
+//import ListNigaRepertoryAuthorAndRemedyDetailsComponent from './components/NigaRepertory/ListNigaRepertoryAuthorAndRemedyDetailsComponent';
 
 
 import AddQuestionSectionComponent from './components/QuestionSection/AddQuestionSectionComponent';
@@ -152,8 +152,8 @@ import AddRoleDetailsComponent from './components/RoleDetails/AddRoleDetailsComp
 import ListRoleDetailsComponent from './components/RoleDetails/ListRoleDetailsComponent';
 import EditRoleDetailsComponent from './components/RoleDetails/EditRoleDetailsComponent';
 
-import GetAstrologyComponent from './components/Astrology/GetAstrologyComponent';
-import AstrologyComponent from './components/Astrology/AstrologyComponent';
+// import GetAstrologyComponent from './components/Astrology/GetAstrologyComponent';
+// import AstrologyComponent from './components/Astrology/AstrologyComponent';
 import RubricList from './components/Rubrics/lisRubric';
 import EditRubric from './components/Rubrics/EditRubric';
 
@@ -233,8 +233,8 @@ const routes = [
   { path: '/EditQuestionSection/:id', name: 'Edit Existance', component: EditQuestionSectionComponent },
 
   /* NigaRepertory */
-  { path: '/ListNigaRepertoryComponent', name: 'Niga Repertory', component: ListNigaRepertoryComponent },
-  {path:'/ListNigaRepertoryAuthorAndRemedyDetailsComponent/:id/:remedyid/:remedyName/:remedyAlias',name:'Materia Medica Details',component:ListNigaRepertoryAuthorAndRemedyDetailsComponent},
+  // { path: '/ListNigaRepertoryComponent', name: 'Niga Repertory', component: ListNigaRepertoryComponent },
+  // {path:'/ListNigaRepertoryAuthorAndRemedyDetailsComponent/:id/:remedyid/:remedyName/:remedyAlias',name:'Materia Medica Details',component:ListNigaRepertoryAuthorAndRemedyDetailsComponent},
 
   /*Author Section*/
   { path: '/AddAuthorComponent', name: 'Add Author', component: AddAuthorComponent },
@@ -457,8 +457,8 @@ const routes = [
   { path: '/AddMonoGram', name: 'Add MonoGram', component: AddMonoGram },
 
   //Astrology
-  { path: '/GetAstrologyComponent', name: 'Astrology', component: GetAstrologyComponent },
-  { path: '/AstrologyComponent', name: 'Astrology', component: AstrologyComponent },
+  // { path: '/GetAstrologyComponent', name: 'Astrology', component: GetAstrologyComponent },
+  // { path: '/AstrologyComponent', name: 'Astrology', component: AstrologyComponent },
   { path: '/RubricList', name: 'RubricList', component: RubricList },
   { path: '/Subscription', name: 'Subscription', component: Subscription }
 ];

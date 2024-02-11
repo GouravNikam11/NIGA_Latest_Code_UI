@@ -91,7 +91,7 @@ class ClinicalSummary extends React.Component {
 
     // show selected parent and chilc navigation options on question tab here/////////////////////
     componentDidUpdate() {
-        debugger
+        //debugger
         if (Object.keys(this.props.parentObject).length > 0 && Object.keys(this.props.childObject).length > 0) {
             if (this.state.objectToCheck.ID === this.props.childObject.ID) {
                 return;
@@ -121,10 +121,10 @@ class ClinicalSummary extends React.Component {
     }
 
     getSubGroupQuestionSection(questiongroupId, questionsectionId) {
-        debugger
+        //debugger
        
         CommonServices.getData(`/DropdownList/GetSubQuestionGroupByQGIDQSIDDDL/${questiongroupId}/${questionsectionId}`).then((temp) => {
-            debugger;
+            //debugger;
             console.log('getSubGroupQuestionSection====>>>>>>>', temp);
             this.setState({                
                 optionList1: temp,
@@ -135,7 +135,7 @@ class ClinicalSummary extends React.Component {
 
 
     TabKeywordById = (questionSubgroupId, string) => {
-        debugger
+        //debugger
         if (questionSubgroupId !== undefined) {
             let requesttype = string == "LOCATION" ? "Bodypart" : "Question"
             this.setState({ Selectedrequesttype: requesttype })
@@ -146,7 +146,7 @@ class ClinicalSummary extends React.Component {
                 "requestType": requesttype
             }
             CommonServices.postData(obj, `/clinicalquestions/GetClinicalQuestionsKeyWordBodyPart`).then((res) => {
-                debugger
+                //debugger
                 console.log('API res===', res.data)
                 if (res.data !== undefined) {
                     this.setState({
@@ -163,7 +163,7 @@ class ClinicalSummary extends React.Component {
 
 
     TabRubricById = (questionKeyWordBodyPartID) => {
-        debugger
+        //debugger
         if (questionKeyWordBodyPartID !== undefined) {
 
             let obj = {
@@ -171,7 +171,7 @@ class ClinicalSummary extends React.Component {
                 "requestType": this.state.Selectedrequesttype
             }
             CommonServices.postData(obj, `/clinicalquestions/GetClinicalRubricData`).then((res) => {
-                debugger
+                //debugger
                 console.log('API res for rubric===', res.data)
                 if (res.data !== undefined) {
                     this.setState({
@@ -187,7 +187,7 @@ class ClinicalSummary extends React.Component {
 
     /* subgroup handle changes */
     handleSelectSubGroup(data) {
-        debugger
+        //debugger
         this.setState({
             selectedOptions1: data,
         })
@@ -200,13 +200,13 @@ class ClinicalSummary extends React.Component {
         this.setState({
             selectedOptions2: data,
         })
-        debugger;
+        //debugger;
         this.props.setIds(this.props.questionSectionId, this.props.questionGroupId, this.state.selectedOptions1.value, data.value)
     }
 
 
     renderSubsection = (subsections) => {
-        debugger;
+        //debugger;
         const { Intensities } = this.props.intensity;
         if (!subsections?.length) {
             return null;
@@ -381,20 +381,17 @@ class ClinicalSummary extends React.Component {
                         <div responsive="true" className="divst0" style={{ overflowY: 'scroll', }}>
                             <span size="sm" style={{ color: '#08478c', fontWeight: '700' }}>QUESTIONS : </span>
                             <hr />
-                            <table>
-                                {
+                                { 
                                     this.state.QuestionORBodyPart?.map((s, index) => {
-                                        return <tr key={index}>
-                                            <td> <i className="fa fa-angle-double-right" aria-hidden="true"></i>
-                                                <span className='quest' onClick={() => {
+                                        return <span class="rubric" key={index}>
+                                                <span className='lbls' onClick={() => {
                                                     this.TabRubricById(s.questionKeyWordBodyPartID)
                                                 }}>
-                                                    {s.questionKeyWordBodyPart}</span></td>
-                                        </tr>
+                                                    {s.questionKeyWordBodyPart},</span> &nbsp;
+                                        </span>
                                     })
                                 }
 
-                            </table>
                         </div>
                     </Col>
                 </Row>
@@ -433,7 +430,7 @@ class ClinicalSummary extends React.Component {
 
 
     selectRubrics = async (rubric, intensity, id) => {
-        debugger;
+        //debugger;
         const remedyCount = await this.props.getRemedyCounts(rubric.subsectionId);
         const remedyName = await this.props.getRemedyName(rubric.subsectionId);
         this.setState({

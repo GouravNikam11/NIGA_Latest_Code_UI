@@ -499,31 +499,42 @@ class SummaryComponent extends React.Component {
                                                     {/* <Link to={"/PatientDashboard/" + this.props.patientId + "/" + this.props.caseId + "/" + this.props.patientAppId + "/" + this.props.doctorId} */ }
                                                     const NewTab = 5
                                                     return (
-                                                        <span key={index} style={{ display: 'inline-block' }} class="remhov">
-                                                            {/* { */}
-                                                            {/* item.remediesModels.map((author, index) => {
+                                                        <div class="hover-text3">
+                                                            <span key={index} style={{ display: 'inline-block' }} class="remhov">
+                                                                {/* { */}
+                                                                {/* item.remediesModels.map((author, index) => {
                                                                         return  */}
-                                                            {/* <span > */}
-                                                            {/* <Link to={`/PatientDashboard/${this.props.patientId}/${this.props.caseId}/${this.props.patientAppId}/${this.props.doctorId}/${NewTab}`} */}
-                                                            <Link to={`#`}
-                                                                style={{
-                                                                    // fontFamily: item.fontName,
-                                                                    color: item.fontColor,
-                                                                    fontStyle: item.fontStyle,
-                                                                    textDecoration: 'none',
-                                                                    cursor: 'pointer',
-                                                                }}>
-                                                                <span onClick={() => this.handleAddRubricClick(item.remedyId)}>
-                                                                    {/* {item.remedyAlias} */}
-                                                                    {item.fontColor === 'Red'
-                                                                        ? item.remedyAlias.toUpperCase()
-                                                                        : item.remedyAlias}
-                                                                    {this.state.ShowAuthorAlias && `(${item.authorAlias}),`}</span>
-                                                            </Link>
-                                                            {/* </span> */}
-                                                            {/* }) */}
-                                                            {/* } */}
-                                                        </span>
+                                                                {/* <span > */}
+                                                                {/* <Link to={`/PatientDashboard/${this.props.patientId}/${this.props.caseId}/${this.props.patientAppId}/${this.props.doctorId}/${NewTab}`} */}
+                                                                <Link to={`#`}
+                                                                    style={{
+                                                                        // fontFamily: item.fontName,
+                                                                        color: item.fontColor,
+                                                                        fontStyle: item.fontStyle,
+                                                                        textDecoration: 'none',
+                                                                        cursor: 'pointer',
+                                                                    }}>
+                                                                    <span onClick={() => this.handleAddRubricClick(item.remedyId)}>
+                                                                        {/* {item.remedyAlias} */}
+                                                                        {item.fontColor === 'Red'
+                                                                            ? item.remedyAlias.toUpperCase()
+                                                                            : item.remedyAlias}
+                                                                        {this.state.ShowAuthorAlias && `(${item.authorAlias}),`}</span>
+                                                                </Link>
+                                                                {/* </span> */}
+                                                                {/* }) */}
+                                                                {/* } */}
+                                                            </span>
+                                                            <div class="tooltip-text3">
+                                                                {/* Themes OR Characteristics:{item.themesORCharacteristics} Generals:{item.generals}
+                                                                Modalities:{item.modalities}  Particulars:{item.particulars} */}
+                                                                <strong>Themes/Characteristics : </strong> {item.themesORCharacteristics} <br></br><br></br>
+                                                                <strong class="mt-2">Generals : </strong> {item.generals} <br></br><br></br>
+                                                                <strong class="mt-2">Modalities : </strong> {item.modalities} <br></br><br></br>
+                                                                <strong class="mt-2">Particulars : </strong> {item.particulars}
+
+                                                            </div>
+                                                        </div>
                                                     )
                                                 })}
                                             </div>

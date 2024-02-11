@@ -76,7 +76,7 @@ const PatientDashHeder = ({ patient }) => {
                         <Col md="3" sm="12" xs="12" >
                             <ul className="quick_actions pull-right">
                                 <li>
-                                    <a href="#" title='Labs & Imaging'>
+                                    <a href="#" title='Labs & Imaging' >
                                         <Biotech style={{ color: "#fff", fontSize: 26 }}  />
                                     </a>
                                 </li>

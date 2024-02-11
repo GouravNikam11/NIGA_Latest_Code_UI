@@ -7,6 +7,13 @@ import CommonServices from '../../Services/CommonServices';
 import { connect } from 'react-redux';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Editor } from 'react-draft-wysiwyg';
+import { convertToRaw, EditorState } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import draftToMarkdown from 'draftjs-to-markdown';
+import { stateToHTML } from "draft-js-export-html";
 import '../../components/CommanStyle.css';
 import {
     enqueueSnackbar as enqueueSnackbarAction,
@@ -24,6 +31,7 @@ class AddDiagnosisTherapeuticsDetail extends Component {
             diagnosisId: 0,
             DiagnosisIds: [],
             details: [],
+            editorState: EditorState.createEmpty(),
         }
         this.submitForm = this.submitForm.bind(this);
     }
@@ -76,6 +84,7 @@ class AddDiagnosisTherapeuticsDetail extends Component {
     }
 
     render() {
+        const { editorState } = this.state;
         return (
             <Card>
                 <CardHeader>
@@ -106,7 +115,7 @@ class AddDiagnosisTherapeuticsDetail extends Component {
 
                             <Col xs="12" >
 
-                                <CKEditor
+                                {/* <CKEditor
                                     editor={ClassicEditor}
                                     data={this.state.details}
                                     onReady={editor => {
@@ -124,7 +133,31 @@ class AddDiagnosisTherapeuticsDetail extends Component {
                                         editor.ui.view.editable.element.style.minHeight = "300px";
                                         console.log('Focus.', editor);
                                     }}
-                                />
+                                /> */}
+                                <div>
+                                    <Editor
+                                        wrapperClassName="demo-wrapper"
+                                        editorClassName="demo-editor"
+                                        onEditorStateChange={editorState => {
+                                            this.handleChangeforeditor(editorState);
+                                        }}
+                                        toolbarClassName="toolbar-class"
+                                        defaultEditorState={editorState}
+                                        wrapperStyle={{
+                                            borderRadius: 5,
+                                            borderWidth: 1,
+                                            borderColor: '#0000'
+                                        }}
+                                        editorStyle={{
+                                            borderRadius: 2,
+                                            border: '1px solid lightgrey',
+                                            backgroundColor: '#FFFFFF',
+                                            height: '300px'
+                                        }}
+
+                                    />
+
+                                </div>
                             </Col>
 
                         </Row>
@@ -172,6 +205,14 @@ class AddDiagnosisTherapeuticsDetail extends Component {
                 DiagnosisList: temp
             })
         })
+    }
+
+    handleChangeforeditor = (rawDraftContentState) => {
+        // no need for convertToRaw or stateToHtml anymore
+
+        // console.log('test = ',stateToHTML(rawDraftContentState.getCurrentContent()))
+        //  console.log('test = ',draftToHtml(convertToRaw(rawDraftContentState.getCurrentContent())))
+        this.setState({ details: draftToHtml(convertToRaw(rawDraftContentState.getCurrentContent())) })
     }
 
     submitForm() {

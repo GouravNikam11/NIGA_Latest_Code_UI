@@ -199,9 +199,9 @@ class AddPatientComponent extends Component {
             errors["lastName"] = "Please enter the last name"
         }
 
-        // if (fields.cellPhone == "") {
-        //     errors["cellPhone"] = "Please enter the mobile number"
-        // }
+        if (fields.cellPhone == "") {
+            errors["cellPhone"] = "Please enter the mobile number"
+        }
         if (fields.address1 == "") {
             errors["address1"] = "Please enter address "
         }
@@ -380,7 +380,7 @@ class AddPatientComponent extends Component {
 
                             <Col xs="12" md="3">
                                 <FormGroup >
-                                    <Label className="label" htmlFor="Pin">PIN  <span className="required"> *</span> :</Label>
+                                    <Label className="label" htmlFor="Pin">PIN   :</Label>
                                     <Input type="text"
                                         id="Pin"
                                         value={this.state.pin}
@@ -388,7 +388,7 @@ class AddPatientComponent extends Component {
                                         name="pin"
                                     >
                                     </Input>
-                                    <span className="error">{this.state.errors["pin"]}</span>
+                                    {/* <span className="error">{this.state.errors["pin"]}</span> */}
 
                                 </FormGroup>
                             </Col>

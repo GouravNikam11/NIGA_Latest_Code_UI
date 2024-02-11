@@ -212,22 +212,22 @@ export default {
     //   url: '/ListRoleDetails',               // add new Role Details.
     //   icon: 'icon-pencil',
     // },
-    {
-      name: 'Deep Analytics',
-      url: '/GetAstrologyComponent',          // Astrology.
-      icon: 'icon-pencil',
-    },
-    {
-      name: 'Deep Analytics Demo',
-      url: '/AstrologyComponent',          // Astrology.
-      icon: 'icon-pencil',
-    },
+    // {
+    //   name: 'Deep Analytics',
+    //   url: '/GetAstrologyComponent',          // Astrology.
+    //   icon: 'icon-pencil',
+    // },
+    // {
+    //   name: 'Deep Analytics Demo',
+    //   url: '/AstrologyComponent',          // Astrology.
+    //   icon: 'icon-pencil',
+    // },
 
-    {
-      name: 'Niga Repertory',
-      url: '/ListNigaRepertoryComponent',          // NigaRepertoryComponent  
-      icon: 'icon-pencil',
-    },
+    // {
+    //   name: 'Niga Repertory',
+    //   url: '/ListNigaRepertoryComponent',          // NigaRepertoryComponent  
+    //   icon: 'icon-pencil',
+    // },
 
 
     {

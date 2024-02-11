@@ -171,16 +171,16 @@ export default {
       url: '/AddPatientAppointment',          // Patient  Appoitment.
       icon: 'icon-pencil',
     },
-    {
-      name: 'Deep Analytics',
-      url: '/GetAstrologyComponent',          // Astrology.
-      icon: 'icon-pencil',
-    },
-    {
-      name: 'Deep Analytics Demo',
-      url: '/AstrologyComponent',          // Astrology.
-      icon: 'icon-pencil',
-    },
+    // {
+    //   name: 'Deep Analytics',
+    //   url: '/GetAstrologyComponent',          // Astrology.
+    //   icon: 'icon-pencil',
+    // },
+    // {
+    //   name: 'Deep Analytics Demo',
+    //   url: '/AstrologyComponent',          // Astrology.
+    //   icon: 'icon-pencil',
+    // },
     // {
     //   name: 'Patient Dashboard',
     //   url: '/PatientDashboard',          // Patient Dashboard

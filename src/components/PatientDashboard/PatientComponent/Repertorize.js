@@ -806,7 +806,7 @@ class RepertorizePage extends React.Component {
 
     /// render differential mm
     renderTabContent = () => {
-        debugger
+       
         const keyword = this.state.SearchDiffMMRemedy
         this.state.NewDifferentialMateriaMedica = this.state.DifferentialMateriaMedica?.filter(common =>
             common.remedyName.toLowerCase().includes(keyword.toLowerCase())
@@ -868,7 +868,7 @@ class RepertorizePage extends React.Component {
 
     //render common
     renderCommonTable = () => {
-        debugger
+      
         const keyword = this.state.SearchRemedydefaultCommon
         this.state.NewcommonRemedyList = this.state.commonRemedyList?.filter(common =>
             common.remedyName.toLowerCase().includes(keyword.toLowerCase())
@@ -1743,7 +1743,7 @@ class RepertorizePage extends React.Component {
 
     ///render grade buttons
     renderButtonsSelectGradeInSelectSection() {
-        debugger
+      
         const buttonNumbers = ['5', '2', '3', '4'];
 
         return buttonNumbers.map(number => (

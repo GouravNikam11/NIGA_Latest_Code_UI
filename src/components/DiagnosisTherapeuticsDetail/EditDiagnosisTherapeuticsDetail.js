@@ -13,6 +13,13 @@ import {
     closeSnackbar
 } from '../../store/actions/notification';
 import AsyncPaginate from "react-select-async-paginate";
+import { Editor } from 'react-draft-wysiwyg';
+import { convertToRaw, convertFromRaw, EditorState, ContentState, convertFromHTML } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+import { stateFromHTML } from 'draft-js-import-html';
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import htmlToDraft from 'html-to-draftjs';
+
 class EditDiagnosisTherapeuticsDetail extends Component {
     constructor(props) {
         super(props)
@@ -24,7 +31,7 @@ class EditDiagnosisTherapeuticsDetail extends Component {
             deletedStatus: false,
             DiagnosisList: [],
             DiagnosisIds: [],
-
+            editorState: undefined,
         }
     }
 
@@ -56,6 +63,15 @@ class EditDiagnosisTherapeuticsDetail extends Component {
         }
     }
 
+    handleChangeforeditor = (rawDraftContentState) => {
+        // no need for convertToRaw or stateToHtml anymore
+
+        // console.log('test = ',stateToHTML(rawDraftContentState.getCurrentContent()))
+        console.log('test = ', draftToHtml(convertToRaw(rawDraftContentState.getCurrentContent())))
+        this.setState({ rawDraftContentState });
+        this.setState({ details: draftToHtml(convertToRaw(rawDraftContentState.getCurrentContent())) })
+    }
+
     editDiagnosisTherapeuticsDetailId(id) {
         debugger;
         if (id !== undefined) {
@@ -66,10 +82,20 @@ class EditDiagnosisTherapeuticsDetail extends Component {
                     label: res.diagnosisName
                 }
                 console.log('obj==', obj)
+                const blocksFromHTML = htmlToDraft(res.diagnosisTherapeuticsDetail1)
+                //  console.log('blocksFromHTML.contentBlocks ', blocksFromHTML.contentBlocks)
+                //  console.log('blocksFromHTML.entityMap ', blocksFromHTML.entityMap)
+                const contentState = ContentState.createFromBlockArray(
+                    blocksFromHTML.contentBlocks,
+                    blocksFromHTML.entityMap
+                );
+                // console.log('contentState =', contentState);
+                const editorState = EditorState.createWithContent(contentState);
                 this.setState({
+                    editorState: editorState,
                     "diagnosisTherapeuticsDetailId": res.diagnosisTherapeuticsDetailId,
                     "diagnosisId": res.diagnosisId,
-                    details: res.diagnosisTherapeuticsDetail1,
+                    // details: res.diagnosisTherapeuticsDetail1,
                     "deletedStatus": false,
                     DiagnosisIds: obj
 
@@ -113,6 +139,7 @@ class EditDiagnosisTherapeuticsDetail extends Component {
     }
 
     render() {
+        const { editorState } = this.state;
         return (
             <Card>
                 <CardHeader>
@@ -141,7 +168,7 @@ class EditDiagnosisTherapeuticsDetail extends Component {
 
                             <Col xs="12" >
 
-                                <CKEditor
+                                {/* <CKEditor
                                     editor={ClassicEditor}
                                     data={this.state.details}
                                     onReady={editor => {
@@ -159,7 +186,31 @@ class EditDiagnosisTherapeuticsDetail extends Component {
                                         editor.ui.view.editable.element.style.minHeight = "300px";
                                         console.log('Focus.', editor);
                                     }}
-                                />
+                                /> */}
+                                {editorState !== undefined && <div>
+                                    <Editor
+                                        wrapperClassName="demo-wrapper"
+                                        editorClassName="demo-editor"
+                                        onEditorStateChange={editorState => {
+                                            this.handleChangeforeditor(editorState);
+                                        }}
+                                        toolbarClassName="toolbar-class"
+                                        defaultEditorState={editorState}
+                                        wrapperStyle={{
+                                            borderRadius: 5,
+                                            borderWidth: 1,
+                                            borderColor: '#0000'
+                                        }}
+                                        editorStyle={{
+                                            borderRadius: 2,
+                                            border: '1px solid lightgrey',
+                                            backgroundColor: '#FFFFFF',
+                                            height: '300px'
+                                        }}
+
+                                    />
+
+                                </div>}
                             </Col>
 
                         </Row>

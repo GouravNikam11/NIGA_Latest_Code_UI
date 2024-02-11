@@ -119,6 +119,8 @@ export class AddClinicalQuestionsComponent extends Component {
                                 <Label className="label" htmlFor="">Existance Name
                                     <span className="required">*</span> :</Label>
                                 <Select
+                                    // isMulti={true}
+                                    // closeMenuOnSelect={false}
                                     options={this.state.optionList}
                                     placeholder="Select Existance Name"
                                     name="SelectExistanceName"
@@ -525,7 +527,7 @@ export class AddClinicalQuestionsComponent extends Component {
 
     /*For type and search dropdown Existance */
     handleSelect(data) {
-        //console.log('pranavsir++++====>>>>>',data)
+        console.log('pranavsir++++====>>>>>',data)
         this.setState({
             selectedOptions: data,
             SelectedGuestionsectionId: data.value

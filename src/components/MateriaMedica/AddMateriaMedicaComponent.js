@@ -2,29 +2,33 @@ import React, { Component } from 'react';
 
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
-
-
+//import FontFamilyUI from './FontFamilyUI';
+import { Editor } from 'react-draft-wysiwyg';
+import { convertToRaw, EditorState } from 'draft-js';
 
 import { Table, Col, FormGroup, Form, Row } from 'react-bootstrap';
-import { Button, Card, CardBody, CardFooter, CardHeader, } from 'reactstrap';
+import { Button, Card, CardBody, CardFooter, CardHeader } from 'reactstrap';
 import { Input, Label, Select } from 'reactstrap';
 import CommonServices from '../../Services/CommonServices';
 import { connect } from 'react-redux';
 import '../../components/CommanStyle.css';
-
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import draftToMarkdown from 'draftjs-to-markdown';
+import { stateToHTML } from "draft-js-export-html";
 
 import {
     enqueueSnackbar as enqueueSnackbarAction,
     closeSnackbar
 } from '../../store/actions/notification';
 
+const content = { "entityMap": {}, "blocks": [{ "key": "637gr", "text": "Initialized from content state.", "type": "unstyled", "depth": 0, "inlineStyleRanges": [], "entityRanges": [], "data": {} }] };
+
 
 export class AddMateriaMedicaComponent extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
             materiaMedicaHeadId: '',
             HeadList: [],
@@ -42,11 +46,13 @@ export class AddMateriaMedicaComponent extends Component {
             addedData: '',
             data: [],
             isDeleted: false,
-            errors: {}
+            errors: {},
+            editorState: EditorState.createEmpty(),
 
         }
         this.handleChange = this.handleChange.bind(this);
         this.submitForm = this.submitForm.bind(this);
+
     }
 
     async componentDidMount() {
@@ -92,6 +98,7 @@ export class AddMateriaMedicaComponent extends Component {
     }
 
     render() {
+        const { editorState } = this.state;
         return (
 
 
@@ -186,7 +193,7 @@ export class AddMateriaMedicaComponent extends Component {
 
                         </Row>
 
-                        <Row>
+                        {/* <Row>
                             <Col xs="12" > Materia Medica Details : </Col>
 
                             <Col xs="12" >
@@ -212,12 +219,68 @@ export class AddMateriaMedicaComponent extends Component {
                                 />
                             </Col>
 
-                        </Row>
+                        </Row> */}
 
+                        {/* <CKEditor
+                            editor={ClassicEditor}
+                            data={this.state.details}
+                            onReady={editor => {
+                                editor.ui.view.editable.element.style.minHeight = '300px';
+                                console.log('Editor is ready to use!', editor);
+                            }}
+                            onChange={(event, editor) => {
+                                const data = editor.getData();
+                                editor.ui.view.editable.element.style.minHeight = '300px';
+                                console.log({ event, editor, data });
+                                this.editorhandlechanges(event, data);
+                            }}
+                            onFocus={(event, editor) => {
+                                editor.ui.view.editable.element.style.minHeight = '300px';
+                                console.log('Focus.', editor);
+                            }}
+                            config={{
+                                language: 'en',
+                                toolbar: ['fontFamily', 'undo', 'redo', 'fontColor',
+                                    'fontSize','font'],
+                                fontColor: {
+                                    colors: [
+                                        { color: 'hsl(0, 0%, 0%)', label: 'Black' },
+                                        { color: 'hsl(0, 0%, 30%)', label: 'Dark Gray' },
+                                        { color: 'hsl(0, 0%, 60%)', label: 'Gray' },
+                                        { color: 'hsl(0, 0%, 90%)', label: 'Light Gray' },
+                                        { color: 'hsl(0, 0%, 100%)', label: 'White' },
+                                    ],
+                                },
+                                fontSize: {
+                                    options: [10, 12, 14, 'default', 18, 24, 36],
+                                },
+                            }}
+                        /> */}
+                        <div>
+                            <Editor
+                                wrapperClassName="demo-wrapper"
+                                editorClassName="demo-editor"
+                                onEditorStateChange={editorState => {
+                                    this.handleChangeforeditor(editorState);
+                                  }}
+                                toolbarClassName="toolbar-class"
+                                defaultEditorState={editorState}
+                                wrapperStyle={{
+                                    borderRadius: 5,
+                                    borderWidth: 1,
+                                    borderColor: '#0000'
+                                }}
+                                editorStyle={{
+                                    borderRadius: 2,
+                                    border: '1px solid lightgrey',
+                                    backgroundColor: '#FFFFFF',
+                                    height: '300px'
+                                }}
+                             
+                            />
+        
+                        </div>
 
-
-
-                      
                     </Form>
                 </CardBody>
                 <CardFooter>
@@ -252,6 +315,23 @@ export class AddMateriaMedicaComponent extends Component {
             </Card>
         )
     }
+
+    handleChangeforeditor = (rawDraftContentState) =>{
+        // no need for convertToRaw or stateToHtml anymore
+       
+       // console.log('test = ',stateToHTML(rawDraftContentState.getCurrentContent()))
+      //  console.log('test = ',draftToHtml(convertToRaw(rawDraftContentState.getCurrentContent())))
+        this.setState({ details: draftToHtml(convertToRaw(rawDraftContentState.getCurrentContent())) })
+    }
+
+    onContentStateChange = (editorState) => {
+        debugger
+        console.log('contentState ==', editorState)
+        this.setState({
+            editorState,
+        });
+    };
+
 
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value })
