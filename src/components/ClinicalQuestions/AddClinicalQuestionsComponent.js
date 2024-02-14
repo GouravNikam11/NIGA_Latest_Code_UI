@@ -69,7 +69,8 @@ export class AddClinicalQuestionsComponent extends Component {
             SelectedQuestionGroupId: 0,
             subQuestionGroupId: 0,
             copyOfSelectedSubQuestionGroup: '',
-            sendFinalReuest: {}
+            sendFinalReuest: {},
+            isMenuOpen: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -119,8 +120,6 @@ export class AddClinicalQuestionsComponent extends Component {
                                 <Label className="label" htmlFor="">Existance Name
                                     <span className="required">*</span> :</Label>
                                 <Select
-                                    // isMulti={true}
-                                    // closeMenuOnSelect={false}
                                     options={this.state.optionList}
                                     placeholder="Select Existance Name"
                                     name="SelectExistanceName"
@@ -239,6 +238,15 @@ export class AddClinicalQuestionsComponent extends Component {
                                     Select Sub Section
                                     <span className="required">*</span> :</Label>
 
+                                {/*  <Select
+                                    style={{ width: '80px' }}
+                                    options={this.state.optionList2}
+                                    placeholder="Type Sub-Section"
+                                    value={this.state.selectedSubSection}
+                                    onChange={(item) => this.SubsectionChanged(item)}
+                                    isSearchable={true}
+                                    isMulti={true} /> */}
+
                                 <AsyncPaginate style={{ width: '80px' }}
                                     isClearable
                                     key={counter}
@@ -246,6 +254,7 @@ export class AddClinicalQuestionsComponent extends Component {
                                     labelKey="value"
                                     labelValue="subSectionId"
                                     isMulti={true}
+                                    closeMenuOnSelect={false}
                                     placeholder="Type Sub-Section"
                                     value={this.state.selectedSubSection}
                                     loadOptions={this.loadOptions.bind(this)}
@@ -436,7 +445,8 @@ export class AddClinicalQuestionsComponent extends Component {
             this.setState({
                 /*  SubSectionId: item.value,
                  SubSectionName: item.label, */
-                selectedSubSection: item
+                selectedSubSection: item,
+                isMenuOpen: true
             })
         }
         else {
@@ -478,7 +488,9 @@ export class AddClinicalQuestionsComponent extends Component {
      * Load data on demand for subsections
      */
     loadOptions = async (search, prevOptions) => {
-
+        console.log('search == ', search);
+        console.log('prevops =', prevOptions)
+        debugger;
         const options = [];
         var subsectionList = this.state.SubSectionModel;
         await this.GetSubsections(this.state.SectionId).then((result) => {
@@ -527,7 +539,7 @@ export class AddClinicalQuestionsComponent extends Component {
 
     /*For type and search dropdown Existance */
     handleSelect(data) {
-        console.log('pranavsir++++====>>>>>',data)
+        //console.log('pranavsir++++====>>>>>',data)
         this.setState({
             selectedOptions: data,
             SelectedGuestionsectionId: data.value
@@ -578,6 +590,8 @@ export class AddClinicalQuestionsComponent extends Component {
 
     getSubGroupQuestionSection(questiongroupId, questionsectionId) {
         debugger
+        console.log('questiongroupId = ', questiongroupId);
+        console.log('questionsectionId = ', questionsectionId)
         CommonServices.getData(`/DropdownList/GetSubQuestionGroupByQGIDQSIDDDL/${questiongroupId}/${questionsectionId}`).then((temp) => {
             //debugger;
             console.log('getSubGroupQuestionSection====>>>>>>>', temp);
@@ -681,7 +695,7 @@ export class AddClinicalQuestionsComponent extends Component {
     async addSelectedSubSectionQuestions() {
         debugger;
         if (this.state.selectedSubSection == null) {
-            alert("Please enter Sub Section");
+            /* alert("Please enter Sub Section"); */
         }
         else {
             //var newQuestionprop = { content: (<div id="0" >{this.state.SubSectionId}</div>) };
@@ -796,7 +810,7 @@ export class AddClinicalQuestionsComponent extends Component {
     /* For the type and serch dropdown questionGroup */
 
     handleSelectedQuestionGroup(data) {
-        //console.log('pranavsir++++====>>>>>', data)
+        console.log('pranavsir++++====>>>>>', data)
         this.setState({
             selectedOptions3: data,
             SelectedQuestionGroupId: data.value
@@ -897,7 +911,7 @@ export class AddClinicalQuestionsComponent extends Component {
             this.state.model1.push(obj)
         });
 */
-        console.log('cthis.state.sendFinalReuest for save=====>>>>>>>+++++------', JSON.stringify(this.state.sendFinalReuest))
+        console.log('this.state.sendFinalReuest for save=====>>>>>>>+++++------', JSON.stringify(this.state.sendFinalReuest))
         /*Save Request*/
 
         // if (this.validateForm()) {  

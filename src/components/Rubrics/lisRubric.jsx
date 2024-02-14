@@ -25,7 +25,7 @@ export const RubricList = (props) => {
 
 
     const [searchTerm, setSearchTerm] = useState('');
-   
+
 
 
 
@@ -44,7 +44,7 @@ export const RubricList = (props) => {
     }, [])
 
 
-    const getData = async (pageNumber, searchQuery,NewSId) => {
+    const getData = async (pageNumber, searchQuery, NewSId) => {
         debugger
         /*  let rubricList = await CommonServices.getData(`/RubricRemedy/GetRubricList?SectionId=${sectionId}`);
  
@@ -57,9 +57,9 @@ export const RubricList = (props) => {
         // console.log(`/RubricRemedy/GetRubricList?SectionId=${sectionId}`)
         // CommonServices.getData(`/RubricRemedy/GetRubricList?SectionId=${sectionId}`).then((subSections) => {
 
-            CommonServices.getData(`/Pagination/GetSubSectionForRubric?sectionId=${NewSId}${searchQuery ? `&queryString=${searchQuery}` : ''}&PageNumber=${pageNumber}&PageSize=${pageSize}`).then((subSections) => {
-                        // this.state.currentPage = pageNumber
-                        setcurrentPage(pageNumber)
+        CommonServices.getData(`/Pagination/GetSubSectionForRubric?sectionId=${NewSId}${searchQuery ? `&queryString=${searchQuery}` : ''}&PageNumber=${pageNumber}&PageSize=${pageSize}`).then((subSections) => {
+            // this.state.currentPage = pageNumber
+            setcurrentPage(pageNumber)
 
 
             setRubricList(subSections);
@@ -93,14 +93,14 @@ export const RubricList = (props) => {
     const handleChange = (e) => {
         debugger
         setIsFetching(true)
-       setsearchSectionId(e.target.value)
+        setsearchSectionId(e.target.value)
         // getData(e.target.value);
         // this.setState({
         //     [e.target.name]: e.target.value,
         //     // isLoading: true
         // }, () => {
         // })
-        getData(1, searchTerm,e.target.value)
+        getData(1, searchTerm, e.target.value)
     }
 
 
@@ -117,12 +117,17 @@ export const RubricList = (props) => {
 
 
     const getGrades = async (subSectionId) => {
-        debugger
-        let gradeDetails = await CommonServices.getData(`/RubricRemedy/GetGradeDetails/${subSectionId}`);
-        debugger
-        if (gradeDetails.length > 0) {
-            setSelectedSubSection(gradeDetails)
-        }
+        debugger;
+        setSelectedSubSection([]);
+        CommonServices.getData(`/RubricRemedy/GetGradeDetails/${subSectionId}`).then((gradeDetails) => {
+            debugger
+            if (gradeDetails.length > 0) {
+                setSelectedSubSection(gradeDetails);
+                setShow(true);
+            } else {
+                setShow(true);
+            }
+        });
     }
 
 
@@ -159,8 +164,8 @@ export const RubricList = (props) => {
     //     })
     // }
 
-   
-    
+
+
     const renderSubsectionTable = () => {
         // const filteredRecords = rubricList.filter(item => 
         //     item.subSectionName.toLowerCase().includes(searchTerm.toLowerCase())
@@ -193,7 +198,7 @@ export const RubricList = (props) => {
         ));
     };
 
-    
+
 
     const renderPagination = () => {
         console.log('rubricList =', rubricList)
@@ -220,8 +225,9 @@ export const RubricList = (props) => {
 
     const remedyDetailsOnClick = async ({ subSectionId }) => {
         debugger
+        console.log('subSectionId == ', subSectionId);
         await getGrades(subSectionId)
-        setShow(true);
+
     }
 
     const remdedyDetailsModal = () => {
@@ -256,7 +262,7 @@ export const RubricList = (props) => {
 
     const renderGradeRemedies = ({ remediesModels, gradeId }) => {
         console.log('gradeId==========>>', gradeId)
-       
+
         return remediesModels.map(remedy => {
             return (
                 <tr key={remedy.remedyId} >
@@ -264,9 +270,9 @@ export const RubricList = (props) => {
                         {remedy.remedyName}
                     </td>
 
-                    
-                   
-                    
+
+
+
                 </tr>
             )
         });
@@ -292,17 +298,17 @@ export const RubricList = (props) => {
                                 onClick={() => setSelectedGradeId(item.gradeId)}
                                 aria-controls="example-collapse-text"
                                 aria-expanded={setSelectedGradeId}
-                                
+
                             >
                                 {item.gradeNo}
 
                             </Button>
 
                             <Link to={`/EditRubrics/${item.subSectionId}/${item.gradeId}`}>
-                               <Button style={{float: 'right'}}><i className="fa fa-pencil" ></i></Button>
+                                <Button style={{ float: 'right' }}><i className="fa fa-pencil" ></i></Button>
                             </Link>
 
-                       
+
                             <Collapse in={item.gradeId === selectedGradeId}>
                                 <div id="example-collapse-text">
                                     <Table striped bordered hover style={{ marginTop: "0.5rem" }}>
@@ -348,14 +354,14 @@ export const RubricList = (props) => {
                         </Col>
 
                         <Col sm="5">
-                             <Input type="search"
-                               placeholder="Search by Lower Case or Upper Case "
-                               name='searchQuery'
-                              onChange={(e) => handleChangeforsearch(e)}
-                              value={searchTerm}
+                            <Input type="search"
+                                placeholder="Search by Lower Case or Upper Case"
+                                name='searchQuery'
+                                onChange={(e) => handleChangeforsearch(e)}
+                                value={searchTerm}
                             //   onChange={e => setSearchTerm(e.target.value)}
-                               />
-                            </Col>
+                            />
+                        </Col>
                     </Row>
                 </Col>
 
@@ -395,7 +401,7 @@ export const RubricList = (props) => {
                         {remdedyDetailsModal()}
                     </Table>
                     {renderPagination()}
-                    
+
                 </> :
                 <>
                     <Table striped bordered hover>
