@@ -208,12 +208,12 @@ class AddPatientComponent extends Component {
         // if (fields.pin == "") {
         //     errors["pin"] = "Please enter the pin "
         // }
-        // if (fields.countryId == "") {
-        //     errors["countryId"] = "Please select country "
-        // }
-        // if (fields.stateId == "") {
-        //     errors["stateId"] = "Please select state "
-        // }
+        if (fields.countryId == "") {
+            errors["countryId"] = "Please select country "
+        }
+        if (fields.stateId == "") {
+            errors["stateId"] = "Please select state "
+        }
         // if (fields.email == "") {
         //     errors["email"] = "Please enter email "
         // }
@@ -294,7 +294,7 @@ class AddPatientComponent extends Component {
             cellPhone: "",
             firstName: "",
             lastName: "",
-            gender: 0,
+            gender: null,
             age: 0,
             dateOfBirth: "",
             email: "",
@@ -413,7 +413,7 @@ class AddPatientComponent extends Component {
                             <Col xs="12" md="3">
                                 <FormGroup >
                                     <Label className="label" htmlFor="Email">Email 
-                                    <span className="required"> *</span> :
+                                    {/* <span className="required"> *</span> : */}
                                     </Label>
                                     <Input type="text"
                                         id="Email"
@@ -485,7 +485,7 @@ class AddPatientComponent extends Component {
                         <Row>
                             <Col xs="12" md="3">
                                 <FormGroup >
-                                    <Label className="label" htmlFor="Country">STD Code  <span className="required"> *</span> :</Label>
+                                    <Label className="label" htmlFor="Country">STD Code :</Label>
                                     <Input type="select" >
                                         <option value="0">
                                            Value 1
@@ -581,12 +581,13 @@ class AddPatientComponent extends Component {
 
                             <Col xs="12" md="3" >
                                 <FormGroup >
-                                    <Label className="label" htmlFor="AgeYear">Age  <span className="required"> *</span> :</Label>
+                                    <Label className="label" htmlFor="AgeYear">Years :</Label>
                                     <Input type="text"
                                         id="AgeYear"
                                         value={this.state.age}
                                         onChange={this.handleNumericFeilds.bind(this)}
                                         name="age"
+                                        readOnly
                                     >
                                     </Input>
                                     <span className="error">{this.state.errors["age"]}</span>
@@ -602,6 +603,7 @@ class AddPatientComponent extends Component {
                                         value={this.state.monthAge}
                                         onChange={this.handleNumericFeilds.bind(this)}
                                         name="monthAge"
+                                        readOnly
                                     >
                                     </Input>
                                 </FormGroup>

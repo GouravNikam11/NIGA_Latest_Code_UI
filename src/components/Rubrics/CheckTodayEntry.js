@@ -101,7 +101,7 @@ export class ListSectionComponent extends Component {
     getrecord() {
         CommonServices.getData(`/subsection/GetSubSectionsByDate/` + this.state.UserId).then((temp) => {
             debugger
-            console.log(temp);
+            console.log("check today entry==",temp);
             debugger;
             this.setState({
                 ListAuthor: temp,
