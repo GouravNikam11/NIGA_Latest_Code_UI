@@ -57,7 +57,7 @@ export class AddSubSectionComponent extends Component {
     componentDidMount() {
         debugger
         this.getSections();
-        this.getSubSection();
+        // this.getSubSection();
         this.getLanguage();
 
     }
@@ -92,12 +92,10 @@ export class AddSubSectionComponent extends Component {
         })
     }
 
-
-
-
-    handleSectionChangesforrefernce(e) {
+    async handleSectionChangesforrefernce(e) {
         debugger
-        console.log('e=======', e.target.options[e.target.selectedIndex].text)
+        console.log('e=======', e.target.options[e.target.selectedIndex].text);
+
         let obj = {
             sectionId: e.target.value,
             sectionName: e.target.options[e.target.selectedIndex].text
@@ -114,7 +112,9 @@ export class AddSubSectionComponent extends Component {
             })
 
         }
-        this.props.getSubSection(parseInt(e.target.value))
+        //await store.dispatch({ type: GET_SUBSECTION, Getallsubsections: [] });
+        //this.setState({ SubSectionList: [] })
+        /* this.getSubSection(parseInt(e.target.value)) */
     }
     renderSectionList = () => {
         if (this.state.SectionList == undefined) {
@@ -178,9 +178,13 @@ export class AddSubSectionComponent extends Component {
     loadOptions = async (search, prevOptions) => {
         debugger
         const options = [];
+        var subsectionList
         // var RepertoryAuthor = this.props.Getallsubsections.filter(state => state.sectionId == this.state.referencesectionId);
         // console.log('temp===',RepertoryAuthor.length)
-        this.props.Getallsubsections.map(x => options.push({ value: x.subSectionId, label: x.subSectionName }));
+        await this.getSubSection(parseInt(this.state.referencesectionId)).then((result) => {
+            subsectionList = result;
+        })
+        subsectionList.map(x => options.push({ value: x.subSectionId, label: x.subSectionName }));
         console.log('options===', options)
         let filteredOptions = [];
         if (!search) {
@@ -337,7 +341,8 @@ export class AddSubSectionComponent extends Component {
                                         }
                                     </Form.Control> */}
 
-                                    <AsyncPaginate isClearable
+                                    <AsyncPaginate
+                                        isClearable
                                         key={counter}
                                         cacheOptions={counter}
                                         labelKey="value"
@@ -464,13 +469,15 @@ export class AddSubSectionComponent extends Component {
                                         <Label className="label" htmlFor="">
                                             Select one or more reference sub section  :
                                         </Label>
-                                        <AsyncPaginate isClearable
+
+                                        <AsyncPaginate
+                                            isClearable
                                             isMulti
                                             key={ReferenceSubSectionId}
                                             cacheOptions={ReferenceSubSectionId}
                                             placeholder="Type Reference Sub Section"
                                             value={this.state.referenceSubSectionIds}
-                                            loadOptions={this.loadOptions}
+                                            loadOptions={this.loadOptions.bind(this)}
                                             onChange={this.ReferenceSubSectionChanged.bind(this)}
                                         />
 
@@ -655,12 +662,13 @@ export class AddSubSectionComponent extends Component {
         })
     }
 
-    getSubSection() {
-        CommonServices.getData(`/subsection/GetSubSections`).then((temp) => {
+    getSubSection(referencesectionId) {
+        return (CommonServices.getDataById(referencesectionId, `/subsection/GetSubSections`).then((temp) => {
             this.setState({
                 SubSectionList: temp,
-            })
-        });
+            });
+            return temp;
+        }));
     }
     submitForm(e) {
         debugger

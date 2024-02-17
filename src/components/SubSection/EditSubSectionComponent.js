@@ -38,6 +38,7 @@ export class EditSubSectionComponent extends Component {
             referenceSubSectionId: '',
             referenceSubSectionName: '',
             NewParentSubsection: [],
+            referenceSubSectionIds: [],
         }
         this.handleChange = this.handleChange.bind(this);
         this.submitForm = this.submitForm.bind(this);
@@ -189,7 +190,7 @@ export class EditSubSectionComponent extends Component {
 
     handleReferenceSubSectionChanges(e) {
         debugger
-        console.log('e=======', e.target.options[e.target.selectedIndex].text)
+        //console.log('e=======', e.target.options[e.target.selectedIndex].text)
         if (e != null) {
             this.setState({
                 referenceSubSectionId: e.target.value,
@@ -199,6 +200,19 @@ export class EditSubSectionComponent extends Component {
         else {
             this.setState({
                 referenceSubSectionId: 0
+            })
+        }
+    }
+
+    ReferenceSubSectionChanged = (e) => {
+        console.log('ee === ', e);
+        debugger;
+        if (e != null) {
+            this.setState({
+                referenceSubSectionIds: e,
+                referencesectionname: e.label,
+                referenceSubSectionId: e.value
+            }, () => {
             })
         }
     }
@@ -231,6 +245,7 @@ export class EditSubSectionComponent extends Component {
 
 
     render() {
+        const ReferenceSubSectionId = this.state.referencesectionId;
         const counter = this.state.sectionId;
         return (
             <Card>
@@ -308,15 +323,15 @@ export class EditSubSectionComponent extends Component {
 
                                     </Form.Control> */}
                                     <AsyncPaginate isClearable
-                                    key={counter}
-                                    cacheOptions={counter}
-                                    labelKey="value"
-                                    labelValue="subSectionId"
-                                    placeholder="Type Sub-Section"
-                                    value={this.state.NewParentSubsection}
-                                    loadOptions={this.loadParentSubOptions.bind(this)}
-                                    onChange={this.SubsectionChanged.bind(this)}
-                                />
+                                        key={counter}
+                                        cacheOptions={counter}
+                                        labelKey="value"
+                                        labelValue="subSectionId"
+                                        placeholder="Type Sub-Section"
+                                        value={this.state.NewParentSubsection}
+                                        loadOptions={this.loadParentSubOptions.bind(this)}
+                                        onChange={this.SubsectionChanged.bind(this)}
+                                    />
                                 </FormGroup>
                             </Col>
                         </Row>
@@ -349,7 +364,17 @@ export class EditSubSectionComponent extends Component {
                                     <Col xs="12" md="4">
                                         <FormGroup >
                                             <Label className="label" htmlFor="">Select reference sub section :</Label>
-                                            <Form.Control as="select"
+                                            <AsyncPaginate
+                                                isClearable
+                                                // isMulti
+                                                key={ReferenceSubSectionId}
+                                                cacheOptions={ReferenceSubSectionId}
+                                                placeholder="Type Reference Sub Section"
+                                                value={this.state.referenceSubSectionIds}
+                                                loadOptions={this.loadOptions.bind(this)}
+                                                onChange={this.ReferenceSubSectionChanged.bind(this)}
+                                            />
+                                            {/* <Form.Control as="select"
                                                 name="referenceSubSectionId"
                                                 onChange={this.handleReferenceSubSectionChanges.bind(this)}
                                                 value={this.state.referenceSubSectionId}>
@@ -361,7 +386,7 @@ export class EditSubSectionComponent extends Component {
                                                         this.renderReferenceSubSection()
                                                         : null
                                                 }
-                                            </Form.Control>
+                                            </Form.Control> */}
                                         </FormGroup>
                                     </Col>
                                     <Col xs="12" md="4">
@@ -528,11 +553,6 @@ export class EditSubSectionComponent extends Component {
     }
 
 
-
-
-
-
-
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value })
 
@@ -546,13 +566,15 @@ export class EditSubSectionComponent extends Component {
         })
     }
 
-    getSubSection() {
-        CommonServices.getData(`/subsection/GetSubSections`).then((temp) => {
+    getSubSection(referencesectionId) {
+        return (CommonServices.getDataById(referencesectionId, `/subsection/GetSubSections`).then((temp) => {
             this.setState({
                 SubSectionList: temp,
-            })
-        });
+            });
+            return temp;
+        }));
     }
+
     submitForm() {
         debugger
         // console.log('reubricref==', this.state.referencerubric)
@@ -610,12 +632,12 @@ export class EditSubSectionComponent extends Component {
             CommonServices.getDataById(parseInt(subsectionId), `/subsection`).then((res) => {
 
                 let options = [];
-                let obj={
-                    value:res.parentSubSectionId,
-                    label:res.parentSubSectionName
+                let obj = {
+                    value: res.parentSubSectionId,
+                    label: res.parentSubSectionName
                 }
-                 options.push(obj);
-                
+                options.push(obj);
+
                 this.setState({
                     mainsubSectionId: res.subSectionId,
                     subsectionId: res.subSectionId,
@@ -628,9 +650,9 @@ export class EditSubSectionComponent extends Component {
                     SubSectionDetailsList: res.subSectionLanguageDetails,
                     EnteredBy: 'Admin',
                     DeleteStatus: false,
-                     NewParentSubsection:options[0]
+                    NewParentSubsection: options[0]
                 })
-              
+
             });
         }
     }
@@ -646,7 +668,7 @@ export class EditSubSectionComponent extends Component {
 
     loadParentSubOptions = async (search, prevOptions) => {
         const options = [];
-        var subsectionList 
+        var subsectionList
         await this.GetParentSubsections(this.state.sectionId).then((result) => {
             subsectionList = result;
         })
@@ -663,6 +685,37 @@ export class EditSubSectionComponent extends Component {
             );
         }
 
+        const hasMore = filteredOptions.length > prevOptions.length + 10;
+        const slicedOptions = filteredOptions.slice(
+            prevOptions.length,
+            prevOptions.length + 10
+        );
+        return {
+            options: slicedOptions,
+            hasMore
+        };
+    }
+
+    loadOptions = async (search, prevOptions) => {
+        debugger
+        const options = [];
+        var subsectionList
+        // var RepertoryAuthor = this.props.Getallsubsections.filter(state => state.sectionId == this.state.referencesectionId);
+        // console.log('temp===',RepertoryAuthor.length)
+        await this.getSubSection(parseInt(this.state.referencesectionId)).then((result) => {
+            subsectionList = result;
+        })
+        subsectionList.map(x => options.push({ value: x.subSectionId, label: x.subSectionName }));
+        console.log('options===', options)
+        let filteredOptions = [];
+        if (!search) {
+            filteredOptions = options;
+        } else {
+            const searchLower = search.toLowerCase();
+            filteredOptions = options.filter(({ label }) =>
+                label.toLowerCase().includes(searchLower)
+            );
+        }
         const hasMore = filteredOptions.length > prevOptions.length + 10;
         const slicedOptions = filteredOptions.slice(
             prevOptions.length,

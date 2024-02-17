@@ -1,4 +1,4 @@
-import { SAVE_PATIENT, GET_PATIENT, SET_IDS, SET_LIST,GET_SUBSECTION } from './types';
+import { SAVE_PATIENT, GET_PATIENT, SET_IDS, SET_LIST, GET_SUBSECTION } from './types';
 import CommonServices from '../../Services/CommonServices';
 export const savePatient = patient => async dispatch => {
     try {
@@ -40,15 +40,15 @@ export const getPatient = (id, caseId) => async dispatch => {
 
 export const getSubSection = (referencesectionId) => async dispatch => {
     debugger
-    CommonServices.getDataById(referencesectionId,`/subsection/GetSubSections`).then((temp) => {
+    await CommonServices.getDataById(referencesectionId, `/subsection/GetSubSections`).then((temp) => {
         debugger
-        dispatch({ type: GET_SUBSECTION, Getallsubsections:temp  })
+        dispatch({ type: GET_SUBSECTION, Getallsubsections: temp })
     });
-   
+
 };
 
 
-export const setIds = (questionSectionId, questionGroupId,questionSubgroupId,bodyPartId) => async dispatch => {
+export const setIds = (questionSectionId, questionGroupId, questionSubgroupId, bodyPartId) => async dispatch => {
     debugger;
     CommonServices.getData(`/clinicalquestions/GetQuestionsBySelectedId?QuestionGroupId=` + questionGroupId + `&QuestionSectionId=` + questionSectionId + `&QuestionSubgroupId=` + questionSubgroupId + `&BodyPartId=` + bodyPartId).then((temp) => {
         debugger;
