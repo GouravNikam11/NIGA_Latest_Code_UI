@@ -255,7 +255,7 @@ export class RubricList extends Component {
                             </Col>
                         </Row>
                     </Form>
-                    <br/>
+                    <br />
                     <Table style={{ width: '100%' }} striped bordered hover>
                         <thead>
                             <tr>
@@ -268,7 +268,7 @@ export class RubricList extends Component {
                                 return <tr key={remedyIndex}>
                                     <td>{item.remedyName}</td>
 
-                                    <td>
+                                    {item.rubricAuthorList.length > 0 ? <td>
                                         <Table>
                                             {item.rubricAuthorList.map((author, authorIndex) => {
                                                 return <tr key={authorIndex}>
@@ -278,7 +278,15 @@ export class RubricList extends Component {
                                             })
                                             }
                                         </Table>
-                                    </td>
+                                    </td> :
+                                        <td>
+                                            <Table>
+                                                <tr key={remedyIndex}>
+                                                    <td>{``}</td>
+                                                    <td className='lcol'><Button variant="danger" className="btn btn-danger" onClick={() => this.deleteRubricRemedyAuthor(item.rubricRemedyId, 0, remedyIndex, 0)} ><i className="fa fa-trash"></i></Button></td>
+                                                </tr>
+                                            </Table>
+                                        </td>}
                                 </tr>
                             })}
                         </tbody>
@@ -473,9 +481,9 @@ export class RubricList extends Component {
             "SectionId": this.state.SectionId,
             "SubSectionId": this.state.SubSectionId.value,
             "GradeId": this.state.GradeId,
-            "rubricRemedyAuthorList":this.state.selectedauthorandremedy
+            "rubricRemedyAuthorList": this.state.selectedauthorandremedy
         }
-debugger
+        debugger
         // CommonServices.postData(obj, `/`).then((result) => {
         CommonServices.postData(obj, `/RubricRemedy/SaveUpdateRubricRemedy`).then((result) => {
 
@@ -511,7 +519,7 @@ debugger
         debugger;
         let selectedSubsection = subSections.find(x => x.subSectionId === rubricRemedyDetails.subSectionId);
         debugger;
-       // let allRemedies = await this.GetAllRemedies(0, rubricRemedyDetails.GradeId);
+        // let allRemedies = await this.GetAllRemedies(0, rubricRemedyDetails.GradeId);
         // let remedyList = rubricRemedyDetails.remedyIds.split(',')
         // let res = allRemedies.filter(el => {
         //     return remedyList.find(element => {
@@ -576,33 +584,33 @@ debugger
     }
 
     AddSelectedRemedyAuthors2() {
-        if(this.state.RemedyIds.length!==0 && this.state.authorIds.length!==0)
-       { var copyTableData = [this.state.RemedyIds];
-        copyTableData.forEach(element => {
-            debugger;
-            let obj = {
-                rubricRemedyId: this.state.RubricRemedyId,
-                remedyId: element.value,
-                remedyName: element.label,
-                rubricAuthorList: []
-            }
+        if (this.state.RemedyIds.length !== 0 && this.state.authorIds.length !== 0) {
+            var copyTableData = [this.state.RemedyIds];
+            copyTableData.forEach(element => {
+                debugger;
+                let obj = {
+                    rubricRemedyId: this.state.RubricRemedyId,
+                    remedyId: element.value,
+                    remedyName: element.label,
+                    rubricAuthorList: []
+                }
 
-        var authorData = this.state.authorIds;
-        authorData.forEach(element => {
-            let authorObj = {
-                remedyRubricAuthorId: 0,
-                authorId: element.value,
-                authorName: element.label,
-            }
-        obj.rubricAuthorList.push(authorObj);
-        });
-        this.state.selectedauthorandremedy.push(obj)
-    });
-        this.setState({ 
-            RemedyIds: '',
-            authorIds: '',
-        })
-    }
+                var authorData = this.state.authorIds;
+                authorData.forEach(element => {
+                    let authorObj = {
+                        remedyRubricAuthorId: 0,
+                        authorId: element.value,
+                        authorName: element.label,
+                    }
+                    obj.rubricAuthorList.push(authorObj);
+                });
+                this.state.selectedauthorandremedy.push(obj)
+            });
+            this.setState({
+                RemedyIds: '',
+                authorIds: '',
+            })
+        }
     }
 
 
@@ -612,47 +620,51 @@ debugger
         const existingIndex = this.state.selectedauthorandremedy.findIndex(item =>
             item.remedyId === this.state.RemedyIds.value
         );
-    
+
         if (existingIndex !== -1) {
             const existingEntry = this.state.selectedauthorandremedy[existingIndex];
 
-            this.state.authorIds.forEach(author => {
-                const isAuthorAlreadyAdded = existingEntry.rubricAuthorList.some(existingAuthor => existingAuthor.authorId === author.value);
+            if (this.state.authorIds.length > 0) {
+                this.state.authorIds.forEach(author => {
+                    const isAuthorAlreadyAdded = existingEntry.rubricAuthorList.some(existingAuthor => existingAuthor.authorId === author.value);
 
-                if (!isAuthorAlreadyAdded) {
+                    if (!isAuthorAlreadyAdded) {
+                        let obj = {
+                            remedyRubricAuthorId: 0,
+                            authorId: author.value,
+                            authorName: author.label,
+                        };
+
+                        existingEntry.rubricAuthorList.push(obj);
+                    }
+                });
+            }
+        }
+
+        else {
+
+            let newEntry = {
+                rubricRemedyId: 0,
+                remedyId: this.state.RemedyIds.value,
+                remedyName: this.state.RemedyIds.label,
+                rubricAuthorList: []
+            };
+            if (this.state.authorIds.length > 0) {
+                this.state.authorIds.forEach(author => {
                     let obj = {
                         remedyRubricAuthorId: 0,
                         authorId: author.value,
                         authorName: author.label,
                     };
-        
-                    existingEntry.rubricAuthorList.push(obj);
-                }
-            });
-        } 
-
-        else {
-  
-        let newEntry = {
-            rubricRemedyId: 0,
-            remedyId: this.state.RemedyIds.value,
-            remedyName: this.state.RemedyIds.label,
-            rubricAuthorList: []
-        }; 
-      this.state.authorIds.forEach(author => {
-            let obj = {
-                remedyRubricAuthorId: 0,
-                authorId: author.value,
-                authorName: author.label,
-            };
-            newEntry.rubricAuthorList.push(obj);
-        });
-        this.state.selectedauthorandremedy.push(newEntry);
+                    newEntry.rubricAuthorList.push(obj);
+                });
+            }
+            this.state.selectedauthorandremedy.push(newEntry);
         }
 
-////////////////
+        ////////////////
         // Reset state
-        this.setState({ 
+        this.setState({
             isLoadTable: true,
             RemedyIds: '',
             authorIds: '',
@@ -660,24 +672,27 @@ debugger
     }
     // test2
 
-    deleteRubricRemedyAuthor = (rubricRemedyId,remedyRubricAuthorId,remedyIndex,authorIndex) => {
+    deleteRubricRemedyAuthor = (rubricRemedyId, remedyRubricAuthorId, remedyIndex, authorIndex) => {
         debugger
 
-        if(this.state.selectedauthorandremedy[remedyIndex].rubricAuthorList.length !==1)
-        {
-            CommonServices.postData({remedyRubricAuthorId:remedyRubricAuthorId}, `/RubricRemedy/DeleteRubricRemedyAuthor`).then((result) => {
-                this.state.selectedauthorandremedy[remedyIndex].rubricAuthorList.splice(authorIndex, 1)
-                this.setState({ selectedauthorandremedy:this.state.selectedauthorandremedy});
-            });
+        if (this.state.selectedauthorandremedy[remedyIndex].rubricAuthorList.length > 0) {
+            if (this.state.selectedauthorandremedy[remedyIndex].rubricAuthorList.length !== 1) {
+                CommonServices.postData({ remedyRubricAuthorId: remedyRubricAuthorId }, `/RubricRemedy/DeleteRubricRemedyAuthor`).then((result) => {
+                    this.state.selectedauthorandremedy[remedyIndex].rubricAuthorList.splice(authorIndex, 1)
+                    this.setState({ selectedauthorandremedy: this.state.selectedauthorandremedy });
+                });
+            }
+
+            else if (this.state.selectedauthorandremedy[remedyIndex].rubricAuthorList.length === 1) {
+                CommonServices.postData({ rubricRemedyId: rubricRemedyId }, `/RubricRemedy/DeleteRubricRemedyAuthor`).then((result) => {
+                    this.state.selectedauthorandremedy.splice(remedyIndex, 1)
+                    this.setState({ selectedauthorandremedy: this.state.selectedauthorandremedy });
+                });
+            }
+        } else {
+            this.state.selectedauthorandremedy.splice(remedyIndex, 1);
+            this.setState({ selectedauthorandremedy: this.state.selectedauthorandremedy });
         }
-    
-       else if(this.state.selectedauthorandremedy[remedyIndex].rubricAuthorList.length===1)
-        {
-            CommonServices.postData({rubricRemedyId:rubricRemedyId}, `/RubricRemedy/DeleteRubricRemedyAuthor`).then((result) => {
-                this.state.selectedauthorandremedy.splice(remedyIndex, 1)
-                this.setState({ selectedauthorandremedy:this.state.selectedauthorandremedy});
-            });
-        }     
     }
 }
 export default RubricList;

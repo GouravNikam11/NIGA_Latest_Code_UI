@@ -95,7 +95,7 @@ export class AddRubricsComponent extends Component {
         this.setState({
             SubSectionId: null,
         })
-       
+
     }
 
     // handleRemedyChange = (event) => {
@@ -291,7 +291,7 @@ export class AddRubricsComponent extends Component {
                                 {/* <th className='fcol'>Sr.No</th> */}
                                 <th>Remedy Name</th>
                                 <th>Author Name</th>
-                                {/* <th className='lcol'>Action</th> */}
+                                {/*  <th className='lcol'>Action</th> */}
                             </tr>
                         </thead>
                         {this.state.isLoadTable && <tbody>
@@ -300,20 +300,32 @@ export class AddRubricsComponent extends Component {
                                 return (
                                     <tr key={index}>
                                         <td>{item.remedyName}</td>
-                                        {
-                                            item.rubricAuthorList.map((author, index2) => {
-                                                return <tr key={index2}>
-                                                    <td>{author.authorName}</td>   
-                                                    <td className='lcol'><Button variant="danger" className="btn btn-danger" onClick={() => this.deleteRubricRemedyAuthor(index,index2)} ><i className="fa fa-trash"></i></Button></td>
-                                                    {/* <td className='lcol'>
+                                        {item.rubricAuthorList.length > 0 ? <td>
+                                            <Table>
+                                                {
+                                                    item.rubricAuthorList.map((author, index2) => {
+                                                        return <tr key={index2}>
+                                                            <td>{author.authorName}</td>
+                                                            <td className='lcol'><Button variant="danger" className="btn btn-danger" onClick={() => this.deleteRubricRemedyAuthor(index, index2)} ><i className="fa fa-trash"></i></Button></td>
+                                                            {/* <td className='lcol'>
                                                             <Button style={{ marginLeft: 8 }} variant="danger" color="danger" 
                                                             onClick={() => this.deleteSubsSection(index)} >
                                                             <i className="fa fa-trash"></i>
                                                             </Button>
                                                     </td> */}
-                                                </tr>
-                                            })
-                                        }
+                                                        </tr>
+                                                    })
+                                                }
+                                            </Table>
+                                        </td> :
+                                            <td>
+                                                <Table>
+                                                    <tr key={index}>
+                                                        <td>{``}</td>
+                                                        <td className='lcol'><Button variant="danger" className="btn btn-danger" onClick={() => this.deleteRubricRemedyAuthor(index, 0)} ><i className="fa fa-trash"></i></Button></td>
+                                                    </tr>
+                                                </Table>
+                                            </td>}
                                         {/* <td className='lcol'>
                                                             <Button style={{ marginLeft: 8 }} variant="danger" color="danger" 
                                                             onClick={() => this.deleteSubsSection(index)} >
@@ -331,6 +343,7 @@ export class AddRubricsComponent extends Component {
                     <Row>
                         <Col xs="12" md="6">
                             <Button type="button"
+                                disabled={this.state.selectedauthorandremedy.length > 0 ? false : true}
                                 onClick={this.HandleSave.bind(this)}
                                 size="sm" color="primary">
                                 <i className="fa fa-dot-circle-o"></i> Submit
@@ -360,70 +373,73 @@ export class AddRubricsComponent extends Component {
 
     deleteSubsSection = (index) => {
         debugger
-        console.log('index===',index)
+        console.log('index===', index)
         var array = [...this.state.selectedauthorandremedy[0].rubricAuthorList]; // make a separate copy of the array
 
         if (index !== -1) {
             array.splice(index, 1);
-            this.state.selectedauthorandremedy[0].rubricAuthorList=array
-            this.setState({ selectedauthorandremedy:this.state.selectedauthorandremedy});
+            this.state.selectedauthorandremedy[0].rubricAuthorList = array
+            this.setState({ selectedauthorandremedy: this.state.selectedauthorandremedy });
         }
     }
 
     addSelectedSubSectionQuestions() {
         debugger
-        if(this.state.RemedyIds.length!=0 && this.state.authorIds.length!=0)
-        {
-        const existingIndex = this.state.selectedauthorandremedy.findIndex(item =>
-            item.remedyId === this.state.RemedyIds.value
-        );
-    
-        if (existingIndex !== -1) {
-            const existingEntry = this.state.selectedauthorandremedy[existingIndex];
+        if (this.state.RemedyIds.length != 0 /* && this.state.authorIds.length != 0 */) {
+            const existingIndex = this.state.selectedauthorandremedy.findIndex(item =>
+                item.remedyId === this.state.RemedyIds.value
+            );
 
-            this.state.authorIds.forEach(author => {
-                const isAuthorAlreadyAdded = existingEntry.rubricAuthorList.some(existingAuthor => existingAuthor.authorId === author.value);
+            if (existingIndex !== -1) {
+                const existingEntry = this.state.selectedauthorandremedy[existingIndex];
 
-                if (!isAuthorAlreadyAdded) {
-                    let obj = {
-                        authorId: author.value,
-                        authorName: author.label,
-                        remedyRubricAuthorId:0
-                    };
-        
-                    existingEntry.rubricAuthorList.push(obj);
+                if (this.state.authorIds.length > 0) {
+                    this.state.authorIds.forEach(author => {
+                        const isAuthorAlreadyAdded = existingEntry.rubricAuthorList.some(existingAuthor => existingAuthor.authorId === author.value);
+
+                        if (!isAuthorAlreadyAdded) {
+                            let obj = {
+                                authorId: author.value,
+                                authorName: author.label,
+                                remedyRubricAuthorId: 0
+                            };
+
+                            existingEntry.rubricAuthorList.push(obj);
+                        }
+                    });
                 }
+            }
+
+            else {
+
+                let newEntry = {
+                    rubricRemedyId: 0,
+                    remedyId: this.state.RemedyIds.value,
+                    remedyName: this.state.RemedyIds.label,
+                    rubricAuthorList: []
+                };
+                if (this.state.authorIds.length > 0) {
+                    this.state.authorIds.forEach(author => {
+                        let obj = {
+                            authorId: author.value,
+                            authorName: author.label,
+                            remedyRubricAuthorId: 0
+                        };
+                        newEntry.rubricAuthorList.push(obj);
+                    });
+                }
+                this.state.selectedauthorandremedy.push(newEntry);
+            }
+
+            ////////////////
+            // Reset state
+            this.setState({
+                isLoadTable: true,
+                RemedyIds: '',
+                authorIds: '',
             });
-        } 
-
-        else {
-  
-        let newEntry = {
-            rubricRemedyId: 0,
-            remedyId: this.state.RemedyIds.value,
-            remedyName: this.state.RemedyIds.label,
-            rubricAuthorList: []
-        }; 
-      this.state.authorIds.forEach(author => {
-            let obj = {
-                authorId: author.value,
-                authorName: author.label,
-                remedyRubricAuthorId:0
-            };
-            newEntry.rubricAuthorList.push(obj);
-        });
-        this.state.selectedauthorandremedy.push(newEntry);
         }
-
-////////////////
-        // Reset state
-        this.setState({ 
-            isLoadTable: true,
-            RemedyIds: '',
-            authorIds: '',
-        });
     }
-}
 
     /**
      * Get all the sections.
@@ -515,7 +531,7 @@ export class AddRubricsComponent extends Component {
     loadOptions = async (search, prevOptions) => {
 
         const options = [];
-        var subsectionList 
+        var subsectionList
         await this.GetSubsections(this.state.SectionId).then((result) => {
             subsectionList = result;
         })
@@ -615,20 +631,23 @@ export class AddRubricsComponent extends Component {
 
     HandleSave = () => {
         debugger;
-    //   this.state.selectedauthorandremedy.forEach(element => {
-    //         debugger;
-    //       element.SectionId=parseInt(this.state.SectionId)
-    //       element.SubSectionId=parseInt(this.state.SubSectionId)
-    //       element.GradeId=parseInt(this.state.GradeId)  
-    //        element.enteredBy=parseInt(localStorage.getItem('UserId'))
-    //        element.enteredDate=moment(new Date()).format('YYYY-MM-DD')
-    //     });
+        //   this.state.selectedauthorandremedy.forEach(element => {
+        //         debugger;
+        //       element.SectionId=parseInt(this.state.SectionId)
+        //       element.SubSectionId=parseInt(this.state.SubSectionId)
+        //       element.GradeId=parseInt(this.state.GradeId)  
+        //        element.enteredBy=parseInt(localStorage.getItem('UserId'))
+        //        element.enteredDate=moment(new Date()).format('YYYY-MM-DD')
+        //     });
+
+
         let obj = {
             "SectionId": parseInt(this.state.SectionId),
             "SubSectionId": parseInt(this.state.SubSectionId),
             "GradeId": parseInt(this.state.GradeId),
-            "rubricRemedyAuthorList":this.state.selectedauthorandremedy
+            "rubricRemedyAuthorList": this.state.selectedauthorandremedy
         }
+        console.log('this.state.selectedauthorandremedy == ', JSON.stringify(this.state.selectedauthorandremedy))
         debugger
         CommonServices.postData(obj, `/RubricRemedy/SaveUpdateRubricRemedy`).then((result) => {
             debugger
@@ -648,9 +667,20 @@ export class AddRubricsComponent extends Component {
         });
     }
 
-    deleteRubricRemedyAuthor = (authorIndex,authorIndex2) => {
+    deleteRubricRemedyAuthor = (authorIndex, authorIndex2) => {
         debugger
-        this.state.selectedauthorandremedy[authorIndex].rubricAuthorList.splice(authorIndex2, 1)
-        this.setState({ selectedauthorandremedy:this.state.selectedauthorandremedy});
+        if (authorIndex2 === 0) {
+            this.state.selectedauthorandremedy.splice(authorIndex, 1)
+            this.setState({ selectedauthorandremedy: this.state.selectedauthorandremedy });
+        } else {
+            if (this.state.selectedauthorandremedy[authorIndex].rubricAuthorList.length === 1) {
+                this.state.selectedauthorandremedy.splice(authorIndex, 1)
+                this.setState({ selectedauthorandremedy: this.state.selectedauthorandremedy });
+            } else {
+                this.state.selectedauthorandremedy[authorIndex].rubricAuthorList.splice(authorIndex2, 1)
+                this.setState({ selectedauthorandremedy: this.state.selectedauthorandremedy });
+            }
+        }
+
     }
 }
