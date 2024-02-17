@@ -682,16 +682,22 @@ export class RubricList extends Component {
                     this.setState({ selectedauthorandremedy: this.state.selectedauthorandremedy });
                 });
             }
-
             else if (this.state.selectedauthorandremedy[remedyIndex].rubricAuthorList.length === 1) {
-                CommonServices.postData({ rubricRemedyId: rubricRemedyId }, `/RubricRemedy/DeleteRubricRemedyAuthor`).then((result) => {
-                    this.state.selectedauthorandremedy.splice(remedyIndex, 1)
+                CommonServices.postData({ remedyRubricAuthorId: remedyRubricAuthorId }, `/RubricRemedy/DeleteRubricRemedyAuthor`).then((result) => {
+                    this.state.selectedauthorandremedy[remedyIndex].rubricAuthorList.splice(authorIndex, 1)
                     this.setState({ selectedauthorandremedy: this.state.selectedauthorandremedy });
+                }).then(() => {
+                    CommonServices.postData({ rubricRemedyId: rubricRemedyId }, `/RubricRemedy/DeleteRubricRemedyAuthor`).then((result) => {
+                        this.state.selectedauthorandremedy.splice(remedyIndex, 1)
+                        this.setState({ selectedauthorandremedy: this.state.selectedauthorandremedy });
+                    });
                 });
             }
         } else {
-            this.state.selectedauthorandremedy.splice(remedyIndex, 1);
-            this.setState({ selectedauthorandremedy: this.state.selectedauthorandremedy });
+            CommonServices.postData({ rubricRemedyId: rubricRemedyId }, `/RubricRemedy/DeleteRubricRemedyAuthor`).then((result) => {
+                this.state.selectedauthorandremedy.splice(remedyIndex, 1)
+                this.setState({ selectedauthorandremedy: this.state.selectedauthorandremedy });
+            });
         }
     }
 }
