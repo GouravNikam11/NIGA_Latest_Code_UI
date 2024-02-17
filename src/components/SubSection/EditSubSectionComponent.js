@@ -210,7 +210,7 @@ export class EditSubSectionComponent extends Component {
         if (e != null) {
             this.setState({
                 referenceSubSectionIds: e,
-                referencesectionname: e.label,
+                referenceSubSectionName: e.label,
                 referenceSubSectionId: e.value
             }, () => {
             })
@@ -236,7 +236,8 @@ export class EditSubSectionComponent extends Component {
             referencesectionId: 0,
             referencesectionname: '',
             referenceSubSectionId: 0,
-            referenceSubSectionName: ''
+            referenceSubSectionName: '',
+            referenceSubSectionIds: []
         })
     }
 
