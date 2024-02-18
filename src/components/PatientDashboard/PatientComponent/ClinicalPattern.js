@@ -56,7 +56,7 @@ class HomeComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            diagnosisSystemList:[],
+            diagnosisSystemList: [],
             toggleOrderModel: false,
             allopathicMedicines: "",
             diagnosisID: 0,
@@ -74,7 +74,7 @@ class HomeComponent extends React.Component {
             specificKeywordId: 0,
             RubricByKeywordIDforpopup: [],
             RemedyAndAuthor: [],
-            islodingRemedy:false,
+            islodingRemedy: false,
             RemedyCountsList: {},
             TabItem: [
                 {
@@ -137,12 +137,12 @@ class HomeComponent extends React.Component {
             ],
             GetDiagnosisForClinicalPattern: [],
             DiagnosisIds: [],
-            RubricNameForPopUp:'',
-        RemedyDtailsList: [],
-        remedyCount: 0,
-        marathiArray:[],
-        englishArray:[],
-        referencerubric:[]
+            RubricNameForPopUp: '',
+            RemedyDtailsList: [],
+            remedyCount: 0,
+            marathiArray: [],
+            englishArray: [],
+            referencerubric: []
         }
 
     }
@@ -151,7 +151,7 @@ class HomeComponent extends React.Component {
         debugger
         this.GetDiagnosisForClinicalPattern()
     }
-    
+
 
     GetDiagnosisForClinicalPattern() {
         CommonServices.getData(`/diagnosis/GetDiagnosisForClinicalPattern`).then((temp) => {
@@ -199,21 +199,21 @@ class HomeComponent extends React.Component {
             diagnosisNameAlias: '',
             diagnosisRemediesModels: [],
             examiniations: 'res.data.examiniations',
-            investigations:'',
+            investigations: '',
             miasm: '',
-            therapeutics:{}
+            therapeutics: {},
+            KeywordArray: []
         })
         console.log("e====", e)
         if (e != null) {
             this.setState({
                 DiagnosisIds: e,
-               
+
             }, () => {
             })
         }
         debugger
-        if(e!==null)
-        {
+        if (e !== null) {
             CommonServices.postData({}, `/diagnosis/DiagnosisSearch?diagnosisID=` + e.value).then((res) => {
                 debugger
                 console.log('API res=== OnClinicalPattern', res)
@@ -221,7 +221,7 @@ class HomeComponent extends React.Component {
                     this.setState({
                         allopathicMedicines: res.data.allopathicMedicines,
                         diagnosisID: res.data.diagnosisID,
-                        diagnosisSystemList:res.data.diagnosisSystemList,
+                        diagnosisSystemList: res.data.diagnosisSystemList,
                         diagnosisName: res.data.diagnosisName,
                         diagnosisNameAlias: res.data.diagnosisNameAlias,
                         diagnosisRemediesModels: res.data.diagnosisRemediesModels,
@@ -238,19 +238,19 @@ class HomeComponent extends React.Component {
                             })
                         }
                         else {
-    
+
                         }
                     });
                 }
                 else {
-    
+
                 }
             });
         }
-        else{
+        else {
 
         }
-       
+
 
 
     }
@@ -360,7 +360,7 @@ class HomeComponent extends React.Component {
 
                             </Col>
                             <Col sm="12" md="7" className="txtleft mt-1">
-                                <span style={{fontWeight: 500}}> {this.state.diagnosisName} </span>- <span>{this.state.diagnosisNameAlias}</span>
+                                <span style={{ fontWeight: 500 }}> {this.state.diagnosisName} </span>- <span>{this.state.diagnosisNameAlias}</span>
                             </Col>
                             <Col sm="12" md="2" className="txtright mt-1">
                                 <span> <b> {this.state.miasm}</b> </span>
@@ -374,22 +374,22 @@ class HomeComponent extends React.Component {
                         <Card>
                             <CardHeader className="p-1 mt-1">
                                 <CardText>
-                                        {
-                                            this.state.TabItem.map((r, index) => {
-                                                return <span class="" key={index} >
-                                                    <Button size="sm" className="btntab" color="primary" onClick={() => {
-                                                                this.TabKeywordById(r.label)
-                                                            }}>
+                                    {
+                                        this.state.TabItem.map((r, index) => {
+                                            return <span class="" key={index} >
+                                                <Button size="sm" className="btntab" color="primary" onClick={() => {
+                                                    this.TabKeywordById(r.label)
+                                                }}>
                                                     {/* <span size="sm" className=""
                                                             style={{ color: r.color }}
                                                             
                                                         > */}
-                                                            {r.label}
+                                                    {r.label}
                                                     {/* </span> */}
-                                                    </Button>
-                                                </span>
-                                            })
-                                        }
+                                                </Button>
+                                            </span>
+                                        })
+                                    }
                                 </CardText>
                             </CardHeader>
                             <CardBody className="pt-1">
@@ -397,23 +397,23 @@ class HomeComponent extends React.Component {
                                     <Col sm="12" md="5" style={{ padding: 0 }}>
                                         <div responsive="true" className="divst1">
                                             <span class="hthead1">KEYWORDS : </span><br />
-                                                <span class="divdet">
-                                                    {
-                                                        this.state.KeywordArray.map((r, index) => {
-                                                            return <span class="rubric" key={index} >
-                                                                <span>
-                                                                    <label
-                                                                        size="sm" className="m-1 lbls"
-                                                                        onClick={() => {
-                                                                            this.KeyWordClikToRubric(r.keywordId)
-                                                                        }}
-                                                                    >{r.keyword},</label>
+                                            <span class="divdet">
+                                                {
+                                                    this.state.KeywordArray.map((r, index) => {
+                                                        return <span class="rubric" key={index} >
+                                                            <span>
+                                                                <label
+                                                                    size="sm" className="m-1 lbls"
+                                                                    onClick={() => {
+                                                                        this.KeyWordClikToRubric(r.keywordId)
+                                                                    }}
+                                                                >{r.keyword},</label>
 
-                                                                </span>
                                                             </span>
-                                                        })
-                                                    }
-                                                </span>
+                                                        </span>
+                                                    })
+                                                }
+                                            </span>
                                         </div>
                                         <div responsive="true" className="divst1 mt-2" style={{ overflowY: 'scroll', maxHeight: '485px' }}>
                                             <span class="hthead1">RUBRICS WITH REMEDIES : </span><br />
@@ -421,11 +421,11 @@ class HomeComponent extends React.Component {
                                                 <div class="table-responsive">
                                                     <table class="table table-hover">
                                                         {this.state.diagnosisRemediesModels.length > 0 ?
-                                                            <tbody style={{ width: '100%', display: 'inline-table'}}>
+                                                            <tbody style={{ width: '100%', display: 'inline-table' }}>
                                                                 {
 
                                                                     this.state.diagnosisRemediesModels.map((r, index) => {
-                                        const { Intensities } = this.props.intensity;
+                                                                        const { Intensities } = this.props.intensity;
 
                                                                         return <tr class="rubric" key={index} >
                                                                             <td><span
@@ -463,7 +463,7 @@ class HomeComponent extends React.Component {
                                                             :
                                                             <span>
                                                                 {this.state.isloding === false ?
-                                                                    <tbody style={{ width: '100%', display: 'inline-table'}}>
+                                                                    <tbody style={{ width: '100%', display: 'inline-table' }}>
                                                                         {
                                                                             this.state.RubricByKeywordID.map((r, index) => {
                                                                                 return <tr class="rubric" key={index} >
@@ -500,9 +500,9 @@ class HomeComponent extends React.Component {
                                                             </span>
                                                         }
                                                     </table>
-                                                    <Modal size="lg" isOpen={this.state.toggleOrderModel} toggle={this.toggleOrderModal.bind(this)} >                                
-                                                <ModalBody>
-                                                    {/* <Row>
+                                                    <Modal size="lg" isOpen={this.state.toggleOrderModel} toggle={this.toggleOrderModal.bind(this)} >
+                                                        <ModalBody>
+                                                            {/* <Row>
                                                         <Col md="12">
                                                             {this.state.RemedyAndAuthor.map((item, index) => {
                                                                 return (
@@ -521,154 +521,154 @@ class HomeComponent extends React.Component {
                                                             })}
                                                         </Col>
                                                     </Row> */}
-                                               
-                    
-                      
 
-                                                    <div responsive="true" >
-                                                        <Row>
-                                                            <Col md="12" className="txtright">
 
-                                                                <div>
-                                                                    <span className="auth"
-                                                                    onClick={() => this.ToggleAuthorAlias()}
-                                                                    ><i class="fa fa-user" aria-hidden="true"></i></span>
-                                                                </div>
 
-                                                                <div class="hover-text1"><span className=""><img src={engs} className="langicon" alt="English" /></span>
-                                                                    <span class="tooltip-text1 bottom">
-                                                                        <div class="">
-                                                                        {
-                                                        this.state.englishArray.length > 0 ?
-                                                        this.state.englishArray.map((c, index) => {
-                                                        return <tr key={index}>
-                                                            <td>{c.subSectionDetails}</td>
-                                                        </tr>
-                                                        }) :
-                                                        <tr>
-                                                            <td colSpan="4">No data to display</td>
-                                                        </tr>}
+
+                                                            <div responsive="true" >
+                                                                <Row>
+                                                                    <Col md="12" className="txtright">
+
+                                                                        <div>
+                                                                            <span className="auth"
+                                                                                onClick={() => this.ToggleAuthorAlias()}
+                                                                            ><i class="fa fa-user" aria-hidden="true"></i></span>
                                                                         </div>
-                                                                    </span>
-                                                                </div>
 
-                                                                <div class="hover-text2"><span className=""><img src={mart} className="langicon" alt="Marathi" /></span>
-                                                                    <span class="tooltip-text2 bottom">
-                                                                        <div class="">
-                                                                        {
-                                                        this.state.marathiArray.length > 0 ?
-                                                        this.state.marathiArray.map((c, index) => {
-                                                            return <tr key={index}>
-                                                                <td>{c.subSectionDetails}</td>
-                                                            </tr>
-                                                        }) :
-                                                        <tr>
-                                                            <td colSpan="4">No data to display</td>
-                                                        </tr>}
+                                                                        <div class="hover-text1"><span className=""><img src={engs} className="langicon" alt="English" /></span>
+                                                                            <span class="tooltip-text1 bottom">
+                                                                                <div class="">
+                                                                                    {
+                                                                                        this.state.englishArray.length > 0 ?
+                                                                                            this.state.englishArray.map((c, index) => {
+                                                                                                return <tr key={index}>
+                                                                                                    <td>{c.subSectionDetails}</td>
+                                                                                                </tr>
+                                                                                            }) :
+                                                                                            <tr>
+                                                                                                <td colSpan="4">No data to display</td>
+                                                                                            </tr>}
+                                                                                </div>
+                                                                            </span>
                                                                         </div>
-                                                                    </span>
-                                                                </div>
-                                                            </Col>
-                                                        </Row>
 
-                                                        <Row style={{ padding: '6px' }}>
-                                                            <Col md="12" className="txtleft">
-                                                                <strong className="h6">{this.state.RubricNameForPopUp}</strong>
-                                                                <hr></hr>
-                                                                <strong className="h6">
-                                                                    {
-                                                                        this.state.referencerubric.length > 0 ?
-                                                                            this.state.referencerubric.map((c, index) => {
-                                                                                return <a href='#' className="crref"><tr key={index}>
-                                                                                    <td >{c.refSubSectionName}</td>
-                                                                                </tr></a>
-                                                                            }) :
-                                                                            <tr>
-                                                                                <td colSpan="4">No data to display</td>
-                                                                            </tr>
-                                                                    }</strong>
-                                                                <hr></hr>
-                                                                <strong className="h6">Remedy Count : ({this.state.remedyCount}) </strong>
-                                                                <hr></hr>
-                                                                {this.state.RemedyDtailsList.length > 0 ?
-                                                                    <div>
-                                                                        {this.state.RemedyDtailsList?.map((item, index) => {
-                                                                            {/* <Link to={"/PatientDashboard/" + this.props.patientId + "/" + this.props.caseId + "/" + this.props.patientAppId + "/" + this.props.doctorId} */ }
-                                                                            const NewTab = 5
-                                                                            return (
-                                                                                <span key={index} style={{display: 'inline-block'}} class="remhov">
-                                                                                    {/* { */}
-                                                                                    {/* item.remediesModels.map((author, index) => {
+                                                                        <div class="hover-text2"><span className=""><img src={mart} className="langicon" alt="Marathi" /></span>
+                                                                            <span class="tooltip-text2 bottom">
+                                                                                <div class="">
+                                                                                    {
+                                                                                        this.state.marathiArray.length > 0 ?
+                                                                                            this.state.marathiArray.map((c, index) => {
+                                                                                                return <tr key={index}>
+                                                                                                    <td>{c.subSectionDetails}</td>
+                                                                                                </tr>
+                                                                                            }) :
+                                                                                            <tr>
+                                                                                                <td colSpan="4">No data to display</td>
+                                                                                            </tr>}
+                                                                                </div>
+                                                                            </span>
+                                                                        </div>
+                                                                    </Col>
+                                                                </Row>
+
+                                                                <Row style={{ padding: '6px' }}>
+                                                                    <Col md="12" className="txtleft">
+                                                                        <strong className="h6">{this.state.RubricNameForPopUp}</strong>
+                                                                        <hr></hr>
+                                                                        <strong className="h6">
+                                                                            {
+                                                                                this.state.referencerubric.length > 0 ?
+                                                                                    this.state.referencerubric.map((c, index) => {
+                                                                                        return <a href='#' className="crref"><tr key={index}>
+                                                                                            <td >{c.refSubSectionName}</td>
+                                                                                        </tr></a>
+                                                                                    }) :
+                                                                                    <tr>
+                                                                                        <td colSpan="4">No data to display</td>
+                                                                                    </tr>
+                                                                            }</strong>
+                                                                        <hr></hr>
+                                                                        <strong className="h6">Remedy Count : ({this.state.remedyCount}) </strong>
+                                                                        <hr></hr>
+                                                                        {this.state.RemedyDtailsList.length > 0 ?
+                                                                            <div>
+                                                                                {this.state.RemedyDtailsList?.map((item, index) => {
+                                                                                    {/* <Link to={"/PatientDashboard/" + this.props.patientId + "/" + this.props.caseId + "/" + this.props.patientAppId + "/" + this.props.doctorId} */ }
+                                                                                    const NewTab = 5
+                                                                                    return (
+                                                                                        <span key={index} style={{ display: 'inline-block' }} class="remhov">
+                                                                                            {/* { */}
+                                                                                            {/* item.remediesModels.map((author, index) => {
                                                                                                 return  */}
-                                                                                    {/* <span > */}
-                                                                                    {/* <Link to={`/PatientDashboard/${this.props.patientId}/${this.props.caseId}/${this.props.patientAppId}/${this.props.doctorId}/${NewTab}`} */}
-                                                                                    <Link to={`#`}
-                                                                                        style={{
-                                                                                            // fontFamily: item.fontName,
-                                                                                            color: item.fontColor,
-                                                                                            fontStyle: item.fontStyle,
-                                                                                            textDecoration : 'none',
-                                                                                            cursor: 'pointer',
-                                                                                        }}>
-                                                                                        <span onClick={() => this.handlePopuptoMM(item.remedyId)}>
-                                                                                            {/* {item.remedyAlias} */}
-                                                                                            {item.fontColor === 'Red'
-                                                                                                ? item.remedyAlias.toUpperCase()
-                                                                                                : item.remedyAlias}
-                                                                                            {this.state.ShowAuthorAlias && `(${item.authorAlias}),`}</span>
-                                                                                    </Link>
-                                                                                    {/* </span> */}
-                                                                                    {/* }) */}
-                                                                                    {/* } */}
-                                                                                </span>
-                                                                            )
-                                                                        })}
-                                                                    </div>
-                                                                    : <div >
-                                                                        <span >Data Not Found</span>
-                                                                    </div>
-                                                                }
-                                                            </Col>
-                                                        </Row>
-                                                    </div>
+                                                                                            {/* <span > */}
+                                                                                            {/* <Link to={`/PatientDashboard/${this.props.patientId}/${this.props.caseId}/${this.props.patientAppId}/${this.props.doctorId}/${NewTab}`} */}
+                                                                                            <Link to={`#`}
+                                                                                                style={{
+                                                                                                    // fontFamily: item.fontName,
+                                                                                                    color: item.fontColor,
+                                                                                                    fontStyle: item.fontStyle,
+                                                                                                    textDecoration: 'none',
+                                                                                                    cursor: 'pointer',
+                                                                                                }}>
+                                                                                                <span onClick={() => this.handlePopuptoMM(item.remedyId)}>
+                                                                                                    {/* {item.remedyAlias} */}
+                                                                                                    {item.fontColor === 'Red'
+                                                                                                        ? item.remedyAlias.toUpperCase()
+                                                                                                        : item.remedyAlias}
+                                                                                                    {this.state.ShowAuthorAlias && `(${item.authorAlias}),`}</span>
+                                                                                            </Link>
+                                                                                            {/* </span> */}
+                                                                                            {/* }) */}
+                                                                                            {/* } */}
+                                                                                        </span>
+                                                                                    )
+                                                                                })}
+                                                                            </div>
+                                                                            : <div >
+                                                                                <span >Data Not Found</span>
+                                                                            </div>
+                                                                        }
+                                                                    </Col>
+                                                                </Row>
+                                                            </div>
 
-                    
-              
-                                                </ModalBody>
-                                                <ModalFooter>
-                                                    <Button color="danger" onClick={this.toggleOrderModal.bind(this)}><i className="fa fa-ban"></i> Cancel</Button>
-                                                </ModalFooter>
-                                            </Modal>
+
+
+                                                        </ModalBody>
+                                                        <ModalFooter>
+                                                            <Button color="danger" onClick={this.toggleOrderModal.bind(this)}><i className="fa fa-ban"></i> Cancel</Button>
+                                                        </ModalFooter>
+                                                    </Modal>
 
                                                 </div>
                                             </span>
                                         </div>
                                     </Col>
                                     <Col sm="12" md="7" style={{ padding: 0 }}>
-                                    <div responsive="true" className="divst2" style={{ overflowY: 'scroll', }}>
+                                        <div responsive="true" className="divst2" style={{ overflowY: 'scroll', }}>
                                             {/* <span class="hthead1">DETAILS : </span><br /> */}
                                             <span class="">
 
-                                            <table style={{width:'100%'}} className='table-bordered'>
+                                                <table style={{ width: '100%' }} className='table-bordered'>
                                                     <tr>
-                                                        <td style={{width:'25%'}} className='text-center'><span class="hthead1" size="sm" style={{ color: '#5682b0', lineHeight : 2 }}>INVESTIGATION</span></td>
-                                                        <td style={{width:'25%'}} className='text-center'><span class="hthead1" size="sm" style={{ color: '#849270', lineHeight : 2 }}>ALLOPATHIC RX</span></td>
-                                                        <td style={{width:'25%'}} className='text-center'><span class="hthead1" size="sm" style={{ color: '#f2c54f', lineHeight : 2 }}>EXAMINATION</span></td>
-                                                        <td style={{width:'25%'}} className='text-center'><span class="hthead1" size="sm" style={{ color: '#f2374f', lineHeight : 2 }}>SYSTEMS</span></td>
+                                                        <td style={{ width: '25%' }} className='text-center'><span class="hthead1" size="sm" style={{ color: '#5682b0', lineHeight: 2 }}>INVESTIGATION</span></td>
+                                                        <td style={{ width: '25%' }} className='text-center'><span class="hthead1" size="sm" style={{ color: '#849270', lineHeight: 2 }}>ALLOPATHIC RX</span></td>
+                                                        <td style={{ width: '25%' }} className='text-center'><span class="hthead1" size="sm" style={{ color: '#f2c54f', lineHeight: 2 }}>EXAMINATION</span></td>
+                                                        <td style={{ width: '25%' }} className='text-center'><span class="hthead1" size="sm" style={{ color: '#f2374f', lineHeight: 2 }}>SYSTEMS</span></td>
                                                     </tr>
                                                     <tr>
                                                         <td className='p-2'>{this.state.investigations}</td>
                                                         <td className='p-2'>{this.state.allopathicMedicines}</td>
                                                         <td className='p-2'>{this.state.examiniations}</td>
                                                         <span>
-                                                        {
-                                                            this.state.diagnosisSystemList.map((s, index) => {
-                                                             return <span key={index}>
-                                                        
-                                                        <td className='p-2'>{s.diagnosisSystemName}</td>
-                                                                </span>
-                                                            })
-                                                        }
+                                                            {
+                                                                this.state.diagnosisSystemList.map((s, index) => {
+                                                                    return <span key={index}>
+
+                                                                        <td className='p-2'>{s.diagnosisSystemName}</td>
+                                                                    </span>
+                                                                })
+                                                            }
                                                         </span>
                                                     </tr>
                                                 </table>
@@ -697,7 +697,7 @@ class HomeComponent extends React.Component {
                                                 </table> */}
 
                                             </span>
-                                           
+
                                         </div>
                                         <div responsive="true" className="divst2 mt-2" style={{ overflowY: 'scroll', height: '420px' }}>
                                             <span class="hthead1">THERAPEUTICS : </span><br />
@@ -717,15 +717,15 @@ class HomeComponent extends React.Component {
 
     popup = (item) => {
         debugger
-        this.state.RubricNameForPopUp=''
-        this.state.RemedyDtailsList= []
-        this.state.remedyCount= 0
-        this.state.marathiArray=[]
-        this.state.englishArray=[]
-        this.state.referencerubric=[]
+        this.state.RubricNameForPopUp = ''
+        this.state.RemedyDtailsList = []
+        this.state.remedyCount = 0
+        this.state.marathiArray = []
+        this.state.englishArray = []
+        this.state.referencerubric = []
 
         CommonServices.getDataById(parseInt(item.subSectionId), `/RubricRemedy/GetRubricDetails`).then((temp) => {
-            console.log("rubric details t===",temp)
+            console.log("rubric details t===", temp)
             temp.subSectionLanguageDetails.forEach((item) => {
                 if (item.languageName.trim() === "English") {
                     this.state.englishArray.push(item);
@@ -768,16 +768,15 @@ class HomeComponent extends React.Component {
         if (isExist === -1) {
             const { remedyCount } = this.props.state;
             rubric.remedyCount = remedyCount;
-           // this.props.addRubrics(rubric)
-           if(this.props.state.selectedRubrics?.length<20)
-           {
-           this.props.addRubrics(rubric)
-           }
-           else{
-           this.props.enqueueSnackbarAction("Whoops! You've hit the max limit of 20 rubrics.", "warning");
-           }
+            // this.props.addRubrics(rubric)
+            if (this.props.state.selectedRubrics?.length < 20) {
+                this.props.addRubrics(rubric)
+            }
+            else {
+                this.props.enqueueSnackbarAction("Whoops! You've hit the max limit of 20 rubrics.", "warning");
+            }
         }
-        else{
+        else {
             this.props.enqueueSnackbarAction("This rubric is already added for Repertorization", "warning");
         }
     }

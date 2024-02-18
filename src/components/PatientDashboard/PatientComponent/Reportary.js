@@ -85,6 +85,7 @@ class SummaryComponent extends React.Component {
             searchQuery: '',
             searchQuery2: '',
             SelectedSectionId: 0,
+            showInfoIcon: false
             // ShowAuthorAlias:false
         }
         this.searchSubsections = debounce(this.searchSubsections, 200)
@@ -234,6 +235,7 @@ class SummaryComponent extends React.Component {
         this.state.marathiArray = []
         this.state.englishArray = []
         this.state.referencerubric = []
+        this.state.showInfoIcon = false;
 
         CommonServices.getDataById(parseInt(subSectionId), `/RubricRemedy/GetRubricDetails`).then((temp) => {
             console.log("rubric details t===", temp)
@@ -420,6 +422,9 @@ class SummaryComponent extends React.Component {
                                             <span className="auth"
                                                 onClick={() => this.ToggleAuthorAlias()}
                                             ><i class="fa fa-user" aria-hidden="true"></i></span>
+                                            <span className="auth"
+                                                onClick={() => this.ToggleAuthorInformation()}
+                                            ><i class="fa fa-info" aria-hidden="true"></i></span>
                                         </div>
 
                                         <div class="hover-text1"><span className=""><img src={engs} className="langicon" alt="English" /></span>
@@ -494,13 +499,13 @@ class SummaryComponent extends React.Component {
                                         {/* <strong className="h6">Remedy Count : ({this.state.remedyCount}) </strong> */}
                                         {/* <hr></hr> */}
                                         {this.state.RemedyDtailsList.length > 0 ?
-                                            <div>
+                                            <div >
                                                 {this.state.RemedyDtailsList?.map((item, index) => {
                                                     {/* <Link to={"/PatientDashboard/" + this.props.patientId + "/" + this.props.caseId + "/" + this.props.patientAppId + "/" + this.props.doctorId} */ }
                                                     const NewTab = 5
                                                     return (
-                                                        <div class="hover-text3">
-                                                            <span key={index} style={{ display: 'inline-block' }} class="remhov">
+                                                        <div class="text-in" >
+                                                            <span key={index} style={{ display: 'inline-block', }} class="remhov">
                                                                 {/* { */}
                                                                 {/* item.remediesModels.map((author, index) => {
                                                                         return  */}
@@ -519,21 +524,29 @@ class SummaryComponent extends React.Component {
                                                                         {item.fontColor === 'Red'
                                                                             ? item.remedyAlias.toUpperCase()
                                                                             : item.remedyAlias}
-                                                                        {this.state.ShowAuthorAlias && `(${item.authorAlias}),`}</span>
+                                                                        {this.state.ShowAuthorAlias && `(${item.authorAlias}),`}
+                                                                        {this.state.showInfoIcon &&
+                                                                            <span className='hover-text3'>
+                                                                                <i class="fa fa-info" aria-hidden="true" style={{ marginLeft: 10, }}></i>
+                                                                                <div class="tooltip-text3">
+                                                                                    {/* Themes OR Characteristics:{item.themesORCharacteristics} Generals:{item.generals}
+                                                                                    Modalities:{item.modalities}  Particulars:{item.particulars} */}
+                                                                                    <strong>Themes/Characteristics : </strong> {item.themesORCharacteristics} <br></br><br></br>
+                                                                                    <strong class="mt-2">Generals : </strong> {item.generals} <br></br><br></br>
+                                                                                    <strong class="mt-2">Modalities : </strong> {item.modalities} <br></br><br></br>
+                                                                                    <strong class="mt-2">Particulars : </strong> {item.particulars}
+
+                                                                                </div>
+                                                                            </span>}
+
+                                                                    </span>
                                                                 </Link>
+
                                                                 {/* </span> */}
                                                                 {/* }) */}
                                                                 {/* } */}
                                                             </span>
-                                                            <div class="tooltip-text3">
-                                                                {/* Themes OR Characteristics:{item.themesORCharacteristics} Generals:{item.generals}
-                                                                Modalities:{item.modalities}  Particulars:{item.particulars} */}
-                                                                <strong>Themes/Characteristics : </strong> {item.themesORCharacteristics} <br></br><br></br>
-                                                                <strong class="mt-2">Generals : </strong> {item.generals} <br></br><br></br>
-                                                                <strong class="mt-2">Modalities : </strong> {item.modalities} <br></br><br></br>
-                                                                <strong class="mt-2">Particulars : </strong> {item.particulars}
 
-                                                            </div>
                                                         </div>
                                                     )
                                                 })}
@@ -913,6 +926,12 @@ class SummaryComponent extends React.Component {
     ToggleAuthorAlias() {
         this.setState((prevState) => ({
             ShowAuthorAlias: !prevState.ShowAuthorAlias
+        }));
+    }
+
+    ToggleAuthorInformation() {
+        this.setState((prevState) => ({
+            showInfoIcon: !prevState.showInfoIcon
         }));
     }
 
