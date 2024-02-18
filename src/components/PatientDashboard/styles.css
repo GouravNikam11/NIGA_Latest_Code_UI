@@ -2086,8 +2086,8 @@ hr {
 }
 
 .css-yk16xz-control, .css-1pahdxg-control {
-    height: 30px !important;
-    min-height: 30px !important;
+    /* height: 30px !important;
+    min-height: 30px !important; */
 }
 
 .form-group {

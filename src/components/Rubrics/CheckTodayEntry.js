@@ -22,6 +22,7 @@ export class ListSectionComponent extends Component {
             subSectionName: '',
             remedyName: '',
             ListAuthor: [],
+            RemedyCount:0,
 
             // EnteredDate:"",
             // EnteredBy: '',
@@ -45,11 +46,24 @@ export class ListSectionComponent extends Component {
 
                      <Col xs="12" md="4">
                                     <FormGroup >
-                                        <Label className="label" htmlFor="">Today's Total Entry Count :</Label>
+                                        <Label className="label" htmlFor="">Today's Total Rubric Count :</Label>
                                         <Form.Control type="text" 
                                                 name="Today'sTotalEntryCount"
                                                 disabled={true}
                                                 value={this.state.length} />
+                                    </FormGroup>
+
+
+                                    
+                        </Col>
+
+                        <Col>
+                        <FormGroup >
+                                        <Label className="label" htmlFor="">Today's Total Remedy Count :</Label>
+                                        <Form.Control type="text" 
+                                                name="Today'sTotalEntryCount"
+                                                disabled={true}
+                                                value={this.state.RemedyCount} />
                                     </FormGroup>
                         </Col>
 
@@ -74,6 +88,7 @@ export class ListSectionComponent extends Component {
                         <tr>
                             <th className='fcol'>Sr.No</th>
                             <th> subSectionName Name</th>
+                            <th> Remedy Count </th>
                         </tr>
 
                     </thead>
@@ -85,7 +100,7 @@ export class ListSectionComponent extends Component {
                                   
                                     <td className='fcol'>{s.subSectionId}</td>
                                     <td>{s.subSectionName}</td>
-                                  
+                                    <td>[{s.remedyCount}]</td>
 
 
                                 </tr>
@@ -102,10 +117,17 @@ export class ListSectionComponent extends Component {
         CommonServices.getData(`/subsection/GetSubSectionsByDate/` + this.state.UserId).then((temp) => {
             debugger
             console.log("check today entry==",temp);
+            let totalRemedyCount = 0; // Initialize total count
+            temp.forEach((item) => {
+                totalRemedyCount += item.remedyCount; // Sum up remedyCount for each item
+            });
+            console.log("totalRemedyCount==",totalRemedyCount);
             debugger;
             this.setState({
                 ListAuthor: temp,
-                length:temp.length
+                length:temp.length,
+                RemedyCount:totalRemedyCount
+
             })
         });
     }
