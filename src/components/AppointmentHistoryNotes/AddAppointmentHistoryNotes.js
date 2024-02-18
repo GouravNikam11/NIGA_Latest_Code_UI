@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import {  Col, Form, Row } from 'react-bootstrap';
+import { Col, Form, Row } from 'react-bootstrap';
 import { Button, Card, CardBody, CardFooter, CardHeader, } from 'reactstrap';
-import {Label} from 'reactstrap';
+import { Label } from 'reactstrap';
 import CommonServices from '../../Services/CommonServices';
 import { connect } from 'react-redux';
 import '../../components/CommanStyle.css';
@@ -14,30 +14,39 @@ import {
     closeSnackbar
 } from '../../store/actions/notification';
 
+import { Editor } from 'react-draft-wysiwyg';
+import { convertToRaw, EditorState } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import draftToMarkdown from 'draftjs-to-markdown';
+
 
 export class AddAppointmentHistoryNotes extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-           
+
             modelEx: [],
             details: [],
             addData: '',
             data: [],
             isDeleted: false,
-            errors: {}
+            errors: {},
+            editorState: EditorState.createEmpty(),
 
         }
-       
-      //   this.submitForm = this.submitForm.bind(this);
+
+        //   this.submitForm = this.submitForm.bind(this);
     }
 
     async componentDidMount() {
-      
+
     }
 
     render() {
+        const { editorState } = this.state;
         return (
             <Card>
                 <CardHeader>
@@ -45,12 +54,12 @@ export class AddAppointmentHistoryNotes extends Component {
                     Add Appointment History Notes
                 </CardHeader>
                 <CardBody>
-                    <Form encType="multipart/form-data" className="form-horizontal">                   
-                       <Row>
+                    <Form encType="multipart/form-data" className="form-horizontal">
+                        <Row>
                             <Col xs="12" > Appointment History Notes : </Col>
                             <Col xs="12" >
                                 <br></br>
-                                <CKEditor
+                                {/* <CKEditor
                                     editor={ClassicEditor}
                                     data={this.state.details}
                                     onReady={editor => {
@@ -68,7 +77,31 @@ export class AddAppointmentHistoryNotes extends Component {
                                         editor.ui.view.editable.element.style.minHeight = "300px";
                                         console.log('Focus.', editor);
                                     }}
-                                />
+                                /> */}
+                                <div>
+                                    <Editor
+                                        wrapperClassName="demo-wrapper"
+                                        editorClassName="demo-editor"
+                                        onEditorStateChange={editorState => {
+                                            this.handleChangeforeditor(editorState);
+                                        }}
+                                        toolbarClassName="toolbar-class"
+                                        defaultEditorState={editorState}
+                                        wrapperStyle={{
+                                            borderRadius: 5,
+                                            borderWidth: 1,
+                                            borderColor: '#0000'
+                                        }}
+                                        editorStyle={{
+                                            borderRadius: 2,
+                                            border: '1px solid lightgrey',
+                                            backgroundColor: '#FFFFFF',
+                                            height: '300px'
+                                        }}
+
+                                    />
+
+                                </div>
                             </Col>
 
                         </Row>
@@ -82,9 +115,9 @@ export class AddAppointmentHistoryNotes extends Component {
                             <Button
                                 type="button"
                                 style={{ textTransform: "uppercase" }}
-                              //   onClick={
-                              //       this.submitForm
-                              //   }
+                                //   onClick={
+                                //       this.submitForm
+                                //   }
                                 size="sm" color="primary">
                                 <i className="fa fa-save"></i> Save
                             </Button> &nbsp;
@@ -108,27 +141,35 @@ export class AddAppointmentHistoryNotes extends Component {
         )
     }
 
-       editorhandlechanges(e, details) {
+    editorhandlechanges(e, details) {
         /*  this.data = details.getData();
          this.addData(e.data); */
 
         this.setState({ details: details })
     }
 
-    
+    handleChangeforeditor = (rawDraftContentState) => {
+        // no need for convertToRaw or stateToHtml anymore
+
+        // console.log('test = ',stateToHTML(rawDraftContentState.getCurrentContent()))
+        //  console.log('test = ',draftToHtml(convertToRaw(rawDraftContentState.getCurrentContent())))
+        this.setState({ details: draftToHtml(convertToRaw(rawDraftContentState.getCurrentContent())) })
+    }
+
+
     submitForm(e) {
         e.preventDefault();
         debugger;
-            CommonServices.postData(this.state, `/MateriaMedicaMaster`).then((responseMessage) => {
-                this.props.enqueueSnackbarAction(responseMessage.data);
-               //  this.props.history.push('/ListMateriaMedicaComponent');
-            }).catch(error => {
-                console.log("error", error);
-                debugger;
-            });
-            this.setState({
-              
-            });
+        CommonServices.postData(this.state, `/MateriaMedicaMaster`).then((responseMessage) => {
+            this.props.enqueueSnackbarAction(responseMessage.data);
+            //  this.props.history.push('/ListMateriaMedicaComponent');
+        }).catch(error => {
+            console.log("error", error);
+            debugger;
+        });
+        this.setState({
+
+        });
     }
 
 }
