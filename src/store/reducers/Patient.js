@@ -1,4 +1,4 @@
-import { SAVE_PATIENT, GET_PATIENT, SET_IDS, SET_LIST, SET_EXISTANCE,GET_SUBSECTION } from "../actions/types";
+import { SAVE_PATIENT, GET_PATIENT, SET_IDS, SET_LIST, SET_EXISTANCE, GET_SUBSECTION, SHOW_LAB_IMAGING, SHOW_ADD_APPOINTMENT } from "../actions/types";
 const initialState = {
     patient: {},
     questionSectionId: 0,
@@ -9,7 +9,9 @@ const initialState = {
     SubGroupQuestionSection: [],
     BodyPartforclinicalquestion: [],
     existance: [],
-    Getallsubsections:[]
+    Getallsubsections: [],
+    showLabAndImaging: false,
+    showAddAppointment: false
 
 };
 
@@ -48,11 +50,25 @@ export default (state = initialState, action) => {
                 ...state,
                 existance: action.existance
             };
-            case GET_SUBSECTION:
-                return {
-                    ...state,
-                    Getallsubsections: action.Getallsubsections
-                };
+        case GET_SUBSECTION:
+            return {
+                ...state,
+                Getallsubsections: action.Getallsubsections
+            };
+        case SHOW_LAB_IMAGING: {
+            console.log('reducers == ', action.payload)
+            return {
+                ...state,
+                showLabAndImaging: action.payload
+            }
+        }
+        case SHOW_ADD_APPOINTMENT: {
+            console.log('reducers == ', action.payload)
+            return {
+                ...state,
+                showAddAppointment: action.payload
+            }
+        }
         default:
             return state;
     }

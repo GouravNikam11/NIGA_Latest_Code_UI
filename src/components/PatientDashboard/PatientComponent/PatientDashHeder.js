@@ -15,16 +15,20 @@ import {
 } from "@material-ui/icons";
 import moment from 'moment';
 import { Biotech } from '@mui/icons-material';
+import { connect, useDispatch, useSelector } from 'react-redux';
 require('../styles.css')
 const PatientDashHeder = ({ patient }) => {
-    console.log('patient==',patient)
+
+    const dispatch = useDispatch();
+    const { showLabAndImaging, showAddAppointment } = useSelector((state) => state.patient)
+    console.log('patient==', patient)
     const currentDate = new Date().toLocaleDateString('en-US', {
         day: 'numeric',
         month: 'short',
         year: 'numeric'
-      });
-    
-      const [day, month, year] = currentDate.split(' ');
+    });
+
+    const [day, month, year] = currentDate.split(' ');
     return (
         <>
             {/* <Container>
@@ -56,7 +60,7 @@ const PatientDashHeder = ({ patient }) => {
                     </Col>
                 </Row>
             </Container> */}
-            <Row className="header_strip" style={{  marginTop: "-7px",marginBottom: "10px", paddingBottom: "10px" }}>
+            <Row className="header_strip" style={{ marginTop: "-7px", marginBottom: "10px", paddingBottom: "10px" }}>
                 <Container className="mxwidth">
                     <Row style={{ marginLeft: "-30px", marginRight: "-30px" }}>
                         <Col md="5" sm="12" xs="12" >
@@ -64,9 +68,9 @@ const PatientDashHeder = ({ patient }) => {
                             <p className="profile-info">
                                 {`${moment().diff(patient.dateOfBirth, "years")}/${patient.gender == 0 ? "M" : "F"} | ${patient.mobileNo}`} <span className="profile-date">{day} {month} {year}</span>
                             </p>
-                            
+
                         </Col>
-                        
+
 
                         <Col md="4" sm="12" xs="12" >
                             <p className="pull-right profile-info" >
@@ -76,8 +80,11 @@ const PatientDashHeder = ({ patient }) => {
                         <Col md="3" sm="12" xs="12" >
                             <ul className="quick_actions pull-right">
                                 <li>
-                                    <a href="#" title='Labs & Imaging' >
-                                        <Biotech style={{ color: "#fff", fontSize: 26 }}  />
+                                    <a href="#" title='Labs & Imaging'>
+                                        <Biotech style={{ color: showLabAndImaging ? "#33ACFF" : "#fff", fontSize: 26 }} onClick={() => {
+                                            dispatch({ type: 'SHOW_LAB_IMAGING', payload: !showLabAndImaging })
+                                            dispatch({ type: 'SHOW_ADD_APPOINTMENT', payload: false })
+                                        }} />
                                     </a>
                                 </li>
                                 <li>
@@ -86,8 +93,11 @@ const PatientDashHeder = ({ patient }) => {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/AddAppointmentHistoryNotes" title='Add Appointment'>
-                                        <EditOutlined style={{ color: "#fff", fontSize: 24 }} />
+                                    <a href="#" title='Add Appointment'>
+                                        <EditOutlined style={{ color: showAddAppointment ? "#33ACFF" : "#fff", fontSize: 24 }} onClick={() => {
+                                            dispatch({ type: 'SHOW_LAB_IMAGING', payload: false })
+                                            dispatch({ type: 'SHOW_ADD_APPOINTMENT', payload: !showAddAppointment })
+                                        }} />
                                     </a>
                                 </li>
                                 <li>
@@ -130,9 +140,9 @@ const PatientDashHeder = ({ patient }) => {
                 &nbsp;&nbsp;
             </Row> */}
 
-            
+
         </>
     )
 }
 
-export default PatientDashHeder;
+export default connect(null, null)(PatientDashHeder);
