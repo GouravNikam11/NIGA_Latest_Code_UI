@@ -122,12 +122,12 @@ export class AddDiagnosisComponent extends Component {
             ObservationsRubricDetails: [],
 
             // BeforeAfterDuring Section
-            BeforeAfterDuringDetailsKeyword:'',
-            BeforeAfterDuringSectionId:0,
-            BeforeAfterDuringsubsectionList:[],
-            diagnosisBeforeAfterDuringIds:[],
-            BeforeAfterDuringDetails:[],
-            BeforeAfterDuringRubricDetails:[],
+            BeforeAfterDuringDetailsKeyword: '',
+            BeforeAfterDuringSectionId: 0,
+            BeforeAfterDuringsubsectionList: [],
+            diagnosisBeforeAfterDuringIds: [],
+            BeforeAfterDuringDetails: [],
+            BeforeAfterDuringRubricDetails: [],
 
             investigations: "",
             allopathicMedicines: "",
@@ -137,7 +137,7 @@ export class AddDiagnosisComponent extends Component {
             diagnosisSystemId: 0,
             diagnosisSystemDetailsList: [],
             diagnosisSystemIds: [],
-           
+
             SectionId: 0,
             subsectionId: 0,
             SubSectionName: '',
@@ -164,7 +164,7 @@ export class AddDiagnosisComponent extends Component {
         this.addModalities = this.addModalities.bind(this);
         this.addAccompanied = this.addAccompanied.bind(this);
         this.addObservations = this.addObservations.bind(this);
-        this.addBeforeAfterDuring=this.addBeforeAfterDuring.bind(this);
+        this.addBeforeAfterDuring = this.addBeforeAfterDuring.bind(this);
     }
 
 
@@ -177,7 +177,7 @@ export class AddDiagnosisComponent extends Component {
         })
     }
 
-   
+
     rendersubsectionList = () => {
         debugger;
         if (this.state.subsectionList == undefined) {
@@ -341,7 +341,7 @@ export class AddDiagnosisComponent extends Component {
         const counterDiagnosisModalities = this.state.ModalitiesSectionId;
         const counterDiagnosisAccompanied = this.state.AccompaniedSectionId;
         const counterDiagnosisObservations = this.state.ObservationsSectionId;
-        const counterDiagnosisBeforeAfterDuring=this.state.BeforeAfterDuringSectionId;
+        const counterDiagnosisBeforeAfterDuring = this.state.BeforeAfterDuringSectionId;
 
         return (
             <Card>
@@ -417,6 +417,7 @@ export class AddDiagnosisComponent extends Component {
                                                 isClearable
                                                 key={counter}
                                                 cacheOptions={counter}
+                                                closeMenuOnSelect={false}
                                                 labelKey="value"
                                                 labelValue="subSectionId"
                                                 name="subSectionId"
@@ -530,6 +531,7 @@ export class AddDiagnosisComponent extends Component {
                                             placeholder="Select one or more subsection"
                                             key={counterDiagnosisSymptoms}
                                             cacheOptions={counterDiagnosisSymptoms}
+                                            closeMenuOnSelect={false}
                                             value={this.state.diagnosisSymptomsIds}
                                             loadOptions={this.loadSymptomsOptions.bind(this)}
                                             onChange={this.DiagnosisTabChanged.bind(this, "Symptoms")}
@@ -620,6 +622,7 @@ export class AddDiagnosisComponent extends Component {
                                             isMulti
                                             placeholder="Select one or more subsection"
                                             key={counterDiagnosisMonogram}
+                                            closeMenuOnSelect={false}
                                             cacheOptions={counterDiagnosisMonogram}
                                             value={this.state.diagnosisMonogramIds}
                                             loadOptions={this.loadMonogramOptions.bind(this)}
@@ -711,6 +714,7 @@ export class AddDiagnosisComponent extends Component {
                                             key={counterDiagnosisCausations}
                                             cacheOptions={counterDiagnosisCausations}
                                             value={this.state.diagnosisCausationsIds}
+                                            closeMenuOnSelect={false}
                                             loadOptions={this.loadCausationsOptions.bind(this)}
                                             onChange={this.DiagnosisTabChanged.bind(this, "Causations")}
                                         />
@@ -801,6 +805,7 @@ export class AddDiagnosisComponent extends Component {
                                             key={counterDiagnosisPathology}
                                             cacheOptions={counterDiagnosisPathology}
                                             value={this.state.diagnosisPathologyIds}
+                                            closeMenuOnSelect={false}
                                             loadOptions={this.loadPathologyOptions.bind(this)}
                                             onChange={this.DiagnosisTabChanged.bind(this, "Pathology")}
                                         />
@@ -859,6 +864,7 @@ export class AddDiagnosisComponent extends Component {
                                             isMulti
                                             key={counterDiagnosisSystem}
                                             cacheOptions={counterDiagnosisSystem}
+                                            closeMenuOnSelect={false}
                                             placeholder="Select one or more Diagnosis System"
                                             value={this.state.diagnosisSystemIds}
                                             loadOptions={this.loadDiagnosisSystem}
@@ -911,6 +917,7 @@ export class AddDiagnosisComponent extends Component {
                                             placeholder="Select one or more subsection"
                                             key={counterDiagnosisEmergencies}
                                             cacheOptions={counterDiagnosisEmergencies}
+                                            closeMenuOnSelect={false}
                                             value={this.state.diagnosisEmergenciesIds}
                                             loadOptions={this.loadEmergenciesOptions.bind(this)}
                                             onChange={this.DiagnosisTabChanged.bind(this, "Emergencies")}
@@ -1033,6 +1040,7 @@ export class AddDiagnosisComponent extends Component {
                                             placeholder="Select one or more subsection"
                                             key={counterDiagnosisOnset}
                                             cacheOptions={counterDiagnosisOnset}
+                                            closeMenuOnSelect={false}
                                             value={this.state.diagnosisOnsetIds}
                                             loadOptions={this.loadOnsetOptions.bind(this)}
                                             onChange={this.DiagnosisTabChanged.bind(this, "Onset")}
@@ -1122,6 +1130,7 @@ export class AddDiagnosisComponent extends Component {
                                             placeholder="Select one or more subsection"
                                             key={counterDiagnosisPatterns}
                                             cacheOptions={counterDiagnosisPatterns}
+                                            closeMenuOnSelect={false}
                                             value={this.state.diagnosisPatternsIds}
                                             loadOptions={this.loadPatternsOptions.bind(this)}
                                             onChange={this.DiagnosisTabChanged.bind(this, "Patterns")}
@@ -1212,6 +1221,7 @@ export class AddDiagnosisComponent extends Component {
                                             placeholder="Select one or more subsection"
                                             key={counterDiagnosisLocationExtention}
                                             cacheOptions={counterDiagnosisLocationExtention}
+                                            closeMenuOnSelect={false}
                                             value={this.state.diagnosisLocationExtentionIds}
                                             loadOptions={this.loadLocationExtentionOptions.bind(this)}
                                             onChange={this.DiagnosisTabChanged.bind(this, "LocationExtention")}
@@ -1301,6 +1311,7 @@ export class AddDiagnosisComponent extends Component {
                                             placeholder="Select one or more subsection"
                                             key={counterDiagnosisSensation}
                                             cacheOptions={counterDiagnosisSensation}
+                                            closeMenuOnSelect={false}
                                             value={this.state.diagnosisSensationIds}
                                             loadOptions={this.loadSensationOptions.bind(this)}
                                             onChange={this.DiagnosisTabChanged.bind(this, "Sensation")}
@@ -1390,6 +1401,7 @@ export class AddDiagnosisComponent extends Component {
                                             placeholder="Select one or more subsection"
                                             key={counterDiagnosisModalities}
                                             cacheOptions={counterDiagnosisModalities}
+                                            closeMenuOnSelect={false}
                                             value={this.state.diagnosisModalitiesIds}
                                             loadOptions={this.loadModalitiesOptions.bind(this)}
                                             onChange={this.DiagnosisTabChanged.bind(this, "Modalities")}
@@ -1479,6 +1491,7 @@ export class AddDiagnosisComponent extends Component {
                                             placeholder="Select one or more subsection"
                                             key={counterDiagnosisAccompanied}
                                             cacheOptions={counterDiagnosisAccompanied}
+                                            closeMenuOnSelect={false}
                                             value={this.state.diagnosisAccompaniedIds}
                                             loadOptions={this.loadAccompaniedOptions.bind(this)}
                                             onChange={this.DiagnosisTabChanged.bind(this, "Accompanied")}
@@ -1567,6 +1580,7 @@ export class AddDiagnosisComponent extends Component {
                                             placeholder="Select one or more subsection"
                                             key={counterDiagnosisObservations}
                                             cacheOptions={counterDiagnosisObservations}
+                                            closeMenuOnSelect={false}
                                             value={this.state.diagnosisObservationsIds}
                                             loadOptions={this.loadObservationsOptions.bind(this)}
                                             onChange={this.DiagnosisTabChanged.bind(this, "Observations")}
@@ -1636,7 +1650,7 @@ export class AddDiagnosisComponent extends Component {
                                     <Label className="label" htmlFor=""> Section
                                         <span className="required">*</span>
                                         :</Label>
-                                        <Form.Control as="select"
+                                    <Form.Control as="select"
                                         name="BeforeAfterDuringSectionId"
                                         onChange={this.handleChangeSubSection.bind(this, "BeforeAfterDuring")}
                                         value={this.state.BeforeAfterDuringSectionId === null ? '' : this.state.BeforeAfterDuringSectionId}>
@@ -1651,13 +1665,14 @@ export class AddDiagnosisComponent extends Component {
                                         <Label className="label" htmlFor="">  Subsection
                                             <span className="required">*</span>  :</Label>
                                         <AsyncPaginate isClearable
-                                             isMulti
-                                             placeholder="Select one or more subsection"
-                                             key={counterDiagnosisBeforeAfterDuring}
-                                             cacheOptions={counterDiagnosisBeforeAfterDuring}
-                                             value={this.state.diagnosisBeforeAfterDuringIds}
-                                             loadOptions={this.loadBeforeAfterDuringOptions.bind(this)}
-                                             onChange={this.DiagnosisTabChanged.bind(this, "BeforeAfterDuring")}
+                                            isMulti
+                                            placeholder="Select one or more subsection"
+                                            key={counterDiagnosisBeforeAfterDuring}
+                                            closeMenuOnSelect={false}
+                                            cacheOptions={counterDiagnosisBeforeAfterDuring}
+                                            value={this.state.diagnosisBeforeAfterDuringIds}
+                                            loadOptions={this.loadBeforeAfterDuringOptions.bind(this)}
+                                            onChange={this.DiagnosisTabChanged.bind(this, "BeforeAfterDuring")}
                                         />
                                     </FormGroup>
                                 </Col>
@@ -1681,7 +1696,7 @@ export class AddDiagnosisComponent extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                {this.state.BeforeAfterDuringDetails.map((item, index) => {
+                                    {this.state.BeforeAfterDuringDetails.map((item, index) => {
                                         return (
                                             <tr key={index}>
                                                 <td>{item.BeforeAfterDuringDetailsKeyword}</td>
@@ -2711,7 +2726,7 @@ export class AddDiagnosisComponent extends Component {
      */
     submitForm() {
         debugger;
-       
+
         this.state.diagnosisSystemIds.forEach(element => {
             let obj = {
                 "diagnosisSystemId": element.value,
@@ -2736,17 +2751,17 @@ export class AddDiagnosisComponent extends Component {
                 // diagnosisPathologyList: this.state.diagnosisPathologyList,
                 // diagnosisMonogramsList: this.state.diagnosisMonogramsList,
                 diagnosisSystemDetailsList: this.state.diagnosisSystemDetailsList,
-                emergencieDetailsModelList:this.state.EmergencieDetails,
-                onsetDurationProgressDetails:this.state.OnsetDurationProgressDetails,
-                patternsDetails:this.state.PatternsDetail,
-                locationExtentionDetailsModelList:this.state.LocationExtentionDetails,
-                sensationDetailsModelList:this.state.SensationDetails,
-                modalitiesDetailsModelsList:this.state.ModalitiesDetails,
-                accompaniedDetailsModelsList:this.state.AccompaniedDetails,
-                observationsDetailsModelsList:this.state.ObservationsDetails,
-                beforeAfterDuringDetailsModelsList:this.state.BeforeAfterDuringDetails,
-                diagnosisMonogramDetailsModelsList:this.state.DiagnosisMonogramDetails,
-                diagnosisPathologyDetailsModelsList:this.state.DiagnosisPathologyDetails,
+                emergencieDetailsModelList: this.state.EmergencieDetails,
+                onsetDurationProgressDetails: this.state.OnsetDurationProgressDetails,
+                patternsDetails: this.state.PatternsDetail,
+                locationExtentionDetailsModelList: this.state.LocationExtentionDetails,
+                sensationDetailsModelList: this.state.SensationDetails,
+                modalitiesDetailsModelsList: this.state.ModalitiesDetails,
+                accompaniedDetailsModelsList: this.state.AccompaniedDetails,
+                observationsDetailsModelsList: this.state.ObservationsDetails,
+                beforeAfterDuringDetailsModelsList: this.state.BeforeAfterDuringDetails,
+                diagnosisMonogramDetailsModelsList: this.state.DiagnosisMonogramDetails,
+                diagnosisPathologyDetailsModelsList: this.state.DiagnosisPathologyDetails,
             }
 
             debugger;

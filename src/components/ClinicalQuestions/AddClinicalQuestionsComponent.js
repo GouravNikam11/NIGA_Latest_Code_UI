@@ -247,7 +247,7 @@ export class AddClinicalQuestionsComponent extends Component {
                                     isSearchable={true}
                                     isMulti={true} /> */}
 
-                                <AsyncPaginate style={{ width: '80px'}}
+                                <AsyncPaginate style={{ width: '80px' }}
                                     isClearable
                                     key={counter}
                                     cacheOptions={counter}
