@@ -505,7 +505,7 @@ class Dashboard extends Component {
                   </ButtonDropdown>
                 </ButtonGroup>
                 <div className="text-value">{this.state.RegUserCount}</div>
-                <div>Registered Users</div>
+                <div>Registered Doctor</div>
               </CardBody>
               <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
                 <Line data={cardChartData2} options={cardChartOpts2} height={70} />
@@ -1135,7 +1135,7 @@ class Dashboard extends Component {
 }
   getRegisteredUserCount() {
     CommonServices.getData(`/users/GetCount`).then((temp) => {
-        console.log(temp);
+        console.log("users/GetCount=========",temp);
         debugger;
         this.setState({
             RegUserCount: temp,
