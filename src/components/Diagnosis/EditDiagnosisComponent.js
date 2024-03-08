@@ -769,6 +769,7 @@ export class EditDiagnosisComponent extends Component {
                                                 isClearable
                                                 key={counter}
                                                 cacheOptions={counter}
+                                                closeMenuOnSelect={false}
                                                 labelKey="value"
                                                 labelValue="subSectionId"
                                                 name="subSectionId"
@@ -881,6 +882,7 @@ export class EditDiagnosisComponent extends Component {
                                             isMulti
                                             placeholder="Select one or more subsection"
                                             key={counterDiagnosisSymptoms}
+                                            closeMenuOnSelect={false}
                                             cacheOptions={counterDiagnosisSymptoms}
                                             value={this.state.diagnosisSymptomsIds}
                                             loadOptions={this.loadSymptomsOptions.bind(this)}
@@ -974,6 +976,7 @@ export class EditDiagnosisComponent extends Component {
                                             isMulti
                                             placeholder="Select one or more subsection"
                                             key={counterDiagnosisMonogram}
+                                            closeMenuOnSelect={false}
                                             cacheOptions={counterDiagnosisMonogram}
                                             value={this.state.diagnosisMonogramIds}
                                             loadOptions={this.loadMonogramOptions.bind(this)}
@@ -1065,6 +1068,7 @@ export class EditDiagnosisComponent extends Component {
                                             isMulti
                                             placeholder="Select one or more subsection"
                                             key={counterDiagnosisCausations}
+                                            closeMenuOnSelect={false}
                                             cacheOptions={counterDiagnosisCausations}
                                             value={this.state.diagnosisCausationsIds}
                                             loadOptions={this.loadCausationsOptions.bind(this)}
@@ -1157,6 +1161,7 @@ export class EditDiagnosisComponent extends Component {
                                             isMulti
                                             placeholder="Select one or more subsection"
                                             key={counterDiagnosisPathology}
+                                            closeMenuOnSelect={false}
                                             cacheOptions={counterDiagnosisPathology}
                                             value={this.state.diagnosisPathologyIds}
                                             loadOptions={this.loadPathologyOptions.bind(this)}
@@ -1221,6 +1226,7 @@ export class EditDiagnosisComponent extends Component {
                                             cacheOptions={counterDiagnosisSystem}
                                             placeholder="Select one or more Diagnosis System"
                                             value={this.state.diagnosisSystemIds}
+                                            closeMenuOnSelect={false}
                                             loadOptions={this.loadDiagnosisSystem}
                                             onChange={this.DiagnosisSystemChanged.bind(this)}
                                         />
@@ -1272,6 +1278,7 @@ export class EditDiagnosisComponent extends Component {
                                             key={counterDiagnosisEmergencies}
                                             cacheOptions={counterDiagnosisEmergencies}
                                             value={this.state.diagnosisEmergenciesIds}
+                                            closeMenuOnSelect={false}
                                             loadOptions={this.loadEmergenciesOptions.bind(this)}
                                             onChange={this.DiagnosisTabChanged.bind(this, "Emergencies")}
                                         />
@@ -1396,6 +1403,7 @@ export class EditDiagnosisComponent extends Component {
                                             key={counterDiagnosisOnset}
                                             cacheOptions={counterDiagnosisOnset}
                                             value={this.state.diagnosisOnsetIds}
+                                            closeMenuOnSelect={false}
                                             loadOptions={this.loadOnsetOptions.bind(this)}
                                             onChange={this.DiagnosisTabChanged.bind(this, "Onset")}
                                         />
@@ -1487,6 +1495,7 @@ export class EditDiagnosisComponent extends Component {
                                             key={counterDiagnosisPatterns}
                                             cacheOptions={counterDiagnosisPatterns}
                                             value={this.state.diagnosisPatternsIds}
+                                            closeMenuOnSelect={false}
                                             loadOptions={this.loadPatternsOptions.bind(this)}
                                             onChange={this.DiagnosisTabChanged.bind(this, "Patterns")}
                                         />
@@ -1577,6 +1586,7 @@ export class EditDiagnosisComponent extends Component {
                                             isMulti
                                             placeholder="Select one or more subsection"
                                             key={counterDiagnosisLocationExtention}
+                                            closeMenuOnSelect={false}
                                             cacheOptions={counterDiagnosisLocationExtention}
                                             value={this.state.diagnosisLocationExtentionIds}
                                             loadOptions={this.loadLocationExtentionOptions.bind(this)}
@@ -1668,6 +1678,7 @@ export class EditDiagnosisComponent extends Component {
                                             isMulti
                                             placeholder="Select one or more subsection"
                                             key={counterDiagnosisSensation}
+                                            closeMenuOnSelect={false}
                                             cacheOptions={counterDiagnosisSensation}
                                             value={this.state.diagnosisSensationIds}
                                             loadOptions={this.loadSensationOptions.bind(this)}
@@ -1760,6 +1771,7 @@ export class EditDiagnosisComponent extends Component {
                                             placeholder="Select one or more subsection"
                                             key={counterDiagnosisModalities}
                                             cacheOptions={counterDiagnosisModalities}
+                                            closeMenuOnSelect={false}
                                             value={this.state.diagnosisModalitiesIds}
                                             loadOptions={this.loadModalitiesOptions.bind(this)}
                                             onChange={this.DiagnosisTabChanged.bind(this, "Modalities")}
@@ -1851,6 +1863,7 @@ export class EditDiagnosisComponent extends Component {
                                             placeholder="Select one or more subsection"
                                             key={counterDiagnosisAccompanied}
                                             cacheOptions={counterDiagnosisAccompanied}
+                                            closeMenuOnSelect={false}
                                             value={this.state.diagnosisAccompaniedIds}
                                             loadOptions={this.loadAccompaniedOptions.bind(this)}
                                             onChange={this.DiagnosisTabChanged.bind(this, "Accompanied")}
@@ -1942,6 +1955,7 @@ export class EditDiagnosisComponent extends Component {
                                             key={counterDiagnosisObservations}
                                             cacheOptions={counterDiagnosisObservations}
                                             value={this.state.diagnosisObservationsIds}
+                                            closeMenuOnSelect={false}
                                             loadOptions={this.loadObservationsOptions.bind(this)}
                                             onChange={this.DiagnosisTabChanged.bind(this, "Observations")}
                                         />
@@ -2032,6 +2046,7 @@ export class EditDiagnosisComponent extends Component {
                                             key={counterDiagnosisBeforeAfterDuring}
                                             cacheOptions={counterDiagnosisBeforeAfterDuring}
                                             value={this.state.diagnosisBeforeAfterDuringIds}
+                                            closeMenuOnSelect={false}
                                             loadOptions={this.loadBeforeAfterDuringOptions.bind(this)}
                                             onChange={this.DiagnosisTabChanged.bind(this, "BeforeAfterDuring")}
                                         />
