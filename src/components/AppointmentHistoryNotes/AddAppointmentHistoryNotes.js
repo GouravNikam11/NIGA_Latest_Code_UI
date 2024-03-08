@@ -158,18 +158,18 @@ export class AddAppointmentHistoryNotes extends Component {
 
 
     submitForm(e) {
-        e.preventDefault();
-        debugger;
-        CommonServices.postData(this.state, `/MateriaMedicaMaster`).then((responseMessage) => {
-            this.props.enqueueSnackbarAction(responseMessage.data);
-            //  this.props.history.push('/ListMateriaMedicaComponent');
-        }).catch(error => {
-            console.log("error", error);
-            debugger;
-        });
-        this.setState({
+        // e.preventDefault();
+        // debugger;
+        // CommonServices.postData(this.state, `/MateriaMedicaMaster`).then((responseMessage) => {
+        //     this.props.enqueueSnackbarAction(responseMessage.data);
+        //     //  this.props.history.push('/ListMateriaMedicaComponent');
+        // }).catch(error => {
+        //     console.log("error", error);
+        //     debugger;
+        // });
+        // this.setState({
 
-        });
+        // });
     }
 
 }

@@ -325,7 +325,7 @@ class ManageUsers extends Component {
                                 <Col sm="12" className="text-center ">
                                     <Button color="primary" style={{ backgroundColor: "#20a8d8", textTransform: "uppercase", margin: 10 }} className="paddg" type="submit">&nbsp; <i className="fa fa-user"></i>  &nbsp; Create an account &nbsp;</Button>
                                     &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <Button className='btn_Cancel'  onClick={() => this.props.history.push('/Login')}>&nbsp; <i className="fa fa-close"></i>  &nbsp; Cancel &nbsp;</Button>
+                                    <Button className='btn_Cancel'  onClick={() => this.props.history.push('/ListUserComponent')}>&nbsp; <i className="fa fa-close"></i>  &nbsp; Cancel &nbsp;</Button>
                                     <br/>
                                 </Col>
                             </div>

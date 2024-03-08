@@ -1796,78 +1796,78 @@ export class AddDiagnosisComponent extends Component {
 
 
     GetSubSections(sectionId, string) {
-        CommonServices.getDataById(sectionId, `/subsection/GetSubSections`).then((temp) => {
+        CommonServices.getDataById(sectionId, `/subsection/GetSubSectionsWithPagination`).then((temp) => {
             debugger
             console.log(temp);
             if (string === "Diagnosis") {
                 this.setState({
-                    subsectionList: temp
+                    subsectionList: temp.resultObject
                 })
             }
             else if (string === "Symptoms") {
                 this.setState({
-                    SymptomssubsectionList: temp
+                    SymptomssubsectionList: temp.resultObject
                 })
             }
             else if (string === "Monogram") {
                 this.setState({
-                    MonogramsubsectionList: temp
+                    MonogramsubsectionList: temp.resultObject
                 })
             }
             else if (string === "Causations") {
 
                 this.setState({
-                    CausationssubsectionList: temp
+                    CausationssubsectionList: temp.resultObject
                 })
             }
             else if (string === "Pathology") {
                 this.setState({
-                    PathologysubsectionList: temp
+                    PathologysubsectionList: temp.resultObject
                 })
             }
             else if (string === "Emergencies") {
                 this.setState({
-                    EmergenciessubsectionList: temp
+                    EmergenciessubsectionList: temp.resultObject
                 })
             }
             else if (string === "Onset") {
                 this.setState({
-                    OnsetsubsectionList: temp
+                    OnsetsubsectionList: temp.resultObject
                 })
             }
             else if (string === "Patterns") {
                 this.setState({
-                    PatternssubsectionList: temp
+                    PatternssubsectionList: temp.resultObject
                 })
             }
             else if (string === "LocationExtention") {
                 this.setState({
-                    LocationExtentionsubsectionList: temp
+                    LocationExtentionsubsectionList: temp.resultObject
                 })
             }
             else if (string === "Sensation") {
                 this.setState({
-                    SensationsubsectionList: temp
+                    SensationsubsectionList: temp.resultObject
                 })
             }
             else if (string === "Modalities") {
                 this.setState({
-                    ModalitiessubsectionList: temp
+                    ModalitiessubsectionList: temp.resultObject
                 })
             }
             else if (string === "Accompanied") {
                 this.setState({
-                    AccompaniedsubsectionList: temp
+                    AccompaniedsubsectionList: temp.resultObject
                 })
             }
             else if (string === "Observations") {
                 this.setState({
-                    ObservationssubsectionList: temp
+                    ObservationssubsectionList: temp.resultObject
                 })
             }
             else if (string === "BeforeAfterDuring") {
                 this.setState({
-                    BeforeAfterDuringsubsectionList: temp
+                    BeforeAfterDuringsubsectionList: temp.resultObject
                 })
             }
         })

@@ -322,7 +322,7 @@ class SummaryComponent extends React.Component {
 
 
 
-                            <Col sm="12" md="9" className="txtright ">
+                            {/* <Col sm="12" md="9" className="txtright ">
 
                                 <Link to={"/Clipboard/" + this.props.patientId + "/" + this.props.caseId + "/" + this.props.patientAppId + "/" + this.props.doctorId}>
                                     <Button size="sm" className="btn1" color="primary">REPORTORIZE</Button><span className="numbadge">{this.props.state.selectedRubrics?.length}</span>
@@ -330,8 +330,8 @@ class SummaryComponent extends React.Component {
                                 <Button size="sm" className="btn2" color="primary">ACUTE CLIPBOARD</Button><span className="numbadge">11</span>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <Button size="sm" className="btn3" color="primary">FOLLOW UP</Button><span className="numbadge">07</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                {/* <Button size="sm" className="btn4" color="primary">5-35 ANALYSIS METHOS &nbsp;<i className="fa fa-angle-down" aria-hidden="true"></i></Button> */}
-                            </Col>
+                                <Button size="sm" className="btn4" color="primary">5-35 ANALYSIS METHOS &nbsp;<i className="fa fa-angle-down" aria-hidden="true"></i></Button>
+                            </Col> */}
                         </FormGroup>
                     </Col>
                 </Row>
