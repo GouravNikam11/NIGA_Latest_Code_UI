@@ -349,12 +349,12 @@ const routes = [
 
 
   /*  User */
-  { path: '/AddUser', name: 'List Remedy', component: AddUserComponent },
+  // { path: '/AddUser', name: 'List Remedy', component: AddUserComponent },
 
 
-  { path: '/ManageUsers', name: 'Manage User', component: ManageUsers },
-  { path: '/ListUserComponent', name: 'List User', component: ListUserComponent },
-  { path: '/EditUserComponent/:id', name: 'Edit User', component: EditUserComponent },
+  // { path: '/ManageUsers', name: 'Manage User', component: ManageUsers },
+  // { path: '/ListUserComponent', name: 'List User', component: ListUserComponent },
+  // { path: '/EditUserComponent/:id', name: 'Edit User', component: EditUserComponent },
 
 
 

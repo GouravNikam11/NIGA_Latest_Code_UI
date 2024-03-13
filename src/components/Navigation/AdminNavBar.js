@@ -193,20 +193,20 @@ export default {
     //   url: '/ListMenuMaster',               // add new Menu.
     //   icon: 'icon-pencil',
     // },
-    {
-      name: 'Role Master',
-      url: '/ListRoleMaster',               // add new Role.
-      icon: 'icon-pencil',
-    },
-    {
+    // {
+    //   name: 'Role Master',
+    //   url: '/ListRoleMaster',               // add new Role.
+    //   icon: 'icon-pencil',
+    // },
+    // {
 
-      name: 'User Master',
+    //   name: 'User Master',
 
-      url: '/ListUserComponent',               // add new User.
+    //   url: '/ListUserComponent',               // add new User.
 
-      icon: 'icon-pencil',
+    //   icon: 'icon-pencil',
 
-    },
+    // },
     // {
     //   name: 'Role Details',
     //   url: '/ListRoleDetails',               // add new Role Details.
