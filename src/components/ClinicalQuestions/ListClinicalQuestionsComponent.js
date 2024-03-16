@@ -42,7 +42,7 @@ export class ListClinicalQuestionsComponent extends Component {
                     <Link to={"/EditClinicalQuestions/" + c.questionsId + "/" + (c.questionSubgroupName === "LOCATION" ? 0 : 1)}>
                         <Button ><i className="fa fa-pencil"></i></Button> 
                     </Link>
-                    <Button style={{marginLeft:8}} variant="danger" onClick={() => this.deleteQuestionGroup(c.questionGroupId)} ><i className="fa fa-trash"></i></Button>
+                    <Button style={{marginLeft:8}} variant="danger" onClick={() => this.deleteQuestionGroup(c.questionsId)} ><i className="fa fa-trash"></i></Button>
                 </td>
             </tr>
         })
@@ -126,7 +126,7 @@ export class ListClinicalQuestionsComponent extends Component {
             CommonServices.getData(`/Pagination/GetClinicalQuestionBodyPart?PageNumber=${pageNumber}&PageSize=${this.state.pageSize}`).then((result) => {
                 this.state.currentPage = pageNumber
             debugger
-            console.log(result);
+            console.log("QuestionGroups====================",result);
             this.setState({
                 QuestionGroups: result
             })
@@ -137,15 +137,15 @@ export class ListClinicalQuestionsComponent extends Component {
      * Method is used to delete question group.
      * @param {delete question group} QuestionGroupId 
      */
-    deleteQuestionGroup(questionGroupId) {
-        var questiongroupModel = {
-            QuestionGroupId: questionGroupId,
-            QuestionGroupName: "test",
-            DeleteStatus: true
-        };
-        console.log(questiongroupModel);
+    deleteQuestionGroup(questionsId) {
+        // var questiongroupModel = {
+        //     QuestionGroupId: questionsId,
+        //     QuestionGroupName: "test",
+        //     DeleteStatus: true
+        // };
+       console.log("questionsId======++++",questionsId);
         debugger;
-        CommonServices.postData(questiongroupModel, `/questiongroup/DeleteQuestionGroup`).then((result) => {
+        CommonServices.postData({}, `/clinicalquestions/DeleteQuestionBodyPartData?questionId=${questionsId}`).then((result) => {
             console.log(result);
             alert(result.data);
             this.getAllQuestionGroups(this.state.currentPage);
