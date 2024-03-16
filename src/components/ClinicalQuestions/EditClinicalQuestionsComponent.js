@@ -57,7 +57,9 @@ export class EditClinicalQuestionsComponent extends Component {
             SubSectionModel: [],
             SectionId: 0,
             selectedSubSection: null,
-            isEditButtonClicked: false
+            isEditButtonClicked: false,
+            sendArrayToApi: {},
+            sendClinicalQuestionBodyPartId: 0
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -237,7 +239,7 @@ export class EditClinicalQuestionsComponent extends Component {
                                 <tbody>
                                     {this.state.clinicalQuestionBodyPartList.map((item, parentIndex) => {
                                         return <tr>
-                                            <td>{item.questionsBodyPartName}</td>
+                                            <td>{this.state.selectedOptions1?.label?.toLowerCase() === 'location' ? item.bodyPartName : item.keywordQuestion}</td>
                                             <td><Button style={{ marginLeft: 8 }} color="primary"
                                                 disabled={this.state.isEditButtonClicked ? true : false}
                                                 onClick={async () => {
@@ -329,6 +331,7 @@ export class EditClinicalQuestionsComponent extends Component {
         var options = [];
         console.log('setForEdit', this.state.selectedOptions1);
         console.log('selectedItem.bodyPartId', selectedItem.bodyPartId);
+        console.log('this.state.optionList2 = ', this.state.optionList2);
 
         if (this.state.selectedOptions1?.label?.toLowerCase() === 'location') {
             var bodyPart = this.state.optionList2.filter((item) => item.value === selectedItem.bodyPartId);
@@ -340,7 +343,7 @@ export class EditClinicalQuestionsComponent extends Component {
             })
         } else {
             this.setState({
-                Question: selectedItem.questionsBodyPartName
+                Question: selectedItem.keywordQuestion
             })
         }
         selectedItem.clinicalRubricViewList.map(x => options.push({ value: x.subsectionID, label: x.subsectionName }));
@@ -354,15 +357,19 @@ export class EditClinicalQuestionsComponent extends Component {
     async addMoreOrUpdateSubSections() {
         debugger;
         var rubic = [];
+        var finalRubric = [];
         var displayList = [];
         let foundIndex;
         console.log('Question == ', this.state.Question);
         console.log('this.state.selectedOptions2 == ', this.state.selectedOptions2);
+        this.setState({ isEditButtonClicked: false });
         if (this.state.selectedOptions1?.label?.toLowerCase() === 'location') {
-            foundIndex = this.state.clinicalQuestionBodyPartList.findIndex(obj => obj.questionsBodyPartName.includes(this.state.selectedOptions2.label));
+            foundIndex = this.state.clinicalQuestionBodyPartList.findIndex(obj => obj.bodyPartName.includes(this.state.selectedOptions2.label));
         } else {
-            foundIndex = this.state.clinicalQuestionBodyPartList.findIndex(obj => obj.questionsBodyPartName.includes(this.state.Question));
+            foundIndex = this.state.clinicalQuestionBodyPartList.findIndex(obj => obj.keywordQuestion.includes(this.state.Question));
         }
+
+
 
         // console.log('found == ', JSON.stringify(this.state.clinicalQuestionBodyPartList[foundIndex].clinicalRubricViewList[0].subsectionName));
         // console.log('this.state.SectionIdForBodyPart == ', JSON.stringify(this.state.SectionIdForBodyPart));
@@ -375,6 +382,10 @@ export class EditClinicalQuestionsComponent extends Component {
                     debugger;
                     let subSectionObject = this.state.clinicalQuestionBodyPartList[foundIndex].clinicalRubricViewList.find(obj => obj.subsectionName === item.label);
 
+                    let bodyPartId = this.state.selectedOptions1?.label?.toLowerCase() !== 'location' ?
+                        this.state.clinicalQuestionBodyPartList[foundIndex].clinicalQueKeywordId :
+                        this.state.clinicalQuestionBodyPartList[foundIndex].clinicalQuestionBodyPartId
+
                     if (subSectionObject) {
                         console.log('found')
                     } else {
@@ -384,6 +395,11 @@ export class EditClinicalQuestionsComponent extends Component {
                                 "clinicalRubricID": 0,
                                 "subsectionID": item.value,
                                 "subsectionName": item.label,
+                            });
+                            finalRubric.push({
+                                "subsectionID": item.value,
+                                "clinicalQuestionBodyPartID": 0,
+                                "clinicalQuestionRubricID": 0
                             })
                             index === this.state.selectedSubSection.length - 1 && resolve(true)
                         } else {
@@ -391,6 +407,11 @@ export class EditClinicalQuestionsComponent extends Component {
                                 "clinicalRubricID": 0,
                                 "subsectionID": item.value,
                                 "subsectionName": item.label,
+                            })
+                            finalRubric.push({
+                                "subsectionID": item.value,
+                                "clinicalQuestionBodyPartID": 0,
+                                "clinicalQuestionRubricID": 0
                             })
                             index === this.state.selectedSubSection.length - 1 && resolve(true)
                         }
@@ -406,9 +427,18 @@ export class EditClinicalQuestionsComponent extends Component {
                     const updatedArray = [...this.state.clinicalQuestionBodyPartList];
                     updatedArray[foundIndex].clinicalRubricViewList.push(...rubic);
 
+                    if (this.state.selectedOptions1?.label?.toLowerCase() === 'location') {
+                        console.log(this.state.sendArrayToApi.clinicalBodyPartList[foundIndex].clinicalBodyPartRubricList)
+                        this.state.sendArrayToApi.clinicalBodyPartList[foundIndex].clinicalBodyPartRubricList.push(...finalRubric);
+                    } else {
+                        console.log(this.state.sendArrayToApi.clinicalQuestionList[foundIndex].clinicalBodyPartRubricList)
+                        this.state.sendArrayToApi.clinicalQuestionList[foundIndex].clinicalQuestionRubricList.push(...finalRubric)
+                    }
                     this.setState({
                         clinicalQuestionBodyPartList: updatedArray,
+                        sendArrayToApi: this.state.sendArrayToApi
                     });
+
                     console.log('after', JSON.stringify(this.state.clinicalQuestionBodyPartList[foundIndex].clinicalRubricViewList));
                     this.setState({
                         selectedOptions2: null,
@@ -431,6 +461,11 @@ export class EditClinicalQuestionsComponent extends Component {
                             "subsectionID": item.value,
                             "subsectionName": item.label,
                         })
+                        finalRubric.push({
+                            "subsectionID": item.value,
+                            "clinicalQuestionBodyPartID": 0,
+                            "clinicalQuestionRubricID": 0
+                        })
                         index === this.state.selectedSubSection.length - 1 && resolve(true)
                     } else {
                         rubic.push({
@@ -438,29 +473,54 @@ export class EditClinicalQuestionsComponent extends Component {
                             "subsectionID": item.value,
                             "subsectionName": item.label,
                         })
+                        finalRubric.push({
+                            "subsectionID": item.value,
+                            "clinicalQuestionBodyPartID": 0,
+                            "clinicalQuestionRubricID": 0
+                        })
                         index === this.state.selectedSubSection.length - 1 && resolve(true)
                     }
 
                 })
             }).then((result) => {
+                debugger
                 console.log('rubic = ', JSON.stringify(rubic))
                 console.log('result = ', result)
                 if (result) {
                     let newObject = {
                         "questionsBodyPartId": 0,
-                        "questionsBodyPartName": this.state.selectedOptions1?.label?.toLowerCase() === 'location' ? this.state.selectedOptions2.label : this.state.Question,
+                        "questionsBodyPartName": null,
                         "sectionId": parseInt(this.state.SectionId),
-                        "bodyPartId": parseInt(this.state.SectionIdForBodyPart),
+                        "bodyPartId": parseInt(this.state.selectedOptions2.value),
                         "qbType": null,
+                        "clinicalQueKeywordId": 0,
+                        "keywordQuestion": this.state.selectedOptions1?.label?.toLowerCase() !== 'location' ? this.state.Question : null,
+                        "bodyPartName": this.state.selectedOptions1?.label?.toLowerCase() === 'location' ? this.state.selectedOptions2.label : null,
+                        "clinicalQuestionBodyPartId": null,
                         "clinicalRubricViewList": rubic
                     }
+                    this.state.clinicalQuestionBodyPartList.push(newObject);
+
+
                     if (this.state.selectedOptions1?.label?.toLowerCase() === 'location') {
-
+                        var finalObject = {
+                            "clinicalQuestionBodyPartID": 0,
+                            "questionID": this.props.match.params.id,
+                            "bodypartID": this.state.selectedOptions2?.value,
+                            "clinicalBodyPartRubricList": finalRubric
+                        }
+                        this.state.sendArrayToApi.clinicalBodyPartList.push(finalObject)
                     } else {
-
+                        var finalObject = {
+                            "clinicalQuestionKeywordID": 0,
+                            "questionID": this.props.match.params.id,
+                            "keyWords": this.state.Question,
+                            "clinicalQuestionRubricList": finalRubric
+                        }
+                        this.state.sendArrayToApi.clinicalQuestionList.push(finalObject)
                     }
 
-                    this.state.clinicalQuestionBodyPartList.push(newObject);
+
                     this.setState({
                         selectedOptions2: null,
                         SectionId: 0,
@@ -478,38 +538,84 @@ export class EditClinicalQuestionsComponent extends Component {
         debugger;
         console.log('parentIndex', parentIndex);
         console.log('childIndex', childIndex)
+        console.log('this.state.sendArrayToApi === ', JSON.stringify(this.state.sendArrayToApi))
         if (this.state.copyOfSelectedSubQuestionGroup?.toLowerCase() !== 'location') {
 
             var array = [...this.state.clinicalQuestionBodyPartList[parentIndex].clinicalRubricViewList]; // make a separate copy of the array
+            var finalArray = [...this.state.sendArrayToApi.clinicalQuestionList[parentIndex].clinicalQuestionRubricList]
 
             if (childIndex !== -1) {
-                array.splice(childIndex, 1);
-                this.state.clinicalQuestionBodyPartList[parentIndex].clinicalRubricViewList = array
-                if (childIndex === 0 && this.state.clinicalQuestionBodyPartList[parentIndex].clinicalRubricViewList.length === 0) {
+                if (childIndex === 0 && this.state.clinicalQuestionBodyPartList[parentIndex].clinicalRubricViewList.length === 1) {
+                    this.deleteSingleRubricFormTable(this.state.clinicalQuestionBodyPartList[parentIndex].clinicalRubricViewList[childIndex].clinicalQuestionRubricID, this.state.clinicalQuestionBodyPartList[parentIndex].clinicalQueKeywordId, this.props.match.params.QBType);
+                    this.deleteSingleRubricFormTable(0, this.state.clinicalQuestionBodyPartList[parentIndex].clinicalQueKeywordId, this.props.match.params.QBType);
+                    array.splice(childIndex, 1);
+                    finalArray.splice(childIndex, 1);
+                    this.state.clinicalQuestionBodyPartList[parentIndex].clinicalRubricViewList = array
+                    this.state.sendArrayToApi.clinicalQuestionList[parentIndex].clinicalQuestionRubricList = finalArray
                     var tempArray = [...this.state.clinicalQuestionBodyPartList];
+                    var finalTempArray = [...this.state.sendArrayToApi.clinicalQuestionList]
                     tempArray.splice(parentIndex, 1);
+                    finalTempArray.splice(parentIndex, 1);
+                    this.state.sendArrayToApi.clinicalQuestionList = finalTempArray;
+                    this.setState({ sendArrayToApi: this.state.sendArrayToApi });
                     this.setState({ clinicalQuestionBodyPartList: tempArray });
                 } else {
+                    this.deleteSingleRubricFormTable(this.state.clinicalQuestionBodyPartList[parentIndex].clinicalRubricViewList[childIndex].clinicalQuestionRubricID, 0, this.props.match.params.QBType);
+                    array.splice(childIndex, 1);
+                    finalArray.splice(childIndex, 1);
+                    this.state.clinicalQuestionBodyPartList[parentIndex].clinicalRubricViewList = array
+                    this.state.sendArrayToApi.clinicalQuestionList[parentIndex].clinicalQuestionRubricList = finalArray
                     this.setState({ clinicalQuestionBodyPartList: this.state.clinicalQuestionBodyPartList });
+                    this.setState({ sendArrayToApi: this.state.sendArrayToApi });
+
+
                 }
 
             }
         } else {
 
             var array = [...this.state.clinicalQuestionBodyPartList[parentIndex].clinicalRubricViewList]; // make a separate copy of the array
+            var finalArray = [...this.state.sendArrayToApi.clinicalBodyPartList[parentIndex].clinicalBodyPartRubricList]
+
             console.log(this.state.clinicalQuestionBodyPartList[parentIndex].clinicalRubricViewList.length)
             if (childIndex !== -1) {
-                array.splice(childIndex, 1);
-                this.state.clinicalQuestionBodyPartList[parentIndex].clinicalRubricViewList = array
-                if (childIndex === 0 && this.state.clinicalQuestionBodyPartList[parentIndex].clinicalRubricViewList.length === 0) {
+                if (childIndex === 0 && this.state.clinicalQuestionBodyPartList[parentIndex].clinicalRubricViewList.length === 1) {
+                    this.deleteSingleRubricFormTable(this.state.clinicalQuestionBodyPartList[parentIndex].clinicalRubricViewList[childIndex].clinicalQuestionRubricID, this.state.clinicalQuestionBodyPartList[parentIndex].clinicalQuestionBodyPartId, this.props.match.params.QBType);
+                    this.deleteSingleRubricFormTable(0, this.state.clinicalQuestionBodyPartList[parentIndex].clinicalQuestionBodyPartId, this.props.match.params.QBType);
+                    array.splice(childIndex, 1);
+                    finalArray.splice(childIndex, 1);
+                    this.state.clinicalQuestionBodyPartList[parentIndex].clinicalRubricViewList = array
+                    this.state.sendArrayToApi.clinicalBodyPartList[parentIndex].clinicalBodyPartRubricList = finalArray
                     var tempArray = [...this.state.clinicalQuestionBodyPartList];
+                    var finalTempArray = [...this.state.sendArrayToApi.clinicalBodyPartList]
                     tempArray.splice(parentIndex, 1);
+                    finalTempArray.splice(parentIndex, 1);
                     this.setState({ clinicalQuestionBodyPartList: tempArray });
+                    this.setState({ sendArrayToApi: this.state.sendArrayToApi });
                 } else {
+                    console.log(this.state.clinicalQuestionBodyPartList[parentIndex].clinicalRubricViewList[childIndex])
+                    this.deleteSingleRubricFormTable(this.state.clinicalQuestionBodyPartList[parentIndex].clinicalRubricViewList[childIndex].clinicalQuestionRubricID, 0, this.props.match.params.QBType);
+                    array.splice(childIndex, 1);
+                    finalArray.splice(childIndex, 1);
+                    this.state.clinicalQuestionBodyPartList[parentIndex].clinicalRubricViewList = array
+                    this.state.sendArrayToApi.clinicalBodyPartList[parentIndex].clinicalBodyPartRubricList = finalArray
                     this.setState({ clinicalQuestionBodyPartList: this.state.clinicalQuestionBodyPartList });
+                    this.setState({ sendArrayToApi: this.state.sendArrayToApi });
                 }
-
             }
+        }
+    }
+
+    deleteSingleRubricFormTable(clinicalRubricId, clinicalQuestionBodyPartId, qbType) {
+        debugger
+        console.log(`/clinicalquestions/DeleteQuestionBodyPartRubricData?clinicalRubricId=${clinicalRubricId}&clinicalQuestionBodyPartId=${clinicalQuestionBodyPartId}&qbType=${qbType}`)
+        try {
+            CommonServices.postData({}, `/clinicalquestions/DeleteQuestionBodyPartRubricData?clinicalRubricId=${clinicalRubricId}&clinicalQuestionBodyPartId=${clinicalQuestionBodyPartId}&qbType=${qbType}`).then(async (res) => {
+                console.log('deleteSingleRubricFormTable = ', JSON.stringify(res));
+
+            })
+        } catch (error) {
+            console.log('error ===', error)
         }
     }
 
@@ -527,6 +633,51 @@ export class EditClinicalQuestionsComponent extends Component {
                 var questionGroup = this.state.optionList3.filter((item) => item.value === res.questionGroupId);
                 var subQuestionGroup = this.state.optionList1.filter((item) => item.value === res.questionSubgroupId);
 
+                console.log('subQuestionGroup = ', subQuestionGroup)
+
+                var bodyPartList = [];
+                var clinicalQuestionList = [];
+                var sendArrayToApi = {}
+                if (subQuestionGroup[0]?.label?.toLowerCase() !== 'location') {
+                    res.clinicalQuestionBodyPartViewList.map((item) => {
+                        var rubricObject = {
+                            "clinicalQuestionKeywordID": item.clinicalQueKeywordId,
+                            "questionID": this.props.match.params.id,
+                            "keyWords": item.keywordQuestion,
+                            "clinicalQuestionRubricList": this.removeKeysFromArray(item.clinicalRubricViewList, "clinicalRubricID", "subsectionName", "clinicalQuestionKeywordID")
+                        }
+                        clinicalQuestionList.push(rubricObject);
+                    });
+
+                    sendArrayToApi = {
+                        "questionsId": res.questionsId,
+                        "questionSectionID": res.questionSectionId,
+                        "questionGroupId": res.questionGroupId,
+                        "questionSubGroupID": res.questionSubgroupId,
+                        "qbType": qbType,
+                        "clinicalQuestionList": clinicalQuestionList
+                    }
+                } else {
+                    res.clinicalQuestionBodyPartViewList.map((item) => {
+                        var rubricObject = {
+                            "clinicalQuestionBodyPartID": item.clinicalQuestionBodyPartId,
+                            "questionID": this.props.match.params.id,
+                            "bodypartID": item.bodyPartId,
+                            "clinicalBodyPartRubricList": this.removeKeysFromArray(item.clinicalRubricViewList, "clinicalRubricID", "subsectionName", "clinicalQuestionKeywordID")
+                        }
+                        bodyPartList.push(rubricObject);
+                    });
+                    sendArrayToApi = {
+                        "questionsId": res.questionsId,
+                        "questionSectionID": res.questionSectionId,
+                        "questionGroupId": res.questionGroupId,
+                        "questionSubGroupID": res.questionSubgroupId,
+                        "qbType": qbType,
+                        "clinicalBodyPartList": bodyPartList
+                    }
+                }
+                console.log('sendArrayToApi == ', sendArrayToApi)
+
 
                 console.log('existance ==', existance)
                 console.log('questionGroup ==', questionGroup)
@@ -539,9 +690,20 @@ export class EditClinicalQuestionsComponent extends Component {
                     selectedOptions: existance[0],
                     selectedOptions3: questionGroup[0],
                     selectedOptions1: subQuestionGroup[0],
-                    clinicalQuestionBodyPartList: res.clinicalQuestionBodyPartViewList
+                    copyOfSelectedSubQuestionGroup: subQuestionGroup[0]?.label,
+                    clinicalQuestionBodyPartList: res.clinicalQuestionBodyPartViewList,
+                    sendArrayToApi: sendArrayToApi,
                 });
             });
+        });
+    }
+
+    // Function to remove keys from each object in the array
+    removeKeysFromArray = (array, ...keysToRemove) => {
+        return array.map(obj => {
+            const newObj = { ...obj }; // Create a new object to avoid mutating the original
+            keysToRemove.forEach(key => delete newObj[key]); // Remove each specified key
+            return newObj;
         });
     }
 
@@ -757,9 +919,10 @@ export class EditClinicalQuestionsComponent extends Component {
 
         var finalRequest = {};
 
-        console.log('clinicalQuestionBodyPartList == ', JSON.stringify(this.state.clinicalQuestionBodyPartList))
+        console.log('clinicalQuestionBodyPartList == ', JSON.stringify(this.state.clinicalQuestionBodyPartList));
+        console.log('this.state.sendArrayToApi == ', JSON.stringify(this.state.sendArrayToApi));
 
-        if (this.state.selectedOptions1?.label?.toLowerCase() !== 'location') {
+        /* if (this.state.selectedOptions1?.label?.toLowerCase() !== 'location') {
 
             finalRequest = {
                 "questionSectionID": this.state.SelectedGuestionsectionId,
@@ -777,10 +940,10 @@ export class EditClinicalQuestionsComponent extends Component {
 
         } else {
 
-        }
+        } */
 
 
-        /* CommonServices.post(this.state.sendFinalReuest, `/clinicalquestions/AddEditClinicalQuestionsBodyPart`).then((res) => {
+        CommonServices.postData(this.state.sendArrayToApi, `/clinicalquestions/AddEditClinicalQuestionsBodyPart`).then((res) => {
             debugger;
             if (res.data == undefined) {
                 // alert('All field are requerd', res.data);
@@ -803,7 +966,7 @@ export class EditClinicalQuestionsComponent extends Component {
                     sendFinalReuest: {}
                 })
             }
-        }) */
+        })
     }
 
     /**
@@ -874,9 +1037,9 @@ export class EditClinicalQuestionsComponent extends Component {
 
         /*  console.log('selectedSubSection === ', this.state.selectedSubSection);
         if (this.state.isEditButtonClicked) {
-
+    
         } else {
-
+    
         } */
 
         /*   console.log('e.label====>>>>>', item.value)
@@ -900,7 +1063,7 @@ export class EditClinicalQuestionsComponent extends Component {
 
     getBodyPart(sectionId, resolve) {
         debugger;
-        CommonServices.getDataById(sectionId, `/bodypart/GetBodyPartsBySection`).then((temp) => {
+        CommonServices.getDataById(parseInt(sectionId), `/bodypart/GetBodyPartsBySection`).then((temp) => {
             //debugger;
             //console.log('getBodyPart===>>>>>>>>>>>>>>>>>',temp);
 
