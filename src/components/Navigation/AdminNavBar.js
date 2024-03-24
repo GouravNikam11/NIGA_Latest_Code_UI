@@ -239,24 +239,22 @@ export default {
 
     {
       name: 'News',
-      url: '/ListNewsComponent',          //  News 
+      url: '/ListNewsComponent',              //  News 
       icon: 'icon-pencil',
     },
 
 
     {
       name: 'Blogs',
-      url: '/ListBlogsComponent',          //   Blogs
+      url: '/ListBlogsComponent',        //   Blogs
       icon: 'icon-pencil',
     },
 
-    // {
-    //   name: 'Sub',
-    //   url: '/Subscription',          //   Blogs
-    //   icon: 'icon-pencil',
-    // },
-
-  
+    {
+      name: 'Subscription',
+      url: '/Subscription',          //   Blogs
+      icon: 'icon-pencil',
+    },
 
   ],
 };
