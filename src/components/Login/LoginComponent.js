@@ -100,7 +100,7 @@ class LoginComponent extends Component {
                         <hr></hr>
                         <Row>
                             <Col sm="12" className="text-center pb-2">
-                                New User Registration ?
+                                New User Registration's ?
                             </Col>
                             <Col>
                                 <div>
