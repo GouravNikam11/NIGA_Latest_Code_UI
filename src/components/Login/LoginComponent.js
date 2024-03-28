@@ -11,6 +11,8 @@ import {
     enqueueSnackbar as enqueueSnackbarAction,
     closeSnackbar
 } from '../../store/actions/notification';
+
+import bgs from '../../assets/img/hm44.png'
 /**
  * Created Date     :       20 Dec 2019
  * Purpose          :       To validate  username and password.
@@ -59,15 +61,14 @@ class LoginComponent extends Component {
      */
     render() {
         return (
-            <div className="Signup">
+            <div className="Signup " style={{ backgroundImage: 'url(' + bgs + ')', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%' , height: '100vh', paddingTop: '6rem' }}>
                 <Col>
                     <Form onSubmit={this.handleClick} className="mres wid50">
                    <center> <img src="/static/media/logo.fe659025.png" width="240" height="60" alt="Homeo Centrum Logo" /></center>
-             
-                        <h4 className="text-center pt-2 pb-0 clrcode">LOGIN</h4>
-                        <Form.Group as={Row} controlId="fromUserName">
+                        
+                        <Form.Group as={Row} controlId="fromUserName" className="mt-2">
                             <Form.Label column sm="12">
-                                User Name<br />
+                                Username<br />
                             </Form.Label>
                             <Col sm="12">
                                 <Form.Control type="text" className="brdrds" placeholder="Enter User Name"
@@ -89,18 +90,26 @@ class LoginComponent extends Component {
                             </Col>
                         </Form.Group>
                         <Row>
-                            <Col sm="12" className="text-center pb-2 pt-3">
-                                <Button color="primary" style={{ backgroundColor: "#20a8d8", textTransform: "uppercase" }} type="submit" className="paddg">&nbsp; <i className="fa fa-sign-in"></i>  &nbsp; Login &nbsp;</Button>
+                            <Col sm="12" className="text-center pb-1 pt-1">
+                                <Button color="primary" style={{ backgroundColor: "#20a8d8", textTransform: "uppercase", borderRadius: '40px', width: '100%' }} type="submit" className="paddg">&nbsp; <i className="fa fa-sign-in"></i>  &nbsp; Login &nbsp;</Button>
                             </Col>
-                            <Col sm="12" className="text-center pb-2 pt-1">
-                            <Link to={"/ForgotpasswordComponent"}>Forgot Password ?</Link>
-                        
+                            
+                        </Row>
+
+                        <Row>
+                            <Col sm="12" className="text-right pb-2 pt-1">
+                                <Link to={"/ForgotpasswordComponent"} className='lgtext' style={{fontSize: '12px', color: 'black'}}>Forgot Password ?</Link>
                             </Col>
                         </Row>
-                        <hr></hr>
                         <Row>
-                            <Col sm="12" className="text-center pb-2">
-                                New User Registration'ss ?
+                        
+                            <Col sm="12" className="text-center pb-2 pt-1">
+                                New User Registration? <Link to={"/AddUser"} className='lgtext'>Register</Link>
+                            </Col>
+
+
+                            {/* <Col sm="12" className="text-center pb-2">
+                                New User Registration ?
                             </Col>
                             <Col>
                                 <div>
@@ -109,7 +118,7 @@ class LoginComponent extends Component {
                                         <Button variant="success" style={{ textTransform: "uppercase" }} className="paddg" type="submit" onClick={this.setRedirect}>&nbsp; <i className="fa fa-pencil"></i>  &nbsp; Click To New Registration &nbsp;</Button>
                                     </Col>
                                 </div>
-                            </Col>
+                            </Col> */}
                         </Row>
                     </Form>
                 </Col>

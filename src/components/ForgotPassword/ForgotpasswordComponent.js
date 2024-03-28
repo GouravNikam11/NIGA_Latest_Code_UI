@@ -13,6 +13,7 @@ import {
     closeSnackbar
 } from '../../store/actions/notification';
 import { Input, Label, Select } from 'reactstrap';
+import bgs from '../../assets/img/hm44.png'
 /**
  * Created Date     :       20 Dec 2019
  * Purpose          :       To validate  username and password.
@@ -61,8 +62,8 @@ class ForgotPassword extends Component {
     render() {
 
         return (
-            <div className="Signup">
-                <Col>  <br></br>  <br></br>
+            <div className="Signup " style={{ backgroundImage: 'url(' + bgs + ')', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%' , height: '100vh', paddingTop: '6rem' }}>
+                <Col>  <br></br>  
                     <Form className="mres wid50">
                         <center> <img src="/static/media/logo.fe659025.png" width="240" height="60" alt="Homeo Centrum Logo" /></center>
                         <br></br>  <br></br>

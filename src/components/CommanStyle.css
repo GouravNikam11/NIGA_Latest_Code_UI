@@ -146,3 +146,8 @@
 .sidebar .sidebar-minimizer {
   display: none;
 }
+
+.brdrds{
+  border: none !important;
+    border-bottom: 1px solid !important;
+}

@@ -1,29 +1,49 @@
 @media all and (min-width: 480px) {
-    .Signup {
-      padding: 60px 0;
-      background-image: url(../../../src/assets/img/home.jpg);
-    }
-  
-    .Signup form {
-      margin: 0 auto;
-      max-width: 55%;
-    }
+  .Signup {
+    padding: 60px 0;
+    background-image: url("");
   }
 
-  
-  
-  .Signup form span.help-block {
-    font-size: 14px;
-    padding-bottom: 10px;
-    color: #999;
+  .Signup form {
+    margin: 0 auto;
+    max-width: 55%;
   }
+}
 
-  .wid50 {
-     background: #f5f4f4a3;
-  }
 
-  hr {
-    background: #48c7ec;
-    margin-top: 0px !important;
-    margin-bottom: 0px !important;
+
+.Signup form span.help-block {
+  font-size: 14px;
+  padding-bottom: 10px;
+  color: #999;
+}
+
+.mtop{
+  margin-top: 2rem !important;
+}
+
+.wid50 {
+   /* background: #f5f4f4a3; */
+   margin-top: 2rem !important;
+}
+
+hr {
+  background: #48c7ec;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+
+
+body {
+background-image: url("../../assets/img/hm1.png");
+background-color: #cccccc;
+}
+
+.wid50 {
+  background: #f5f4f4;
+}
+
+.brdrds{
+  border: none !important;
+    border-bottom: 1px solid !important;
 }

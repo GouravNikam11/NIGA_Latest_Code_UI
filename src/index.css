@@ -60,7 +60,7 @@ code {
 
 .wid50{
   width: 33% !important;
-  background: #f5f4f4;
+  background: #ffffff;
   border: 1px solid #c9c5c5;
   border-radius: 5px;
   padding: 20px;
@@ -73,6 +73,21 @@ code {
   border-radius: 5px;
   padding: 20px;
 }
+
+.mres11{
+  padding: 0 !important;
+}
+
+.wid801{
+  width: 55% !important;
+    background: #ffffff;
+    border: 1px solid #7b7b7b;
+    padding: 5px 20px;
+    float: right;
+    border-radius: 25px 0px 0px 25px;
+}
+
+
 .wid100{
   width: 100% !important;
   background: #f5f4f4;

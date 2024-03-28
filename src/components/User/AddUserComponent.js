@@ -8,6 +8,7 @@ import {
     enqueueSnackbar as enqueueSnackbarAction,
     closeSnackbar
 } from '../../store/actions/notification';
+import bgs from '../../assets/img/regss.png'
 
 /**
  * Created Date     :   19 Dec 2019.
@@ -60,205 +61,229 @@ class AddUserComponent extends Component {
      */
     render() {
         return (
-            <div className="Signup">
-                <Col className="mres1">
-                    <Form onSubmit={this.handleClick} className="mres wid80">
-                    <center> <img src="/static/media/logo.fe659025.png" width="240" height="60" alt="Homeo Centrum Logo" /></center>
+            <div className="Signup" style={{ backgroundImage: 'url(' + bgs + ')', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%' , height: '100vh' }}>
+                <Col className="mres11">
+                <Form onSubmit={this.handleClick} className="mres wid801" style={{ height: '100vh', overflowY: 'scroll'}}>
+                    <center> <img src="/static/media/logo.fe659025.png" width="175" height="50" alt="Homeo Centrum Logo" /></center>
                    <br></br>
-                        <h4 className="text-center pb-3 clrcode">ACCOUNT CREDENTIALS</h4>
-                        <Form.Group as={Row} controlId="fromUserName">
-                            <Form.Label column sm="3">
-                                Username
+                        <h4 className="text-center pb-1 pt-1 clrcode">ACCOUNT CREDENTIALS</h4>
+                    
+                        <Row>
+                        
+                            <Col sm="4">
+                            <Form.Group as={Row} controlId="fromUserName" >
+                            <Form.Label column sm="12" className='col-form-lbl'>
+                                Username<br />
                             </Form.Label>
-                            <Form.Label column sm="1" className="colm">
-                                :
-                            </Form.Label>
-                            <Col sm="8">
-                                <Form.Control type="text" placeholder="User Name"
+                     
+                            <Col sm="12">
+                                <Form.Control type="text" placeholder="User Name" className='form-cnt'
                                     name="UserName"
                                     onChange={this.handleChange}
                                     value={this.state.UserName === null ? '' : this.state.UserName} />
                             </Col>
 
-                        </Form.Group>
+                         </Form.Group>
+                            </Col>
+                            <Col sm="4">
+                                <Form.Group as={Row} controlId="formPassword" >
+                                    <Form.Label column sm="12" className='col-form-lbl'>
+                                        Password<br />
+                                    </Form.Label>
+                                    <Col sm="12">
+                                        <Form.Control type="password" placeholder="Password" className='form-cnt'
+                                            name="UserPassword"
+                                            onChange={this.handleChange}
+                                            value={this.state.UserPassword === null ? '' : this.state.UserPassword}
+                                        />
+                                    </Col>
+                                </Form.Group>
+                            </Col>
+                            <Col sm="4">
+                                <Form.Group as={Row} controlId="formReEnterPassword"  >
+                                    <Form.Label column sm="12" className='col-form-lbl'>
+                                    Confirm Password<br />
+                                    </Form.Label>
+                                    <Col sm="12">
+                                        <Form.Control type="password" placeholder="Confirm Password" className='form-cnt'
+                                            name="ReenterPassword"
+                                            onChange={this.handleChange}
+                                            value={this.state.ReenterPassword === null ? '' : this.state.ReenterPassword} />
+                                    </Col>
+                                </Form.Group>
+                            </Col>
+                            
+                        </Row>
+                 
 
-                        <Form.Group as={Row} controlId="formPassword">
-                            <Form.Label column sm="3">
-                                Password
-                            </Form.Label>
-                            <Form.Label column sm="1" className="colm">
-                                :
-                            </Form.Label>
-                            <Col sm="8">
-                                <Form.Control type="password" placeholder="Password"
-                                    name="UserPassword"
-                                    onChange={this.handleChange}
-                                    value={this.state.UserPassword === null ? '' : this.state.UserPassword}
-                                />
+                  
+
+                        <h4 className="text-center pb-1 pt-1 clrcode">Basic information </h4>
+
+                        <Row>
+                        
+                            <Col sm="2">
+                                <Form.Group as={Row} controlId="formTitle" className='frmgrp'>
+                                    <Form.Label column sm="12" className='col-form-lbl'>
+                                    Title<br />
+                                    </Form.Label>
+                                    <Col sm="12">
+                                        <Form.Control as="select" className='form-cnt'
+                                            name="Title"
+                                            onChange={this.handleChange}
+                                            value={this.state.Title === null ? '' : this.state.Title} >
+                                            <option>--</option>
+                                            <option value="1">Mr.</option>
+                                            <option value="2">Mrs.</option>
+                                            <option value="3">Dr.</option>
+                                        </Form.Control>
+                                    </Col>
+                                </Form.Group>
+                            </Col>
+
+                            <Col sm="5">
+                                <Form.Group as={Row} controlId="formFirstName" className='frmgrp' >
+                                <Form.Label column sm="12" className='col-form-lbl'>
+                                    First Name<br />
+                                    </Form.Label>
+                                    <Col sm="12">
+                                        <Form.Control type="text" placeholder="First Name" className='form-cnt'
+                                            name="FirstName"
+                                            onChange={this.handleChange}
+                                            value={this.state.FirstName === null ? '' : this.state.FirstName} />
+                                    </Col>
+                                </Form.Group>
+                            </Col>
+
+                            <Col sm="5">
+                                <Form.Group as={Row} controlId="formLastName" className='frmgrp'>
+                                <Form.Label column sm="12" className='col-form-lbl'>
+                                    Last Name<br />
+                                    </Form.Label>
+                                    <Col sm="12">
+                                        <Form.Control type="text" placeholder="Last Name" className='form-cnt'
+                                            name="LastName"
+                                            onChange={this.handleChange}
+                                            value={this.state.LastName === null ? '' : this.state.LastName} />
+                                    </Col>
+                                </Form.Group>
+                            </Col>
+
+                        </Row>
+
+                        <Row>
+                        
+                            <Col sm="6">
+                                <Form.Group as={Row} controlId="formCompany" >
+                                <Form.Label column sm="12" className='col-form-lbl'>
+                                    Company<br />
+                                    </Form.Label>
+                                    <Col sm="12">
+                                        <Form.Control type="text" placeholder="Company" className='form-cnt'
+                                            name="CompanyName"
+                                            onChange={this.handleChange}
+                                            value={this.state.CompanyName === null ? '' : this.state.CompanyName} />
+                                    </Col>
+                                </Form.Group>
+                            </Col>
+
+                            <Col sm="6">
+                                <Form.Group as={Row} controlId="formCountry" >
+                                <Form.Label column sm="12" className='col-form-lbl'>
+                                    Country<br />
+                                    </Form.Label>
+                                    <Col sm="12">
+                                        <Form.Control as="select" className='form-cnt'
+                                            name="CountryId"
+                                            onChange={this.handleChange}
+                                            value={this.state.CountryId === null ? '' : this.state.CountryId}>
+                                            <option value="0">--</option>
+                                            {
+                                                this.renderCountryList()
+                                            }
+                                        </Form.Control>
+                                    </Col>
+                                </Form.Group>
+                            </Col>
+
+                        </Row>
+
+               
+                 
+                        
+                       
+
+                
+                        <h4 className="text-center pb-1 pt-1 clrcode">Contact information </h4>
+
+                        <Row>
+                        
+                            <Col sm="12">
+                                <Form.Group as={Row} controlId="formMobile" className='frmgrp'>
+                                <Form.Label column sm="12" className='col-form-lbl'>
+                                    Mobile No.<br />
+                                    </Form.Label>
+                                    <Col sm="12">
+                                        <Form.Control type="text" placeholder="Mobile No." className='form-cnt'
+                                            name="MobileNo"
+                                            onChange={this.handleChange}
+                                            value={this.state.MobileNo === null ? '' : this.state.MobileNo} />
+                                    </Col>
+                                </Form.Group>
+                            </Col>
+
+                            <Col sm="6">
+
+                                <Form.Group as={Row} controlId="formEmail">
+                                <Form.Label column sm="12" className='col-form-lbl'>
+                                    Email<br />
+                                    </Form.Label>
+                                    <Col sm="12">
+                                        <Form.Control type="text" placeholder="Email" className='form-cnt'
+                                            name="EmailId"
+                                            onChange={this.handleChange}
+                                            value={this.state.EmailId === null ? '' : this.state.EmailId} />
+                                    </Col>
+                                </Form.Group>
 
                             </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} controlId="formReEnterPassword"  >
-                            <Form.Label column sm="3">
-                                Confirm Password
-                            </Form.Label>
-                            <Form.Label column sm="1" className="colm">
-                                :
-                            </Form.Label>
-                            <Col sm="8">
-                                <Form.Control type="password" placeholder="Confirm Password"
-                                    name="ReenterPassword"
-                                    onChange={this.handleChange}
-                                    value={this.state.ReenterPassword === null ? '' : this.state.ReenterPassword} />
-                            </Col>
-                        </Form.Group>
 
-                        <hr />
+                            <Col sm="6">
 
-                        <h4 className="text-center pb-3 clrcode">Basic information </h4>
-                        <Form.Group as={Row} controlId="formTitle">
-                            <Form.Label column sm="3">
-                                Title
-                            </Form.Label>
-                            <Form.Label column sm="1" className="colm">
-                                :
-                            </Form.Label>
-                            <Col sm="8">
-                                <Form.Control as="select"
-                                    name="Title"
-                                    onChange={this.handleChange}
-                                    value={this.state.Title === null ? '' : this.state.Title} >
-                                    <option>Choose...</option>
-                                    <option value="1">Mr.</option>
-                                    <option value="2">Mrs.</option>
-                                    <option value="2">Dr.</option>
-                                </Form.Control>
-                            </Col>
-                        </Form.Group>
+                                <Form.Group as={Row} controlId="formReenterEmail">
+                                <Form.Label column sm="12" className='col-form-lbl'>
+                                    Confirm Email<br />
+                                    </Form.Label>
+                                    <Col sm="12">
+                                        <Form.Control type="text" placeholder="Re-Enter Email" className='form-cnt'
+                                            name="ReEnterEmail"
+                                            onChange={this.handleChange}
+                                            value={this.state.ReEnterEmail === null ? '' : this.state.ReEnterEmail} />
+                                    </Col>
+                                </Form.Group>
 
-                        <Form.Group as={Row} controlId="formFirstName">
-                            <Form.Label column sm="3">
-                                First Name
-                            </Form.Label>
-                            <Form.Label column sm="1" className="colm">
-                                :
-                            </Form.Label>
-                            <Col sm="8">
-                                <Form.Control type="text" placeholder="First Name"
-                                    name="FirstName"
-                                    onChange={this.handleChange}
-                                    value={this.state.FirstName === null ? '' : this.state.FirstName} />
                             </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} controlId="formLastName">
-                            <Form.Label column sm="3">
-                                Last Name
-                            </Form.Label>
-                            <Form.Label column sm="1" className="colm">
-                                :
-                            </Form.Label>
-                            <Col sm="8">
-                                <Form.Control type="text" placeholder="Last Name"
-                                    name="LastName"
-                                    onChange={this.handleChange}
-                                    value={this.state.LastName === null ? '' : this.state.LastName} />
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} controlId="formCompany">
-                            <Form.Label column sm="3">
-                                Company
-                            </Form.Label>
-                            <Form.Label column sm="1" className="colm">
-                                :
-                            </Form.Label>
-                            <Col sm="8">
-                                <Form.Control type="text" placeholder="Company"
-                                    name="CompanyName"
-                                    onChange={this.handleChange}
-                                    value={this.state.CompanyName === null ? '' : this.state.CompanyName} />
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} controlId="formCountry">
-                            <Form.Label column sm="3">
-                                Country
-                            </Form.Label>
-                            <Form.Label column sm="1" className="colm">
-                                :
-                            </Form.Label>
-                            <Col sm="8">
-                                <Form.Control as="select"
-                                    name="CountryId"
-                                    onChange={this.handleChange}
-                                    value={this.state.CountryId === null ? '' : this.state.CountryId}>
-                                    <option value="0">Select</option>
-                                    {
-                                        this.renderCountryList()
-                                    }
-                                </Form.Control>
-                            </Col>
-                        </Form.Group>
 
-                        <hr />
+                        </Row>
 
-                        <h4 className="text-center pb-3 clrcode">Contact information </h4>
-                        <Form.Group as={Row} controlId="formMobile">
-                            <Form.Label column sm="3">
-                                Mobile No.
-                            </Form.Label>
-                            <Form.Label column sm="1" className="colm">
-                                :
-                            </Form.Label>
-                            <Col sm="8">
-                                <Form.Control type="text" placeholder="Mobile No."
-                                    name="MobileNo"
-                                    onChange={this.handleChange}
-                                    value={this.state.MobileNo === null ? '' : this.state.MobileNo} />
-                            </Col>
-                        </Form.Group>
+                       
 
-
-                        <Form.Group as={Row} controlId="formEmail">
-                            <Form.Label column sm="3">
-                                Email
-                            </Form.Label>
-                            <Form.Label column sm="1" className="colm">
-                                :
-                            </Form.Label>
-                            <Col sm="8">
-                                <Form.Control type="text" placeholder="Email"
-                                    name="EmailId"
-                                    onChange={this.handleChange}
-                                    value={this.state.EmailId === null ? '' : this.state.EmailId} />
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} controlId="formReenterEmail">
-                            <Form.Label column sm="3">
-                                Confirm Email
-                            </Form.Label>
-                            <Form.Label column sm="1" className="colm">
-                                :
-                            </Form.Label>
-                            <Col sm="8">
-                                <Form.Control type="text" placeholder="Re-Enter Email"
-                                    name="ReEnterEmail"
-                                    onChange={this.handleChange}
-                                    value={this.state.ReEnterEmail === null ? '' : this.state.ReEnterEmail} />
-                            </Col>
-                        </Form.Group>
+                    
+                        
 
                         <hr />
 
                         <Col>
-                            <div>
-                                <Col sm="12" className="text-center ">
-                                    <Button color="primary" style={{ backgroundColor: "#20a8d8", textTransform: "uppercase", margin: 10 }} className="paddg" type="submit">&nbsp; <i className="fa fa-user"></i>  &nbsp; Create an account &nbsp;</Button>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <Button className='btn_Cancel'  onClick={() => this.props.history.push('/Login')}>&nbsp; <i className="fa fa-close"></i>  &nbsp; Cancel &nbsp;</Button>
+                            <Row>
+                                <Col sm="6" className="text-center ">
+                                    <Button color="primary" style={{ borderRadius: '40px', width: '80%', backgroundColor: "#20a8d8", textTransform: "uppercase", margin: 10 }} className="paddg" type="submit">&nbsp; <i className="fa fa-user"></i>  &nbsp; Create an account &nbsp;</Button>
+                                </Col>
+                                <Col sm="6" className="text-center ">
+                                    <Button className='btn_Cancel paddg'  style={{ borderRadius: '40px', width: '80%', textTransform: "uppercase", margin: 10 }} onClick={() => this.props.history.push('/Login')}>&nbsp; <i className="fa fa-close"></i>  &nbsp; Cancel &nbsp;</Button>
                                     <br/>
                                 </Col>
-                            </div>
+                            </Row>
                         </Col>
-                        <br/>
                         <br/>
                     </Form>
                     <br/>
