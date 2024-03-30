@@ -91,7 +91,7 @@ export class AddClinicalQuestionsComponent extends Component {
         this.getSections();
         this.getQuestionSection();
 
-        this.getBodyPart();
+        //this.getBodyPart();
         // this.getAllClinicalQuestions();
     }
 
@@ -170,7 +170,7 @@ export class AddClinicalQuestionsComponent extends Component {
                                     type="select"
                                     name="SectionIdForBodyPart"
                                     value={this.state.SectionIdForBodyPart}
-                                    onChange={this.handleSetionChange.bind(this)} >
+                                    onChange={this.handleSetionChangeforBodypart.bind(this)} >
                                     <option value="0">Select Section</option>
                                     {
                                         SectionList != undefined ?
@@ -430,6 +430,15 @@ export class AddClinicalQuestionsComponent extends Component {
         })
     }
 
+    handleSetionChangeforBodypart = (event) => {
+        this.setState({ [event.target.name]: event.target.value });
+        this.setState({
+            SectionIdForBodyPart: null,
+        })
+
+        this.getBodyPart(event.target.value)
+    }
+
     GetAllSections = () => {
         CommonServices.getData(`/mastersAPI/GetSections`).then((sections) => {
             this.setState({
@@ -629,9 +638,9 @@ export class AddClinicalQuestionsComponent extends Component {
         })
     }
 
-    getBodyPart() {
+    getBodyPart(SectionIdForBodyPart) {
         debugger;
-        CommonServices.getData(`/bodypart`).then((temp) => {
+        CommonServices.getDataById(parseInt(SectionIdForBodyPart),`/bodypart/GetBodyPartsBySection`).then((temp) => {
             //debugger;
             //console.log('getBodyPart===>>>>>>>>>>>>>>>>>',temp);
 

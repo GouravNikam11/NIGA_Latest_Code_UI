@@ -29,7 +29,8 @@ class Subscription extends React.Component {
 			ListSubcription: [],
 			validityInDays: '',
 			amount: '',
-			razorpay: null
+			razorpay: null,
+			
 
 		}
 
@@ -37,8 +38,12 @@ class Subscription extends React.Component {
 	}
 
 
+	
+
+
 	componentDidMount() {
 		 this.getListSubscription();
+		
 	  }
 
 
