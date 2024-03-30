@@ -925,7 +925,7 @@ export class AddClinicalQuestionsComponent extends Component {
 
         // if (this.validateForm()) {  
         debugger;
-        CommonServices.post(this.state.sendFinalReuest, `/clinicalquestions/AddEditClinicalQuestionsBodyPart`).then((res) => {
+        CommonServices.postData(this.state.sendFinalReuest, `/clinicalquestions/AddEditClinicalQuestionsBodyPart`).then((res) => {
             debugger;
             if (res.data == undefined) {
                 // alert('All field are requerd', res.data);
