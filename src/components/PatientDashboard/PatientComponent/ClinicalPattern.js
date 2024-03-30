@@ -24,7 +24,7 @@ import {
     Label,
     CardText,
     Button,
-    Alert
+    Alert,
 
 } from 'reactstrap';
 import { ClipLoader } from 'react-spinners';
@@ -50,6 +50,7 @@ import {
     enqueueSnackbar as enqueueSnackbarAction,
     closeSnackbar
 } from '../../../store/actions/notification';
+import { FastForward } from '@material-ui/icons';
 
 
 class HomeComponent extends React.Component {
@@ -142,7 +143,9 @@ class HomeComponent extends React.Component {
             remedyCount: 0,
             marathiArray: [],
             englishArray: [],
-            referencerubric: []
+            referencerubric: [],
+            isRemedyLoad: false,
+            showInfoIcon: false
         }
 
     }
@@ -309,6 +312,12 @@ class HomeComponent extends React.Component {
     //     }
     // }
 
+    ToggleAuthorInformation() {
+        this.setState((prevState) => ({
+            showInfoIcon: !prevState.showInfoIcon
+        }));
+    }
+
     KeyWordClikToRubric = (Id) => {
         debugger
         this.setState({
@@ -446,7 +455,7 @@ class HomeComponent extends React.Component {
                                                                                         <button
                                                                                             className="btn-clipboard1"
                                                                                             id={`${r.subSectionId}${r.intensityNo}`}
-                                                                                            style={{ backgroundColor: green }}
+                                                                                            style={{ backgroundColor: id === this.state.id ? "green" : "" }}
                                                                                             // onClick={() => this.updateIntensity(rubric.subSectionId, intensity.intensityNo)}
                                                                                             onClick={() => this.selectRubrics(r, intensity.intensityNo, id)}
                                                                                         >
@@ -466,6 +475,7 @@ class HomeComponent extends React.Component {
                                                                     <tbody style={{ width: '100%', display: 'inline-table' }}>
                                                                         {
                                                                             this.state.RubricByKeywordID.map((r, index) => {
+                                                                                const { Intensities } = this.props.intensity;
                                                                                 return <tr class="rubric" key={index} >
                                                                                     <td>
                                                                                         <span
@@ -474,11 +484,21 @@ class HomeComponent extends React.Component {
                                                                                                 this.popup(r);   // Calling the second method
                                                                                             }}
                                                                                         >{r.subSectionName}</span>
-                                                                                        <button class="btn-clipboard" id="10">0</button>
-                                                                                        <button class="btn-clipboard" id="11">1</button>
-                                                                                        <button class="btn-clipboard" id="12">2</button>
-                                                                                        <button class="btn-clipboard" id="13">3</button>
-                                                                                        <button class="btn-clipboard" id="14">4</button>
+                                                                                        {Intensities.map((intensity, index) => {
+                                                                                            let id = `${r.subSectionId}${intensity.intensityNo}`;
+                                                                                            return (
+                                                                                                <button
+                                                                                                    className="btn-clipboard1"
+                                                                                                    id={`${r.subSectionId}${r.intensityNo}`}
+                                                                                                    style={{ backgroundColor: id === this.state.id ? "green" : "" }}
+                                                                                                    // onClick={() => this.updateIntensity(rubric.subSectionId, intensity.intensityNo)}
+                                                                                                    onClick={() => this.selectRubrics(r, intensity.intensityNo, id)}
+                                                                                                >
+                                                                                                    {intensity.intensityNo}
+                                                                                                </button>
+                                                                                            )
+                                                                                        })
+                                                                                        }
                                                                                     </td>
                                                                                 </tr>
                                                                             })
@@ -533,6 +553,9 @@ class HomeComponent extends React.Component {
                                                                             <span className="auth"
                                                                                 onClick={() => this.ToggleAuthorAlias()}
                                                                             ><i class="fa fa-user" aria-hidden="true"></i></span>
+                                                                            <span className="auth"
+                                                                                onClick={() => this.ToggleAuthorInformation()}
+                                                                            ><i class="fa fa-info" aria-hidden="true"></i></span>
                                                                         </div>
 
                                                                         <div class="hover-text1"><span className=""><img src={engs} className="langicon" alt="English" /></span>
@@ -588,46 +611,77 @@ class HomeComponent extends React.Component {
                                                                                     </tr>
                                                                             }</strong>
                                                                         <hr></hr>
-                                                                        <strong className="h6">Remedy Count : ({this.state.remedyCount}) </strong>
+                                                                        <strong className="h6">Remedy Count : {this.state.isRemedyLoad ? `(${this.state.remedyCount})` : <ClipLoader
+                                                                            color="#2d292a"
+                                                                            size={12}
+                                                                        />} </strong>
                                                                         <hr></hr>
-                                                                        {this.state.RemedyDtailsList.length > 0 ?
+                                                                        {this.state.isRemedyLoad ?
                                                                             <div>
-                                                                                {this.state.RemedyDtailsList?.map((item, index) => {
-                                                                                    {/* <Link to={"/PatientDashboard/" + this.props.patientId + "/" + this.props.caseId + "/" + this.props.patientAppId + "/" + this.props.doctorId} */ }
-                                                                                    const NewTab = 5
-                                                                                    return (
-                                                                                        <span key={index} style={{ display: 'inline-block' }} class="remhov">
-                                                                                            {/* { */}
-                                                                                            {/* item.remediesModels.map((author, index) => {
+                                                                                {this.state.RemedyDtailsList.length > 0 ?
+                                                                                    <div>
+                                                                                        {this.state.RemedyDtailsList?.map((item, index) => {
+                                                                                            {/* <Link to={"/PatientDashboard/" + this.props.patientId + "/" + this.props.caseId + "/" + this.props.patientAppId + "/" + this.props.doctorId} */ }
+                                                                                            const NewTab = 5
+                                                                                            return (
+                                                                                                <span key={index} style={{ display: 'inline-block' }} class="remhov">
+                                                                                                    {/* { */}
+                                                                                                    {/* item.remediesModels.map((author, index) => {
                                                                                                 return  */}
-                                                                                            {/* <span > */}
-                                                                                            {/* <Link to={`/PatientDashboard/${this.props.patientId}/${this.props.caseId}/${this.props.patientAppId}/${this.props.doctorId}/${NewTab}`} */}
-                                                                                            <Link to={`#`}
-                                                                                                style={{
-                                                                                                    // fontFamily: item.fontName,
-                                                                                                    color: item.fontColor,
-                                                                                                    fontStyle: item.fontStyle,
-                                                                                                    textDecoration: 'none',
-                                                                                                    cursor: 'pointer',
-                                                                                                }}>
-                                                                                                <span onClick={() => this.handlePopuptoMM(item.remedyId)}>
-                                                                                                    {/* {item.remedyAlias} */}
-                                                                                                    {item.fontColor === 'Red'
-                                                                                                        ? item.remedyAlias.toUpperCase()
-                                                                                                        : item.remedyAlias}
-                                                                                                    {this.state.ShowAuthorAlias && `(${item.authorAlias}),`}</span>
-                                                                                            </Link>
-                                                                                            {/* </span> */}
-                                                                                            {/* }) */}
-                                                                                            {/* } */}
-                                                                                        </span>
-                                                                                    )
-                                                                                })}
-                                                                            </div>
-                                                                            : <div >
-                                                                                <span >Data Not Found</span>
+                                                                                                    {/* <span > */}
+                                                                                                    {/* <Link to={`/PatientDashboard/${this.props.patientId}/${this.props.caseId}/${this.props.patientAppId}/${this.props.doctorId}/${NewTab}`} */}
+                                                                                                    <Link to={`#`}
+                                                                                                        style={{
+                                                                                                            // fontFamily: item.fontName,
+                                                                                                            color: item.fontColor,
+                                                                                                            fontStyle: item.fontStyle,
+                                                                                                            textDecoration: 'none',
+                                                                                                            cursor: 'pointer',
+                                                                                                        }}>
+                                                                                                        <span onClick={() => this.handlePopuptoMM(item.remedyId)}>
+                                                                                                            {/* {item.remedyAlias} */}
+                                                                                                            {item.fontColor === 'Red'
+                                                                                                                ? item.remedyAlias.toUpperCase()
+                                                                                                                : item.remedyAlias}
+                                                                                                            {this.state.ShowAuthorAlias && `(${item.authorAlias}),`}
+                                                                                                            {this.state.showInfoIcon &&
+                                                                                                                <span className='hover-text3'>
+                                                                                                                    <i class="fa fa-info" aria-hidden="true" style={{ marginLeft: 10, }}></i>
+                                                                                                                    <div class="tooltip-text3">
+                                                                                                                        <strong>Themes/Characteristics : </strong> {item.themesORCharacteristics} <br></br><br></br>
+                                                                                                                        <strong class="mt-2">Generals : </strong> {item.generals} <br></br><br></br>
+                                                                                                                        <strong class="mt-2">Modalities : </strong> {item.modalities} <br></br><br></br>
+                                                                                                                        <strong class="mt-2">Particulars : </strong> {item.particulars}
+
+                                                                                                                    </div>
+                                                                                                                </span>}
+                                                                                                        </span>
+                                                                                                    </Link>
+                                                                                                    {/* </span> */}
+                                                                                                    {/* }) */}
+                                                                                                    {/* } */}
+                                                                                                </span>
+                                                                                            )
+                                                                                        })}
+                                                                                    </div>
+                                                                                    : <div >
+                                                                                        <span >Data Not Found</span>
+                                                                                    </div>
+                                                                                }
+                                                                            </div> :
+                                                                            <div style={{
+                                                                                display: 'flex',
+                                                                                alignItems: 'center',
+                                                                                justifyContent: 'center',
+
+                                                                            }}>
+                                                                                <ClipLoader
+                                                                                    color="#2d292a"
+                                                                                    size={50}
+                                                                                />
                                                                             </div>
                                                                         }
+
                                                                     </Col>
                                                                 </Row>
                                                             </div>
@@ -723,8 +777,11 @@ class HomeComponent extends React.Component {
         this.state.marathiArray = []
         this.state.englishArray = []
         this.state.referencerubric = []
+        this.state.isRemedyLoad = false
 
-        CommonServices.getDataById(parseInt(item.subSectionId), `/RubricRemedy/GetRubricDetails`).then((temp) => {
+        console.log('item == ', item)
+
+        CommonServices.getDataById(parseInt(item.subSectionID), `/RubricRemedy/GetRubricDetails`).then((temp) => {
             console.log("rubric details t===", temp)
             temp.subSectionLanguageDetails.forEach((item) => {
                 if (item.languageName.trim() === "English") {
@@ -736,6 +793,7 @@ class HomeComponent extends React.Component {
             this.setState({
                 // isloding: true,
                 RemedyDtailsList: temp.remediesList,
+                isRemedyLoad: true,
                 remedyCount: temp.remdeyCount,
                 referencerubric: temp.referencerubric,
                 RubricNameForPopUp: temp.subSectionName
@@ -754,12 +812,20 @@ class HomeComponent extends React.Component {
     ////
     selectRubrics = async (rubric, intensity, id) => {
         debugger
-        const remedyCount = await this.props.getRemedyCounts(rubric.subSectionId);
+        const remedyCount = await this.props.getRemedyCounts(rubric.subSectionID);
+
+        this.setState({
+            ...this.state,
+            id
+
+        });
 
         const { selectedRubrics } = this.props.state;//subSectionId
         console.log('selectedRubricscount====', this.props.state)
+        console.log('rubric====', rubric)
+        console.log('selectedRubrics====', selectedRubrics)
         // const isExist = selectedRubrics.indexOf(rubric)
-        const isExist = selectedRubrics.findIndex((item) => item.subSectionId === rubric.subSectionId && item.subSectionId === rubric.subSectionId);
+        const isExist = selectedRubrics.findIndex((item) => item.subSectionId === rubric.subSectionID && item.subSectionId === rubric.subSectionID);
 
         rubric.intensity = intensity;
         rubric.remedyCountForSort = remedyCount.remedyCount;

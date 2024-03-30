@@ -4,8 +4,14 @@ import { Link } from 'react-router-dom';
 import { enqueueSnackbar as snackAlert } from "../../../store/actions/notification";
 import Select from "react-select";
 import navlinks from '../../Navigation/DoctorNavBar';
-
+import { green } from '@mui/material/colors';
 import { setIds } from '../../../store/actions/Patient';
+import {
+    Modal,
+    ModalHeader,
+    ModalBody,
+    ModalFooter,
+} from 'reactstrap';
 
 import {
     Card,
@@ -24,8 +30,9 @@ import {
     CardFooter
 
 } from 'reactstrap';
-
-
+import engs from '../../../assets/eng.png'
+import mart from '../../../assets/mar.png'
+import { ClipLoader } from 'react-spinners';
 import { connect } from "react-redux";
 import { debounce } from 'lodash'
 import {
@@ -53,6 +60,7 @@ class ClinicalSummary extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            id: 0,
             QuestionList: this.props.GetQuestionsBySelectedIdforclinicalquestion,
             optionList: [],
             optionList3: [],
@@ -69,7 +77,16 @@ class ClinicalSummary extends React.Component {
             caseId: this.props.caseId,
             doctorId: this.props.doctorId,
             patientAppId: this.props.patientAppId,
-            objectToCheck: {}
+            objectToCheck: {},
+            isRemedyLoad: false,
+            showInfoIcon: false,
+            RubricNameForPopUp: '',
+            RemedyDtailsList: [],
+            remedyCount: 0,
+            marathiArray: [],
+            englishArray: [],
+            referencerubric: [],
+            toggleOrderModel: false
         }
 
     }
@@ -86,7 +103,7 @@ class ClinicalSummary extends React.Component {
         // if (Object.keys(this.props.parentObject).length > 0 && Object.keys(this.props.childObject).length > 0) {
         //     this.getSubGroupQuestionSection(this.props.childObject.ID, this.props.parentObject.ID)
         // }
-       
+
     }
 
     // show selected parent and chilc navigation options on question tab here/////////////////////
@@ -99,8 +116,8 @@ class ClinicalSummary extends React.Component {
                 console.log('this.props.parentObject == ', this.props.parentObject);
 
                 this.setState({
-                    QuestionORBodyPartRubric:[],
-                    QuestionORBodyPart:[]
+                    QuestionORBodyPartRubric: [],
+                    QuestionORBodyPart: []
                 })
                 /*  if (Object.keys(this.props.parentObject).length > 0 && Object.keys(this.props.childObject).length > 0) { */
                 this.setState({ objectToCheck: this.props.childObject })
@@ -122,11 +139,11 @@ class ClinicalSummary extends React.Component {
 
     getSubGroupQuestionSection(questiongroupId, questionsectionId) {
         //debugger
-       
+
         CommonServices.getData(`/DropdownList/GetSubQuestionGroupByQGIDQSIDDDL/${questiongroupId}/${questionsectionId}`).then((temp) => {
             //debugger;
             console.log('getSubGroupQuestionSection====>>>>>>>', temp);
-            this.setState({                
+            this.setState({
                 optionList1: temp,
                 // SubQuastionGroupList: temp,
             })
@@ -381,16 +398,16 @@ class ClinicalSummary extends React.Component {
                         <div responsive="true" className="divst0" style={{ overflowY: 'scroll', }}>
                             <span size="sm" style={{ color: '#08478c', fontWeight: '700' }}>QUESTIONS : </span>
                             <hr />
-                                { 
-                                    this.state.QuestionORBodyPart?.map((s, index) => {
-                                        return <span class="rubric" key={index}>
-                                                <span className='lbls' onClick={() => {
-                                                    this.TabRubricById(s.questionKeyWordBodyPartID)
-                                                }}>
-                                                    {s.questionKeyWordBodyPart},</span> &nbsp;
-                                        </span>
-                                    })
-                                }
+                            {
+                                this.state.QuestionORBodyPart?.map((s, index) => {
+                                    return <span class="rubric" key={index}>
+                                        <span className='lbls' onClick={() => {
+                                            this.TabRubricById(s.questionKeyWordBodyPartID)
+                                        }}>
+                                            {s.questionKeyWordBodyPart},</span> &nbsp;
+                                    </span>
+                                })
+                            }
 
                         </div>
                     </Col>
@@ -404,13 +421,34 @@ class ClinicalSummary extends React.Component {
                                 <tr class="rubric" >
                                     {
                                         this.state.QuestionORBodyPartRubric?.map((s, index) => {
+                                            const { Intensities } = this.props.intensity;
                                             return <td key={index}><i className="fa fa-angle-double-right" aria-hidden="true"></i> &nbsp;
-                                                <span className='rubnm'>{s.subsectionName}</span>
-                                                <button class="btn-clipboard" id="10">0</button>
+                                                <span className='rubnm'
+                                                    onClick={() => {
+                                                        console.log(s)
+                                                        this.toggleOrderModal(); // Calling the first method
+                                                        this.popup(s);   // Calling the second method
+                                                    }}>{s.subsectionName}</span>
+                                                {/*   <button class="btn-clipboard" id="10">0</button>
                                                 <button class="btn-clipboard" id="11">1</button>
                                                 <button class="btn-clipboard" id="12">2</button>
                                                 <button class="btn-clipboard" id="13">3</button>
-                                                <button class="btn-clipboard" id="14">4</button>
+                                                <button class="btn-clipboard" id="14">4</button> */}
+                                                {Intensities.map((intensity, index) => {
+                                                    let id = `${s.subsectionId}${intensity.intensityNo}`;
+                                                    return (
+                                                        <button
+                                                            className="btn-clipboard1"
+                                                            id={`${s.subsectionId}${s.intensityNo}`}
+                                                            style={{ backgroundColor: id === this.state.id ? "green" : "" }}
+                                                            // onClick={() => this.updateIntensity(rubric.subSectionId, intensity.intensityNo)}
+                                                            onClick={() => this.selectRubrics(s, intensity.intensityNo, id)}
+                                                        >
+                                                            {intensity.intensityNo}
+                                                        </button>
+                                                    )
+                                                })
+                                                }
                                             </td>
                                         })
                                     }
@@ -422,14 +460,235 @@ class ClinicalSummary extends React.Component {
                     </Col>
                 </Row>
 
+                <Modal size="lg" isOpen={this.state.toggleOrderModel} toggle={this.toggleOrderModal.bind(this)} >
+                    <ModalBody>
+                        {/* <Row>
+                                                        <Col md="12">
+                                                            {this.state.RemedyAndAuthor.map((item, index) => {
+                                                                return (
+                                                                    <span key={index}>
+                                                                        <span
+                                                                            style={{
+                                                                                fontFamily: item.fontName,
+                                                                                color: item.fontColor,
+                                                                                fontStyle: item.fontStyle,
+                                                                            }}
+                                                                            to="#">
+                                                                            <span>
+                                                                                {item.remedyAlias}, &nbsp;</span> </span>
+                                                                    </span>
+                                                                )
+                                                            })}
+                                                        </Col>
+                                                    </Row> */}
+
+
+
+
+                        <div responsive="true" >
+                            <Row>
+                                <Col md="12" className="txtright">
+
+                                    <div>
+                                        <span className="auth"
+                                            onClick={() => this.ToggleAuthorAlias()}
+                                        ><i class="fa fa-user" aria-hidden="true"></i></span>
+                                        <span className="auth"
+                                            onClick={() => this.ToggleAuthorInformation()}
+                                        ><i class="fa fa-info" aria-hidden="true"></i></span>
+                                    </div>
+
+                                    <div class="hover-text1"><span className=""><img src={engs} className="langicon" alt="English" /></span>
+                                        <span class="tooltip-text1 bottom">
+                                            <div class="">
+                                                {
+                                                    this.state.englishArray.length > 0 ?
+                                                        this.state.englishArray.map((c, index) => {
+                                                            return <tr key={index}>
+                                                                <td>{c.subSectionDetails}</td>
+                                                            </tr>
+                                                        }) :
+                                                        <tr>
+                                                            <td colSpan="4">No data to display</td>
+                                                        </tr>}
+                                            </div>
+                                        </span>
+                                    </div>
+
+                                    <div class="hover-text2"><span className=""><img src={mart} className="langicon" alt="Marathi" /></span>
+                                        <span class="tooltip-text2 bottom">
+                                            <div class="">
+                                                {
+                                                    this.state.marathiArray.length > 0 ?
+                                                        this.state.marathiArray.map((c, index) => {
+                                                            return <tr key={index}>
+                                                                <td>{c.subSectionDetails}</td>
+                                                            </tr>
+                                                        }) :
+                                                        <tr>
+                                                            <td colSpan="4">No data to display</td>
+                                                        </tr>}
+                                            </div>
+                                        </span>
+                                    </div>
+                                </Col>
+                            </Row>
+
+                            <Row style={{ padding: '6px' }}>
+                                <Col md="12" className="txtleft">
+                                    <strong className="h6">{this.state.RubricNameForPopUp}</strong>
+                                    <hr></hr>
+                                    <strong className="h6">
+                                        {
+                                            this.state.referencerubric.length > 0 ?
+                                                this.state.referencerubric.map((c, index) => {
+                                                    return <a href='#' className="crref"><tr key={index}>
+                                                        <td >{c.refSubSectionName}</td>
+                                                    </tr></a>
+                                                }) :
+                                                <tr>
+                                                    <td colSpan="4">No data to display</td>
+                                                </tr>
+                                        }</strong>
+                                    <hr></hr>
+                                    <strong className="h6">Remedy Count : {this.state.isRemedyLoad ? `(${this.state.remedyCount})` : <ClipLoader
+                                        color="#2d292a"
+                                        size={12}
+                                    />} </strong>
+                                    <hr></hr>
+                                    {this.state.isRemedyLoad ?
+                                        <div>
+                                            {this.state.RemedyDtailsList.length > 0 ?
+                                                <div>
+                                                    {this.state.RemedyDtailsList?.map((item, index) => {
+                                                        {/* <Link to={"/PatientDashboard/" + this.props.patientId + "/" + this.props.caseId + "/" + this.props.patientAppId + "/" + this.props.doctorId} */ }
+                                                        const NewTab = 5
+                                                        return (
+                                                            <span key={index} style={{ display: 'inline-block' }} class="remhov">
+                                                                {/* { */}
+                                                                {/* item.remediesModels.map((author, index) => {
+                                                                                                return  */}
+                                                                {/* <span > */}
+                                                                {/* <Link to={`/PatientDashboard/${this.props.patientId}/${this.props.caseId}/${this.props.patientAppId}/${this.props.doctorId}/${NewTab}`} */}
+                                                                <Link to={`#`}
+                                                                    style={{
+                                                                        // fontFamily: item.fontName,
+                                                                        color: item.fontColor,
+                                                                        fontStyle: item.fontStyle,
+                                                                        textDecoration: 'none',
+                                                                        cursor: 'pointer',
+                                                                    }}>
+                                                                    <span onClick={() => this.handlePopuptoMM(item.remedyId)}>
+                                                                        {/* {item.remedyAlias} */}
+                                                                        {item.fontColor === 'Red'
+                                                                            ? item.remedyAlias.toUpperCase()
+                                                                            : item.remedyAlias}
+                                                                        {this.state.ShowAuthorAlias && `(${item.authorAlias}),`}
+                                                                        {this.state.showInfoIcon &&
+                                                                            <span className='hover-text3'>
+                                                                                <i class="fa fa-info" aria-hidden="true" style={{ marginLeft: 10, }}></i>
+                                                                                <div class="tooltip-text3">
+                                                                                    <strong>Themes/Characteristics : </strong> {item.themesORCharacteristics} <br></br><br></br>
+                                                                                    <strong class="mt-2">Generals : </strong> {item.generals} <br></br><br></br>
+                                                                                    <strong class="mt-2">Modalities : </strong> {item.modalities} <br></br><br></br>
+                                                                                    <strong class="mt-2">Particulars : </strong> {item.particulars}
+
+                                                                                </div>
+                                                                            </span>}
+                                                                    </span>
+                                                                </Link>
+                                                                {/* </span> */}
+                                                                {/* }) */}
+                                                                {/* } */}
+                                                            </span>
+                                                        )
+                                                    })}
+                                                </div>
+                                                : <div >
+                                                    <span >Data Not Found</span>
+                                                </div>
+                                            }
+                                        </div> :
+                                        <div style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+
+                                        }}>
+                                            <ClipLoader
+                                                color="#2d292a"
+                                                size={50}
+                                            />
+                                        </div>
+                                    }
+
+                                </Col>
+                            </Row>
+                        </div>
+
+
+
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="danger" onClick={this.toggleOrderModal.bind(this)}><i className="fa fa-ban"></i> Cancel</Button>
+                    </ModalFooter>
+                </Modal>
+
             </TabPane>
         )
+    }
+
+    ToggleAuthorInformation() {
+        this.setState((prevState) => ({
+            showInfoIcon: !prevState.showInfoIcon
+        }));
+    }
+
+    toggleOrderModal = () => {
+        this.setState({
+            toggleOrderModel: !this.state.toggleOrderModel,
+
+        })
+    };
+
+    popup = (item) => {
+        debugger
+        this.state.RubricNameForPopUp = ''
+        this.state.RemedyDtailsList = []
+        this.state.remedyCount = 0
+        this.state.marathiArray = []
+        this.state.englishArray = []
+        this.state.referencerubric = []
+        this.state.isRemedyLoad = false
+
+        console.log('item == ', item)
+
+        CommonServices.getDataById(parseInt(item.subsectionId), `/RubricRemedy/GetRubricDetails`).then((temp) => {
+            console.log("rubric details t===", temp)
+            temp.subSectionLanguageDetails.forEach((item) => {
+                if (item.languageName.trim() === "English") {
+                    this.state.englishArray.push(item);
+                } else if (item.languageName.trim() === "Marathi") {
+                    this.state.marathiArray.push(item);
+                }
+            });
+            this.setState({
+                // isloding: true,
+                RemedyDtailsList: temp.remediesList,
+                isRemedyLoad: true,
+                remedyCount: temp.remdeyCount,
+                referencerubric: temp.referencerubric,
+                RubricNameForPopUp: temp.subSectionName
+            })
+        });
     }
 
     /* For type and search dropdown Existance  */
 
 
     selectRubrics = async (rubric, intensity, id) => {
+
+        console.log('rubric == ', rubric)
         //debugger;
         const remedyCount = await this.props.getRemedyCounts(rubric.subsectionId);
         const remedyName = await this.props.getRemedyName(rubric.subsectionId);

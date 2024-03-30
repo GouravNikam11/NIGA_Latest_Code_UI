@@ -659,7 +659,8 @@ class RepertorizePage extends React.Component {
         this.props.state.selectedRubrics?.forEach(element => {
             let obj = {
 
-                "subsectionId": element.subSectionId,
+                "subsectionId": element.subSectionId === undefined ? element.subSectionID === undefined ? element.subsectionId : element.subSectionID : element.subSectionId
+                ,
                 "intensity": element.intensity,
 
             }
@@ -732,6 +733,8 @@ class RepertorizePage extends React.Component {
         // );
 
         return this.props.state.selectedRubrics?.map((rubric, index) => {
+
+            console.log('this.props.state.selectedRubrics == ', this.props.state.selectedRubrics)
             ///For Eliminate
             const isEliminate = this.state.ClipboardRubricsEliminateModel?.some(item => item.subSectionId === rubric.subSectionId);
             const eliminateStyle = isEliminate ? { backgroundColor: '#ffc7c7', borderRadius: '4px', border: '2px solid #c51515', height: '20px', width: '20px' } : {};
@@ -742,7 +745,7 @@ class RepertorizePage extends React.Component {
             return (
                 <tr className="rubric" key={rubric?.subSectionId} >
                     <td>
-                        <span> <span onClick={() => { this.toggleOrderModal(); this.popup(rubric?.subSectionId) }} style={BoldStyle}>{rubric?.subSectionName} [{rubric?.remedyCount.remedyCount}]</span>
+                        <span> <span onClick={() => { this.toggleOrderModal(); this.popup(rubric?.subSectionId) }} style={BoldStyle}>{rubric?.subSectionName === undefined ? rubric?.subsectionName : rubric?.subSectionName} [{rubric?.remedyCount.remedyCount}]</span>
 
                             <div className="intbar" ><img src={pyicon} className="elibtn" alt="" title="Eliminate" style={eliminateStyle}
                                 onClick={(e) => this.HandleAddEliminationofRubric(rubric)} />
@@ -806,7 +809,7 @@ class RepertorizePage extends React.Component {
 
     /// render differential mm
     renderTabContent = () => {
-       
+
         const keyword = this.state.SearchDiffMMRemedy
         this.state.NewDifferentialMateriaMedica = this.state.DifferentialMateriaMedica?.filter(common =>
             common.remedyName.toLowerCase().includes(keyword.toLowerCase())
@@ -836,7 +839,7 @@ class RepertorizePage extends React.Component {
             <div responsive="true" style={{ height: '430px' }}>
                 {this.state.NewDifferentialMateriaMedica.map((item, index) => (
                     <div key={index}>
-                        <span className="divdet">  <strong>{item.remedyName}</strong></span> [{item.score}] 
+                        <span className="divdet">  <strong>{item.remedyName}</strong></span> [{item.score}]
                         <p dangerouslySetInnerHTML={{ __html: item.materiaMedica }} ></p>
                         {/* <div dangerouslySetInnerHTML={{ __html: item.materiaMedica }} /> */}
                     </div>
@@ -868,7 +871,7 @@ class RepertorizePage extends React.Component {
 
     //render common
     renderCommonTable = () => {
-      
+
         const keyword = this.state.SearchRemedydefaultCommon
         this.state.NewcommonRemedyList = this.state.commonRemedyList?.filter(common =>
             common.remedyName.toLowerCase().includes(keyword.toLowerCase())
@@ -1743,7 +1746,7 @@ class RepertorizePage extends React.Component {
 
     ///render grade buttons
     renderButtonsSelectGradeInSelectSection() {
-      
+
         const buttonNumbers = ['5', '2', '3', '4'];
 
         return buttonNumbers.map(number => (
