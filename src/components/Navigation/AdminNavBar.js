@@ -250,11 +250,11 @@ export default {
       icon: 'icon-pencil',
     },
 
-    {
-      name: 'Subscription',
-      url: '/Subscription',          //   Blogs
-      icon: 'icon-pencil',
-    },
+    // {
+    //   name: 'Subscription',
+    //   url: '/Subscription',          //   Blogs
+    //   icon: 'icon-pencil',
+    // },
 
   ],
 };
