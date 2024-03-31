@@ -20,6 +20,7 @@ import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import draftToMarkdown from 'draftjs-to-markdown';
+import {withRouter} from 'react-router-dom';
 
 
 export class AddAppointmentHistoryNotes extends Component {
@@ -35,14 +36,25 @@ export class AddAppointmentHistoryNotes extends Component {
             isDeleted: false,
             errors: {},
             editorState: EditorState.createEmpty(),
+            PappointmentId:this.props.appointmentId
 
         }
 
-        //   this.submitForm = this.submitForm.bind(this);
+          this.submitForm = this.submitForm.bind(this);
+
+          console.log("props==",this.props)
     }
 
     async componentDidMount() {
+        // var Id = this.props.appointmentId;
 
+        // this.setState({
+        //     PappointmentId:Id
+        // })
+        // // this.state.appointmentId=Id
+
+        // console.log("appID====>>>",Id)
+       
     }
 
     render() {
@@ -115,9 +127,9 @@ export class AddAppointmentHistoryNotes extends Component {
                             <Button
                                 type="button"
                                 style={{ textTransform: "uppercase" }}
-                                //   onClick={
-                                //       this.submitForm
-                                //   }
+                                onClick={
+                                    this.submitForm
+                                }
                                 size="sm" color="primary">
                                 <i className="fa fa-save"></i> Save
                             </Button> &nbsp;
@@ -158,19 +170,35 @@ export class AddAppointmentHistoryNotes extends Component {
 
 
     submitForm(e) {
-        // e.preventDefault();
-        // debugger;
-        // CommonServices.postData(this.state, `/MateriaMedicaMaster`).then((responseMessage) => {
-        //     this.props.enqueueSnackbarAction(responseMessage.data);
-        //     //  this.props.history.push('/ListMateriaMedicaComponent');
-        // }).catch(error => {
-        //     console.log("error", error);
-        //     debugger;
-        // });
-        // this.setState({
+        e.preventDefault();
+        debugger;
+       // console.log("this.state.appointmentId====", this.props.appointmentId)
+        let obj = {
+            "historyId": 0,
+            "appointmentId": this.props.appointmentId,
+            "historyNote": this.state.details
+        }
 
-        // });
+        console.log("objforhistory====", obj)
+        CommonServices.postData(obj, `/AppointmentHistoryNote/SaveUpdateAppointmentHistoryNote`).then((responseMessage) => {
+            console.log("responseMessageforhistory====", responseMessage)
+            this.props.enqueueSnackbarAction(responseMessage.data);
+            this.props.history.push('/DoctorDashboard'); 
+        }).catch(error => {
+            console.log("error", error);
+           
+        });
+        this.setState({
+            modelEx: [],
+            details: [],
+            addData: '',
+            data: [],
+            isDeleted: false,
+            errors: {},
+            editorState: EditorState.createEmpty(),
+            PappointmentId:0
+        });
     }
 
 }
-export default connect(null, { enqueueSnackbarAction, closeSnackbar })(AddAppointmentHistoryNotes)
+export default withRouter(connect(null, { enqueueSnackbarAction, closeSnackbar })(AddAppointmentHistoryNotes)) 

@@ -109,7 +109,7 @@ class PatientDashboard extends React.Component {
         this.getQuestionSection();
         var Id = this.props.match.params.id;
         var caseId = this.props.match.params.caseId;
-        // console.log('patientDashboard===>>>',this.props)
+         //console.log('patientAppId===>>>',this.props.match.params.patientAppId)
         this.setState({
             patientId: Id,
             caseId: caseId,
@@ -380,7 +380,7 @@ class PatientDashboard extends React.Component {
                     </React.Suspense> :
                     this.props.showAddAppointment ?
                         <React.Suspense fallback={<Spinner style={{ marginLeft: "50%" }} size="md" color="primary" />} >
-                            <AddAppointmentHistoryNotes />
+                            <AddAppointmentHistoryNotes appointmentId={this.props.match.params.patientAppId} history={this.props.history}/>
                         </React.Suspense> :
                         <TabContent activeTab={this.state.activeTab} style={{ backgroundColor: "#f5f5f5" }} >
                             <React.Suspense fallback={<Spinner style={{ marginLeft: "50%" }} size="md" color="primary" />} >

@@ -172,7 +172,8 @@ class Prescription extends React.Component {
                 //     "subsectionId": element.subSectionId
                 // }
                 // array.push(obj)
-                array.push(element.subSectionId);
+                array.push(element.subSectionId === undefined ? element.subSectionID === undefined ? 
+                    element.subsectionId : element.subSectionID : element.subSectionId);
             });
             // let commaSeparatedList = array.join(', ');
             debugger
