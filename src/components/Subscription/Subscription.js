@@ -30,45 +30,45 @@ class Subscription extends React.Component {
 			validityInDays: '',
 			amount: '',
 			razorpay: null,
-			
+
 
 		}
 
-		
+
 	}
 
 
-	
+
 
 
 	componentDidMount() {
-		 this.getListSubscription();
-		
-	  }
+		this.getListSubscription();
+
+	}
 
 
-	  handlePaymentSuccess(response) {
+	handlePaymentSuccess(response) {
 		// Handle payment success event
 		console.log('Payment successful:', response);
-	  }
+	}
 
 
-	  handlePayment() {
+	handlePayment() {
 		debugger
 		if (this.state.razorpay) {
-		  this.state.razorpay.open();
+			this.state.razorpay.open();
 		} else {
-		  console.error('Razorpay is not initialized yet.');
+			console.error('Razorpay is not initialized yet.');
 		}
-	  }
+	}
 
-		OnBuyClick(variant) {
-			console.log(variant)
+	OnBuyClick(variant) {
+		console.log(variant)
 		debugger
-			const script = document.createElement('script');
-			script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-			script.async = true;
-			script.onload = () => {
+		const script = document.createElement('script');
+		script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+		script.async = true;
+		script.onload = () => {
 			// Initialize Razorpay
 			const razorpay = new window.Razorpay({
 				key: 'rzp_live_WSDlLVrcCPFbEQ',
@@ -78,99 +78,99 @@ class Subscription extends React.Component {
 				//image: '/your_logo.png',
 				handler: this.handlePaymentSuccess,
 				prefill: {
-				name: 'John Doe',
-				email: 'john@example.com',
-				contact: '9876543210'
+					name: 'John Doe',
+					email: 'john@example.com',
+					contact: '9876543210'
 				},
 				notes: {
-				address: '123, Main Street, City, Country'
+					address: '123, Main Street, City, Country'
 				},
 				theme: {
-				color: '#F37254'
+					color: '#F37254'
 				}
 			});
-		
+
 			this.setState({ razorpay });
-			};
-			document.body.appendChild(script);
-			setTimeout(() => {
-				this.handlePayment();
-			}, 1000);
-			
-		}
+		};
+		document.body.appendChild(script);
+		setTimeout(() => {
+			this.handlePayment();
+		}, 1000);
+
+	}
 
 
-		// OnBuyClick(variant) {
-		// 	// Make a request to your backend to generate the order ID
-		// 	fetch(`http://api.homeocentrum.com/api/generate-order`, {
-		// 		method: 'POST',
-		// 		headers: {
-		// 			'Content-Type': 'application/json',
-		// 			// You may need to pass any authentication tokens or other necessary headers here
-		// 		},
-		// 		body: JSON.stringify({
-		// 			// You can pass any necessary data to your backend to generate the order
-		// 			variant: variant
-		// 		})
-		// 	})
-		// 	.then(response => response.json())
-		// 	.then(data => {
-		// 		// Once you receive the order ID from your backend, use it in Razorpay configuration
-		// 		const orderId = data.orderId;
-	
-		// 		// Load Razorpay script
-		// 		const script = document.createElement('script');
-		// 		script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-		// 		script.async = true;
-		// 		script.onload = () => {
-		// 			// Initialize Razorpay
-		// 			const razorpay = new window.Razorpay({
-		// 				key: 'rzp_live_WSDlLVrcCPFbEQ',
-		// 				amount: 1 * 100,
-		// 				name: 'Homeo Centrum',
-		// 				description: 'Payment For Doctor Subscription',
-		// 				handler: this.handlePaymentSuccess,
-		// 				prefill: {
-		// 					name: 'John Doe',
-		// 					email: 'john@example.com',
-		// 					contact: '9876543210'
-		// 				},
-		// 				notes: {
-		// 					address: '123, Main Street, City, Country'
-		// 				},
-		// 				theme: {
-		// 					color: '#F37254'
-		// 				},
-		// 				order_id: orderId // Pass the order ID here
-		// 			});
-	
-		// 			this.setState({ razorpay });
-		// 		};
-		// 		document.body.appendChild(script);
-		// 	})
-		// 	.catch(error => {
-		// 		console.error('Error generating order ID:', error);
-		// 		// Handle error appropriately, e.g., show an error message to the user
-		// 	});
-		// }
-	
-		handlePaymentSuccess(paymentResponse) {
-			// Handle payment success response from Razorpay
-			console.log(paymentResponse);
-		}
-	
-		render() {
-			return (
-				<div>
-					{/* Your component UI */}
-					<button onClick={() => this.OnBuyClick('your-variant')}>Buy Now</button>
-				</div>
-			);
-		}
-	
-		
+	// OnBuyClick(variant) {
+	// 	// Make a request to your backend to generate the order ID
+	// 	fetch(`http://api.homeocentrum.com/api/generate-order`, {
+	// 		method: 'POST',
+	// 		headers: {
+	// 			'Content-Type': 'application/json',
+	// 			// You may need to pass any authentication tokens or other necessary headers here
+	// 		},
+	// 		body: JSON.stringify({
+	// 			// You can pass any necessary data to your backend to generate the order
+	// 			variant: variant
+	// 		})
+	// 	})
+	// 	.then(response => response.json())
+	// 	.then(data => {
+	// 		// Once you receive the order ID from your backend, use it in Razorpay configuration
+	// 		const orderId = data.orderId;
 
-	
+	// 		// Load Razorpay script
+	// 		const script = document.createElement('script');
+	// 		script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+	// 		script.async = true;
+	// 		script.onload = () => {
+	// 			// Initialize Razorpay
+	// 			const razorpay = new window.Razorpay({
+	// 				key: 'rzp_live_WSDlLVrcCPFbEQ',
+	// 				amount: 1 * 100,
+	// 				name: 'Homeo Centrum',
+	// 				description: 'Payment For Doctor Subscription',
+	// 				handler: this.handlePaymentSuccess,
+	// 				prefill: {
+	// 					name: 'John Doe',
+	// 					email: 'john@example.com',
+	// 					contact: '9876543210'
+	// 				},
+	// 				notes: {
+	// 					address: '123, Main Street, City, Country'
+	// 				},
+	// 				theme: {
+	// 					color: '#F37254'
+	// 				},
+	// 				order_id: orderId // Pass the order ID here
+	// 			});
+
+	// 			this.setState({ razorpay });
+	// 		};
+	// 		document.body.appendChild(script);
+	// 	})
+	// 	.catch(error => {
+	// 		console.error('Error generating order ID:', error);
+	// 		// Handle error appropriately, e.g., show an error message to the user
+	// 	});
+	// }
+
+	handlePaymentSuccess(paymentResponse) {
+		// Handle payment success response from Razorpay
+		console.log(paymentResponse);
+	}
+
+	// render() {
+	// 	return (
+	// 		<div>
+
+	// 			<button onClick={() => this.OnBuyClick('your-variant')}>Buy Now</button>
+	// 		</div>
+	// 	);
+	// }
+
+
+
+
 
 	render() {
 		debugger;
@@ -203,7 +203,7 @@ class Subscription extends React.Component {
 												<Label className="pcklbl"> <i class="fa fa-check-circle chkcrl"></i> Validation : {variant.validityInDays} Days</Label>
 
 												<div class="text-center">
-													<Button className='pckbtn' size="lg" onClick={()=>this.OnBuyClick(variant)}> BUY NOW </Button>
+													<Button className='pckbtn' size="lg" onClick={() => this.OnBuyClick(variant)}> BUY NOW </Button>
 												</div>
 											</div>
 										</div>
