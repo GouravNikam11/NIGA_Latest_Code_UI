@@ -175,7 +175,7 @@ class DoctorDashboard extends React.Component {
         }, `/Subscription/SaveUpdateSubscription`).then((result) => {
             debugger
             console.log("result payment==", result);
-            this.setState({ toggleOrderModal: false })
+            this.setState({ toggleOrderModel: false })
 
         })
         console.log('handlePaymentSuccess == ', paymentResponse);

@@ -15,7 +15,7 @@ const initialState = {
     subsections: {},
     selectedRubrics: [],
     remedyCount: {},
-    Diagnosis:[]
+    Diagnosis: []
 }
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -24,11 +24,11 @@ export default (state = initialState, action) => {
                 ...state,
                 sections: action.payload
             };
-            case GET_DIAGNOSIS:
-                return{
-                    ...state,
-                    Diagnosis:action.payload
-                }
+        case GET_DIAGNOSIS:
+            return {
+                ...state,
+                Diagnosis: action.payload
+            }
 
         case GET_BODY_PARTS_BY_SECTION: {
             return {
@@ -52,6 +52,7 @@ export default (state = initialState, action) => {
         };
 
         case ADD_RUBRICS: {
+            console.log('selectedRubrics == ', state.selectedRubrics)
             return {
                 ...state,
                 selectedRubrics: [...state.selectedRubrics, action.selectedRubric]

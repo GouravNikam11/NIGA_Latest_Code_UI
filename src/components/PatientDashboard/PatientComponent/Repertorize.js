@@ -610,6 +610,7 @@ class RepertorizePage extends React.Component {
         this.props.deleteRubrics([])
         this.GetHeadingByAuthorid(this.state.selectedAuthorId);
         this.ToSelect();
+        console.log('Rubrics For Repertorization == ', this.props.state.selectedRubrics)
     }
 
     componentDidUpdate(prevProps) {
