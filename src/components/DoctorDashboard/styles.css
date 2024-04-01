@@ -95,3 +95,117 @@ div.sticky {
 
 
 
+
+
+
+
+  .card-trial,
+  .card-basic,
+  .card-premium,
+  .card-standard,
+  .card-gold {
+  padding: 0 0 0.5rem 0;
+  line-height: 2.5;
+  background: #fff;
+  color: #444;
+  text-align: center;
+  border-radius: 1rem;
+  box-shadow: 0.5rem 0.5rem 2rem rgba(51, 51, 51, 0.2);
+  overflow: hidden;
+  transition: all 0.1ms ease-in-out;
+  margin-bottom: 20px;
+  }
+  .card-trial:hover,
+  .card-basic:hover,
+  .card-premium:hover,
+  .card-standard:hover,
+  .card-gold:hover {
+  transform: scale(1.02);
+  }
+
+  .card-headers {
+    height: 2.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 0.2rem;
+    padding: 0.3rem 0;
+    color: #fff;
+    -webkit-clip-path: polygon(0 0, 100% 0%, 100% 85%, 0% 100%);
+    clip-path: polygon(0 0, 100% 0%, 100% 85%, 0% 100%);
+  }
+
+  .header-trial,
+  .btn-trial {
+  background: linear-gradient(135deg, #d58ff9, #ff007a);
+  }
+
+  .header-basic,
+  .btn-basic {
+  background: linear-gradient(135deg, #0077ee, #06c766);
+  }
+
+  .header-standard,
+  .btn-standard {
+  background: linear-gradient(135deg, #4c0896, #f42ca1);
+  }
+
+  .header-gold,
+  .btn-gold {
+  background: linear-gradient(135deg, #eea300, #ee5700);
+  }
+
+  .header-premium,
+  .btn-premium {
+  background: linear-gradient(135deg, #3788be, #6f28ad);
+  }
+
+  .card-bodys {
+  padding: 0.3rem 0;
+  }
+  .card-bodys h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  }
+
+  .card-element-containers {
+  color: black;
+  list-style: none;
+  padding: 0;
+  }
+
+  .card-titles{
+    font-size: 18px;
+    padding-top: 4px;
+  }
+
+  .card-elements{
+    line-height: 1.7;
+  }
+
+  .btns {
+    padding-top: 0px;
+    padding-bottom: 2px;
+    outline: none;
+    border-radius: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #fff !important;
+    border: none;
+    cursor: pointer;
+    transition: all 0.1ms ease-in-out;
+  }
+
+  .btns:hover {
+  transform: scale(0.95);
+  }
+
+  .btns:active {
+  transform: scale(1);
+  }
+
+  .card-element-hiddens {
+  display: none;
+  }
+
+
+

@@ -376,22 +376,48 @@ class DoctorDashboard extends React.Component {
 
                 <Modal backdrop="static" size="xl" isOpen={this.state.toggleOrderModel} toggle={this.toggleOrderModal.bind(this)} >
                     <ModalBody>
-                        <Card >
-                            <CardHeader>Subscriptions</CardHeader>
-                            <CardBody>
+                        <div >
+                            {/* <CardHeader>Subscriptions</CardHeader> */}
+                            <center><h2 class="mb-3">Choose Your Subscription</h2></center>
+                            <div>
                                 <Form className="form-horizontal">
                                     <Row >
                                         {this.state.ListSubcription.map((variant, idx) => (
 
+                                          
+                                            // card-trial, card-basic, card-standard, card-gold, card-premium
+                                            // header-trial, header-basic, header-standard, header-gold, header-premium
+                                            // card-element-hiddens-trial, card-element-hiddens-basic, card-element-hiddens-standard, card-element-hiddens-gold, card-element-hiddens-premium
+                                            // btn-trial, btn-basic, btn-standard, btn-gold, btn-premium
+
 
                                             <Col xs="12" md="4">
-                                                <Row >
+
+                                                <div class="col-md-12 ">
+                                                    <div class="card-trial">
+                                                        <div class="card-headers header-trial">
+                                                        <h3 class="card-titles">{variant.packageName}</h3>
+                                                        </div>
+                                                        <div class="card-bodys">
+                                                        <h2 class="mb-2">₹ {variant.amount} /-</h2>
+                                                        <div class="card-element-hiddens-trial">
+                                                            <ul class="card-element-containers">
+                                                                <li class="card-elements"><b>{variant.validityInDays}</b> Days Validity</li>
+                                                                <li class="card-elements"><b>{variant.caseCount}</b> No. of Cases *</li>
+                                                                <li class="card-elements"><b>1</b> Logins *</li>
+                                                                <li class="card-elements">Include <b>All</b> Modules *</li>
+                                                            </ul>
+                                                            <Button className="btns btn-trial" onClick={() => this.OnBuyClick(variant)}>Buy Now</Button>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
 
+                                                {/* <Row >
                                                     <div class="col-md-12">
                                                         <div class="orange-moon" >
                                                             <h3 class="pcknm">{variant.packageName}</h3>
-
 
                                                             <div class="text-center">
                                                                 <i class="fa fa-rupee pckrp" > </i> <span class="pckvl">{variant.amount} /-</span>
@@ -407,14 +433,14 @@ class DoctorDashboard extends React.Component {
                                                         </div>
                                                     </div>
 
-                                                </Row>
+                                                </Row> */}
                                             </Col>
 
                                         ))}
                                     </Row>
                                 </Form>
 
-                            </CardBody>
+                            </div>
                             {/* <CardFooter>
                                 <Row>
                                     <Col xs="12" md="6">
@@ -425,7 +451,7 @@ class DoctorDashboard extends React.Component {
                                     </Col>
                                 </Row>
                             </CardFooter> */}
-                        </Card>
+                        </div>
                     </ModalBody>
                 </Modal>
                 <Modal size="lg" isOpen={this.state.isLastFiveDaysRemaining} toggle={this.toggleSubscriptionEndAlertModal.bind(this)} >

@@ -97,7 +97,7 @@ class LoginComponent extends Component {
                         </Row>
 
                         <Row>
-                            <Col sm="12" className="text-right pb-2 pt-1">
+                            <Col sm="12" className="text-center pb-2 pt-1">
                                 <Link to={"/ForgotpasswordComponent"} className='lgtext' style={{fontSize: '12px', color: 'black'}}>Forgot Password ?</Link>
                             </Col>
                         </Row>

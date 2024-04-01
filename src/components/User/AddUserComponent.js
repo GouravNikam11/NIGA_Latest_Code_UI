@@ -72,12 +72,12 @@ class AddUserComponent extends Component {
                         
                             <Col sm="4">
                             <Form.Group as={Row} controlId="fromUserName" >
-                            <Form.Label column sm="12" className='col-form-lbl'>
+                            <Form.Label column sm="12" className='col-form-lbl lbls'>
                                 Username<br />
                             </Form.Label>
                      
                             <Col sm="12">
-                                <Form.Control type="text" placeholder="User Name" className='form-cnt'
+                                <Form.Control type="text" placeholder="Enter Username" className='form-cnt brdrds brds'
                                     name="UserName"
                                     onChange={this.handleChange}
                                     value={this.state.UserName === null ? '' : this.state.UserName} />
@@ -87,11 +87,11 @@ class AddUserComponent extends Component {
                             </Col>
                             <Col sm="4">
                                 <Form.Group as={Row} controlId="formPassword" >
-                                    <Form.Label column sm="12" className='col-form-lbl'>
+                                    <Form.Label column sm="12" className='col-form-lbl lbls'>
                                         Password<br />
                                     </Form.Label>
                                     <Col sm="12">
-                                        <Form.Control type="password" placeholder="Password" className='form-cnt'
+                                        <Form.Control type="password" placeholder="Enter Password" className='form-cnt brdrds brds'
                                             name="UserPassword"
                                             onChange={this.handleChange}
                                             value={this.state.UserPassword === null ? '' : this.state.UserPassword}
@@ -101,11 +101,11 @@ class AddUserComponent extends Component {
                             </Col>
                             <Col sm="4">
                                 <Form.Group as={Row} controlId="formReEnterPassword"  >
-                                    <Form.Label column sm="12" className='col-form-lbl'>
+                                    <Form.Label column sm="12" className='col-form-lbl lbls'>
                                     Confirm Password<br />
                                     </Form.Label>
                                     <Col sm="12">
-                                        <Form.Control type="password" placeholder="Confirm Password" className='form-cnt'
+                                        <Form.Control type="password" placeholder="Enter Password Again" className='form-cnt brdrds brds'
                                             name="ReenterPassword"
                                             onChange={this.handleChange}
                                             value={this.state.ReenterPassword === null ? '' : this.state.ReenterPassword} />
@@ -124,11 +124,11 @@ class AddUserComponent extends Component {
                         
                             <Col sm="2">
                                 <Form.Group as={Row} controlId="formTitle" className='frmgrp'>
-                                    <Form.Label column sm="12" className='col-form-lbl'>
+                                    <Form.Label column sm="12" className='col-form-lbl lbls'>
                                     Title<br />
                                     </Form.Label>
                                     <Col sm="12">
-                                        <Form.Control as="select" className='form-cnt'
+                                        <Form.Control as="select" className='form-cnt brdrds brds'
                                             name="Title"
                                             onChange={this.handleChange}
                                             value={this.state.Title === null ? '' : this.state.Title} >
@@ -143,11 +143,11 @@ class AddUserComponent extends Component {
 
                             <Col sm="5">
                                 <Form.Group as={Row} controlId="formFirstName" className='frmgrp' >
-                                <Form.Label column sm="12" className='col-form-lbl'>
+                                <Form.Label column sm="12" className='col-form-lbl lbls'>
                                     First Name<br />
                                     </Form.Label>
                                     <Col sm="12">
-                                        <Form.Control type="text" placeholder="First Name" className='form-cnt'
+                                        <Form.Control type="text" placeholder="Enter First Name" className='form-cnt brdrds brds'
                                             name="FirstName"
                                             onChange={this.handleChange}
                                             value={this.state.FirstName === null ? '' : this.state.FirstName} />
@@ -157,11 +157,11 @@ class AddUserComponent extends Component {
 
                             <Col sm="5">
                                 <Form.Group as={Row} controlId="formLastName" className='frmgrp'>
-                                <Form.Label column sm="12" className='col-form-lbl'>
+                                <Form.Label column sm="12" className='col-form-lbl lbls'>
                                     Last Name<br />
                                     </Form.Label>
                                     <Col sm="12">
-                                        <Form.Control type="text" placeholder="Last Name" className='form-cnt'
+                                        <Form.Control type="text" placeholder="Enter Last Name" className='form-cnt brdrds brds'
                                             name="LastName"
                                             onChange={this.handleChange}
                                             value={this.state.LastName === null ? '' : this.state.LastName} />
@@ -175,11 +175,11 @@ class AddUserComponent extends Component {
                         
                             <Col sm="6">
                                 <Form.Group as={Row} controlId="formCompany" >
-                                <Form.Label column sm="12" className='col-form-lbl'>
+                                <Form.Label column sm="12" className='col-form-lbl lbls'>
                                     Company<br />
                                     </Form.Label>
                                     <Col sm="12">
-                                        <Form.Control type="text" placeholder="Company" className='form-cnt'
+                                        <Form.Control type="text" placeholder="Enter Company" className='form-cnt brdrds brds'
                                             name="CompanyName"
                                             onChange={this.handleChange}
                                             value={this.state.CompanyName === null ? '' : this.state.CompanyName} />
@@ -189,11 +189,11 @@ class AddUserComponent extends Component {
 
                             <Col sm="6">
                                 <Form.Group as={Row} controlId="formCountry" >
-                                <Form.Label column sm="12" className='col-form-lbl'>
+                                <Form.Label column sm="12" className='col-form-lbl lbls'>
                                     Country<br />
                                     </Form.Label>
                                     <Col sm="12">
-                                        <Form.Control as="select" className='form-cnt'
+                                        <Form.Control as="select" className='form-cnt brdrds brds'
                                             name="CountryId"
                                             onChange={this.handleChange}
                                             value={this.state.CountryId === null ? '' : this.state.CountryId}>
@@ -220,11 +220,11 @@ class AddUserComponent extends Component {
                         
                             <Col sm="12">
                                 <Form.Group as={Row} controlId="formMobile" className='frmgrp'>
-                                <Form.Label column sm="12" className='col-form-lbl'>
+                                <Form.Label column sm="12" className='col-form-lbl lbls'>
                                     Mobile No.<br />
                                     </Form.Label>
                                     <Col sm="12">
-                                        <Form.Control type="text" placeholder="Mobile No." className='form-cnt'
+                                        <Form.Control type="text" placeholder="Enter Mobile No." className='form-cnt brdrds brds'
                                             name="MobileNo"
                                             onChange={this.handleChange}
                                             value={this.state.MobileNo === null ? '' : this.state.MobileNo} />
@@ -239,7 +239,7 @@ class AddUserComponent extends Component {
                                     Email<br />
                                     </Form.Label>
                                     <Col sm="12">
-                                        <Form.Control type="text" placeholder="Email" className='form-cnt'
+                                        <Form.Control type="text" placeholder="Enter Email" className='form-cnt brdrds brds'
                                             name="EmailId"
                                             onChange={this.handleChange}
                                             value={this.state.EmailId === null ? '' : this.state.EmailId} />
@@ -251,11 +251,11 @@ class AddUserComponent extends Component {
                             <Col sm="6">
 
                                 <Form.Group as={Row} controlId="formReenterEmail">
-                                <Form.Label column sm="12" className='col-form-lbl'>
+                                <Form.Label column sm="12" className='col-form-lbl lbls'>
                                     Confirm Email<br />
                                     </Form.Label>
                                     <Col sm="12">
-                                        <Form.Control type="text" placeholder="Re-Enter Email" className='form-cnt'
+                                        <Form.Control type="text" placeholder="Enter Email Again" className='form-cnt brdrds brds'
                                             name="ReEnterEmail"
                                             onChange={this.handleChange}
                                             value={this.state.ReEnterEmail === null ? '' : this.state.ReEnterEmail} />

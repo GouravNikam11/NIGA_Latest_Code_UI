@@ -67,11 +67,11 @@ class ForgotPassword extends Component {
                     <Form className="mres wid50">
                         <center> <img src="/static/media/logo.fe659025.png" width="240" height="60" alt="Homeo Centrum Logo" /></center>
                         <br></br>  <br></br>
-                        <h4 className="text-center pb-2 clrcode">Forgot Password</h4>
+                        {/* <h4 className="text-center pb-2 clrcode">Forgot Password</h4> */}
                         <FormGroup >
                             <Label className="label" htmlFor="">  Email
                                 <span className="required"> *</span> :</Label>
-                            <Form.Control type="text" placeholder="Enter email"
+                            <Form.Control type="text" placeholder="Enter email" className="brdrds"
                                 name="email"
                                 onChange={this.handleChange}
                                 value={this.state.email === null ? '' : this.state.email} />
