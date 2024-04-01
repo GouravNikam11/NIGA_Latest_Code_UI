@@ -103,7 +103,8 @@ div.sticky {
   .card-basic,
   .card-premium,
   .card-standard,
-  .card-gold {
+  .card-gold,
+  .card-super {
   padding: 0 0 0.5rem 0;
   line-height: 2.5;
   background: #fff;
@@ -119,7 +120,8 @@ div.sticky {
   .card-basic:hover,
   .card-premium:hover,
   .card-standard:hover,
-  .card-gold:hover {
+  .card-gold:hover,
+  .card-super:hover {
   transform: scale(1.02);
   }
 
@@ -152,6 +154,11 @@ div.sticky {
   .header-gold,
   .btn-gold {
   background: linear-gradient(135deg, #eea300, #ee5700);
+  }
+
+  .header-super,
+  .btn-super {
+  background: linear-gradient(135deg, #00ffef, #05742d);
   }
 
   .header-premium,
@@ -205,6 +212,34 @@ div.sticky {
 
   .card-element-hiddens {
   display: none;
+  }
+
+  .fdiv{
+    padding: 5px 5px 5px 15px !important;
+  }
+
+  .sdiv{
+    padding: 5px !important;
+  }
+
+  .tdiv{
+    padding: 5px 15px 5px 5px !important;
+  }
+
+  .cardtextl{
+    position: absolute;
+  }
+
+  .cardsearch{
+    width: 200px !important;
+    float: right;
+    margin-top: -9px;
+    margin-bottom: -9px;
+    margin-right: -18px;
+  }
+
+  .side-navigation-panel-select-option-text{
+    margin-left: 0.5rem !important;
   }
 
 

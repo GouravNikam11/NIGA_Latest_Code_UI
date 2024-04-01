@@ -64,7 +64,7 @@
 }
 
 .header_strip {
-    background: #464a4d none repeat scroll 0 0;
+    background: #132a44 none repeat scroll 0 0;
     color: #fff;
     font: 14px open sans;
     padding: 10px 10px 0;
@@ -310,9 +310,12 @@ hr {
     cursor: pointer !important;
     font-size: 16px;
     color: #6354b1;
-    border: 2px solid;
+    border: 1.5px solid;
     padding: 0px 6px;
     margin: 10px;
+    width: 28px;
+    text-align: center;
+    border-radius: 2px;
 
 }
 
@@ -2355,4 +2358,8 @@ hr {
     padding: 6px;
     border-radius: 4px;
     margin: 0 !important;
+}
+
+.container-fluid{
+    overflow: hidden;
 }

@@ -296,7 +296,7 @@ class SummaryComponent extends React.Component {
             <TabPane tabId={4} >
                 <Row>
                     <Col sm="12" md="12">
-                        <FormGroup row>
+                        <Row>
                             <Col sm="12" md="3">
                                 <Input type="text"
                                     placeholder="Rubric Search..."
@@ -332,11 +332,11 @@ class SummaryComponent extends React.Component {
                                 <Button size="sm" className="btn3" color="primary">FOLLOW UP</Button><span className="numbadge">07</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <Button size="sm" className="btn4" color="primary">5-35 ANALYSIS METHOS &nbsp;<i className="fa fa-angle-down" aria-hidden="true"></i></Button>
                             </Col> */}
-                        </FormGroup>
+                        </Row>
                     </Col>
                 </Row>
                 <Row>
-                    <Col sm="12" md="2">
+                    <Col sm="12" md="2" className="fdiv">
                         <Card>
                             <CardHeader>
                                 <CardText>Sections</CardText>
@@ -378,12 +378,13 @@ class SummaryComponent extends React.Component {
                         </Card>
                     </Col> */}
                     {/* Subsections  */}
-                    <Col sm="12" md="4">
+                    <Col sm="12" md="4" className="sdiv">
                         <Card>
-                            <CardHeader>
-                                <CardText>Sub Sections</CardText>
+                            <CardHeader style={{height: '42px'}}>
+                                <CardText className="cardtextl">Sub Sections</CardText>
                                 {this.state.SelectedSectionId !== 0 && (
                                     <Input type="text"
+                                    className="cardsearch"
                                         placeholder="Sub Sections Search..."
                                         name='searchQuery'
                                         value={this.state.searchQuery2}
@@ -408,7 +409,7 @@ class SummaryComponent extends React.Component {
                         </Card>
                     </Col>
 
-                    <Col sm="12" md="6">
+                    <Col sm="12" md="6" className="tdiv">
                         <Card>
                             <CardHeader>
                                 <CardText>Rubric Details</CardText>

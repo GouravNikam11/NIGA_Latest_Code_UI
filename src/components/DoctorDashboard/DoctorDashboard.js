@@ -45,7 +45,8 @@ class DoctorDashboard extends React.Component {
             appointmentCount: '',
             Appdate: new Date(),
             IsDataFetched: false,
-            toggleOrderModel: !JSON.parse(localStorage.getItem("isPlanActive")),
+            toggleOrderModel: null,
+            // toggleOrderModel: !JSON.parse(localStorage.getItem("isPlanActive")),
             isLastFiveDaysRemaining: JSON.parse(localStorage.getItem("islastFiveDays")),
             packageId: 0,
             packageName: '',
@@ -385,10 +386,10 @@ class DoctorDashboard extends React.Component {
                                         {this.state.ListSubcription.map((variant, idx) => (
 
                                           
-                                            // card-trial, card-basic, card-standard, card-gold, card-premium
-                                            // header-trial, header-basic, header-standard, header-gold, header-premium
-                                            // card-element-hiddens-trial, card-element-hiddens-basic, card-element-hiddens-standard, card-element-hiddens-gold, card-element-hiddens-premium
-                                            // btn-trial, btn-basic, btn-standard, btn-gold, btn-premium
+                                            // card-trial, card-basic, card-standard, card-gold, card-premium, card-super
+                                            // header-trial, header-basic, header-standard, header-gold, header-premium, header-super
+                                            // card-element-hiddens-trial, card-element-hiddens-basic, card-element-hiddens-standard, card-element-hiddens-gold, card-element-hiddens-premium, card-element-hiddens-super
+                                            // btn-trial, btn-basic, btn-standard, btn-gold, btn-premium, btn-super
 
 
                                             <Col xs="12" md="4">

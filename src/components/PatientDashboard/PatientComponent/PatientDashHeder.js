@@ -64,7 +64,7 @@ const PatientDashHeder = ({ patient }) => {
                 <Container className="mxwidth">
                     <Row style={{ marginLeft: "-30px", marginRight: "-30px" }}>
                         <Col md="5" sm="12" xs="12" >
-                            <a href="#" className="profile-text">{patient.patientName}</a><span>&nbsp;&nbsp;</span>
+                            <a href="#" className="profile-text">&nbsp;&nbsp;{patient.patientName}</a><span>&nbsp;&nbsp;</span>
                             <p className="profile-info">
                                 {`${moment().diff(patient.dateOfBirth, "years")}/${patient.gender == 0 ? "M" : "F"} | ${patient.mobileNo}`} <span className="profile-date">{day} {month} {year}</span>
                             </p>

@@ -275,7 +275,7 @@ class PatientDashboard extends React.Component {
                 return (
                     <NavLink
                         className={classnames({ active: this.state.activeTab === tab.tabId })}
-                        style={{ backgroundColor: "#20a8d8", color: "white" }}
+                        style={{ backgroundColor: "#20a8d8", color: "white", position:"absolute", right:"232px"}}
                         onClick={() => {
                             this.toggle(tab.tabId);
                             store.dispatch({ type: 'SET_CHILD_OPTION', payload: {} });
@@ -283,7 +283,7 @@ class PatientDashboard extends React.Component {
                             store.dispatch({ type: 'SHOW_LAB_IMAGING', payload: false });
                             store.dispatch({ type: 'SHOW_ADD_APPOINTMENT', payload: false });
                         }} >
-                        {tab.tabName} <span className="numbadge1">{this.props.state.selectedRubrics.length}</span>
+                        &nbsp;&nbsp;<i className="fa fa-line-chart"></i>&nbsp;&nbsp;{tab.tabName} <span className="numbadge1">{this.props.state.selectedRubrics.length}</span>
                     </NavLink>
                 )
             }
@@ -291,7 +291,7 @@ class PatientDashboard extends React.Component {
                 return (
                     <NavLink
                         className={classnames({ active: this.state.activeTab === tab.tabId })}
-                        style={{ backgroundColor: "#268026", color: "white" }}
+                        style={{ backgroundColor: "#268026", color: "white", position:"absolute", right:"116px", }}
                         onClick={() => {
                             this.toggle(tab.tabId);
                             store.dispatch({ type: 'SET_CHILD_OPTION', payload: {} });
@@ -299,7 +299,7 @@ class PatientDashboard extends React.Component {
                             store.dispatch({ type: 'SHOW_LAB_IMAGING', payload: false });
                             store.dispatch({ type: 'SHOW_ADD_APPOINTMENT', payload: false });
                         }} >
-                        {tab.tabName} <span className="numbadge1">11</span>
+                        &nbsp;&nbsp;<i className="fa fa-repeat"></i>&nbsp;&nbsp;{tab.tabName} <span className="numbadge1">11</span>
                     </NavLink>
                 )
             }
@@ -307,7 +307,7 @@ class PatientDashboard extends React.Component {
                 return (
                     <NavLink
                         className={classnames({ active: this.state.activeTab === tab.tabId })}
-                        style={{ backgroundColor: "#c3b20a", color: "white" }}
+                        style={{ backgroundColor: "#c3b20a", color: "white", position:"absolute", right:"4px" }}
                         onClick={() => {
                             this.toggle(tab.tabId);
                             store.dispatch({ type: 'SET_CHILD_OPTION', payload: {} });
@@ -315,7 +315,7 @@ class PatientDashboard extends React.Component {
                             store.dispatch({ type: 'SHOW_LAB_IMAGING', payload: false });
                             store.dispatch({ type: 'SHOW_ADD_APPOINTMENT', payload: false });
                         }} >
-                        {tab.tabName} <span className="numbadge1">07</span>
+                        &nbsp;&nbsp;<i className="fa fa-file-text-o"></i>&nbsp;&nbsp;{tab.tabName} <span className="numbadge1">07</span>
                     </NavLink>
                 )
             }
@@ -323,7 +323,7 @@ class PatientDashboard extends React.Component {
                 return (
                     <NavLink
                         className={classnames({ active: this.state.activeTab === tab.tabId })}
-                        style={{ backgroundColor: "#224285", color: "white" }}
+                        style={{ backgroundColor: "#224285", color: "white"}}
                         onClick={() => {
                             this.toggle(tab.tabId);
                             store.dispatch({ type: 'SET_CHILD_OPTION', payload: {} });

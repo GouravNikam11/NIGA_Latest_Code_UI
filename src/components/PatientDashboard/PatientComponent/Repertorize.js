@@ -801,7 +801,7 @@ class RepertorizePage extends React.Component {
 
         let authourList = this.state.authourList;
         return authourList.map((author, index) => (
-            <Tab eventKey={author.authorId} title={author.authorName} style={{ overflowY: 'scroll' }}>
+            <Tab eventKey={author.authorId} title={author.authorName} style={{ overflowY: 'scroll', height: '370px' }}>
                 {/* <span className="divdet">Heading | (Score) | Remedy Name</span> */}
                 {this.renderTabContent()}
             </Tab>
