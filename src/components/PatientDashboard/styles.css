@@ -2361,5 +2361,5 @@ hr {
 }
 
 .container-fluid{
-    overflow: hidden;
+    /* overflow: hidden; */
 }
