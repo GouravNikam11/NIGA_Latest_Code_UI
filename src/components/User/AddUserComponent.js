@@ -235,7 +235,7 @@ class AddUserComponent extends Component {
                             <Col sm="6">
 
                                 <Form.Group as={Row} controlId="formEmail">
-                                <Form.Label column sm="12" className='col-form-lbl'>
+                                <Form.Label column sm="12" className='col-form-lbl lbls'>
                                     Email<br />
                                     </Form.Label>
                                     <Col sm="12">
