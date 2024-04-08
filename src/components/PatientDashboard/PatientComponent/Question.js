@@ -415,47 +415,49 @@ class ClinicalSummary extends React.Component {
 
                 <Row className="mt-2">
                     <Col md="12">
-                        <div responsive="true" className="divst0 table-responsive" style={{ overflowY: 'scroll', }}>
+                        <div responsive="true" className="divst0 table-responsive" style={{ overflowY: 'scroll', overflowX: 'hidden' }}>
                             <span size="sm" style={{ color: '#08478c', fontWeight: '700' }}>RUBRICS : </span>
-                            <table class="table table-hover mt-2">
-                                <tr class="rubric" >
-                                    {
-                                        this.state.QuestionORBodyPartRubric?.map((s, index) => {
-                                            const { Intensities } = this.props.intensity;
-                                            return <td key={index}><i className="fa fa-angle-double-right" aria-hidden="true"></i> &nbsp;
-                                                <span className='rubnm'
-                                                    onClick={() => {
-                                                        console.log(s)
-                                                        this.toggleOrderModal(); // Calling the first method
-                                                        this.popup(s);   // Calling the second method
-                                                    }}>{s.subsectionName}</span>
-                                                {/*   <button class="btn-clipboard" id="10">0</button>
-                                                <button class="btn-clipboard" id="11">1</button>
-                                                <button class="btn-clipboard" id="12">2</button>
-                                                <button class="btn-clipboard" id="13">3</button>
-                                                <button class="btn-clipboard" id="14">4</button> */}
-                                                {Intensities.map((intensity, index) => {
-                                                    let id = `${s.subsectionId}${intensity.intensityNo}`;
-                                                    return (
-                                                        <button
-                                                            className="btn-clipboard1"
-                                                            id={`${s.subsectionId}${s.intensityNo}`}
-                                                            style={{ backgroundColor: id === this.state.id ? "green" : "" }}
-                                                            // onClick={() => this.updateIntensity(rubric.subSectionId, intensity.intensityNo)}
-                                                            onClick={() => this.selectRubrics(s, intensity.intensityNo, id)}
-                                                        >
-                                                            {intensity.intensityNo}
-                                                        </button>
-                                                    )
-                                                })
-                                                }
-                                            </td>
-                                        })
-                                    }
-                                </tr>
-
-
-                            </table>
+                            
+                            <div class="row">
+                                
+                                        {
+                                            this.state.QuestionORBodyPartRubric?.map((s, index) => {
+                                                const { Intensities } = this.props.intensity;
+                                                return  <div class="col-md-4"> <table class="table table-hover mt-2"><tr class="rubric" > <td key={index}><i className="fa fa-angle-double-right" aria-hidden="true"></i> &nbsp;
+                                                            <span className='rubnm'
+                                                            onClick={() => {
+                                                                console.log(s)
+                                                                this.toggleOrderModal(); // Calling the first method
+                                                                this.popup(s);   // Calling the second method
+                                                            }}>{s.subsectionName}</span>
+                                                            {/*   <button class="btn-clipboard" id="10">0</button>
+                                                            <button class="btn-clipboard" id="11">1</button>
+                                                            <button class="btn-clipboard" id="12">2</button>
+                                                            <button class="btn-clipboard" id="13">3</button>
+                                                            <button class="btn-clipboard" id="14">4</button> */}
+                                                            {Intensities.map((intensity, index) => {
+                                                                let id = `${s.subsectionId}${intensity.intensityNo}`;
+                                                                return (
+                                                                    <button
+                                                                        className="btn-clipboard1"
+                                                                        id={`${s.subsectionId}${s.intensityNo}`}
+                                                                        style={{ backgroundColor: id === this.state.id ? "green" : "" }}
+                                                                        // onClick={() => this.updateIntensity(rubric.subSectionId, intensity.intensityNo)}
+                                                                        onClick={() => this.selectRubrics(s, intensity.intensityNo, id)}
+                                                                    >
+                                                                        {intensity.intensityNo}
+                                                                    </button>
+                                                                )
+                                                            })
+                                                            }
+                                                            </td>
+                                                            </tr>
+                                                            </table>
+                                                        </div> 
+                                            })
+                                        }
+                
+                            </div>
                         </div>
                     </Col>
                 </Row>
