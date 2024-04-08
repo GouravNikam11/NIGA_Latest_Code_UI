@@ -264,3 +264,12 @@ textarea{
   min-width: 50% !important;
   padding: 5px 20px !important;
 }
+
+.popup-img-avatar{
+  max-width: 50px !important;
+  float: right !important;
+}
+
+.dropmenu{
+  margin-top: 0px !important;
+}

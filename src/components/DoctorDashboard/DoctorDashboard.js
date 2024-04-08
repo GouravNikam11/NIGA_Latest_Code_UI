@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux"
 import CommonServices from '../../Services/CommonServices';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import {
     enqueueSnackbar as enqueueSnackbarAction,
     closeSnackbar
@@ -21,7 +21,9 @@ import {
     ModalHeader,
     ModalBody,
     ModalFooter,
+    UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, Badge
 } from 'reactstrap';
+import avtr from '../../assets/img/avatars/users.jpg'
 import './styles.css'
 import { DatePickerInput } from "rc-datepicker";
 import 'rc-datepicker/lib/style.css';
@@ -46,7 +48,7 @@ class DoctorDashboard extends React.Component {
             Appdate: new Date(),
             IsDataFetched: false,
             toggleOrderModel: null,
-            // toggleOrderModel: !JSON.parse(localStorage.getItem("isPlanActive")),
+            toggleOrderModel: !JSON.parse(localStorage.getItem("isPlanActive")),
             isLastFiveDaysRemaining: JSON.parse(localStorage.getItem("islastFiveDays")),
             packageId: 0,
             packageName: '',
@@ -110,7 +112,7 @@ class DoctorDashboard extends React.Component {
         })
 
         CommonServices.postData({
-            "amount": 1,
+            "amount": variant.amount,
             "currency": "INR",
             "receipt": "order_rcptid_11",
             "paymentCapture": 1
@@ -125,22 +127,22 @@ class DoctorDashboard extends React.Component {
                     // Initialize Razorpay
                     const razorpay = new window.Razorpay({
                         key: 'rzp_live_WSDlLVrcCPFbEQ',
-                        amount: 1 * 100,
+                        amount: variant.amount * 100,
                         name: 'Homeo Centrum',
                         description: 'Payment For Docter Subscription',
                         order_id: result.data.orderId,
                         //image: '/your_logo.png',
                         handler: this.handlePaymentSuccess,
                         prefill: {
-                            name: 'John Doe',
-                            email: 'john@example.com',
-                            contact: '9876543210'
+                            name: localStorage.getItem("UserName"),
+                            email: 'nigahomeocentrum@gmail.com',
+                            contact: '9730596019'
                         },
                         notes: {
-                            address: '123, Main Street, City, Country'
+                            address: 'NIGA HOMEOPATHY, Bagechiwadi,B6 Ramkali, Sangram Nagar Malshiras Road Akluj.'
                         },
                         theme: {
-                            color: '#F37254'
+                            color: '#012652'
                         }
                     });
 
@@ -207,6 +209,12 @@ class DoctorDashboard extends React.Component {
 
         })
     };
+
+    Logout(e) {
+        // e.preventDefault()
+        localStorage.clear();
+        this.props.history.push('/login')
+    }
 
     render() {
         debugger;
@@ -375,69 +383,107 @@ class DoctorDashboard extends React.Component {
                     <div className="col-sm-1"></div>
                 </div>
 
-                <Modal backdrop="static" size="xl" isOpen={this.state.toggleOrderModel} toggle={this.toggleOrderModal.bind(this)} >
+                <Modal backdrop="static" size="xl" isOpen={this.state.toggleOrderModel}
+                    toggle={this.toggleOrderModal.bind(this)} >
+                    <div className="gfdhg">
+
+                        <Nav className="ml-autos w-100" navbar>
+
+                            <UncontrolledDropdown nav direction="down">
+                                <DropdownToggle nav>
+                                    <Row>
+                                        <Col md="3">
+                                        </Col>
+                                        <Col md="6">
+                                            <h2 class="mb-3 text-center mt-3">Choose Your Subscription</h2>
+                                        </Col>
+                                        <Col md="3">
+                                            <img src={avtr} className="img-avatar popup-img-avatar" alt="img" />
+                                        </Col>
+                                    </Row>
+
+
+                                </DropdownToggle>
+                                <DropdownMenu right className="dropmenu">
+                                    {/* <DropdownItem><i className="fa fa-user"></i> Profile</DropdownItem>
+                                    <DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem> */}
+                                    <DropdownItem onClick={() => this.Logout()}><i className="fa fa-lock"></i> Logout</DropdownItem>
+                                </DropdownMenu>
+                            </UncontrolledDropdown>
+
+                        </Nav>
+
+                    </div>
                     <ModalBody>
                         <div >
                             {/* <CardHeader>Subscriptions</CardHeader> */}
-                            <center><h2 class="mb-3">Choose Your Subscription</h2></center>
+
                             <div>
                                 <Form className="form-horizontal">
-                                    <Row >
-                                        {this.state.ListSubcription.map((variant, idx) => (
+                                    <Row>
+                                        {this.state.ListSubcription?.map((variant, idx) => {
+                                            let cardClass = '';
+                                            let headerClass = '';
+                                            let buttonClass = '';
 
-                                          
-                                            // card-trial, card-basic, card-standard, card-gold, card-premium, card-super
-                                            // header-trial, header-basic, header-standard, header-gold, header-premium, header-super
-                                            // card-element-hiddens-trial, card-element-hiddens-basic, card-element-hiddens-standard, card-element-hiddens-gold, card-element-hiddens-premium, card-element-hiddens-super
-                                            // btn-trial, btn-basic, btn-standard, btn-gold, btn-premium, btn-super
+                                            // Map package names to CSS classes
+                                            switch (variant.packageName.toLowerCase()) {
+                                                case "9 days":
+                                                    cardClass = 'card-trial';
+                                                    headerClass = 'header-trial';
+                                                    buttonClass = 'btn-trial';
+                                                    break;
+                                                case "1 month":
+                                                    cardClass = 'card-basic';
+                                                    headerClass = 'header-basic';
+                                                    buttonClass = 'btn-basic';
+                                                    break;
+                                                case "3 months":
+                                                    cardClass = 'card-standard';
+                                                    headerClass = 'header-standard';
+                                                    buttonClass = 'btn-standard';
+                                                    break;
+                                                case "6 months":
+                                                    cardClass = 'card-gold';
+                                                    headerClass = 'header-gold';
+                                                    buttonClass = 'btn-gold';
+                                                    break;
+                                                case "1 year":
+                                                    cardClass = 'card-premium';
+                                                    headerClass = 'header-premium';
+                                                    buttonClass = 'btn-premium';
+                                                    break;
+                                                case "5 year":
+                                                    cardClass = 'card-super'; // Assuming 5 year is same as 6 months
+                                                    headerClass = 'header-super';
+                                                    buttonClass = 'btn-super';
+                                                    break;
+                                                default:
+                                                    break;
+                                            }
 
-
-                                            <Col xs="12" md="4">
-
-                                                <div class="col-md-12 ">
-                                                    <div class="card-trial">
-                                                        <div class="card-headers header-trial">
-                                                        <h3 class="card-titles">{variant.packageName}</h3>
+                                            return (
+                                                <Col xs="12" md="2" key={idx}>
+                                                    <div className={` ${cardClass}`}>
+                                                        <div className={`card-headers ${headerClass}`}>
+                                                            <h3 className="card-titles">{variant.packageName}</h3>
                                                         </div>
-                                                        <div class="card-bodys">
-                                                        <h2 class="mb-2">₹ {variant.amount} /-</h2>
-                                                        <div class="card-element-hiddens-trial">
-                                                            <ul class="card-element-containers">
-                                                                <li class="card-elements"><b>{variant.validityInDays}</b> Days Validity</li>
-                                                                <li class="card-elements"><b>{variant.caseCount}</b> No. of Cases *</li>
-                                                                <li class="card-elements"><b>1</b> Logins *</li>
-                                                                <li class="card-elements">Include <b>All</b> Modules *</li>
-                                                            </ul>
-                                                            <Button className="btns btn-trial" onClick={() => this.OnBuyClick(variant)}>Buy Now</Button>
-                                                        </div>
+                                                        <div className="card-bodys">
+                                                            <h2 className="mb-2">₹ {variant.amount} /-</h2>
+                                                            <div className={`card-element-hiddens-${cardClass}`}>
+                                                                <ul className="card-element-containers">
+                                                                    <li className="card-elements">Validity <b>{variant.validityInDays}</b> Days</li>
+                                                                    <li className="card-elements"><b>Unlimited</b> Cases*</li>
+                                                                    <li className="card-elements"><b>Single</b> Login*</li>
+                                                                    <li className="card-elements"><b>Including </b> All Modules*</li>
+                                                                </ul>
+                                                                <Button className={`btns ${buttonClass}`} onClick={() => this.OnBuyClick(variant)}>Buy Now</Button>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-
-
-                                                {/* <Row >
-                                                    <div class="col-md-12">
-                                                        <div class="orange-moon" >
-                                                            <h3 class="pcknm">{variant.packageName}</h3>
-
-                                                            <div class="text-center">
-                                                                <i class="fa fa-rupee pckrp" > </i> <span class="pckvl">{variant.amount} /-</span>
-                                                            </div>
-
-                                                            <Label className="pcklbl"> <i class="fa fa-check-circle chkcrl"></i> Case Count : {variant.caseCount} </Label>
-
-                                                            <Label className="pcklbl"> <i class="fa fa-check-circle chkcrl"></i> Validation : {variant.validityInDays} Days</Label>
-
-                                                            <div class="text-center">
-                                                                <Button className='pckbtn' size="lg" onClick={() => this.OnBuyClick(variant)}> BUY NOW </Button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </Row> */}
-                                            </Col>
-
-                                        ))}
+                                                </Col>
+                                            );
+                                        })}
                                     </Row>
                                 </Form>
 
@@ -460,7 +506,7 @@ class DoctorDashboard extends React.Component {
                         <Card >
                             <CardHeader>Subscriptions</CardHeader>
                             <CardBody>
-                                5 Days Remain for expairation
+                          <center><b> Your subscription will expire after 5 days. Please buy new subscription to continue your valuable practice.</b></center>
                             </CardBody>
                             <CardFooter>
                                 <Row>
@@ -474,6 +520,9 @@ class DoctorDashboard extends React.Component {
                             </CardFooter>
                         </Card>
                     </ModalBody>
+                    <ModalFooter>
+                        <Button color="danger" onClick={this.toggleSubscriptionEndAlertModal.bind(this)}><i className="fa fa-ban"></i> Cancel</Button>
+                    </ModalFooter>
                 </Modal>
             </div>
         )

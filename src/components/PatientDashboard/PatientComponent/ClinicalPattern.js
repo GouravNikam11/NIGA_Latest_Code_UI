@@ -780,8 +780,8 @@ class HomeComponent extends React.Component {
         this.state.isRemedyLoad = false
 
         console.log('item == ', item)
-
-        CommonServices.getDataById(parseInt(item.subSectionID), `/RubricRemedy/GetRubricDetails`).then((temp) => {
+        
+        CommonServices.getDataById(parseInt(item.subSectionId === undefined ? item.subSectionID === undefined ? item.subsectionId : item.subSectionID : item.subSectionId), `/RubricRemedy/GetRubricDetails`).then((temp) => {
             console.log("rubric details t===", temp)
             temp.subSectionLanguageDetails.forEach((item) => {
                 if (item.languageName.trim() === "English") {
