@@ -277,7 +277,8 @@ class Prescription extends React.Component {
                 let obj = {
                     // "prescriptionRubricId": 0,
                     // "prescriptionRubricId": null,
-                    "rubricId": element.subSectionId,
+                    "rubricId": element.subSectionId === undefined ? element.subSectionID === undefined ? 
+                    element.subsectionId : element.subSectionID : element.subSectionId,
                     "intensityId": element.intensity,
                     "remedyCount": element.remedyCount.remedyCount,
                 }

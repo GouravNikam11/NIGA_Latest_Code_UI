@@ -180,6 +180,7 @@ export class ViewRemedialRubricsComponent extends Component {
      * Get Remedy Details
      */
     GetRemedyDetails = remedyId => {
+      
         CommonServices.getDataById(remedyId, `/RubricRemedy/GetRubricRemedyDetails`).then((result) => {
             debugger;
             console.log("/RubricRemedy/GetRubricRemedyDetails",result)

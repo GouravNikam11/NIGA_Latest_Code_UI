@@ -8,6 +8,7 @@ import {
     closeSnackbar
 } from '../../store/actions/notification';
 import Pagination from "react-js-pagination";
+import { Input } from 'reactstrap';
 class AuthorListComponent extends Component {
     constructor(props) {
         super(props)
@@ -21,6 +22,7 @@ class AuthorListComponent extends Component {
             DeleteStatus: false,
             currentPage: 1,
             pageSize: 10,
+            searchQuery:"",
         }
     }
 
@@ -64,12 +66,21 @@ class AuthorListComponent extends Component {
                 //         currentPage:pageNumber
                 //     })
                 // }}
-                onChange={(pageNumber) => { this.getListAuthor(pageNumber) }}
+                onChange={(pageNumber) => { this.getListAuthor(pageNumber,this.state.searchQuery) }}
             />
         )
     }
 
-
+    handleSearch = (e) => {
+        // console.log('handleChangeforsearch===', event.target.value)
+        // const searchQuery = event.target.value;
+        // this.setState({ searchQuery });
+        this.setState({
+            searchQuery: e.target.value,
+            ListAuthor: [],
+        })
+        this.getListAuthor(1,e.target.value);
+    }
 
     render() {
         return (
@@ -82,6 +93,14 @@ class AuthorListComponent extends Component {
                     Add Author 
                     </Button>
                 </Link>
+
+                <Col sm="5">
+                    <Input 
+                       type="text"
+                       placeholder="Search by diagnosis name..."
+                       value={this.state.searchQuery}
+                       onChange={this.handleSearch}/>
+                </Col>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
@@ -107,10 +126,11 @@ class AuthorListComponent extends Component {
     componentDidMount() {
         this.getListAuthor(1);
     }
-    getListAuthor(pageNumber) {
+    getListAuthor(pageNumber,searchQuery) {
         // CommonServices.getData(`/Author`).then((temp) => {
-            CommonServices.getData(`/Pagination/GetAuthor?PageNumber=${pageNumber}&PageSize=${this.state.pageSize}`).then((temp) => {
+            CommonServices.getData(`/Pagination/GetAuthor?${searchQuery ? `queryString=${searchQuery}` : ''}&PageNumber=${pageNumber}&PageSize=${this.state.pageSize}`).then((temp) => {
                 this.state.currentPage = pageNumber
+               
             this.setState({
                 ListAuthor: temp,
             })

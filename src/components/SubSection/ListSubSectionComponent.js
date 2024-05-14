@@ -30,7 +30,7 @@ export class ListSubSectionComponent extends Component {
             isddlSearchLoading: true,
             searchSectionId: 0,
             currentPage: 1,
-            pageSize: 10,
+            pageSize: 25,
             searchQuery: '',
         }
         this.handleChange = this.handleChange.bind(this);
@@ -149,7 +149,8 @@ export class ListSubSectionComponent extends Component {
                 activePage={this.state.currentPage}
                 itemsCountPerPage={this.state.pageSize}
                 totalItemsCount={totalRecords}
-                pageRangeDisplayed={this.state.pageSize}
+               // pageRangeDisplayed={this.state.pageSize}
+                pageRangeDisplayed={20}
                 // onChange={this.getSubSection(pageNumber)}
                 onChange={(pageNumber) => { this.getSubSection(pageNumber, this.state.searchQuery) }}
             />

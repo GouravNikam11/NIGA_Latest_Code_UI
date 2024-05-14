@@ -177,8 +177,7 @@ export class ListDiagnosisComponent extends Component {
         // CommonServices.getData(`/diagnosis/GetDiagnosis`).then((temp) => {
             CommonServices.getData(`/Pagination/GetDiagnosis?${searchQuery ? `queryString=${searchQuery}` : ''}&PageNumber=${pageNumber}&PageSize=${this.state.pageSize}`).then((temp) => {  
                 this.state.currentPage = pageNumber
-            console.log(temp);
-            debugger;
+           
             this.setState({
                 diagnosisList: temp,
             })

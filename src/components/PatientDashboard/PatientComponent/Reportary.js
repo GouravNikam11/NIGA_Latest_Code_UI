@@ -150,7 +150,7 @@ class SummaryComponent extends React.Component {
     renderSections = () => {
 
         const { sections } = this.props.state;
-        console.log('sections========', sections)
+       // console.log('sections========', sections)
         if (!sections?.length) {
             return null;
         }
@@ -386,7 +386,7 @@ class SummaryComponent extends React.Component {
                                     <Input type="text"
                                     className="cardsearch"
                                         placeholder="Sub Sections Search..."
-                                        name='searchQuery'
+                                        name='searchQuery2'
                                         value={this.state.searchQuery2}
                                         onChange={this.handleChangeSubSection.bind(this)}
                                     />
@@ -842,6 +842,8 @@ class SummaryComponent extends React.Component {
         this.state.currentPage = pageNumber
         this.state.SubSectionList = []
         CommonServices.getData(`/Pagination/GetSubsectionBySectionIdOrQueryString?sectionId=${this.state.SelectedSectionId}${searchQuery ? `&queryString=${searchQuery}` : ''}&PageNumber=${pageNumber}&PageSize=${this.state.pageSize}`).then((temp) => {
+            console.log("searchq2=========",temp)
+            this.state.currentPage = pageNumber
             this.setState({
                 SubSectionList: temp,
                 isLoading: false
@@ -919,7 +921,7 @@ class SummaryComponent extends React.Component {
                 // onChange={(pageNumber) => {
                 //     this.setState({ currentPage: pageNumber });
                 // }}
-                onChange={(pageNumber) => { this.GetSubSection(pageNumber, this.state.searchQuery, this.state.SelectedSectionId) }}
+                onChange={(pageNumber) => { this.GetSubSection(pageNumber, this.state.searchQuery2 ==''? this.state.searchQuery :this.state.searchQuery2, this.state.SelectedSectionId) }}
             />
         );
     }
