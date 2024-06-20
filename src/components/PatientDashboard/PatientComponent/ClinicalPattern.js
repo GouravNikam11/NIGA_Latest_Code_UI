@@ -630,24 +630,38 @@ class HomeComponent extends React.Component {
                                                                                                 return  */}
                                                                                                     {/* <span > */}
                                                                                                     {/* <Link to={`/PatientDashboard/${this.props.patientId}/${this.props.caseId}/${this.props.patientAppId}/${this.props.doctorId}/${NewTab}`} */}
+
+
                                                                                                     <Link to={`#`}
-                                                                                                        style={{
-                                                                                                            // fontFamily: item.fontName,
-                                                                                                            color: item.fontColor,
-                                                                                                            fontStyle: item.fontStyle,
-                                                                                                            textDecoration: 'none',
-                                                                                                            cursor: 'pointer',
-                                                                                                        }}>
-                                                                                                        <span onClick={() => this.handlePopuptoMM(item.remedyId)}>
+                                                                                                    // style={{
+                                                                                                    //      fontFamily: item.fontName,
+                                                                                                    //     color: item.fontColor,
+                                                                                                    //     fontStyle: item.fontStyle,
+                                                                                                    //     textDecoration: 'none',
+                                                                                                    //     cursor: 'pointer',
+                                                                                                    // }}
+
+                                                                                                    >
+                                                                                                        <span onClick={() => this.handleAddRubricClick(item.remedyId)}>
                                                                                                             {/* {item.remedyAlias} */}
-                                                                                                            {item.fontColor === 'Red'
-                                                                                                                ? item.remedyAlias.toUpperCase()
-                                                                                                                : item.remedyAlias}
-                                                                                                            {this.state.ShowAuthorAlias && `(${item.authorAlias}),`}
+                                                                                                            <span className={item.gradeNo == 1 ? 'grade1css' : item.gradeNo == 2 ? 'grade2css' : item.gradeNo == 3 ? 'grade3css' : item.gradeNo == 4 && 'grade4css'}>
+                                                                                                                {item.fontColor === 'Red'
+                                                                                                                    ? item.remedyAlias.toUpperCase()
+                                                                                                                    : item.remedyAlias}
+                                                                                                            </span>
+
+                                                                                                            {/* {this.state.ShowAuthorAlias && `(${item.authorAlias}),`} */}
+                                                                                                            {this.state.ShowAuthorAlias && (
+                                                                                                                <span style={{ color: 'black', font: 'small-caption' }}>
+                                                                                                                    ({item.authorAlias}),
+                                                                                                                </span>
+                                                                                                            )}
                                                                                                             {this.state.showInfoIcon &&
                                                                                                                 <span className='hover-text3'>
-                                                                                                                    <i class="fa fa-info" aria-hidden="true" style={{ marginLeft: 10, }}></i>
+                                                                                                                    <i class="fa fa-info" aria-hidden="true" style={{ marginLeft: 10, color: 'black' }}></i>
                                                                                                                     <div class="tooltip-text3">
+                                                                                                                        {/* Themes OR Characteristics:{item.themesORCharacteristics} Generals:{item.generals}
+                                                                                    Modalities:{item.modalities}  Particulars:{item.particulars} */}
                                                                                                                         <strong>Themes/Characteristics : </strong> {item.themesORCharacteristics} <br></br><br></br>
                                                                                                                         <strong class="mt-2">Generals : </strong> {item.generals} <br></br><br></br>
                                                                                                                         <strong class="mt-2">Modalities : </strong> {item.modalities} <br></br><br></br>
@@ -655,6 +669,7 @@ class HomeComponent extends React.Component {
 
                                                                                                                     </div>
                                                                                                                 </span>}
+
                                                                                                         </span>
                                                                                                     </Link>
                                                                                                     {/* </span> */}
@@ -780,7 +795,7 @@ class HomeComponent extends React.Component {
         this.state.isRemedyLoad = false
 
         console.log('item == ', item)
-        
+
         CommonServices.getDataById(parseInt(item.subSectionId === undefined ? item.subSectionID === undefined ? item.subsectionId : item.subSectionID : item.subSectionId), `/RubricRemedy/GetRubricDetails`).then((temp) => {
             console.log("rubric details t===", temp)
             temp.subSectionLanguageDetails.forEach((item) => {

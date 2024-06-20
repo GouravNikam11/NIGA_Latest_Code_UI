@@ -150,7 +150,7 @@ class SummaryComponent extends React.Component {
     renderSections = () => {
 
         const { sections } = this.props.state;
-       // console.log('sections========', sections)
+        // console.log('sections========', sections)
         if (!sections?.length) {
             return null;
         }
@@ -380,11 +380,11 @@ class SummaryComponent extends React.Component {
                     {/* Subsections  */}
                     <Col sm="12" md="4" className="sdiv">
                         <Card>
-                            <CardHeader style={{height: '42px'}}>
+                            <CardHeader style={{ height: '42px' }}>
                                 <CardText className="cardtextl">Sub Sections</CardText>
                                 {this.state.SelectedSectionId !== 0 && (
                                     <Input type="text"
-                                    className="cardsearch"
+                                        className="cardsearch"
                                         placeholder="Sub Sections Search..."
                                         name='searchQuery2'
                                         value={this.state.searchQuery2}
@@ -513,22 +513,32 @@ class SummaryComponent extends React.Component {
                                                                 {/* <span > */}
                                                                 {/* <Link to={`/PatientDashboard/${this.props.patientId}/${this.props.caseId}/${this.props.patientAppId}/${this.props.doctorId}/${NewTab}`} */}
                                                                 <Link to={`#`}
-                                                                    style={{
-                                                                        // fontFamily: item.fontName,
-                                                                        color: item.fontColor,
-                                                                        fontStyle: item.fontStyle,
-                                                                        textDecoration: 'none',
-                                                                        cursor: 'pointer',
-                                                                    }}>
+                                                                    // style={{
+                                                                    //      fontFamily: item.fontName,
+                                                                    //     color: item.fontColor,
+                                                                    //     fontStyle: item.fontStyle,
+                                                                    //     textDecoration: 'none',
+                                                                    //     cursor: 'pointer',
+                                                                    // }}
+                                                                    
+                                                                >
                                                                     <span onClick={() => this.handleAddRubricClick(item.remedyId)}>
                                                                         {/* {item.remedyAlias} */}
+                                                                        <span  className={item.gradeNo == 1 ? 'grade1css' : item.gradeNo == 2 ? 'grade2css' : item.gradeNo == 3 ? 'grade3css' : item.gradeNo == 4 && 'grade4css'}>
                                                                         {item.fontColor === 'Red'
                                                                             ? item.remedyAlias.toUpperCase()
                                                                             : item.remedyAlias}
-                                                                        {this.state.ShowAuthorAlias && `(${item.authorAlias}),`}
+                                                                        </span>
+                                                                        
+                                                                        {/* {this.state.ShowAuthorAlias && `(${item.authorAlias}),`} */}
+                                                                        {this.state.ShowAuthorAlias && (
+                                                                            <span style={{ color: 'black' , font:'small-caption' }}>
+                                                                                ({item.authorAlias}),
+                                                                            </span>
+                                                                        )}
                                                                         {this.state.showInfoIcon &&
                                                                             <span className='hover-text3'>
-                                                                                <i class="fa fa-info" aria-hidden="true" style={{ marginLeft: 10, }}></i>
+                                                                                <i class="fa fa-info" aria-hidden="true" style={{ marginLeft: 10, color: 'black' }}></i>
                                                                                 <div class="tooltip-text3">
                                                                                     {/* Themes OR Characteristics:{item.themesORCharacteristics} Generals:{item.generals}
                                                                                     Modalities:{item.modalities}  Particulars:{item.particulars} */}
@@ -842,7 +852,7 @@ class SummaryComponent extends React.Component {
         this.state.currentPage = pageNumber
         this.state.SubSectionList = []
         CommonServices.getData(`/Pagination/GetSubsectionBySectionIdOrQueryString?sectionId=${this.state.SelectedSectionId}${searchQuery ? `&queryString=${searchQuery}` : ''}&PageNumber=${pageNumber}&PageSize=${this.state.pageSize}`).then((temp) => {
-            console.log("searchq2=========",temp)
+            console.log("searchq2=========", temp)
             this.state.currentPage = pageNumber
             this.setState({
                 SubSectionList: temp,
@@ -921,7 +931,7 @@ class SummaryComponent extends React.Component {
                 // onChange={(pageNumber) => {
                 //     this.setState({ currentPage: pageNumber });
                 // }}
-                onChange={(pageNumber) => { this.GetSubSection(pageNumber, this.state.searchQuery2 ==''? this.state.searchQuery :this.state.searchQuery2, this.state.SelectedSectionId) }}
+                onChange={(pageNumber) => { this.GetSubSection(pageNumber, this.state.searchQuery2 == '' ? this.state.searchQuery : this.state.searchQuery2, this.state.SelectedSectionId) }}
             />
         );
     }

@@ -153,6 +153,9 @@ class ClinicalSummary extends React.Component {
 
     TabKeywordById = (questionSubgroupId, string) => {
         //debugger
+        this.setState({
+            QuestionORBodyPartRubric: []
+        })
         if (questionSubgroupId !== undefined) {
             let requesttype = string == "LOCATION" ? "Bodypart" : "Question"
             this.setState({ Selectedrequesttype: requesttype })
@@ -181,6 +184,9 @@ class ClinicalSummary extends React.Component {
 
     TabRubricById = (questionKeyWordBodyPartID) => {
         //debugger
+        this.setState({
+            QuestionORBodyPartRubric: []
+        })
         if (questionKeyWordBodyPartID !== undefined) {
 
             let obj = {
@@ -417,46 +423,46 @@ class ClinicalSummary extends React.Component {
                     <Col md="12">
                         <div responsive="true" className="divst0 table-responsive" style={{ overflowY: 'scroll', overflowX: 'hidden' }}>
                             <span size="sm" style={{ color: '#08478c', fontWeight: '700' }}>RUBRICS : </span>
-                            
+
                             <div class="row">
-                                
-                                        {
-                                            this.state.QuestionORBodyPartRubric?.map((s, index) => {
-                                                const { Intensities } = this.props.intensity;
-                                                return  <div class="col-md-4"> <table class="table table-hover mt-2"><tr class="rubric" > <td key={index}><i className="fa fa-angle-double-right" aria-hidden="true"></i> &nbsp;
-                                                            <span className='rubnm'
-                                                            onClick={() => {
-                                                                console.log(s)
-                                                                this.toggleOrderModal(); // Calling the first method
-                                                                this.popup(s);   // Calling the second method
-                                                            }}>{s.subsectionName}</span>
-                                                            {/*   <button class="btn-clipboard" id="10">0</button>
+
+                                {
+                                    this.state.QuestionORBodyPartRubric?.map((s, index) => {
+                                        const { Intensities } = this.props.intensity;
+                                        return <div class="col-md-4"> <table class="table table-hover mt-2"><tr class="rubric" > <td key={index}><i className="fa fa-angle-double-right" aria-hidden="true"></i> &nbsp;
+                                            <span className='rubnm'
+                                                onClick={() => {
+                                                    console.log(s)
+                                                    this.toggleOrderModal(); // Calling the first method
+                                                    this.popup(s);   // Calling the second method
+                                                }}>{s.subsectionName}</span>
+                                            {/*   <button class="btn-clipboard" id="10">0</button>
                                                             <button class="btn-clipboard" id="11">1</button>
                                                             <button class="btn-clipboard" id="12">2</button>
                                                             <button class="btn-clipboard" id="13">3</button>
                                                             <button class="btn-clipboard" id="14">4</button> */}
-                                                            {Intensities.map((intensity, index) => {
-                                                                let id = `${s.subsectionId}${intensity.intensityNo}`;
-                                                                return (
-                                                                    <button
-                                                                        className="btn-clipboard1"
-                                                                        id={`${s.subsectionId}${s.intensityNo}`}
-                                                                        style={{ backgroundColor: id === this.state.id ? "green" : "" }}
-                                                                        // onClick={() => this.updateIntensity(rubric.subSectionId, intensity.intensityNo)}
-                                                                        onClick={() => this.selectRubrics(s, intensity.intensityNo, id)}
-                                                                    >
-                                                                        {intensity.intensityNo}
-                                                                    </button>
-                                                                )
-                                                            })
-                                                            }
-                                                            </td>
-                                                            </tr>
-                                                            </table>
-                                                        </div> 
+                                            {Intensities.map((intensity, index) => {
+                                                let id = `${s.subsectionId}${intensity.intensityNo}`;
+                                                return (
+                                                    <button
+                                                        className="btn-clipboard1"
+                                                        id={`${s.subsectionId}${s.intensityNo}`}
+                                                        style={{ backgroundColor: id === this.state.id ? "green" : "" }}
+                                                        // onClick={() => this.updateIntensity(rubric.subSectionId, intensity.intensityNo)}
+                                                        onClick={() => this.selectRubrics(s, intensity.intensityNo, id)}
+                                                    >
+                                                        {intensity.intensityNo}
+                                                    </button>
+                                                )
                                             })
-                                        }
-                
+                                            }
+                                        </td>
+                                        </tr>
+                                        </table>
+                                        </div>
+                                    })
+                                }
+
                             </div>
                         </div>
                     </Col>
@@ -573,23 +579,35 @@ class ClinicalSummary extends React.Component {
                                                                 {/* <span > */}
                                                                 {/* <Link to={`/PatientDashboard/${this.props.patientId}/${this.props.caseId}/${this.props.patientAppId}/${this.props.doctorId}/${NewTab}`} */}
                                                                 <Link to={`#`}
-                                                                    style={{
-                                                                        // fontFamily: item.fontName,
-                                                                        color: item.fontColor,
-                                                                        fontStyle: item.fontStyle,
-                                                                        textDecoration: 'none',
-                                                                        cursor: 'pointer',
-                                                                    }}>
-                                                                    <span onClick={() => this.handlePopuptoMM(item.remedyId)}>
+                                                                // style={{
+                                                                //      fontFamily: item.fontName,
+                                                                //     color: item.fontColor,
+                                                                //     fontStyle: item.fontStyle,
+                                                                //     textDecoration: 'none',
+                                                                //     cursor: 'pointer',
+                                                                // }}
+
+                                                                >
+                                                                    <span onClick={() => this.handleAddRubricClick(item.remedyId)}>
                                                                         {/* {item.remedyAlias} */}
-                                                                        {item.fontColor === 'Red'
-                                                                            ? item.remedyAlias.toUpperCase()
-                                                                            : item.remedyAlias}
-                                                                        {this.state.ShowAuthorAlias && `(${item.authorAlias}),`}
+                                                                        <span className={item.gradeNo == 1 ? 'grade1css' : item.gradeNo == 2 ? 'grade2css' : item.gradeNo == 3 ? 'grade3css' : item.gradeNo == 4 && 'grade4css'}>
+                                                                            {item.fontColor === 'Red'
+                                                                                ? item.remedyAlias.toUpperCase()
+                                                                                : item.remedyAlias}
+                                                                        </span>
+
+                                                                        {/* {this.state.ShowAuthorAlias && `(${item.authorAlias}),`} */}
+                                                                        {this.state.ShowAuthorAlias && (
+                                                                            <span style={{ color: 'black', font: 'small-caption' }}>
+                                                                                ({item.authorAlias}),
+                                                                            </span>
+                                                                        )}
                                                                         {this.state.showInfoIcon &&
                                                                             <span className='hover-text3'>
-                                                                                <i class="fa fa-info" aria-hidden="true" style={{ marginLeft: 10, }}></i>
+                                                                                <i class="fa fa-info" aria-hidden="true" style={{ marginLeft: 10, color: 'black' }}></i>
                                                                                 <div class="tooltip-text3">
+                                                                                    {/* Themes OR Characteristics:{item.themesORCharacteristics} Generals:{item.generals}
+                                                                                    Modalities:{item.modalities}  Particulars:{item.particulars} */}
                                                                                     <strong>Themes/Characteristics : </strong> {item.themesORCharacteristics} <br></br><br></br>
                                                                                     <strong class="mt-2">Generals : </strong> {item.generals} <br></br><br></br>
                                                                                     <strong class="mt-2">Modalities : </strong> {item.modalities} <br></br><br></br>
@@ -597,6 +615,7 @@ class ClinicalSummary extends React.Component {
 
                                                                                 </div>
                                                                             </span>}
+
                                                                     </span>
                                                                 </Link>
                                                                 {/* </span> */}

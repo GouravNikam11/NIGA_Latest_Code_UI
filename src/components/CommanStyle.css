@@ -1,3 +1,32 @@
+.grade1css{
+  font-family: 'Times New Roman';
+  color: black;
+
+}
+.grade2css{
+  font-family: 'Times New Roman';
+  color:blue;
+  font-style: italic;
+
+}
+.grade3css{
+  font-family: 'Times New Roman';
+  color:red;
+  text-transform: uppercase;
+
+}
+.grade4css{
+  font-family: 'Times New Roman';
+  color:#DA70D6;
+  text-transform: uppercase;
+  font-weight: bold;
+  /* text-decoration-line: underline; */
+
+}
+
+
+
+
 .btn_Appointment{
     background: rgb(0, 181, 233);
     color: white;
