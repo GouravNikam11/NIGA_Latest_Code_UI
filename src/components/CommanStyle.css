@@ -1,21 +1,25 @@
 .grade1css{
+  font-size: 16px;
   font-family: 'Times New Roman';
   color: black;
 
 }
 .grade2css{
+  font-size: 16px;
   font-family: 'Times New Roman';
   color:blue;
   font-style: italic;
 
 }
 .grade3css{
+  font-size: 16px;
   font-family: 'Times New Roman';
   color:red;
   text-transform: uppercase;
 
 }
 .grade4css{
+  font-size: 16px;
   font-family: 'Times New Roman';
   color:#DA70D6;
   text-transform: uppercase;

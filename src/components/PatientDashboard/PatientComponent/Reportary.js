@@ -513,18 +513,15 @@ class SummaryComponent extends React.Component {
                                                                 {/* <span > */}
                                                                 {/* <Link to={`/PatientDashboard/${this.props.patientId}/${this.props.caseId}/${this.props.patientAppId}/${this.props.doctorId}/${NewTab}`} */}
                                                                 <Link to={`#`}
-                                                                    // style={{
-                                                                    //      fontFamily: item.fontName,
-                                                                    //     color: item.fontColor,
-                                                                    //     fontStyle: item.fontStyle,
-                                                                    //     textDecoration: 'none',
-                                                                    //     cursor: 'pointer',
-                                                                    // }}
+                                                                    style={{
+                                                                        textDecoration: 'none' 
+                                                                    }}
                                                                     
                                                                 >
-                                                                    <span onClick={() => this.handleAddRubricClick(item.remedyId)}>
+                                                                    <span >
                                                                         {/* {item.remedyAlias} */}
-                                                                        <span  className={item.gradeNo == 1 ? 'grade1css' : item.gradeNo == 2 ? 'grade2css' : item.gradeNo == 3 ? 'grade3css' : item.gradeNo == 4 && 'grade4css'}>
+                                                                        <span onClick={() => this.handleAddRubricClick(item.remedyId)}
+                                                                         className={item.gradeNo == 1 ? 'grade1css' : item.gradeNo == 2 ? 'grade2css' : item.gradeNo == 3 ? 'grade3css' : item.gradeNo == 4 && 'grade4css'}>
                                                                         {item.fontColor === 'Red'
                                                                             ? item.remedyAlias.toUpperCase()
                                                                             : item.remedyAlias}
@@ -532,7 +529,7 @@ class SummaryComponent extends React.Component {
                                                                         
                                                                         {/* {this.state.ShowAuthorAlias && `(${item.authorAlias}),`} */}
                                                                         {this.state.ShowAuthorAlias && (
-                                                                            <span style={{ color: 'black' , font:'small-caption' }}>
+                                                                            <span style={{ color: 'black' , fontSize:"12px" }}>
                                                                                 ({item.authorAlias}),
                                                                             </span>
                                                                         )}

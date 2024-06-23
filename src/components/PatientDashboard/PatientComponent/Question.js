@@ -579,13 +579,9 @@ class ClinicalSummary extends React.Component {
                                                                 {/* <span > */}
                                                                 {/* <Link to={`/PatientDashboard/${this.props.patientId}/${this.props.caseId}/${this.props.patientAppId}/${this.props.doctorId}/${NewTab}`} */}
                                                                 <Link to={`#`}
-                                                                // style={{
-                                                                //      fontFamily: item.fontName,
-                                                                //     color: item.fontColor,
-                                                                //     fontStyle: item.fontStyle,
-                                                                //     textDecoration: 'none',
-                                                                //     cursor: 'pointer',
-                                                                // }}
+                                                                   style={{
+                                                                    textDecoration: 'none' 
+                                                                }}
 
                                                                 >
                                                                     <span onClick={() => this.handleAddRubricClick(item.remedyId)}>
@@ -598,7 +594,7 @@ class ClinicalSummary extends React.Component {
 
                                                                         {/* {this.state.ShowAuthorAlias && `(${item.authorAlias}),`} */}
                                                                         {this.state.ShowAuthorAlias && (
-                                                                            <span style={{ color: 'black', font: 'small-caption' }}>
+                                                                            <span  style={{ color: 'black' , fontSize:"12px" }}>
                                                                                 ({item.authorAlias}),
                                                                             </span>
                                                                         )}

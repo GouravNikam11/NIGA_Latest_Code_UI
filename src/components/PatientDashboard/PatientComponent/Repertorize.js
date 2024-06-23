@@ -51,6 +51,7 @@ class RepertorizePage extends React.Component {
         super(props);
         this.state = {
             toggleOrderModel: false,
+            showInfoIcon: false,
             ListSelectSection: [],
             ListSelectSection2: [],
             tableData: [],
@@ -289,6 +290,9 @@ class RepertorizePage extends React.Component {
                                                                     <span className="auth"
                                                                         onClick={() => this.ToggleAuthorAlias()}
                                                                     ><i class="fa fa-user" aria-hidden="true"></i></span>
+                                                                    <span className="auth"
+                                                                        onClick={() => this.ToggleAuthorInformation()}
+                                                                    ><i class="fa fa-info" aria-hidden="true"></i></span>
                                                                 </div>
 
                                                                 <div class="hover-text1"><span className=""><img src={engs} className="langicon" alt="English" /></span>
@@ -360,18 +364,38 @@ class RepertorizePage extends React.Component {
                                                                                     {/* <Link to={`/PatientDashboard/${this.props.patientId}/${this.props.caseId}/${this.props.patientAppId}/${this.props.doctorId}/${NewTab}`} */}
                                                                                     <Link to={`#`}
                                                                                         style={{
-                                                                                            // fontFamily: item.fontName,
-                                                                                            color: item.fontColor,
-                                                                                            fontStyle: item.fontStyle,
                                                                                             textDecoration: 'none',
-                                                                                            cursor: 'pointer',
+                                                                                            // color: item.fontColor,
+                                                                                            // fontStyle: item.fontStyle,
+                                                                                            // textDecoration: 'none',
+                                                                                            // cursor: 'pointer',
                                                                                         }}>
-                                                                                        <span onClick={() => this.handlePopuptoMM(item.remedyId)}>
-                                                                                            {/* {item.remedyAlias} */}
-                                                                                            {item.fontColor === 'Red'
-                                                                                                ? item.remedyAlias.toUpperCase()
-                                                                                                : item.remedyAlias}
-                                                                                            {this.state.ShowAuthorAlias && `(${item.authorAlias}),`}</span>
+                                                                                        <span
+                                                                                            onClick={() => this.handlePopuptoMM(item.remedyId)}>
+                                                                                            <span className={item.gradeNo == 1 ? 'grade1css' : item.gradeNo == 2 ? 'grade2css' : item.gradeNo == 3 ? 'grade3css' : item.gradeNo == 4 && 'grade4css'}>
+                                                                                                {item.fontColor === 'Red'
+                                                                                                    ? item.remedyAlias.toUpperCase()
+                                                                                                    : item.remedyAlias}
+                                                                                            </span>
+                                                                                            {this.state.ShowAuthorAlias && (
+                                                                                                <span style={{ color: 'black', fontSize: "12px" }}>
+                                                                                                    ({item.authorAlias}),
+                                                                                                </span>
+                                                                                            )}
+                                                                                            {this.state.showInfoIcon &&
+                                                                                                <span className='hover-text3'>
+                                                                                                    <i class="fa fa-info" aria-hidden="true" style={{ marginLeft: 10, color: 'black' }}></i>
+                                                                                                    <div class="tooltip-text3">
+                                                                                                        <strong>Themes/Characteristics : </strong> {item.themesORCharacteristics} <br></br><br></br>
+                                                                                                        <strong class="mt-2">Generals : </strong> {item.generals} <br></br><br></br>
+                                                                                                        <strong class="mt-2">Modalities : </strong> {item.modalities} <br></br><br></br>
+                                                                                                        <strong class="mt-2">Particulars : </strong> {item.particulars}
+
+                                                                                                    </div>
+                                                                                                </span>
+                                                                                            }
+
+                                                                                        </span>
                                                                                     </Link>
                                                                                     {/* </span> */}
                                                                                     {/* }) */}
@@ -1633,6 +1657,13 @@ class RepertorizePage extends React.Component {
 
         });
 
+    }
+
+
+    ToggleAuthorInformation() {
+        this.setState((prevState) => ({
+            showInfoIcon: !prevState.showInfoIcon
+        }));
     }
 
 
