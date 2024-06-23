@@ -415,7 +415,7 @@ class SummaryComponent extends React.Component {
                                 <CardText>Rubric Details</CardText>
                             </CardHeader>
 
-                            <div responsive="true" style={{ height: '600px' }}>
+                            <div responsive="true" style={{ overflowY: 'scroll', overflowX: 'hidden', height: '600px' }}>
                                 <Row>
                                     <Col md="12" className="txtright">
 
@@ -475,7 +475,7 @@ class SummaryComponent extends React.Component {
                                     </Col>
                                 </Row>
 
-                                <Row style={{ padding: '6px' }}>
+                                <Row style={{ padding: '6px'}}>
                                     <Col md="12" className="txtleft">
                                         {/* <strong className="h6">{this.state.RubricNameForPopUp} ({this.state.remedyCount})</strong> */}
                                         {this.state.RubricNameForPopUp && (
@@ -500,12 +500,12 @@ class SummaryComponent extends React.Component {
                                         {/* <strong className="h6">Remedy Count : ({this.state.remedyCount}) </strong> */}
                                         {/* <hr></hr> */}
                                         {this.state.RemedyDtailsList.length > 0 ?
-                                            <div >
+                                            <div>
                                                 {this.state.RemedyDtailsList?.map((item, index) => {
                                                     {/* <Link to={"/PatientDashboard/" + this.props.patientId + "/" + this.props.caseId + "/" + this.props.patientAppId + "/" + this.props.doctorId} */ }
                                                     const NewTab = 5
                                                     return (
-                                                        <div class="text-in" >
+                                                        <span class="text-in" >
                                                             <span key={index} style={{ display: 'inline-block', }} class="remhov">
                                                                 {/* { */}
                                                                 {/* item.remediesModels.map((author, index) => {
@@ -558,7 +558,7 @@ class SummaryComponent extends React.Component {
                                                                 {/* } */}
                                                             </span>
 
-                                                        </div>
+                                                        </span>
                                                     )
                                                 })}
                                             </div>
