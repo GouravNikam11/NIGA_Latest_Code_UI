@@ -343,7 +343,8 @@ export class EditClinicalQuestionsComponent extends Component {
             })
         } else {
             this.setState({
-                Question: selectedItem.keywordQuestion
+                Question: selectedItem.keywordQuestion,
+                SectionId: selectedItem.sectionId,
             })
         }
         selectedItem.clinicalRubricViewList.map(x => options.push({ value: x.subsectionID, label: x.subsectionName }));
@@ -371,9 +372,9 @@ export class EditClinicalQuestionsComponent extends Component {
 
 
 
-        // console.log('found == ', JSON.stringify(this.state.clinicalQuestionBodyPartList[foundIndex].clinicalRubricViewList[0].subsectionName));
+        //console.log('found == ', JSON.stringify(this.state.clinicalQuestionBodyPartList));
         // console.log('this.state.SectionIdForBodyPart == ', JSON.stringify(this.state.SectionIdForBodyPart));
-        /// console.log('this.state.selectedSubSection == ', JSON.stringify(this.state.selectedSubSection));
+        // console.log('this.state.selectedSubSection == ', JSON.stringify(this.state.selectedSubSection));
         // console.log('this.state.selectedOptions2 == ', this.state.selectedOptions2);
         if (foundIndex !== -1) {
 
@@ -484,8 +485,9 @@ export class EditClinicalQuestionsComponent extends Component {
                 })
             }).then((result) => {
                 debugger
-                console.log('rubic = ', JSON.stringify(rubic))
-                console.log('result = ', result)
+                // console.log('rubic = ', JSON.stringify(rubic))
+                // console.log('result = ', result)
+                // console.log('this.state.selectedOptions2.value == ', this.state.selectedOptions2)
                 if (result) {
                     let newObject = {
                         "questionsBodyPartId": 0,
@@ -522,9 +524,9 @@ export class EditClinicalQuestionsComponent extends Component {
 
 
                     this.setState({
-                        selectedOptions2: null,
+                        //selectedOptions2: null,
                         SectionId: 0,
-                        SectionIdForBodyPart: 0,
+                        // SectionIdForBodyPart: 0,
                         selectedSubSection: null,
                         Question: ''
                     })
