@@ -15,13 +15,18 @@ import { makeStyles } from '@material-ui/core/styles';
 import MailIcon from '@material-ui/icons/Mail';
 import { Link } from '@material-ui/core';
 import '../../components/CommanStyle.css';
+import { connect } from 'react-redux';
+import {
+    enqueueSnackbar as enqueueSnackbarAction,
+    closeSnackbar
+} from '../../store/actions/notification';
 
 /**
  * Created Date     :   06-01-2020
  * Purpose          :   Component is used to add clicical questions
  * Author           :   Chandrashekhar Salagar.
  */
-export class AddClinicalQuestionsComponent extends Component {
+class AddClinicalQuestionsComponent extends Component {
 
     /**
      * Constructor to initialize class members.
@@ -53,6 +58,7 @@ export class AddClinicalQuestionsComponent extends Component {
             bodyPartId: 0,
             selectedOptions: '',
             selectedOptions1: '',
+            copyOfSelectedOptions1: '',
             selectedOptions2: '',
             selectedOptions3: '',
             optionList: [],
@@ -590,11 +596,18 @@ export class AddClinicalQuestionsComponent extends Component {
 
     handleSelectSubGroup(data) {
         //console.log('pranavsir++++====>>>>>', data)
-        this.setState({
-            selectedOptions1: data,
-            copyOfSelectedSubQuestionGroup: data.label,
-            subQuestionGroupId: data.value
-        })
+
+        if ((this.state.copyOfSelectedOptions1?.label?.toLowerCase() === data.label?.toLowerCase()) || this.state.copyOfSelectedOptions1 === '') {
+            this.setState({
+                selectedOptions1: data,
+                copyOfSelectedOptions1: data,
+                copyOfSelectedSubQuestionGroup: data.label,
+                subQuestionGroupId: data.value
+            })
+        } else {
+            this.props.enqueueSnackbarAction(`Entered data in table is about ${this.state.copyOfSelectedOptions1?.label.toLowerCase()} sub question group name.`, "error");
+        }
+
     }
 
     getSubGroupQuestionSection(questiongroupId, questionsectionId) {
@@ -640,7 +653,7 @@ export class AddClinicalQuestionsComponent extends Component {
 
     getBodyPart(SectionIdForBodyPart) {
         debugger;
-        CommonServices.getDataById(parseInt(SectionIdForBodyPart),`/bodypart/GetBodyPartsBySection`).then((temp) => {
+        CommonServices.getDataById(parseInt(SectionIdForBodyPart), `/bodypart/GetBodyPartsBySection`).then((temp) => {
             //debugger;
             //console.log('getBodyPart===>>>>>>>>>>>>>>>>>',temp);
 
@@ -1056,3 +1069,5 @@ export class AddClinicalQuestionsComponent extends Component {
         // alert(nodeId);
     }
 }
+
+export default connect(null, { enqueueSnackbarAction, closeSnackbar })(AddClinicalQuestionsComponent)

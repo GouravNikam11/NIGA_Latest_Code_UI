@@ -63,7 +63,7 @@ import ListIntensityComponent from './components/Intensity/ListIntensityComponen
 import AddIntensityComponent from './components/Intensity/AddIntensityComponent';
 import EditIntensityComponent from './components/Intensity/EditIntensityComponent';
 import { ListClinicalQuestionsComponent } from './components/ClinicalQuestions/ListClinicalQuestionsComponent';
-import { AddClinicalQuestionsComponent } from './components/ClinicalQuestions/AddClinicalQuestionsComponent';
+import AddClinicalQuestionsComponent from './components/ClinicalQuestions/AddClinicalQuestionsComponent';
 import { EditClinicalQuestionsComponent } from './components/ClinicalQuestions/EditClinicalQuestionsComponent';
 
 
@@ -127,7 +127,7 @@ import { AddRemedialRubricsComponent } from './components/RemedialRubrics/AddRem
 import { ViewRemedialRubricsComponent } from './components/RemedialRubrics/ViewRemedialRubricsComponent';
 
 import PatientBackHistoryComponent from './components/CaseTaking/PatientBackHistoryComponent'
-import  PatientListComponent  from './components/CaseTaking/PatientListComponent';
+import PatientListComponent from './components/CaseTaking/PatientListComponent';
 import { AddCaseComponent } from './components/CaseTaking/AddCaseComponent';
 import AddPatientComponent from './components/CaseTaking/AddPatientComponent';
 import FindRubricsComponent from './components/FindRubrics/FindRubricsComponent';
@@ -157,7 +157,7 @@ import EditRoleDetailsComponent from './components/RoleDetails/EditRoleDetailsCo
 import RubricList from './components/Rubrics/lisRubric';
 import EditRubric from './components/Rubrics/EditRubric';
 
-import LanguageListComponent from'./components/LanguageMaster/ListLanguageMaster';
+import LanguageListComponent from './components/LanguageMaster/ListLanguageMaster';
 import AddLanguageComponent from './components/LanguageMaster/AddLanguageMaster';
 import EditLanguageMaster from './components/LanguageMaster/EditLanguageMaster';
 
@@ -195,37 +195,37 @@ const routes = [
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
 
 
-// Diagnosis Therapeutics Detail Section
-{path:'/AddDiagnosisTherapeuticsDetail',name :'Add Diagnosis Therapeutics Detail', component:AddDiagnosisTherapeuticsDetail},
-{path:'/EditDiagnosisTherapeuticsDetail/:diagnosisTherapeuticsDetailId',name :'Edit Diagnosis Therapeutics Detail', component:EditDiagnosisTherapeuticsDetail},
-{path:'/ListDiagnosisTherapeuticsDetail',name :'List Diagnosis Therapeutics Detail', component:ListDiagnosisTherapeuticsDetail},
-{path:'/DiagnosisTherapeuticsDetail/:diagnosisTherapeuticsDetailId',name :'List Diagnosis Therapeutics Detail', component:DiagnosisTherapeuticsDetail},
+  // Diagnosis Therapeutics Detail Section
+  { path: '/AddDiagnosisTherapeuticsDetail', name: 'Add Diagnosis Therapeutics Detail', component: AddDiagnosisTherapeuticsDetail },
+  { path: '/EditDiagnosisTherapeuticsDetail/:diagnosisTherapeuticsDetailId', name: 'Edit Diagnosis Therapeutics Detail', component: EditDiagnosisTherapeuticsDetail },
+  { path: '/ListDiagnosisTherapeuticsDetail', name: 'List Diagnosis Therapeutics Detail', component: ListDiagnosisTherapeuticsDetail },
+  { path: '/DiagnosisTherapeuticsDetail/:diagnosisTherapeuticsDetailId', name: 'List Diagnosis Therapeutics Detail', component: DiagnosisTherapeuticsDetail },
 
 
-//Appointment History Notes Section
-{path:'/AddAppointmentHistoryNotes',name :'Appointment History Notes', component:AddAppointmentHistoryNotes},
+  //Appointment History Notes Section
+  { path: '/AddAppointmentHistoryNotes', name: 'Appointment History Notes', component: AddAppointmentHistoryNotes },
 
-// DrugSystem Section 
-{path:'/ListDrugSystem',name :'List Drug System', component:ListDrugSystem},
-{path:'/EditDrugSystem/:drugSystemId',name :'Edit Drug System', component:EditDrugSystem},
-{path:'/AddDrugSystem',name :'Add Drug System', component:AddDrugSystem},
-
-
-// DrugGroupMaster Section 
-{path:'/ListDrugGroupMaster',name :'List Drug Group', component:ListDrugGroupMaster},
-{path:'/EditDrugGroupMaster/:drugGroupId',name :'Edit Drug Group', component:EditDrugGroupMaster},
-{path:'/AddDrugGroupMaster',name :'Add Drug Group', component:AddDrugGroupMaster},
-
-// AllopathicDrugMaster Section
-{path:'/ListAllopathicDrugMaster',name :'List Allopathic Drug', component:ListAllopathicDrugMaster},
-{path:'/EditAllopathicDrugMaster/:allopathicDrugId',name :'Edit Allopathic Drug', component:EditAllopathicDrugMaster},
-{path:'/AddAllopathicDrugMaster',name :'Add Allopathic Drug', component:AddAllopathicDrugMaster},
+  // DrugSystem Section 
+  { path: '/ListDrugSystem', name: 'List Drug System', component: ListDrugSystem },
+  { path: '/EditDrugSystem/:drugSystemId', name: 'Edit Drug System', component: EditDrugSystem },
+  { path: '/AddDrugSystem', name: 'Add Drug System', component: AddDrugSystem },
 
 
- /* Language section */
-{path:'/LanguageList',name :'List Language', component:LanguageListComponent},
-{path:'/AddLanguage',name :'Add Language', component:AddLanguageComponent},
-{path: '/EditLanguage/:languageId', name:'Edit Language',component:EditLanguageMaster},
+  // DrugGroupMaster Section 
+  { path: '/ListDrugGroupMaster', name: 'List Drug Group', component: ListDrugGroupMaster },
+  { path: '/EditDrugGroupMaster/:drugGroupId', name: 'Edit Drug Group', component: EditDrugGroupMaster },
+  { path: '/AddDrugGroupMaster', name: 'Add Drug Group', component: AddDrugGroupMaster },
+
+  // AllopathicDrugMaster Section
+  { path: '/ListAllopathicDrugMaster', name: 'List Allopathic Drug', component: ListAllopathicDrugMaster },
+  { path: '/EditAllopathicDrugMaster/:allopathicDrugId', name: 'Edit Allopathic Drug', component: EditAllopathicDrugMaster },
+  { path: '/AddAllopathicDrugMaster', name: 'Add Allopathic Drug', component: AddAllopathicDrugMaster },
+
+
+  /* Language section */
+  { path: '/LanguageList', name: 'List Language', component: LanguageListComponent },
+  { path: '/AddLanguage', name: 'Add Language', component: AddLanguageComponent },
+  { path: '/EditLanguage/:languageId', name: 'Edit Language', component: EditLanguageMaster },
 
   /* Question section */
   { path: '/AddQuestionSection', name: 'Add Existance', component: AddQuestionSectionComponent },
@@ -363,7 +363,7 @@ const routes = [
 
   /* Remedy Grade */
   { path: '/PatientEntry', name: 'Add Patient', component: AddPatientComponent },
-  {path: '/PatientBackHistory/:id', name:'Patient Back History', component:PatientBackHistoryComponent},
+  { path: '/PatientBackHistory/:id', name: 'Patient Back History', component: PatientBackHistoryComponent },
   // { path: '/AddCases', name: 'Add Cases', component: AddCasesComponent },
   // { path: '/TreeSample', name: 'Add Cases', component: TreeSample },
 
@@ -396,8 +396,8 @@ const routes = [
   { path: '/FindRubrics', name: 'Find Rubrics', component: FindRubricsComponent },
 
   //Patient Dashboard
-  
-   { path: '/PatientDashboard/:id/:caseId/:patientAppId/:doctorId', name: 'Patient Dashboard', component: PatientDashboard },
+
+  { path: '/PatientDashboard/:id/:caseId/:patientAppId/:doctorId', name: 'Patient Dashboard', component: PatientDashboard },
   { path: '/PatientDashboard/:id/:caseId/:patientAppId/:doctorId/:questionGroupId/:questionSectionId', name: '', component: PatientDashboard },
   { path: '/PatientDashboard/:id/:caseId/:patientAppId/:doctorId/:NewTab', name: 'Patient Dashboard', component: PatientDashboard },
 
