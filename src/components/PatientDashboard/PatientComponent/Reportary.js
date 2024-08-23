@@ -162,7 +162,7 @@ class SummaryComponent extends React.Component {
                         // onClick={() => this.handleChange2((section.sectionId))
                         // onClick={this.handleChange2(section.sectionId)}
                         onClick={() => this.handleChange2((section.sectionId))}>
-                        <Navigation
+                        <Navigation 
                             items={[
                                 {
                                     title: <span style={{ fontWeight: isSelected ? 'bold' : '' }}>{section.sectionName}</span>,
@@ -380,7 +380,7 @@ class SummaryComponent extends React.Component {
                     {/* Subsections  */}
                     <Col sm="12" md="4" className="sdiv">
                         <Card>
-                            <CardHeader style={{ height: '42px' }}>
+                            <CardHeader style={{ height: '35px' }}>
                                 <CardText className="cardtextl">Sub Sections</CardText>
                                 {this.state.SelectedSectionId !== 0 && (
                                     <Input type="text"
@@ -394,13 +394,15 @@ class SummaryComponent extends React.Component {
                             </CardHeader>
 
                             <div responsive="true" style={{ overflowY: 'scroll', height: '600px' }}>
-                                <Table responsive hover>
-                                    <tbody>
-                                        {
-                                            this.renderNewSubsections()
-                                        }
-                                    </tbody>
-                                </Table>
+                                <div responsive="true" style={{ overflowY: 'scroll', height: '560px' }}>
+                                    <Table responsive hover >
+                                        <tbody>
+                                            {
+                                                this.renderNewSubsections()
+                                            }
+                                        </tbody>
+                                    </Table>
+                                </div>
                                 <div responsive="true" className='pgdiva'>
                                     {this.renderPagination()}
                                 </div>
@@ -892,7 +894,7 @@ class SummaryComponent extends React.Component {
         return this.state.SubSectionList?.resultObject?.map((subSection, index) => (
             <tr className="rubric" key={subSection.subSectionId}>
                 <td onClick={() => this.RemedyDetailsByID(subSection.subSectionId)}>
-                    {subSection.subSectionName}
+                    <span className='subsect'>{subSection.subSectionName}</span>
                     {
                         Intensities.map((intensity, index) => {
                             let id = `${subSection.subSectionId}${intensity.intensityNo}`;

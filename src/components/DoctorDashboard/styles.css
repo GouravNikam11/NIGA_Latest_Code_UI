@@ -234,9 +234,9 @@ div.sticky {
   .cardsearch{
     width: 200px !important;
     float: right;
-    margin-top: -9px;
-    margin-bottom: -9px;
-    margin-right: -18px;
+    margin-top: -6px !important;
+    margin-bottom: -8px;
+  
   }
 
   .side-navigation-panel-select-option-text{
@@ -244,4 +244,7 @@ div.sticky {
   }
 
 
+  .form-control {
+    font-size: 12px !important;
+  }
 

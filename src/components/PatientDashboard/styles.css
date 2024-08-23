@@ -1,26 +1,26 @@
 .grade1css{
-    font-size: 16px;
-    font-family: 'Times New Roman';
+    font-size: 12px;
+    /* font-family: 'Times New Roman'; */
     color: black;
 
 }
 .grade2css{
-    font-size: 16px;
-    font-family: 'Times New Roman';
+    font-size: 12px;
+    /* font-family: 'Times New Roman'; */
     color:blue;
     font-style: italic;
 
 }
 .grade3css{
-    font-size: 16px;
-    font-family: 'Times New Roman';
+    font-size: 12px;
+    /* font-family: 'Times New Roman'; */
     color:red;
     text-transform: uppercase;
 
 }
 .grade4css{
-    font-size: 16px;
-    font-family: 'Times New Roman';
+    font-size: 12px;
+    /* font-family: 'Times New Roman'; */
     color:#DA70D6;
     text-transform: uppercase;
     font-weight: bold;
@@ -52,16 +52,13 @@
 }
 
 .remhov {
-    padding: 1px 5px;
-    margin: 1px;
-    /* background: #f2f2f2; */
+    padding: 1px 3px;
     border-radius: 2px;
 }
 
 .remhov:hover {
     border-radius: 3px;
     background: #e1e1e1 !important;
-    font-weight: 500;
 }
 
 .profile-info {
@@ -72,7 +69,7 @@
 }
 
 .profile-date {
-    background: #195c74;
+    background: #001646;
     padding: 4px;
     border-radius: 3px;
     margin-left: 10px;
@@ -100,7 +97,7 @@
 }
 
 .header_strip {
-    background: #132a44 none repeat scroll 0 0;
+    background: #193a5f none repeat scroll 0 0;
     color: #fff;
     font: 14px open sans;
     padding: 10px 10px 0;
@@ -166,9 +163,10 @@ ul.quick_actions {
     float: right;
     font-size: 9px;
     text-align: center;
-    font-weight: bold;
+    font-weight: 500;
     padding: 1px 5px;
-    margin: -1px;
+    margin: 1px;
+    border: 1px solid gray;
 }
 
 .txtright {
@@ -229,7 +227,7 @@ ul.quick_actions {
 }
 
 .card-header {
-    padding: 0.5rem 0.8rem;
+    padding: 8px !important;
 }
 
 .subpart {
@@ -251,7 +249,12 @@ hr {
 }
 
 .crref {
-    color: rgb(15, 15, 118);
+    color: rgb(18, 18, 88);
+    font-size: 12px;
+}
+
+.subsect{
+    font-weight: 600;
 }
 
 
@@ -459,7 +462,25 @@ hr {
 }
 
 .nav-tabs .nav-link.active {
-    box-shadow: 0 0 0 0.05rem #8b8b8b;
+    /* box-shadow: 0 0 0 0.05rem #8b8b8b; */
+}
+
+.nav-tabs .nav-link {
+    border: none !important;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.nav-tabs .nav-link.active {
+    color: #2f353a;
+    font-weight: 500;
+    border-bottom: 2px solid #001646 !important;
+}
+
+.side-navigation-panel-select-option-selected{
+    border-color: none !important;
+}
+.side-navigation-panel *, .side-navigation-panel:after, .side-navigation-panel:before {
+    border-style: none !important;
 }
 
 .nav-fill .nav-link {
@@ -994,7 +1015,12 @@ hr {
 }
 
 .page-link {
-    padding: 0.3rem 0.6rem !important;
+    padding: 0.3rem 0.85rem !important;
+}
+
+.page-item.active .page-link {
+    background-color: #676767 !important;
+    border-color: #676767 !important;
 }
 
 .side-navigation-panel:after,
@@ -2402,3 +2428,7 @@ hr {
 .container-fluid{
     /* overflow: hidden; */
 }  
+
+.form-control {
+    font-size: 12px !important;
+  }

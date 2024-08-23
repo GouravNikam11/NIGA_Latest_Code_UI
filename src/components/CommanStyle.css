@@ -28,7 +28,9 @@
 
 }
 
-
+.form-control {
+  font-size: 12px !important;
+}
 
 
 .btn_Appointment{

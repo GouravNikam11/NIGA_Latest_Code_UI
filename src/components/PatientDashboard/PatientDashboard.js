@@ -275,7 +275,7 @@ class PatientDashboard extends React.Component {
                 return (
                     <NavLink
                         className={classnames({ active: this.state.activeTab === tab.tabId })}
-                        style={{ backgroundColor: "#20a8d8", color: "white", position:"absolute", right:"232px"}}
+                        style={{ backgroundColor: "#676767", color: "white", position:"absolute", right:"232px"}}
                         onClick={() => {
                             this.toggle(tab.tabId);
                             store.dispatch({ type: 'SET_CHILD_OPTION', payload: {} });
@@ -291,7 +291,7 @@ class PatientDashboard extends React.Component {
                 return (
                     <NavLink
                         className={classnames({ active: this.state.activeTab === tab.tabId })}
-                        style={{ backgroundColor: "#268026", color: "white", position:"absolute", right:"116px", }}
+                        style={{ backgroundColor: "#676767", color: "white", position:"absolute", right:"116px", }}
                         onClick={() => {
                             this.toggle(tab.tabId);
                             store.dispatch({ type: 'SET_CHILD_OPTION', payload: {} });
@@ -307,7 +307,7 @@ class PatientDashboard extends React.Component {
                 return (
                     <NavLink
                         className={classnames({ active: this.state.activeTab === tab.tabId })}
-                        style={{ backgroundColor: "#c3b20a", color: "white", position:"absolute", right:"4px" }}
+                        style={{ backgroundColor: "#676767", color: "white", position:"absolute", right:"4px" }}
                         onClick={() => {
                             this.toggle(tab.tabId);
                             store.dispatch({ type: 'SET_CHILD_OPTION', payload: {} });
@@ -323,7 +323,7 @@ class PatientDashboard extends React.Component {
                 return (
                     <NavLink
                         className={classnames({ active: this.state.activeTab === tab.tabId })}
-                        style={{ backgroundColor: "#224285", color: "white"}}
+                        style={{ backgroundColor: "#676767", color: "white"}}
                         onClick={() => {
                             this.toggle(tab.tabId);
                             store.dispatch({ type: 'SET_CHILD_OPTION', payload: {} });
@@ -345,7 +345,7 @@ class PatientDashboard extends React.Component {
                     <NavItem key={index}>
                         <NavLink
                             className={this.props.showLabAndImaging || this.props.showAddAppointment ? classnames({ active: false }) : classnames({ active: this.state.activeTab === tab.tabId })}
-                            style={this.props.showLabAndImaging || this.props.showAddAppointment ? { backgroundColor: "#fff" } : { backgroundColor: this.state.activeTab === tab.tabId ? "#ddd" : "#fff" }}
+                            style={this.props.showLabAndImaging || this.props.showAddAppointment ? { backgroundColor: "#fff" } : { backgroundColor: this.state.activeTab === tab.tabId ? "#20a8d8" : "#fff" }}
                             onClick={() => {
                                 this.toggle(tab.tabId);
                                 store.dispatch({ type: 'SET_CHILD_OPTION', payload: {} });
