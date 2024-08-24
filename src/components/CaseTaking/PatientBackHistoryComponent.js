@@ -77,13 +77,16 @@ class PatientBackHistoryComponent extends Component {
 
 
                                 <Row>
-                                    <Col md="5">
-                                        <span className="hthead">Case History : </span><Button className='btncons' size="md" color="primary"><i className="fa fa-plus-square"></i> NEW CONSULTATION</Button>
+                                    <Col md="6">
+                                        <span className="hthead">Case History : </span>
+                                        {/* <Button className='btncons' size="md" color="primary"><i className="fa fa-plus-square"></i> NEW CONSULTATION</Button> */}
 
                                         <Table hover bordered responsive >
-                                            <thead>
+                                            <thead style={{ textAlign: 'center' }}>
                                                 <th>Date</th>
+                                                <th>Time</th>
                                                 <th>Type</th>
+                                                <th>Case Notes</th>
                                             </thead>
                                             <tbody>
                                                 {
@@ -95,7 +98,7 @@ class PatientBackHistoryComponent extends Component {
                                         </Table>
                                         {this.renderPagination()}
                                     </Col>
-                                    <Col md="7">
+                                    <Col md="6">
                                         <span className="hthead">Case Notes : </span>
                                         <CKEditor
                                             editor={ClassicEditor}
@@ -143,7 +146,9 @@ class PatientBackHistoryComponent extends Component {
             return <tr key={index}>
                 {/* <td>{s.appointmentDate}</td> */}
                 <td onClick={() => this.handlegetrubricbyPatientAppid(s)} style={{ textAlign: 'center' }}>{new Date(s.appointmentDate).toLocaleDateString('en-GB')}</td>
-                <td onClick={() => this.handlegetPrescriptionbyPatientAppid(s)}>Prescription</td>
+                <td onClick={() => this.handlegetrubricbyPatientAppid(s)} style={{ textAlign: 'center' }}>{s.appointmentTime}</td>
+                <td onClick={() => this.handlegetPrescriptionbyPatientAppid(s)} style={{ textAlign: 'center' }}>Prescription</td>
+                <td style={{ textAlign: 'center' }}><Button>Nots</Button></td>
 
 
             </tr>

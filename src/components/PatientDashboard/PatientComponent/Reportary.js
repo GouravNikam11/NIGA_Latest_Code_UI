@@ -926,7 +926,7 @@ class SummaryComponent extends React.Component {
                 activePage={this.state.currentPage}
                 itemsCountPerPage={this.state.pageSize}
                 totalItemsCount={totalRecords}
-                pageRangeDisplayed={5}
+                pageRangeDisplayed={6}
                 // onChange={(pageNumber) => {
                 //     this.setState({ currentPage: pageNumber });
                 // }}
