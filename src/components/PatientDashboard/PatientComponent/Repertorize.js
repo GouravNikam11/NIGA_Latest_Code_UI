@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import { Link } from 'react-router-dom';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
@@ -105,12 +105,20 @@ class RepertorizePage extends React.Component {
             remedyCount: 0,
             marathiArray: [],
             englishArray: [],
-            referencerubric: []
+            referencerubric: [],
+
+            page: 1, // Current page
+            loading: false, // Loading state
+            hasMore: true,
+            selectedRemedyId:'',
+            selectedRequiredType:''
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleChange2 = this.handleChange2.bind(this);
         this.handleChange3 = this.handleChange3.bind(this);
         this.handleChange4 = this.handleChange4.bind(this);
+        this.detailsRef = createRef();
+        this.handleScroll = this.handleScroll.bind(this);
     }
 
     ///search
@@ -638,9 +646,14 @@ class RepertorizePage extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        this.props.getIntensities();
+
         if (prevProps.state.selectedRubrics !== this.props.state.selectedRubrics) {
             this.ToSelect();
+            this.props.getIntensities();
+        }
+        if (this.detailsRef.current) {
+            console.log('in ifff')
+            this.detailsRef.current.addEventListener('scroll', this.handleScroll);
         }
     }
 
@@ -650,6 +663,31 @@ class RepertorizePage extends React.Component {
                 ListSelectSection: temp,
             })
         });
+    }
+
+    componentWillUnmount() {
+        console.log('this.detailsRef.current =',this.detailsRef.current)
+        // Clean up the scroll event listener
+        if (this.detailsRef.current) {
+            this.detailsRef.current.removeEventListener('scroll', this.handleScroll);
+        }
+    }
+
+    handleScroll = () => {
+        console.log('called handleScroll')
+        if (this.detailsRef.current) {
+            const { scrollTop, scrollHeight, clientHeight } = this.detailsRef.current;
+            if (scrollHeight - scrollTop === clientHeight && !this.state.loading) {
+                // User reached the bottom, load more data
+                this.renderRubricCommonSmallRubric(this.state.selectedRemedyId,this.state.selectedRequiredType,0);
+            }
+
+            if (scrollTop + clientHeight < scrollHeight) {
+                console.log('Scrolling');
+              } else {
+                console.log('Not scrolling');
+              }
+        }
     }
 
     getauthor() {
@@ -1439,7 +1477,13 @@ class RepertorizePage extends React.Component {
         }
 
         return filteredListNewcommonRemedyList3.map((common, index) => {
-            return <Accordion onChange={this.handleChange3(index)} onClick={() => this.renderRubricCommonSmallRubric(common.remedyId, "SmallRubric", index)} key={index} expanded3={expanded3 === index} >
+            return <Accordion onChange={this.handleChange3(index)} onClick={() =>{
+                this.setState({
+                    selectedRemedyId:common.remedyId,
+                    selectedRequiredType:"SmallRubric"
+                });
+                this.renderRubricCommonSmallRubric(common.remedyId, "SmallRubric", index)
+            }} key={index} expanded3={expanded3 === index} >
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
                     <Typography onClick={(e) => { e.stopPropagation(); }} sx={{ width: '33%', flexShrink: 0 }}>
                         {/* <span title="Data/Information Hover Popup"> */}
@@ -1457,8 +1501,8 @@ class RepertorizePage extends React.Component {
                         <button class="btnscore"><span onClick={(e) => this.HandleBoldRubricOnRemedyClick(common)} title={`Score: ${common.score}`} class="scrvalue">[{common.score}]</span></button> <Progress color="primary" value={common.progressBar} className="pbar" title={`Max Index: ${common.maxIndex}, Progress Bar: ${common.progressBar} %`}>{common.maxIndex}</Progress>
                     </Typography>
                 </AccordionSummary>
-                <AccordionDetails>
-                    <Typography>
+                <AccordionDetails ref={this.detailsRef} style={{height:'200px'}} >
+                    <Typography key={index}>
                         <table class="w-100">
                             <tbody>
 
@@ -1643,19 +1687,51 @@ class RepertorizePage extends React.Component {
 
     renderRubricCommonSmallRubric = (remedyId, method, index) => {
         // this.state.RubricListByRemedySmallRubricCommon = []
-
-        CommonServices.postData({ remedyID: remedyId, requiredType: method }, `/clipboardRubrics/GetRepertorizarionRemedy`).then((result) => {
-
+        if (this.state.loading || !this.state.hasMore) {
+            return;
+        }
+        this.setState({ loading: true });
+        console.log('url = ',`/Pagination/GetRepertorizarionRemedyForAccordion?remedyID=${remedyId}&RequiredType=${method}&PageNumber=${this.state.page}&PageSize=${10}`)
+        CommonServices.getData(`/Pagination/GetRepertorizarionRemedyForAccordion?remedyID=${remedyId}&RequiredType=${method}&PageNumber=${this.state.page}&PageSize=${10}`).then((result) => {
+            console.log('result.data = ',result)
             if (!this.state.ListSelectSection.some(item => item.isChecked !== undefined && item.isChecked != false)) {
-                this.setState({ RubricListByRemedySmallRubricCommon: result.data });
+
+                this.setState(prevState => ({
+                    RubricListByRemedySmallRubricCommon: [...result.resultObject],
+                    page: prevState.page + 1,
+                    loading: false,
+                    hasMore: result.resultObject.length > 0
+                }));
             }
 
-            if (result.data.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId)).length > 0) {
+            if (result.resultObject.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId)).length > 0) {
 
-                this.setState({ RubricListByRemedySmallRubricCommon: result.data.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId)) });
+                // this.setState({ RubricListByRemedySmallRubricCommon: [...result.data.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId)) ],
+                //     page: prevState.page + 1,
+                //     loading: false,
+                //     hasMore: data.items.length > 0
+                // });
+                this.setState(prevState => ({
+                    RubricListByRemedySmallRubricCommon: [...result.resultObject.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId))],
+                    page: prevState.page + 1,
+                    loading: false,
+                    hasMore: result.resultObject.length > 0
+                }));
             }
-
         });
+
+        // CommonServices.postData({ remedyID: remedyId, requiredType: method }, `/clipboardRubrics/GetRepertorizarionRemedy`).then((result) => {
+
+        //     if (!this.state.ListSelectSection.some(item => item.isChecked !== undefined && item.isChecked != false)) {
+        //         this.setState({ RubricListByRemedySmallRubricCommon: result.data });
+        //     }
+
+        //     if (result.data.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId)).length > 0) {
+
+        //         this.setState({ RubricListByRemedySmallRubricCommon: result.data.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId)) });
+        //     }
+
+        // });
 
     }
 
