@@ -385,7 +385,7 @@ class PatientDashboard extends React.Component {
                         <TabContent activeTab={this.state.activeTab} style={{ backgroundColor: "#f5f5f5" }} >
                             <React.Suspense fallback={<Spinner style={{ marginLeft: "50%" }} size="md" color="primary" />} >
                                 <Reportary updatePassedId={this.updatePassedId} patientId={this.state.patientId} caseId={this.state.caseId} doctorId={this.props.match.params.doctorId} patientAppId={this.props.match.params.patientAppId} />
-                                <Question patientId={this.props.match.params.id} caseId={this.props.match.params.caseId} doctorId={this.props.match.params.doctorId} patientAppId={this.props.match.params.patientAppId} />
+                                <Question updatePassedId={this.updatePassedId} patientId={this.props.match.params.id} caseId={this.props.match.params.caseId} doctorId={this.props.match.params.doctorId} patientAppId={this.props.match.params.patientAppId} />
                                 <ClinicalPattern updatePassedId={this.updatePassedId} />
                                 <MateriaMedica remedyIdToMM={this.state.remedyId} />
                                 <AdverseEffect />

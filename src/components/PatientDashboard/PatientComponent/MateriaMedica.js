@@ -52,6 +52,7 @@ class ClinicalSummary extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            zoomLevel: 1,
             QuestionList: '',
             optionList: [],
             optionList3: [],
@@ -75,6 +76,8 @@ class ClinicalSummary extends React.Component {
             isLstRemedyLoad: false,
             RemedyIds: [],
         }
+        this.handleZoomIn = this.handleZoomIn.bind(this);
+        this.handleZoomOut = this.handleZoomOut.bind(this);
     }
     //s1=0;
     /**
@@ -87,8 +90,8 @@ class ClinicalSummary extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.remedyIdToMM !== this.props.remedyIdToMM) {
-            this.state.remedyId=this.props.remedyIdToMM
-            this.state.RemedyIds= []
+            this.state.remedyId = this.props.remedyIdToMM
+            this.state.RemedyIds = []
             this.getRemedynameToShow()
         }
     }
@@ -136,8 +139,32 @@ class ClinicalSummary extends React.Component {
             )
         })
     }
+    handleZoomIn = () => {
+        if(this.state.zoomLevel==1.2)
+        {
+            console.log("zoom",this.state.zoomLevel)
+        }
+        else{
+            console.log("zoom",this.state.zoomLevel)
+            this.setState(prevState => ({
+                zoomLevel: Math.round((prevState.zoomLevel + 0.1) * 100) / 100
+            }));
+        }
+       
+    };
 
+    // Method to handle zoom out
+    handleZoomOut = () => {
+        console.log("zoom",this.state.zoomLevel)
+        this.setState(prevState => ({
+            zoomLevel: prevState.zoomLevel > 0.1 
+                ? Math.round((prevState.zoomLevel - 0.1) * 100) / 100 
+                : 0.1 // Prevent zoom level going below 0.1
+        }));
+    };
 
+    
+   
 
     // renderSubsections = (subsections) => {
     //     debugger;
@@ -188,18 +215,18 @@ class ClinicalSummary extends React.Component {
                                     {/* <Input type="text"
                                         placeholder="Search..."
                                     /> */}
-                                        <AsyncPaginate isClearable
-                                    labelKey="value"
-                                    labelValue="RemedyId"
-                                    placeholder="Search remedy"
-                                    value={this.state.RemedyIds}
-                                    loadOptions={this.loadRemedies}
-                                    onChange={this.RemedyChanged.bind(this)}
-                                />
+                                    <AsyncPaginate isClearable
+                                        labelKey="value"
+                                        labelValue="RemedyId"
+                                        placeholder="Search remedy"
+                                        value={this.state.RemedyIds}
+                                        loadOptions={this.loadRemedies}
+                                        onChange={this.RemedyChanged.bind(this)}
+                                    />
                                 </Col>
 
                                 <Col sm="12" md="8">
-                                <Row>
+                                    <Row>
                                         <Col md="4" className='tright'>
                                             <FormLabel className='hthead1'><i className="fa fa-user"></i> | Author  </FormLabel>
                                         </Col>
@@ -217,7 +244,7 @@ class ClinicalSummary extends React.Component {
                                             </Form.Control>
                                         </Col>
                                     </Row>
-                                    </Col>
+                                </Col>
                             </Row>
 
                             <Row>
@@ -267,8 +294,15 @@ class ClinicalSummary extends React.Component {
                                 <Col md="12">
                                     <div responsive="true" className="divst0">
                                         <span size="sm" style={{ color: '#08478c', fontWeight: '700' }}>Information : </span>
-                                        <hr />
-                                        {/* <div class="medica">
+                                        <span className="auth"
+                                            onClick={() => this.handleZoomIn()}
+                                        ><i class="fa fa-user" aria-hidden="true"></i></span>
+                                        <span className="auth"
+                                            onClick={() => this.handleZoomOut()}
+                                        ><i class="fa fa-info" aria-hidden="true"></i></span>
+                                    </div>
+                                    <hr />
+                                    {/* <div class="medica">
                                                     <div class="row">
                                                         <div class="col">
                                                             <p>
@@ -301,42 +335,55 @@ class ClinicalSummary extends React.Component {
                                                     </div>
                                                 </div> */}
 
-                                        {this.state.authorId !== '' && this.state.remedyId!='' ?
+                                    <div >
+
+
+                                        {this.state.authorId !== '' && this.state.remedyId != '' ?
                                             <Row>
                                                 <Col sm="12" className='medica'>
                                                     {
                                                         this.state.lstRemedy.map((r, index) => {
                                                             return <Row key={index}>
                                                                 <Col>
-                                                                    {ReactHtmlParser(r.materiaMedicaDetail1)}</Col>
-                                                            </Row>
-                                                        })
-                                                    }
+                                                                    <div
+                                                                        style={{
+                                                                            transform: `scale(${this.state.zoomLevel.toFixed(2)})`,
+                                                                            transformOrigin: '0 0', // Ensures the scaling is consistent
+                                                                            transition: 'transform 0.2s', // Smooth transition,
+                                                                           
+                                                                        }}
+                                                                    >
+                                                                        {ReactHtmlParser(r.materiaMedicaDetail1)}
+                                                            </div>
+                                                            </Col>
+                                                        </Row>
+                                                    })
+                                                }
 
-                                                </Col>
-                                            </Row> :
-                                            <Row>
-                                                <Col sm="12" className='medica'>
-                                                    Please Select Author
-                                                </Col>
-                                            </Row>
-                                        }
-
-                                    </div>
+                                </Col>
+                            </Row> :
+                            <Row>
+                                <Col sm="12" className='medica'>
+                                    Please Select Author
                                 </Col>
                             </Row>
+                                    }
+
+                        </div>
+                    </Col>
+                </Row>
 
 
 
 
-                        </Col>
-                    </Row>
-                </div>
+            </Col>
+            </Row >
+                </div >
 
 
 
 
-            </TabPane>
+            </TabPane >
         )
     }
 
@@ -385,7 +432,7 @@ class ClinicalSummary extends React.Component {
 
     handleSectionChanges(e) {
         debugger
-        if (this.props.remedyIdToMM > 0 || this.state.remedyId>0) {
+        if (this.props.remedyIdToMM > 0 || this.state.remedyId > 0) {
             CommonServices.getData(`/MateriaMedicaRemediesDetails/GetMateriaMedicaRemediesDetails?remedyId=` + parseInt(this.state.remedyId) + `&authorId=` + parseInt(e.target.value)).then((temp) => {
                 console.log(temp)
                 this.setState({
@@ -403,8 +450,8 @@ class ClinicalSummary extends React.Component {
     getRemedynameToShow() {
         debugger;
         if (this.props.remedyIdToMM > 0) {
-            this.state.authorId=''
-            this.state.lstRemedy=[]
+            this.state.authorId = ''
+            this.state.lstRemedy = []
             CommonServices.getDataById(this.props.remedyIdToMM, `/remedy`).then((res) => {
                 debugger;
                 this.setState({
@@ -419,8 +466,8 @@ class ClinicalSummary extends React.Component {
     getRemedynameToShow2() {
         debugger;
         if (this.state.remedyId > 0) {
-            this.state.authorId=''
-            this.state.lstRemedy=[]
+            this.state.authorId = ''
+            this.state.lstRemedy = []
             CommonServices.getDataById(this.state.remedyId, `/remedy`).then((res) => {
                 debugger;
                 this.setState({
@@ -440,7 +487,7 @@ class ClinicalSummary extends React.Component {
             subsectionList = result;
             console.log('data===>>', result)
         })
-debugger
+        debugger
         subsectionList.map(x => options.push({ value: x.remedyId, label: x.remedyName }));
         let filteredOptions;
         if (!search) {
@@ -467,31 +514,30 @@ debugger
     RemedyChanged = (e) => {
         debugger;
         if (e != null) {
-            this.state.RemedyIds=e
-            this.state.remedyId=e.value
-        this.getRemedynameToShow2()
+            this.state.RemedyIds = e
+            this.state.remedyId = e.value
+            this.getRemedynameToShow2()
         }
-         else
-        {
+        else {
             // this.state.remedyId=0
             this.setState({
                 RemedyIds: [],
-                lstRemedy:[],
-                RemedyName:'',
-                remedyAlias:'',
-                authorId:''
+                lstRemedy: [],
+                RemedyName: '',
+                remedyAlias: '',
+                authorId: ''
             })
             // this.state.RemedyIds= []
 
         }
     }
-    GetAllRemedies(){
+    GetAllRemedies() {
         debugger
         return CommonServices.getData(`/MateriaMedicaMaster/GetRemedyDDL`).then((remadies) => {
-     
-         return remadies;
-     })
-         }
+
+            return remadies;
+        })
+    }
 };
 
 const mapStateToProps = (state) => ({

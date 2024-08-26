@@ -106,6 +106,8 @@ class ClinicalSummary extends React.Component {
 
     }
 
+   
+
     // show selected parent and chilc navigation options on question tab here/////////////////////
     componentDidUpdate() {
         //debugger
@@ -136,6 +138,24 @@ class ClinicalSummary extends React.Component {
              this.getSubGroupQuestionSection(this.props.childObject.ID, this.props.parentObject.ID)
          } */
     }
+
+    handleAddRubricClick = (remedyId) => {
+        this.props.updatePassedId(5, remedyId);
+        this.setState({
+            toggleOrderModel:false
+        })
+    };
+
+    handlePopuptoMM = (remedyId) => {
+        this.toggleOrderModal()
+        this.props.updatePassedId(5, remedyId);
+    };
+    ToggleAuthorAlias() {
+        this.setState((prevState) => ({
+            ShowAuthorAlias: !prevState.ShowAuthorAlias
+        }));
+    }
+
 
     getSubGroupQuestionSection(questiongroupId, questionsectionId) {
         //debugger

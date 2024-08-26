@@ -155,6 +155,13 @@ class HomeComponent extends React.Component {
         this.GetDiagnosisForClinicalPattern()
     }
 
+    handleAddRubricClick = (remedyId) => {
+        this.props.updatePassedId(5, remedyId);
+        this.setState({
+            toggleOrderModel:false
+        })
+    };
+
 
     GetDiagnosisForClinicalPattern() {
         CommonServices.getData(`/diagnosis/GetDiagnosisForClinicalPattern`).then((temp) => {
@@ -165,6 +172,9 @@ class HomeComponent extends React.Component {
     }
 
     loadDiagnosisListOptions = async (search, prevOptions) => {
+        this.setState({
+            DiagnosisIds:0
+        })
         const options = [];
         // var subsectionList 
         // await this.GetParentSubsections(this.state.sectionId).then((result) => {
@@ -205,7 +215,8 @@ class HomeComponent extends React.Component {
             investigations: '',
             miasm: '',
             therapeutics: {},
-            KeywordArray: []
+            KeywordArray: [],
+            DiagnosisIds:''
         })
         console.log("e====", e)
         if (e != null) {

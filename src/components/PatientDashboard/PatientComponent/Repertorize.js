@@ -1501,13 +1501,11 @@ class RepertorizePage extends React.Component {
                         <button class="btnscore"><span onClick={(e) => this.HandleBoldRubricOnRemedyClick(common)} title={`Score: ${common.score}`} class="scrvalue">[{common.score}]</span></button> <Progress color="primary" value={common.progressBar} className="pbar" title={`Max Index: ${common.maxIndex}, Progress Bar: ${common.progressBar} %`}>{common.maxIndex}</Progress>
                     </Typography>
                 </AccordionSummary>
-                <AccordionDetails ref={this.detailsRef} style={{height:'200px'}} >
+                <AccordionDetails >
                     <Typography key={index}>
                         <table class="w-100">
-                            <tbody>
-
+                            <tbody className="scrollable-tbody" ref={this.detailsRef}>
                                 {
-
                                     this.state.RubricListByRemedySmallRubricCommon?.filter
                                         (common => (this.state.SelectedgradeId === '' || common.gradeId === parseInt(this.state.SelectedgradeId)) &&
                                             (!this.state.ListSelectSection.some(item => item.isChecked !== undefined && item.isChecked != false) || this.state.ListSelectSection.some(selectedItem =>

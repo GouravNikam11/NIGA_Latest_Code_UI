@@ -1,3 +1,12 @@
+.scrollable-tbody {
+    display: block; /* Make tbody a block element */
+    max-height: 200px; /* Set the maximum height you want for tbody */
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Disable horizontal scrolling */
+    width: 100%; /* Ensure it takes up the full width */
+}
+
+
 .grade1css{
     font-size: 12px;
     /* font-family: 'Times New Roman'; */
