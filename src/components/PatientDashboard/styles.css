@@ -367,6 +367,20 @@ hr {
 
 }
 
+.zoombtn{
+    display: inline;
+    float: right;
+    cursor: pointer !important;
+    font-size: 12px;
+    color: #6354b1;
+    border: 1.5px solid;
+    padding: 0px 3px;
+    margin: 5px;
+    width: 22px;
+    text-align: center;
+    border-radius: 2px;
+}
+
 .tblr {
     padding: 0px !important;
     margin: 0px !important;
@@ -697,14 +711,16 @@ hr {
     position: relative;
     top: 0px;
     right: 20%;
-    padding: 1px 4px;
-    margin: -1px;
+    padding: 1px 5px;
+    margin: 1px;
     display: none;
     float: right;
     font-size: 9px;
     text-align: center;
-    font-weight: bold;
+    font-weight: 500;
     z-index: 99999 !important;
+    margin: 1px;
+    border: 1px solid gray;
 }
 
 .btn-clip0 {
@@ -716,22 +732,27 @@ hr {
     float: right;
     font-size: 9px;
     text-align: center;
-    font-weight: bold;
+    font-weight: 500;
     z-index: 99999 !important;
+    margin: 1px;
+    border: 1px solid gray;
 }
 
 .btn-clipboard1 {
     position: relative;
     top: 0px;
     padding: 1px 5px;
-    margin: -1px;
+    margin: 1px;
     display: none;
     float: right;
     font-size: 9px;
     text-align: center;
-    font-weight: bold;
+    font-weight: 500;
     z-index: 99999 !important;
+    margin: 1px;
+    border: 1px solid gray;
 }
+
 
 .rubric {
     font-size: 10.8px;
@@ -739,7 +760,7 @@ hr {
 }
 
 .rubric1 {
-    font-size: 10.8px;
+    font-size: 10px;
     word-break: break-word;
 }
 
@@ -2440,4 +2461,16 @@ hr {
 
 .form-control {
     font-size: 12px !important;
+  }
+
+  .rub1{
+    display: grid;
+  }
+
+  .tbl-in{
+    background: #efefef;
+  }
+
+  .divscroll{
+    overflow-x: scroll;
   }

@@ -1282,7 +1282,7 @@ class RepertorizePage extends React.Component {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        <table class="w-100">
+                        <table class="w-100 tbl-in">
                             {/* between filter and map */}
                             {/* (common => this.state.SelectedgradeId === '' || common.gradeId === parseInt(this.state.SelectedgradeId)) */}
 
@@ -1297,9 +1297,9 @@ class RepertorizePage extends React.Component {
 
                                             const { Intensities } = this.props?.intensity;
 
-                                            return (<tr class="rubric1" >
+                                            return (<tr class="rubric1 rub1" >
                                                 <td>
-                                                    {/* <span style={{ color: common.fontColor, fontFamily: common.fontName }}>{common.subSectionName}</span> */}
+                                                    {/* <span style={{ color: common.fontColor }}>{common.subSectionName}</span> */}
                                                     <span style={{ color: common.fontColor }}>{common.subSectionName}</span>
                                                     {Intensities?.map((intensity, index) => {
                                                         let id = `${common.subSectionId}${intensity.intensityNo}`;
@@ -1390,7 +1390,7 @@ class RepertorizePage extends React.Component {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        <table class="w-100">
+                        <table class="w-100 tbl-in">
                             <tbody>
 
                                 {
@@ -1405,7 +1405,7 @@ class RepertorizePage extends React.Component {
                                             if (this.state.RubricListByRemedyKolkattaUnCommon.length == 0) {
                                                 return (<tr><td>No data found</td></tr>)
                                             }
-                                            return (<tr class="rubric1" >
+                                            return (<tr class="rubric1 rub1" >
                                                 <td>
                                                     <span style={{ color: common.fontColor }}>{common.subSectionName}</span>
                                                     {Intensities?.map((intensity, index) => {
@@ -1503,7 +1503,7 @@ class RepertorizePage extends React.Component {
                 </AccordionSummary>
                 <AccordionDetails >
                     <Typography key={index}>
-                        <table class="w-100">
+                        <table class="w-100 tbl-in">
                             <tbody className="scrollable-tbody" ref={this.detailsRef}>
                                 {
                                     this.state.RubricListByRemedySmallRubricCommon?.filter
@@ -1516,9 +1516,9 @@ class RepertorizePage extends React.Component {
                                                 return (<tr><td>No data found</td></tr>)
                                             }
                                             const { Intensities } = this.props?.intensity;
-                                            return (<tr class="rubric1" >
+                                            return (<tr class="rubric1 rub1" >
                                                 <td>
-                                                    <span style={{ color: common.fontColor, fontFamily: common.fontName }}>{common.subSectionName}</span>
+                                                    <span style={{ color: common.fontColor }}>{common.subSectionName}</span>
                                                     {Intensities?.map((intensity, index) => {
                                                         let id = `${common.subSectionId}${intensity.intensityNo}`;
                                                         return (
@@ -1601,7 +1601,7 @@ class RepertorizePage extends React.Component {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        <table class="w-100">
+                        <table class="w-100 tbl-in">
                             <tbody>
                                 {
                                     this.state.RubricListByRemedySmallRubricUnCommon?.filter
@@ -1611,9 +1611,9 @@ class RepertorizePage extends React.Component {
                                             )))
                                         .map((common, index) => {
                                             const { Intensities } = this.props?.intensity;
-                                            return (<tr class="rubric1" >
+                                            return (<tr class="rubric1 rub1" >
                                                 <td>
-                                                    <span style={{ color: common.fontColor, fontFamily: common.fontName }}>{common.subSectionName}</span>
+                                                    <span style={{ color: common.fontColor}}>{common.subSectionName}</span>
                                                     {Intensities?.map((intensity, index) => {
                                                         let id = `${common.subSectionId}${intensity.intensityNo}`;
                                                         return (

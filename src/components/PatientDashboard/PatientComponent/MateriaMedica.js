@@ -292,16 +292,56 @@ class ClinicalSummary extends React.Component {
 
                             <Row className="mt-0">
                                 <Col md="12">
-                                    <div responsive="true" className="divst0">
+                                    <Row>
+                                        <Col sm="6">
                                         <span size="sm" style={{ color: '#08478c', fontWeight: '700' }}>Information : </span>
-                                        <span className="auth"
-                                            onClick={() => this.handleZoomIn()}
-                                        ><i class="fa fa-user" aria-hidden="true"></i></span>
-                                        <span className="auth"
-                                            onClick={() => this.handleZoomOut()}
-                                        ><i class="fa fa-info" aria-hidden="true"></i></span>
-                                    </div>
+                                        </Col>
+                                        <Col sm="6" className="text-right">
+                                        <span className="zoombtn" onClick={() => this.handleZoomOut()}><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                        <span className="zoombtn" onClick={() => this.handleZoomIn()}><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                        </Col>
+                                    </Row>
+
                                     <hr />
+
+                                    <div responsive="true" className="divst0 divscroll">
+                                       
+                                        {this.state.authorId !== '' && this.state.remedyId != '' ?
+                                            <Row>
+                                                <Col sm="12" className='medica'>
+                                                    {
+                                                        this.state.lstRemedy.map((r, index) => {
+                                                            return <Row key={index}>
+                                                                <Col>
+                                                                    <div
+                                                                        style={{
+                                                                            transform: `scale(${this.state.zoomLevel.toFixed(2)})`,
+                                                                            transformOrigin: '0 0', // Ensures the scaling is consistent
+                                                                            transition: 'transform 0.2s', // Smooth transition,
+                                                                           
+                                                                        }}
+                                                                    >
+                                                                        {ReactHtmlParser(r.materiaMedicaDetail1)}
+                                                                </div>
+                                                                </Col>
+                                                            </Row>
+                                                        })
+                                                    }
+                                                </Col>
+                                            </Row> :
+
+                                            <Row>
+                                                <Col sm="12" className='medica'>
+                                                    Please Select Author
+                                                </Col>
+                                            </Row>
+                                        }
+                                       
+
+                                    </div>
+
+                                    
+                                    
                                     {/* <div class="medica">
                                                     <div class="row">
                                                         <div class="col">
@@ -335,39 +375,13 @@ class ClinicalSummary extends React.Component {
                                                     </div>
                                                 </div> */}
 
+
+                                        
+
                                     <div >
 
 
-                                        {this.state.authorId !== '' && this.state.remedyId != '' ?
-                                            <Row>
-                                                <Col sm="12" className='medica'>
-                                                    {
-                                                        this.state.lstRemedy.map((r, index) => {
-                                                            return <Row key={index}>
-                                                                <Col>
-                                                                    <div
-                                                                        style={{
-                                                                            transform: `scale(${this.state.zoomLevel.toFixed(2)})`,
-                                                                            transformOrigin: '0 0', // Ensures the scaling is consistent
-                                                                            transition: 'transform 0.2s', // Smooth transition,
-                                                                           
-                                                                        }}
-                                                                    >
-                                                                        {ReactHtmlParser(r.materiaMedicaDetail1)}
-                                                            </div>
-                                                            </Col>
-                                                        </Row>
-                                                    })
-                                                }
-
-                                </Col>
-                            </Row> :
-                            <Row>
-                                <Col sm="12" className='medica'>
-                                    Please Select Author
-                                </Col>
-                            </Row>
-                                    }
+                                        
 
                         </div>
                     </Col>
