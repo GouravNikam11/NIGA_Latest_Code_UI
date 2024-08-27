@@ -110,15 +110,21 @@ class RepertorizePage extends React.Component {
             page: 1, // Current page
             loading: false, // Loading state
             hasMore: true,
-            selectedRemedyId:'',
-            selectedRequiredType:''
+            selectedRemedyId: '',
+            selectedRequiredType: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleChange2 = this.handleChange2.bind(this);
         this.handleChange3 = this.handleChange3.bind(this);
         this.handleChange4 = this.handleChange4.bind(this);
-        this.detailsRef = createRef();
-        this.handleScroll = this.handleScroll.bind(this);
+        this.renderSmallRubricCommonTabledetailsRef = createRef();
+        this.renderSmallRubricUnCommonTabledetailsRef = createRef();
+        this.renderKolkattaKeynoteCommonTabledetailsRef = createRef();
+        this.renderKolkattaKeynoteUnCommonTabledetailsRef = createRef();
+        //this.handleScroll = this.handleScroll.bind(this);
+       // this.handleSmallRubricUnCommonTableScroll = this.handleSmallRubricUnCommonTableScroll.bind(this);
+        // this.handleKolkattaKeynoteCommonTableScroll = this.handleKolkattaKeynoteCommonTableScroll.bind(this);
+        // this.handleKolkattaKeynoteUnCommonTableScroll = this.handleKolkattaKeynoteUnCommonTableScroll.bind(this);
     }
 
     ///search
@@ -167,61 +173,10 @@ class RepertorizePage extends React.Component {
         return (
             <TabPane tabId={8} >
                 <div className="labs-imagimg">
-
-                    {/* <Row>
-                        <Col sm="12" md="12">
-                        <div>
-                            <Accordion expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
-                                <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
-                                    <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                                        Remedy Name 1
-                                    </Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                    <Typography>
-                                        Rubric List
-                                    </Typography>
-                                </AccordionDetails>
-                            </Accordion>
-                            <Accordion expanded={expanded === 'panel2'} onChange={this.handleChange('panel2')}>
-                                <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel2bh-content"  id="panel2bh-header">
-                                    <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                                        Remedy Name 2
-                                    </Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                    <Typography>
-                                        Rubric List
-                                    </Typography>
-                                </AccordionDetails>
-                            </Accordion>
-                            <Accordion expanded={expanded === 'panel3'} onChange={this.handleChange('panel3')}>
-                                <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel3bh-content" id="panel3bh-header">
-                                    <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                                        Remedy Name 3
-                                    </Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                <Typography>
-                                    Rubric List
-                                </Typography>
-                                </AccordionDetails>
-                            </Accordion>
-                        
-                        </div>
-                        </Col>
-                    </Row> */}
-
                     <Row>
                         <Col sm="12" md="12">
                             <Row className="mb-1">
                                 <Col sm="12" md="3">
-                                    {/* <Input type="text"
-                                        placeholder="Rubric Search..."
-                                        name='searchText'
-                                        className="textrs"
-                                        onChange={this.SearchSearchRubricForRepertorization}
-                                    /> */}
                                 </Col>
 
                                 <Col sm="12" md="9" className="txtright">
@@ -269,27 +224,6 @@ class RepertorizePage extends React.Component {
                                             <Modal size="lg" isOpen={this.state.toggleOrderModel} toggle={this.toggleOrderModal.bind(this)} >
 
                                                 <ModalBody>
-                                                    {/* <Row>
-                                                        <Col md="12">
-                                                            {this.state.RemedyAndAuthor.map((item, index) => {
-                                                                return (
-                                                                    <span key={index}>
-                                                                        <span
-                                                                            style={{
-                                                                                fontFamily: item.fontName,
-                                                                                color: item.fontColor,
-                                                                                fontStyle: item.fontStyle,
-                                                                            }}
-                                                                            to="#">
-                                                                            <span>
-                                                                                {item.remedyAlias}, &nbsp;</span> </span>
-                                                                    </span>
-                                                                )
-                                                            })}
-                                                        </Col>
-                                                    </Row> */}
-
-
                                                     <div responsive="true">
                                                         <Row>
                                                             <Col md="12" className="txtright">
@@ -365,11 +299,7 @@ class RepertorizePage extends React.Component {
                                                                             const NewTab = 5
                                                                             return (
                                                                                 <span key={index} style={{ display: 'inline-block' }} class="remhov">
-                                                                                    {/* { */}
-                                                                                    {/* item.remediesModels.map((author, index) => {
-                                                                                                        return  */}
-                                                                                    {/* <span > */}
-                                                                                    {/* <Link to={`/PatientDashboard/${this.props.patientId}/${this.props.caseId}/${this.props.patientAppId}/${this.props.doctorId}/${NewTab}`} */}
+
                                                                                     <Link to={`#`}
                                                                                         style={{
                                                                                             textDecoration: 'none',
@@ -405,9 +335,6 @@ class RepertorizePage extends React.Component {
 
                                                                                         </span>
                                                                                     </Link>
-                                                                                    {/* </span> */}
-                                                                                    {/* }) */}
-                                                                                    {/* } */}
                                                                                 </span>
                                                                             )
                                                                         })}
@@ -643,6 +570,31 @@ class RepertorizePage extends React.Component {
         this.GetHeadingByAuthorid(this.state.selectedAuthorId);
         this.ToSelect();
         console.log('Rubrics For Repertorization == ', this.props.state.selectedRubrics)
+
+        this.observer = new IntersectionObserver(this.handleObserver, {
+            root: this.renderSmallRubricCommonTabledetailsRef.current,
+            rootMargin: '0px',
+            threshold: 1.0
+        });
+        
+        if (this.renderSmallRubricCommonTabledetailsRef.current) {
+            const target = this.renderSmallRubricCommonTabledetailsRef.current.querySelector('.scroll-trigger');
+            if (target) {
+                this.observer.observe(target);
+            }
+        }
+        // window.addEventListener('scroll', this.handleScroll);
+        this.observerSmallRubricUnCommonTable = new IntersectionObserver(this.handleObserverSmallRubricUnCommonTable, {
+            root: this.renderSmallRubricUnCommonTabledetailsRef.current,
+            rootMargin: '0px',
+            threshold: 1.0
+        });
+        if (this.renderSmallRubricUnCommonTabledetailsRef.current) {
+            const target = this.renderSmallRubricUnCommonTabledetailsRef.current.querySelector('.scroll-triggersmalluncommantable');
+            if (target) {
+                this.observerSmallRubricUnCommonTable.observe(target);
+            }
+        }
     }
 
     componentDidUpdate(prevProps) {
@@ -650,10 +602,6 @@ class RepertorizePage extends React.Component {
         if (prevProps.state.selectedRubrics !== this.props.state.selectedRubrics) {
             this.ToSelect();
             this.props.getIntensities();
-        }
-        if (this.detailsRef.current) {
-            console.log('in ifff')
-            this.detailsRef.current.addEventListener('scroll', this.handleScroll);
         }
     }
 
@@ -666,29 +614,40 @@ class RepertorizePage extends React.Component {
     }
 
     componentWillUnmount() {
-        console.log('this.detailsRef.current =',this.detailsRef.current)
-        // Clean up the scroll event listener
-        if (this.detailsRef.current) {
-            this.detailsRef.current.removeEventListener('scroll', this.handleScroll);
+        if (this.observer) {
+            this.observer.disconnect();
+        }
+
+        if (this.observerSmallRubricUnCommonTable) {
+            this.observerSmallRubricUnCommonTable.disconnect();
+        }
+    }
+    handleObserver = (entities) => {
+        console.log('handleObserver==')
+        const target = entities[0];
+        if (target.isIntersecting) {
+            this.renderRubricCommonSmallRubric(this.state.selectedRemedyId, this.state.selectedRequiredType, this.state.page);
         }
     }
 
-    handleScroll = () => {
-        console.log('called handleScroll')
-        if (this.detailsRef.current) {
-            const { scrollTop, scrollHeight, clientHeight } = this.detailsRef.current;
-            if (scrollHeight - scrollTop === clientHeight && !this.state.loading) {
-                // User reached the bottom, load more data
-                this.renderRubricCommonSmallRubric(this.state.selectedRemedyId,this.state.selectedRequiredType,0);
-            }
-
-            if (scrollTop + clientHeight < scrollHeight) {
-                console.log('Scrolling');
-              } else {
-                console.log('Not scrolling');
-              }
+    handleObserverSmallRubricUnCommonTable = (entities) => {
+        console.log('handleObserverSmallRubricUnCommonTable==')
+        const target = entities[0];
+        if (target.isIntersecting) {
+            this.renderRubricUnCommonSmallRubric(this.state.selectedRemedyId, this.state.selectedRequiredType, this.state.page);
         }
     }
+
+
+  /*   handleScroll = () => {
+        console.log('Bottom reached, loading more data...');
+        this.renderRubricCommonSmallRubric(this.state.selectedRemedyId, this.state.selectedRequiredType, 0);
+    } */
+
+   /*  handleSmallRubricUnCommonTableScroll = () => {
+        console.log('Bottom reached, loading more data...');
+        this.renderRubricUnCommonSmallRubric(this.state.selectedRemedyId, this.state.selectedRequiredType, 0);
+    } */
 
     getauthor() {
         CommonServices.getData(`/DropdownList/GetAuthorforMateriaMedicaDDL`).then((temp) => {
@@ -731,15 +690,7 @@ class RepertorizePage extends React.Component {
         });
 
         if (this.state.ClipboardRubricsEliminateModel.length > 0) {
-            // this.state.isLoad= true
             CommonServices.postData({ withoutEliminateRubric: array, withEliminateRubric: this.state.ClipboardRubricsEliminateModel }, `/clipboardRubrics/GetEliminationData`).then((temp) => {
-                // let filteredcommonRemedyList = temp.data.commonRemedyList;
-                // let filteredunCommonRemedyList = temp.data.unCommonRemedyList;
-
-                // if (this.state.thermalId !== '') {
-                //     filteredcommonRemedyList = temp.data.commonRemedyList.filter(item => item.thermalId === this.state.thermalId);
-                //     filteredunCommonRemedyList = temp.data.unCommonRemedyList.filter(item => item.thermalId === this.state.thermalId);
-                // }
                 this.setState({
                     commonRemedyList: temp.data.commonRemedyList,
                     unCommonRemedyList: temp.data.unCommonRemedyList,
@@ -753,23 +704,9 @@ class RepertorizePage extends React.Component {
 
         else {
             console.log("array001", array)
-            // this.state.isLoad= true
-            // CommonServices.postData(array, `/clipboardRubrics/GetCommanUnCommanRubricsDetailsBySubsectionId`).then((temp) => {
             CommonServices.postData(array, `/clipboardRubrics/GetCommanUnCommanRubricsDetails`).then((temp) => {
                 debugger
                 console.log("clipboardRubrics/GetDemo test", temp)
-                // this.setState({
-                //     commonRemedyList2: temp.data.commonRemedyList,
-                //     unCommonRemedyList2: temp.data.unCommonRemedyList,
-                // });
-
-                // let filteredcommonRemedyList = temp.data.commonRemedyList;
-                // let filteredunCommonRemedyList = temp.data.unCommonRemedyList;
-
-                // if (this.state.thermalId !== '') {
-                //     filteredcommonRemedyList = temp.data.commonRemedyList.filter(item => item.thermalId === this.state.thermalId);
-                //     filteredunCommonRemedyList = temp.data.unCommonRemedyList.filter(item => item.thermalId === this.state.thermalId);
-                // }
                 this.setState({
                     commonRemedyList: temp.data.commonRemedyList,
                     unCommonRemedyList: temp.data.unCommonRemedyList,
@@ -783,18 +720,10 @@ class RepertorizePage extends React.Component {
     }
 
     renderRubricsForRepertorization() {
-        // const selectedRubrics = this.props.state.selectedRubrics.filter((v, i, a) => a.findIndex(t => (t.subSectionId === v.subSectionId)) === i);;
-
         const { Intensities } = this.props?.intensity;
         if (!this.props.state.selectedRubrics?.length) {
             return (<tr><td><Alert color="danger">Please select Rubrics for Repertorization</Alert></td></tr>)
         }
-
-        // const keyword = this.state.SearchRubricForRepertorization
-        // this.state.NewtableData = selectedRubrics?.filter(common =>
-        //     common.subSectionName.toLowerCase().includes(keyword.toLowerCase())
-        // );
-
         return this.props.state.selectedRubrics?.map((rubric, index) => {
 
             console.log('this.props.state.selectedRubrics == ', this.props.state.selectedRubrics)
@@ -849,11 +778,6 @@ class RepertorizePage extends React.Component {
         let updateIntensity = this.props.state.selectedRubrics?.map(item =>
             item.subSectionId === subSectionId ? { ...item, intensity: intensityNo } : item
         );
-
-        // let updatedRemedyData = this.state.RemedyData.map(item =>
-        //     item.subSectionId === subSectionId ? { ...item, intensity: intensityNo } : item
-        // );
-
         this.props.state.selectedRubrics = updateIntensity
         this.ToSelect();
     }
@@ -864,7 +788,6 @@ class RepertorizePage extends React.Component {
         let authourList = this.state.authourList;
         return authourList.map((author, index) => (
             <Tab eventKey={author.authorId} title={author.authorName} style={{ overflowY: 'scroll', height: '370px' }}>
-                {/* <span className="divdet">Heading | (Score) | Remedy Name</span> */}
                 {this.renderTabContent()}
             </Tab>
         ));
@@ -1006,12 +929,6 @@ class RepertorizePage extends React.Component {
                 />
             </div>)
         }
-
-        // if (this.state.SearchRemedydefaultUnCommon === "") {
-        //     // this.setState({ NewcommonRemedyList : this.state.commonRemedyList})
-        //     this.state.NewunCommonRemedyList = this.state.unCommonRemedyList
-        // }
-
         const filteredListNewunCommonRemedyList = this.state.NewunCommonRemedyList.filter(item => this.state.thermalId === '' || item.thermalId === this.state.thermalId)
         if (filteredListNewunCommonRemedyList.length == 0) {
             return (<tr><td>No data found</td></tr>)
@@ -1140,15 +1057,9 @@ class RepertorizePage extends React.Component {
         if (this.state.ClipboardRubricsEliminateModel.length > 0 && (this.state.ShowDivCommonUnCommon == 2 || this.state.ShowDivCommonUnCommon == 3)) {
             debugger
             this.setState({
-                // thermalId: '',
                 SelectedgradeId: '',
                 ShowDivCommonUnCommon: Tab,
                 ListSelectSection: [],
-                // commonRemedyList: this.state.commonRemedyList2,
-                // unCommonRemedyList: this.state.unCommonRemedyList2,
-                // selectedCommonUnCommonTab:1,
-                // selectedAuthorId: 4,
-                // DifferentialMateriaMedica: [],
             });
             this.state.selectedAuthorId = 4
             this.GetDifferentialMateriaMedica()
@@ -1157,15 +1068,9 @@ class RepertorizePage extends React.Component {
 
         else if (this.state.ClipboardRubricsEliminateModel.length == 0) {
             this.setState({
-                // thermalId: '',
                 SelectedgradeId: '',
                 ShowDivCommonUnCommon: Tab,
                 ListSelectSection: [],
-                // commonRemedyList: this.state.commonRemedyList2,
-                // unCommonRemedyList: this.state.unCommonRemedyList2,
-                // selectedCommonUnCommonTab:1,
-                // selectedAuthorId: 4,
-                // DifferentialMateriaMedica: [],
             });
             // this.state.selectedCommonUnCommonTab=1
             this.state.thermalId = ''
@@ -1193,17 +1098,10 @@ class RepertorizePage extends React.Component {
 
     ChangeTabReset(Tab) {
         debugger
-        // if(this.state.ClipboardRubricsEliminateModel.length=0){
         this.setState({
             ShowDivCommonUnCommon: Tab,
-            // thermalId: '',
             SelectedgradeId: '',
-            // NewDifferentialMateriaMedica: [],
             ListSelectSection: [],
-            // commonRemedyList: this.state.commonRemedyList2,
-            // unCommonRemedyList: this.state.unCommonRemedyList2,
-            // selectedCommonUnCommonTab:1,
-            // selectedAuthorId: 4,
             ClipboardRubricsEliminateModel: [],
             RubricBoldModel: [],
             expanded: false,
@@ -1248,12 +1146,6 @@ class RepertorizePage extends React.Component {
                 />
             </div>)
         }
-
-        // if (this.state.SearchRemedydefaultCommon === "") {
-        //     // this.setState({ NewcommonRemedyList : this.state.commonRemedyList})
-        //     this.state.NewcommonRemedyList = this.state.commonRemedyList
-        // }
-
         const filteredListNewcommonRemedyList2 = this.state.NewcommonRemedyList.filter(item => this.state.thermalId === '' || item.thermalId === this.state.thermalId)
         if (filteredListNewcommonRemedyList2.length == 0) {
             return (<tr><td>No data found</td></tr>)
@@ -1283,9 +1175,6 @@ class RepertorizePage extends React.Component {
                 <AccordionDetails>
                     <Typography>
                         <table class="w-100 tbl-in">
-                            {/* between filter and map */}
-                            {/* (common => this.state.SelectedgradeId === '' || common.gradeId === parseInt(this.state.SelectedgradeId)) */}
-
                             <tbody>
                                 {
                                     this.state.RubricListByRemedyKolkattaCommon.filter
@@ -1357,14 +1246,6 @@ class RepertorizePage extends React.Component {
                 />
             </div>)
         }
-
-        // if (this.state.SearchRemedydefaultUnCommon === "") {
-        //     // this.setState({ NewcommonRemedyList : this.state.commonRemedyList})
-        //     this.state.NewunCommonRemedyList = this.state.unCommonRemedyList
-        // }
-
-
-
         const filteredListNewunCommonRemedyList2 = this.state.NewunCommonRemedyList.filter(item => this.state.thermalId === '' || item.thermalId === this.state.thermalId)
         if (filteredListNewunCommonRemedyList2.length == 0) {
             return (<tr><td>No data found</td></tr>)
@@ -1463,27 +1344,28 @@ class RepertorizePage extends React.Component {
                 />
             </div>)
         }
-
-        // if (this.state.SearchRemedydefaultCommon === "") {
-        //     // this.setState({ NewcommonRemedyList : this.state.commonRemedyList})
-        //     this.state.NewcommonRemedyList = this.state.commonRemedyList
-        // }
-
-
-
         const filteredListNewcommonRemedyList3 = this.state.NewcommonRemedyList.filter(item => this.state.thermalId === '' || item.thermalId === this.state.thermalId)
         if (filteredListNewcommonRemedyList3.length == 0) {
             return (<tr><td>No data found</td></tr>)
         }
 
         return filteredListNewcommonRemedyList3.map((common, index) => {
-            return <Accordion onChange={this.handleChange3(index)} onClick={() =>{
-                this.setState({
-                    selectedRemedyId:common.remedyId,
-                    selectedRequiredType:"SmallRubric"
-                });
-                this.renderRubricCommonSmallRubric(common.remedyId, "SmallRubric", index)
-            }} key={index} expanded3={expanded3 === index} >
+            const isExpanded = expanded3 === index;
+            return <Accordion onChange={() => this.setState({ expanded3: isExpanded ? null : index, RubricListByRemedySmallRubricCommon: []})}
+
+                expanded={isExpanded} onClick={() => {
+                    this.setState({
+                        selectedRemedyId: common.remedyId,
+                        selectedRequiredType: "SmallRubric",
+                        page: 1
+                    }, () => {
+                        console.log("State updated:", this.state);
+                        // You can perform any actions here after the state has been updated
+                        console.log('isExpanded =', isExpanded)
+                        this.renderRubricCommonSmallRubric(common.remedyId, "SmallRubric", 1)
+                    });
+                   
+                }} key={index}  >
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
                     <Typography onClick={(e) => { e.stopPropagation(); }} sx={{ width: '33%', flexShrink: 0 }}>
                         {/* <span title="Data/Information Hover Popup"> */}
@@ -1504,7 +1386,7 @@ class RepertorizePage extends React.Component {
                 <AccordionDetails >
                     <Typography key={index}>
                         <table class="w-100 tbl-in">
-                            <tbody className="scrollable-tbody" ref={this.detailsRef}>
+                            <tbody ref={this.renderSmallRubricCommonTabledetailsRef} style={{ overflowY: 'auto', maxHeight: '200px', display: 'block', overflowX: 'hidden', width: '100%' }}>
                                 {
                                     this.state.RubricListByRemedySmallRubricCommon?.filter
                                         (common => (this.state.SelectedgradeId === '' || common.gradeId === parseInt(this.state.SelectedgradeId)) &&
@@ -1538,6 +1420,9 @@ class RepertorizePage extends React.Component {
                                             )
                                         })
                                 }
+                                <tr className="scroll-trigger">
+                                    <td colSpan="3">Read More...</td>
+                                </tr>
 
                             </tbody>
                         </table>
@@ -1572,18 +1457,17 @@ class RepertorizePage extends React.Component {
                 />
             </div>)
         }
-
-        // if (this.state.SearchRemedydefaultUnCommon === "") {
-        //     this.state.NewunCommonRemedyList = this.state.unCommonRemedyList
-        // }
-
         const filteredListNewunCommonRemedyList3 = this.state.NewunCommonRemedyList.filter(item => this.state.thermalId === '' || item.thermalId === this.state.thermalId)
         if (filteredListNewunCommonRemedyList3.length == 0) {
             return (<tr><td>No data found</td></tr>)
         }
 
         return filteredListNewunCommonRemedyList3.map((common, index) => {
-            return <Accordion onChange={this.handleChange4(index)} onClick={() => this.renderRubricUnCommonSmallRubric(common.remedyId, "SmallRubric", index)} key={index} expanded4={expanded4 === index}>
+            const isExpanded = expanded4 === index
+            return <Accordion onChange={() =>
+                this.setState({ expanded4: isExpanded ? null : index, RubricListByRemedySmallRubricUnCommon: [], page: 1 })}
+                expanded={isExpanded}
+                onClick={() => this.renderRubricUnCommonSmallRubric(common.remedyId, "SmallRubric", index)} key={index} >
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
                     <Typography onClick={(e) => { e.stopPropagation(); }} sx={{ width: '33%', flexShrink: 0 }}>
                         {/* <span title="Data/Information Hover Popup"> */}
@@ -1602,7 +1486,7 @@ class RepertorizePage extends React.Component {
                 <AccordionDetails>
                     <Typography>
                         <table class="w-100 tbl-in">
-                            <tbody>
+                            <tbody ref={this.renderSmallRubricUnCommonTabledetailsRef} style={{ overflowY: 'auto', maxHeight: '200px', display: 'block', overflowX: 'hidden', width: '100%' }}>
                                 {
                                     this.state.RubricListByRemedySmallRubricUnCommon?.filter
                                         (common => (this.state.SelectedgradeId === '' || common.gradeId === parseInt(this.state.SelectedgradeId)) &&
@@ -1613,7 +1497,7 @@ class RepertorizePage extends React.Component {
                                             const { Intensities } = this.props?.intensity;
                                             return (<tr class="rubric1 rub1" >
                                                 <td>
-                                                    <span style={{ color: common.fontColor}}>{common.subSectionName}</span>
+                                                    <span style={{ color: common.fontColor }}>{common.subSectionName}</span>
                                                     {Intensities?.map((intensity, index) => {
                                                         let id = `${common.subSectionId}${intensity.intensityNo}`;
                                                         return (
@@ -1634,6 +1518,9 @@ class RepertorizePage extends React.Component {
                                             )
                                         })
                                 }
+                                <tr className="scroll-triggersmalluncommantable">
+                                    <td colSpan="3">Read More...</td>
+                                </tr>
                             </tbody>
                         </table>
                     </Typography>
@@ -1647,90 +1534,56 @@ class RepertorizePage extends React.Component {
     ///render rubric in remedy common Kolkatta Key note
 
     renderRubricCommonKolkatta = (remedyId, method, index) => {
-        // this.setState({ RubricListByRemedyKolkattaCommon: [] });
-        // this.setState.RubricListByRemedyKolkattaCommon= []
         CommonServices.postData({ remedyID: remedyId, requiredType: method }, `/clipboardRubrics/GetRepertorizarionRemedy`).then((result) => {
-
-
-            // if (!this.state.ListSelectSection.some(item => item.isChecked !== undefined && item.isChecked != false)) {
             this.setState({ RubricListByRemedyKolkattaCommon: result.data });
-            // }
-
-            //    else if (result.data.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId)).length > 0) {
-
-            //         this.setState({ RubricListByRemedyKolkattaCommon: result.data.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId)) });
-            //     }
-
         });
     }
 
     ///render kolkatta uncommon
     renderRubricUnCommonKolkatta = (remedyId, method, index) => {
-        // this.state.RubricListByRemedyKolkattaUnCommon = []
         this.setState({ RubricListByRemedyKolkattaUnCommon: [] });
-
         CommonServices.postData({ remedyID: remedyId, requiredType: method }, `/clipboardRubrics/GetRepertorizarionRemedy`).then((result) => {
-
-            // if (!this.state.ListSelectSection.some(item => item.isChecked !== undefined && item.isChecked != false)) {
             this.setState({ RubricListByRemedyKolkattaUnCommon: result.data });
-            // }
-
-            // if (result.data.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId)).length > 0) {
-
-            //     this.setState({ RubricListByRemedyKolkattaUnCommon: result.data.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId)) });
-            // }
         });
 
     }
 
-    renderRubricCommonSmallRubric = (remedyId, method, index) => {
+    renderRubricCommonSmallRubric = (remedyId, method, page) => {
         // this.state.RubricListByRemedySmallRubricCommon = []
         if (this.state.loading || !this.state.hasMore) {
             return;
         }
         this.setState({ loading: true });
-        console.log('url = ',`/Pagination/GetRepertorizarionRemedyForAccordion?remedyID=${remedyId}&RequiredType=${method}&PageNumber=${this.state.page}&PageSize=${10}`)
+        console.log('page = ', page)
+        console.log(`/Pagination/GetRepertorizarionRemedyForAccordion?remedyID=${remedyId}&RequiredType=${method}&PageNumber=${page}&PageSize=${10}`)
         CommonServices.getData(`/Pagination/GetRepertorizarionRemedyForAccordion?remedyID=${remedyId}&RequiredType=${method}&PageNumber=${this.state.page}&PageSize=${10}`).then((result) => {
-            console.log('result.data = ',result)
+            console.log('result.data = ', result)
             if (!this.state.ListSelectSection.some(item => item.isChecked !== undefined && item.isChecked != false)) {
-
-                this.setState(prevState => ({
-                    RubricListByRemedySmallRubricCommon: [...result.resultObject],
-                    page: prevState.page + 1,
-                    loading: false,
-                    hasMore: result.resultObject.length > 0
-                }));
+                console.log('in ifff ')
+                this.setState(prevState => {
+                    console.log('Current page:', prevState.page);
+                    const newPage = prevState.page + 1;
+                    console.log('New page:', newPage);
+                    return {
+                        page: newPage,
+                        loading: false,
+                        hasMore: result.resultObject.length > 0,
+                        RubricListByRemedySmallRubricCommon: [...prevState.RubricListByRemedySmallRubricCommon, ...result.resultObject],
+                        
+                    };
+                });
+                
             }
 
             if (result.resultObject.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId)).length > 0) {
-
-                // this.setState({ RubricListByRemedySmallRubricCommon: [...result.data.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId)) ],
-                //     page: prevState.page + 1,
-                //     loading: false,
-                //     hasMore: data.items.length > 0
-                // });
                 this.setState(prevState => ({
-                    RubricListByRemedySmallRubricCommon: [...result.resultObject.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId))],
+                    RubricListByRemedySmallRubricCommon: [...prevState.RubricListByRemedySmallRubricCommon, ...result.resultObject.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId))],
                     page: prevState.page + 1,
                     loading: false,
                     hasMore: result.resultObject.length > 0
                 }));
             }
         });
-
-        // CommonServices.postData({ remedyID: remedyId, requiredType: method }, `/clipboardRubrics/GetRepertorizarionRemedy`).then((result) => {
-
-        //     if (!this.state.ListSelectSection.some(item => item.isChecked !== undefined && item.isChecked != false)) {
-        //         this.setState({ RubricListByRemedySmallRubricCommon: result.data });
-        //     }
-
-        //     if (result.data.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId)).length > 0) {
-
-        //         this.setState({ RubricListByRemedySmallRubricCommon: result.data.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId)) });
-        //     }
-
-        // });
-
     }
 
 
@@ -1742,19 +1595,46 @@ class RepertorizePage extends React.Component {
 
 
     renderRubricUnCommonSmallRubric = (remedyId, method, index) => {
-        // this.state.RubricListByRemedySmallRubricUnCommon = []
-
-        CommonServices.postData({ remedyID: remedyId, requiredType: method }, `/clipboardRubrics/GetRepertorizarionRemedy`).then((result) => {
-
+        if (this.state.loading || !this.state.hasMore) {
+            return;
+        }
+        this.setState({ loading: true });
+        console.log(`/Pagination/GetRepertorizarionRemedyForAccordion?remedyID=${remedyId}&RequiredType=${method}&PageNumber=${this.state.page}&PageSize=${10}`)
+        CommonServices.getData(`/Pagination/GetRepertorizarionRemedyForAccordion?remedyID=${remedyId}&RequiredType=${method}&PageNumber=${this.state.page}&PageSize=${10}`).then((result) => {
+            console.log('result.data = ', result)
             if (!this.state.ListSelectSection.some(item => item.isChecked !== undefined && item.isChecked != false)) {
-                this.setState({ RubricListByRemedySmallRubricUnCommon: result.data });
+
+                this.setState(prevState => ({
+                    RubricListByRemedySmallRubricUnCommon: [...prevState.RubricListByRemedySmallRubricUnCommon, ...result.resultObject],
+                    page: prevState.page + 1,
+                    loading: false,
+                    hasMore: result.resultObject.length > 0
+                }));
             }
 
-            if (result.data.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId)).length > 0) {
-
-                this.setState({ RubricListByRemedySmallRubricUnCommon: result.data.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId)) });
+            if (result.resultObject.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId)).length > 0) {
+                this.setState(prevState => ({
+                    RubricListByRemedySmallRubricUnCommon: [...prevState.RubricListByRemedySmallRubricUnCommon, ...result.resultObject.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId))],
+                    page: prevState.page + 1,
+                    loading: false,
+                    hasMore: result.resultObject.length > 0
+                }));
             }
         });
+
+
+
+        // CommonServices.postData({ remedyID: remedyId, requiredType: method }, `/clipboardRubrics/GetRepertorizarionRemedy`).then((result) => {
+
+        //     if (!this.state.ListSelectSection.some(item => item.isChecked !== undefined && item.isChecked != false)) {
+        //         this.setState({ RubricListByRemedySmallRubricUnCommon: result.data });
+        //     }
+
+        //     if (result.data.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId)).length > 0) {
+
+        //         this.setState({ RubricListByRemedySmallRubricUnCommon: result.data.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId)) });
+        //     }
+        // });
     }
 
     ChangeThermalState(Tab) {
@@ -1818,29 +1698,9 @@ class RepertorizePage extends React.Component {
         this.setState({
             ListSelectSection: updatedList
         });
-
-        // this.setState({
-        //             expanded: false,
-        //             expanded2: false,
-        //             expanded3: false,
-        //             expanded4: false
-        //         });
-
-        // this.state.expanded= false
-        // this.state.expanded2= false
-        // this.state.expanded3= false
-        // this.state.expanded4= false
     }
 
     handleSelecteddgradeIdClick = (gradeId) => {
-        debugger
-        // this.setState({
-        //     expanded: false,
-        //     expanded2: false,
-        //     expanded3: false,
-        //     expanded4: false
-        // });
-
         if (this.state.SelectedgradeId == gradeId) {
             this.setState({ SelectedgradeId: '' });
 
@@ -1963,10 +1823,6 @@ class RepertorizePage extends React.Component {
             })
         });
     }
-
-    // componentWillUnmount() {
-    //     this.props.state.selectedRubrics = [];
-    // }
 }
 
 const mapStateToProps = (state) => ({

@@ -155,12 +155,18 @@ class ClinicalSummary extends React.Component {
 
     // Method to handle zoom out
     handleZoomOut = () => {
-        console.log("zoom",this.state.zoomLevel)
-        this.setState(prevState => ({
-            zoomLevel: prevState.zoomLevel > 0.1 
-                ? Math.round((prevState.zoomLevel - 0.1) * 100) / 100 
-                : 0.1 // Prevent zoom level going below 0.1
-        }));
+        if(this.state.zoomLevel==0.9){
+            console.log("zoom",this.state.zoomLevel)
+        }
+        else{
+           
+            this.setState(prevState => ({
+                zoomLevel: prevState.zoomLevel > 0.1 
+                    ? Math.round((prevState.zoomLevel - 0.1) * 100) / 100 
+                    : 0.1 // Prevent zoom level going below 0.1
+            }));
+        }
+       
     };
 
     
