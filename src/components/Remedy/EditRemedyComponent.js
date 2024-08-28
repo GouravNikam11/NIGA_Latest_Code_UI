@@ -3,6 +3,10 @@ import { Table, Col, FormGroup, Form, Row } from 'react-bootstrap';
 import { Button, Card, CardBody, CardFooter, CardHeader, } from 'reactstrap';
 import { Input, Label } from 'reactstrap';
 import CommonServices from '../../Services/CommonServices';
+import { Editor } from 'react-draft-wysiwyg';
+import { convertToRaw, EditorState, ContentState } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
 import { connect } from 'react-redux';
 import {
     enqueueSnackbar as enqueueSnackbarAction,
@@ -21,10 +25,16 @@ class EditRemedyComponent extends Component {
             EnteredBy: 'Admin',
             DeleteStatus: false,
             errors: {},
-            themesOrCharacteristics: '',
-            generals: '',
-            modalities: '',
-            particulars: '',
+
+            themesOrCharacteristics: [],
+            generals: [],
+            modalities: [],
+            particulars: [],
+
+            editorStateThemesCharacteristics: undefined,
+            editorStateGenerals: undefined,
+            editorStateModalities: undefined,
+            editorStateParticulars: undefined,
             commonOrUncommon: '',
             thermalId: null,
             thermalNameList: [],
@@ -33,7 +43,31 @@ class EditRemedyComponent extends Component {
         this.submitForm = this.submitForm.bind(this);
     }
 
+    handleChangeforeditorThemesCharacteristics = (rawDraftContentState) => {
+        this.setState({ themesOrCharacteristics: draftToHtml(convertToRaw(rawDraftContentState.getCurrentContent())) })
+        console.log('test = ', draftToHtml(convertToRaw(rawDraftContentState.getCurrentContent())))
+    }
+
+    handleChangeforeditorGenerals = (rawDraftContentState) => {
+        this.setState({ generals: draftToHtml(convertToRaw(rawDraftContentState.getCurrentContent())) })
+        //console.log('test = ', draftToHtml(convertToRaw(rawDraftContentState.getCurrentContent())))
+    }
+
+    handleChangeforModalities = (rawDraftContentState) => {
+        this.setState({ modalities: draftToHtml(convertToRaw(rawDraftContentState.getCurrentContent())) })
+        //console.log('test = ', draftToHtml(convertToRaw(rawDraftContentState.getCurrentContent())))
+    }
+
+    handleChangeforParticulars = (rawDraftContentState) => {
+        this.setState({ particulars: draftToHtml(convertToRaw(rawDraftContentState.getCurrentContent())) })
+        //console.log('test = ', draftToHtml(convertToRaw(rawDraftContentState.getCurrentContent())))
+    }
+
     render() {
+        const { editorStateThemesCharacteristics } = this.state;
+        const { editorStateGenerals } = this.state;
+        const { editorStateModalities } = this.state;
+        const { editorStateParticulars } = this.state;
         return (
             <Card>
 
@@ -70,7 +104,7 @@ class EditRemedyComponent extends Component {
 
                             <Col xs="12" md="4">
                                 <FormGroup >
-                                    <Label className="label" htmlFor="">Thermal Name 
+                                    <Label className="label" htmlFor="">Thermal Name
                                         <span className="required"></span> :</Label>
                                     <Form.Control as="select"
                                         name="thermalId"
@@ -89,7 +123,7 @@ class EditRemedyComponent extends Component {
                             <Col xs="12" md="6">
                                 <FormGroup >
                                     <Label className="label" htmlFor="">Description :</Label>
-                                    <textarea  placeholder="Description" className="form-control"
+                                    <textarea placeholder="Description" className="form-control"
                                         name="Description"
                                         onChange={this.handleChange}
                                         value={this.state.Description === null ? '' : this.state.Description} >
@@ -97,16 +131,16 @@ class EditRemedyComponent extends Component {
                                 </FormGroup>
                             </Col>
                             <Col xs="12" md="6">
-                                <FormGroup >
+                                {/* <FormGroup >
                                     <Label className="label" htmlFor="">Themes/ Characteristics :</Label>
                                     <textarea  placeholder="Themes/ Characteristics" className="form-control"
                                         name="themesOrCharacteristics"
                                         onChange={this.handleChange}
                                         value={this.state.themesOrCharacteristics === null ? '' : this.state.themesOrCharacteristics} >
                                     </textarea>
-                                </FormGroup>
+                                </FormGroup> */}
                             </Col>
-                            <Col xs="12" md="6">
+                            {/* <Col xs="12" md="6">
                                 <FormGroup >
                                     <Label className="label" htmlFor="">Generals :</Label>
                                     <textarea  placeholder="Generals" className="form-control"
@@ -115,8 +149,8 @@ class EditRemedyComponent extends Component {
                                         value={this.state.generals === null ? '' : this.state.generals} >
                                     </textarea>
                                 </FormGroup>
-                            </Col>
-                            <Col xs="12" md="6">
+                            </Col> */}
+                            {/* <Col xs="12" md="6">
                                 <FormGroup >
                                     <Label className="label" htmlFor="">Modalities :</Label>
                                     <textarea  placeholder="Modalities" className="form-control"
@@ -125,8 +159,8 @@ class EditRemedyComponent extends Component {
                                         value={this.state.modalities === null ? '' : this.state.modalities}  >
                                     </textarea>
                                 </FormGroup>
-                            </Col>
-                            <Col xs="12" md="6">
+                            </Col> */}
+                            {/* <Col xs="12" md="6">
                                 <FormGroup >
                                     <Label className="label" htmlFor="">Particulars :</Label>
                                     <textarea  placeholder="Particulars" className="form-control"
@@ -135,16 +169,139 @@ class EditRemedyComponent extends Component {
                                         value={this.state.particulars === null ? '' : this.state.particulars}  >
                                     </textarea>
                                 </FormGroup>
+                            </Col> */}
+
+                            <Col xs="12" md="6">
+                                <Label className="label" htmlFor="">Themes/ Characteristics :</Label>
+                                {editorStateThemesCharacteristics !== undefined &&    <div>
+                                    <Editor
+                                        wrapperClassName="demo-wrapper"
+                                        editorClassName="demo-editor"
+                                        onEditorStateChange={editorStateThemesCharacteristics => {
+                                            this.handleChangeforeditorThemesCharacteristics(editorStateThemesCharacteristics);
+                                        }}
+                                        toolbarClassName="toolbar-class"
+                                        defaultEditorState={editorStateThemesCharacteristics}
+                                        wrapperStyle={{
+                                            borderRadius: 5,
+                                            borderWidth: 1,
+                                            borderColor: '#0000'
+                                        }}
+                                        editorStyle={{
+                                            borderRadius: 2,
+                                            border: '1px solid lightgrey',
+                                            backgroundColor: '#FFFFFF',
+                                            height: '300px'
+                                        }}
+
+                                    />
+
+                                </div>
+                                }
+                            
+                            </Col>
+
+                            <Col xs="12" md="6">
+                                <Label className="label" htmlFor="">Generals :</Label>
+                                {
+                                    editorStateGenerals !== undefined &&  <div>
+                                    <Editor
+                                        wrapperClassName="demo-wrapper"
+                                        editorClassName="demo-editor"
+                                        onEditorStateChange={editorStateGenerals => {
+                                            this.handleChangeforeditorGenerals(editorStateGenerals);
+                                        }}
+                                        toolbarClassName="toolbar-class"
+                                        defaultEditorState={editorStateGenerals}
+                                        wrapperStyle={{
+                                            borderRadius: 5,
+                                            borderWidth: 1,
+                                            borderColor: '#0000'
+                                        }}
+                                        editorStyle={{
+                                            borderRadius: 2,
+                                            border: '1px solid lightgrey',
+                                            backgroundColor: '#FFFFFF',
+                                            height: '300px'
+                                        }}
+
+                                    />
+
+                                </div>
+                                }
+                               
+                            </Col>
+
+                            <Col xs="12" md="6">
+                                <Label className="label" htmlFor="">Modalities :</Label>
+                                { editorStateModalities !== undefined &&  <div>
+                                    <Editor
+                                        wrapperClassName="demo-wrapper"
+                                        editorClassName="demo-editor"
+                                        onEditorStateChange={editorStateModalities => {
+                                            this.handleChangeforModalities(editorStateModalities);
+                                        }}
+                                        toolbarClassName="toolbar-class"
+                                        defaultEditorState={editorStateModalities}
+                                        wrapperStyle={{
+                                            borderRadius: 5,
+                                            borderWidth: 1,
+                                            borderColor: '#0000'
+                                        }}
+                                        editorStyle={{
+                                            borderRadius: 2,
+                                            border: '1px solid lightgrey',
+                                            backgroundColor: '#FFFFFF',
+                                            height: '300px'
+                                        }}
+
+                                    />
+
+                                </div>
+
+                                }
+                              
+                            </Col>
+
+                            <Col xs="12" md="6">
+                                <Label className="label" htmlFor="">Particulars :</Label>
+                                {editorStateParticulars !== undefined &&  <div>
+                                    <Editor
+                                        wrapperClassName="demo-wrapper"
+                                        editorClassName="demo-editor"
+                                        onEditorStateChange={editorStateParticulars => {
+                                            this.handleChangeforParticulars(editorStateParticulars);
+                                        }}
+                                        toolbarClassName="toolbar-class"
+                                        defaultEditorState={editorStateParticulars}
+                                        wrapperStyle={{
+                                            borderRadius: 5,
+                                            borderWidth: 1,
+                                            borderColor: '#0000'
+                                        }}
+                                        editorStyle={{
+                                            borderRadius: 2,
+                                            border: '1px solid lightgrey',
+                                            backgroundColor: '#FFFFFF',
+                                            height: '300px'
+                                        }}
+
+                                    />
+
+                                </div>
+
+                                }
+                              
                             </Col>
                             <Col xs="12" md="6">
                                 <FormGroup >
-                                    <Label className="label" htmlFor="">Common ? :</Label><br/>
+                                    <Label className="label" htmlFor="">Common ? :</Label><br />
                                     <input class="form-check-input-check" type="checkbox" value="" id="" checked={this.state.commonOrUncommon}
-                                            onChange={() => this.setState({ commonOrUncommon: !this.state.commonOrUncommon })} />
+                                        onChange={() => this.setState({ commonOrUncommon: !this.state.commonOrUncommon })} />
                                 </FormGroup>
                             </Col>
 
-                            
+
                         </Row>
 
                     </Form>
@@ -209,17 +366,17 @@ class EditRemedyComponent extends Component {
     componentDidMount() {
         var Id = this.props.match.params.id;
         this.editRemedy(this.props.match.params.id);
-         this.getThermalNameList();
+        this.getThermalNameList();
     }
     submitForm() {
 
         if (this.validateForm()) {
+        console.log("submit===",this.state)
+            // CommonServices.postData(this.state, `/remedy`).then((responseMessage) => {
+            //     this.props.enqueueSnackbarAction(responseMessage.data);
+            //     this.props.history.push('/ListRemedy');
 
-            CommonServices.postData(this.state, `/remedy`).then((responseMessage) => {
-                this.props.enqueueSnackbarAction(responseMessage.data);
-                this.props.history.push('/ListRemedy');
-
-            });
+            // });
             this.setState({
                 remedyId: 0,
                 RemedyName: "",
@@ -232,7 +389,7 @@ class EditRemedyComponent extends Component {
                 modalities: '',
                 particulars: '',
                 commonOrUncommon: '',
-                thermalId:''
+                thermalId: ''
             });
         }
 
@@ -243,6 +400,39 @@ class EditRemedyComponent extends Component {
         if (remedyId != undefined) {
             CommonServices.getDataById(remedyId, `/remedy`).then((res) => {
                 debugger;
+                console.log("remedy==",res)
+                // this is fot editorStateThemesCharacteristics
+                const blocksFromHTMLThemesCharacteristics = htmlToDraft(res.themesOrCharacteristics)
+                const contentStateThemesCharacteristics = ContentState.createFromBlockArray(
+                    blocksFromHTMLThemesCharacteristics.contentBlocks,
+                    blocksFromHTMLThemesCharacteristics.entityMap
+                );
+                const editorStateThemesCharacteristics = EditorState.createWithContent(contentStateThemesCharacteristics);
+                console.log("editorStateThemesCharacteristics==",editorStateThemesCharacteristics)
+                // this is fot editorStateGenerals
+                const blocksFromHTMLgenerals = htmlToDraft(res.generals)
+                const contentStategenerals = ContentState.createFromBlockArray(
+                    blocksFromHTMLgenerals.contentBlocks,
+                    blocksFromHTMLgenerals.entityMap
+                );
+                const editorStateGenerals = EditorState.createWithContent(contentStategenerals);
+               
+                // this is fot editorStatemodalities 
+                const blocksFromHTMLModalities = htmlToDraft(res.generals)
+                const contentStateModalities = ContentState.createFromBlockArray(
+                    blocksFromHTMLModalities.contentBlocks,
+                    blocksFromHTMLModalities.entityMap
+                );
+                const editorStateModalities = EditorState.createWithContent(contentStateModalities);
+
+                // this is fot editorStatemodalities 
+                const blocksFromHTMLparticulars = htmlToDraft(res.particulars)
+                const contentStateparticulars = ContentState.createFromBlockArray(
+                    blocksFromHTMLparticulars.contentBlocks,
+                    blocksFromHTMLparticulars.entityMap
+                );
+                const editorStateParticulars = EditorState.createWithContent(contentStateparticulars);
+
                 this.setState({
                     remedyId: res.remedyId,
                     RemedyName: res.remedyName,
@@ -250,10 +440,10 @@ class EditRemedyComponent extends Component {
                     Description: res.description,
                     EnteredBy: 'Admin',
                     DeleteStatus: false,
-                    themesOrCharacteristics: res.themesOrCharacteristics,
-                    generals: res.generals,
-                    modalities: res.modalities,
-                    particulars: res.particulars,
+                    editorStateThemesCharacteristics: editorStateThemesCharacteristics,
+                    editorStateGenerals: editorStateGenerals,
+                    editorStateModalities: editorStateModalities,
+                    editorStateParticulars: editorStateParticulars,
                     commonOrUncommon: res.commonOrUncommon,
                     thermalId: res.thermalId,
                 })
