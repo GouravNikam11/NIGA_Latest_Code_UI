@@ -323,7 +323,7 @@ hr {
 .hover-text1 {
     position: relative;
     display: inline-block;
-    margin: 10px;
+    margin: 6px;
     text-align: center;
 }
 
@@ -348,7 +348,7 @@ hr {
 .hover-text2 {
     position: relative;
     display: inline-block;
-    margin: 10px;
+    margin: 6px;
     text-align: center;
 }
 
@@ -356,15 +356,15 @@ hr {
     display: inline;
     float: left;
     cursor: pointer !important;
-    font-size: 16px;
+    font-size: 15px;
     color: #6354b1;
     border: 1.5px solid;
-    padding: 0px 6px;
-    margin: 10px;
-    width: 28px;
+    padding: 0px 0px;
+    margin: 6px;
+    width: 26px;
+    height: 24px;
     text-align: center;
     border-radius: 2px;
-
 }
 
 .zoombtn{
@@ -496,7 +496,7 @@ hr {
 .nav-tabs .nav-link.active {
     color: #2f353a;
     font-weight: 500;
-    border-bottom: 2px solid #001646 !important;
+    border-bottom: 2px solid #20a8d8 !important;
 }
 
 .side-navigation-panel-select-option-selected{
@@ -2371,10 +2371,9 @@ hr {
     padding: 0px 5px !important;
 }
 
-.css-yk16xz-control,
-.css-1pahdxg-control {
-    /* height: 30px !important;
-    min-height: 30px !important; */
+.css-yk16xz-control, .css-1pahdxg-control {
+    /* height: 3px !important;*/
+    min-height: 31px !important; 
 }
 
 .form-group {
@@ -2473,4 +2472,47 @@ hr {
 
   .divscroll{
     overflow-x: scroll;
+  }
+
+  .padd-ot{
+    padding: 0px 6px !important;
+  }
+
+  .padd-in{
+    padding: 2px 9px !important;
+  }
+
+  .modal-txt1{
+    background: #dbefff;
+    border-radius: 5px;
+    text-align: left;
+    padding: 5px;
+    text-align: justify;
+  }
+
+  .modal-txt2{
+    background: #96a3b4;
+    border-radius: 5px;
+    text-align: left;
+    padding: 5px;
+    margin-top: 5px;
+    text-align: justify;
+  }
+
+  .modal-txt3{
+    background: #dbefff;
+    border-radius: 5px;
+    text-align: left;
+    padding: 5px;
+    margin-top: 5px;
+    text-align: justify;
+  }
+
+  .modal-txt4{
+    background: #96a3b4;
+    border-radius: 5px;
+    text-align: left;
+    padding: 5px;
+    margin-top: 5px;
+    text-align: justify;
   }

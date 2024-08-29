@@ -73,7 +73,7 @@ class Prescription extends React.Component {
                             <span className="add-lab-order pull-right">
                                 <Button disabled={this.props?.location.state?.TabIdFromPatientHistoryforprec != undefined} onClick={this.SavePres.bind(this)}
                                     className="addButton mb-1"
-                                    style={{ backgroundColor: "#268026" }}
+                                    style={{ backgroundColor: "#20a8d8" }}
                                     type="button"
                                     size="sm" color="primary">
                                     <i className="fa fa-save" color="#FFF"></i> &nbsp; Save Prescription
@@ -81,16 +81,16 @@ class Prescription extends React.Component {
                             </span>
                         </Col>
                     </Row>
-                    <hr />
-                    <br />
-                    <Row>
-                        <Col md="3" sm="12" xs="12">
+                    <hr className='mb-2'/>
+                    <Row className="padd-ot">
+                        <Col md="3" sm="12" xs="12" className='p-0'>
                             {/* <AsyncPaginate isClearable
                                 labelKey="value"
                                 labelValue=""
                                 placeholder="Type & Search"
                             /> */}
                             <AsyncPaginate disabled={this.props?.location.state?.TabIdFromPatientHistoryforprec != undefined}
+                                className="padd-in"
                                 labelKey="value"
                                 labelValue="RemedyId"
                                 placeholder="Select Remedy"
@@ -99,16 +99,16 @@ class Prescription extends React.Component {
                                 onChange={this.RemedyChanged.bind(this)}
                             />
                         </Col>
-                        <Col md="8" sm="12" xs="12"  >
-                            <FormGroup >
+                        <Col md="8" sm="12" xs="12" className='p-0'>
+                            <FormGroup className="mb-0 padd-in">
                                 <textarea class="form-text" disabled={this.props?.location.state?.TabIdFromPatientHistoryforprec != undefined}
-                                    placeholder="Remedy Description" name="PrescriptionDec" rows={3}
+                                    placeholder="Remedy Description" name="PrescriptionDec" rows={1}
                                     onChange={this.handleChange}
                                     value={this.state.PrescriptionDec === null ? '' : this.state.PrescriptionDec} ></textarea>
                             </FormGroup>
                         </Col>
-                        <Col md="1" sm="12" xs="12">
-                            <span className="add-lab-order pull-right">
+                        <Col md="1" sm="12" xs="12" className='p-0'>
+                            <span className="add-lab-order pull-right padd-in">
                                 <Button onClick={this.AddRemedyAndPrescriptiontolist.bind(this)}
                                     className="addButton" disabled={this.props?.location.state?.TabIdFromPatientHistoryforprec != undefined}
                                     style={{ backgroundColor: "#11b3ea" }}
@@ -119,8 +119,7 @@ class Prescription extends React.Component {
                             </span>
                         </Col>
                     </Row>
-                    <hr />
-                    <br />
+                    <hr className='mb-2 mt-2'/>
                     <Row>
                         <Col sm="12" md="12">
                             <Table hover>
