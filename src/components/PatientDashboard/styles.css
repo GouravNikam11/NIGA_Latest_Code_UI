@@ -61,13 +61,16 @@
 }
 
 .remhov {
-    padding: 1px 3px;
+    padding: 2px 3px;
     border-radius: 2px;
+    margin: 0px 2px;
 }
 
 .remhov:hover {
     border-radius: 3px;
     background: #e1e1e1 !important;
+    margin: 0px 2px;
+    padding: 0px 5px;
 }
 
 .profile-info {
@@ -235,7 +238,7 @@ ul.quick_actions {
     background: none !important;
 }
 
-.card-header {
+.card-header, .card-footer {
     padding: 8px !important;
 }
 
@@ -280,7 +283,9 @@ hr {
     width: 60%;
     border-radius: 5px;
     color: #000;
-    background-color: #acc7de;
+    background-color: #3b4a88;
+    padding: 5px;
+    border: 1px solid gray;
     padding: 5px;
     margin: auto;
     /* Centering horizontally */
@@ -309,11 +314,12 @@ hr {
     z-index: 1;
     width: 100px;
     border-radius: 5px;
-    color: black;
-    background-color: #acc7de;
+    color: white;
     padding: 5px;
     margin-top: 7px;
     right: 10%;
+    background-color: #3b4a88;
+    border: 1px solid gray;
 }
 
 .hover-text1:hover .tooltip-text1 {
@@ -324,7 +330,8 @@ hr {
     position: relative;
     display: inline-block;
     margin: 6px;
-    text-align: center;
+    font-size: 11px;
+    text-align: left;
 }
 
 
@@ -334,11 +341,13 @@ hr {
     z-index: 1;
     width: 100px;
     border-radius: 5px;
-    color: black;
+    color: white;
     background-color: #acc7de;
     padding: 5px;
     margin-top: 7px;
     right: 10%;
+    background-color: #3b4a88;
+    border: 1px solid gray;
 }
 
 .hover-text2:hover .tooltip-text2 {
@@ -349,7 +358,8 @@ hr {
     position: relative;
     display: inline-block;
     margin: 6px;
-    text-align: center;
+    font-size: 11px;
+    text-align: left;
 }
 
 .auth {
@@ -496,7 +506,8 @@ hr {
 .nav-tabs .nav-link.active {
     color: #2f353a;
     font-weight: 500;
-    border-bottom: 2px solid #20a8d8 !important;
+    border-bottom: 5px solid #20a8d8 !important;
+    height: 30px;
 }
 
 .side-navigation-panel-select-option-selected{
@@ -927,7 +938,7 @@ hr {
 .vertop {
     vertical-align: top !important;
     width: 33.33%;
-    border: 1px solid #08478c;
+    border: 1px solid #dadada;
     background: rgb(255, 255, 255);
     font-weight: 500;
     text-align: left !important;
@@ -935,7 +946,7 @@ hr {
 }
 
 .mtext {
-    font-size: 16px;
+    /* font-size: 16px; */
     font-weight: 700;
     color: #224285;
     vertical-align: middle;
@@ -946,14 +957,14 @@ hr {
     text-align: center;
     letter-spacing: 2px;
     text-transform: uppercase;
-    background: #224285 !important;
+    background: #676767 !important;
 }
 
 .stext {
     font-weight: 700;
     color: #831b06;
     vertical-align: middle;
-    font-size: 13px;
+    /* font-size: 13px; */
     padding-left: 10px;
 }
 
@@ -962,7 +973,7 @@ hr {
     color: #6c299f;
     vertical-align: middle;
     font-style: italic;
-    font-size: 13px;
+    /* font-size: 13px; */
     float: right;
 }
 
@@ -973,8 +984,7 @@ hr {
     width: 100%;
 }
 
-.table td,
-.table th {
+.table td, .table th {
     padding: 0.3rem 0.3rem !important;
 }
 
@@ -2405,7 +2415,7 @@ hr {
     width: 60%;
     border-radius: 5px;
     color: #000;
-    background-color: #acc7de;
+    background-color: #3b4a88;
     padding: 5px;
     margin: auto;
     /* Centering horizontally */
@@ -2441,7 +2451,7 @@ hr {
     width: 50%;
     border-radius: 5px;
     color: #000;
-    background-color: #acc7de;
+    background-color: #3b4a88;
     padding: 5px;
     margin-top: 20px;
     left: 15%;
@@ -2487,32 +2497,36 @@ hr {
     border-radius: 5px;
     text-align: left;
     padding: 5px;
+    font-size: 11px;
     text-align: justify;
   }
 
   .modal-txt2{
-    background: #96a3b4;
+    background: #bae1ff;
     border-radius: 5px;
     text-align: left;
     padding: 5px;
+    font-size: 11px;
     margin-top: 5px;
     text-align: justify;
   }
 
   .modal-txt3{
-    background: #dbefff;
+    background: #9accf4;
     border-radius: 5px;
     text-align: left;
     padding: 5px;
+    font-size: 11px;
     margin-top: 5px;
     text-align: justify;
   }
 
   .modal-txt4{
-    background: #96a3b4;
+    background: #83c6fa;
     border-radius: 5px;
     text-align: left;
     padding: 5px;
+    font-size: 11px;
     margin-top: 5px;
     text-align: justify;
   }

@@ -324,11 +324,10 @@ class RepertorizePage extends React.Component {
                                                                                                 <span className='hover-text3'>
                                                                                                     <i class="fa fa-info" aria-hidden="true" style={{ marginLeft: 10, color: 'black' }}></i>
                                                                                                     <div class="tooltip-text3">
-                                                                                                        <strong>Themes/Characteristics : </strong> {item.themesORCharacteristics} <br></br><br></br>
-                                                                                                        <strong class="mt-2">Generals : </strong> {item.generals} <br></br><br></br>
-                                                                                                        <strong class="mt-2">Modalities : </strong> {item.modalities} <br></br><br></br>
-                                                                                                        <strong class="mt-2">Particulars : </strong> {item.particulars}
-
+                                                                                                        <div className='modal-txt1'><strong>Themes/Characteristics : </strong> {item.themesORCharacteristics}</div>
+                                                                                                        <div className='modal-txt2'><strong class="mt-2">Generals : </strong> {item.generals}</div>
+                                                                                                        <div className='modal-txt3'><strong class="mt-2">Modalities : </strong> {item.modalities}</div>
+                                                                                                        <div className='modal-txt4'><strong class="mt-2">Particulars : </strong> {item.particulars}</div>
                                                                                                     </div>
                                                                                                 </span>
                                                                                             }
@@ -893,10 +892,10 @@ class RepertorizePage extends React.Component {
                         {common.remedyName}
                     </span>
                     <div class="dvCommhide">
-                        <strong>Themes/Characteristics : </strong> {common.themesOrCharacteristics} <br></br><br></br>
-                        <strong class="mt-2">Generals : </strong> {common.generals} <br></br><br></br>
-                        <strong class="mt-2">Modalities : </strong> {common.modalities} <br></br><br></br>
-                        <strong class="mt-2">Particulars : </strong> {common.particulars}
+                        <div className='modal-txt1'><strong>Themes/Characteristics : </strong> {common.themesOrCharacteristics}</div>
+                        <div className='modal-txt2'><strong class="mt-2">Generals : </strong> {common.generals}</div>
+                        <div className='modal-txt3'><strong class="mt-2">Modalities : </strong> {common.modalities}</div>
+                        <div className='modal-txt4'><strong class="mt-2">Particulars : </strong> {common.particulars}</div>
                     </div>
                     <button class="btnscore"><span onClick={(e) => this.HandleBoldRubricOnRemedyClick(common)} title={`Score: ${common.score}`} class="scrvalue">[{common.score}]</span></button> <Progress color="primary" value={common.progressBar} className="pbar" title={`Max Index: ${common.maxIndex}, Progress Bar: ${common.progressBar} %`}>{common.maxIndex}</Progress>
                 </td>
@@ -942,10 +941,10 @@ class RepertorizePage extends React.Component {
                         {common.remedyName}
                     </span>
                     <div class="dvUncommhide">
-                        <strong>Themes/Characteristics : </strong> {common.themesOrCharacteristics} <br></br><br></br>
-                        <strong class="mt-2">Generals : </strong> {common.generals} <br></br><br></br>
-                        <strong class="mt-2">Modalities : </strong> {common.modalities} <br></br><br></br>
-                        <strong class="mt-2">Particulars : </strong> {common.particulars}
+                        <div className='modal-txt1'><strong>Themes/Characteristics : </strong> {common.themesOrCharacteristics}</div>
+                        <div className='modal-txt2'><strong class="mt-2">Generals : </strong> {common.generals}</div>
+                        <div className='modal-txt3'><strong class="mt-2">Modalities : </strong> {common.modalities}</div>
+                        <div className='modal-txt4'><strong class="mt-2">Particulars : </strong> {common.particulars}</div>
                     </div>
 
                     <button class="btnscore"><span onClick={(e) => this.HandleBoldRubricOnRemedyClick(common)} title={`Score: ${common.score}`} class="scrvalue">[{common.score}]</span></button> <Progress color="primary" value={common.progressBar} className="pbar" title={`Max Index: ${common.maxIndex}, Progress Bar: ${common.progressBar} %`}>{common.maxIndex}</Progress>
@@ -1161,10 +1160,10 @@ class RepertorizePage extends React.Component {
                             {common.remedyName}
                         </span>
                         <div class="dvCommhide">
-                            <strong>Themes/Characteristics : </strong> {common.themesOrCharacteristics} <br></br><br></br>
-                            <strong class="mt-2">Generals : </strong> {common.generals} <br></br><br></br>
-                            <strong class="mt-2">Modalities : </strong> {common.modalities} <br></br><br></br>
-                            <strong class="mt-2">Particulars : </strong> {common.particulars}
+                            <div className='modal-txt1'><strong>Themes/Characteristics : </strong> {common.themesOrCharacteristics}</div>
+                            <div className='modal-txt2'><strong class="mt-2">Generals : </strong> {common.generals}</div>
+                            <div className='modal-txt3'><strong class="mt-2">Modalities : </strong> {common.modalities}</div>
+                            <div className='modal-txt4'><strong class="mt-2">Particulars : </strong> {common.particulars}</div>
                         </div>
 
                         <button class="btnscore" ><span onClick={(e) => this.HandleBoldRubricOnRemedyClick(common)} title={`Score: ${common.score}`} class="scrvalue">[{common.score}]</span> </button>
@@ -1260,10 +1259,10 @@ class RepertorizePage extends React.Component {
                             {common.remedyName}
                         </span>
                         <div class="dvUncommhide">
-                            <strong>Themes/Characteristics : </strong> {common.themesOrCharacteristics} <br></br><br></br>
-                            <strong class="mt-2">Generals : </strong> {common.generals} <br></br><br></br>
-                            <strong class="mt-2">Modalities : </strong> {common.modalities} <br></br><br></br>
-                            <strong class="mt-2">Particulars : </strong> {common.particulars}
+                            <div className='modal-txt1'><strong>Themes/Characteristics : </strong> {common.themesOrCharacteristics}</div>
+                            <div className='modal-txt2'><strong class="mt-2">Generals : </strong> {common.generals}</div>
+                            <div className='modal-txt3'><strong class="mt-2">Modalities : </strong> {common.modalities}</div>
+                            <div className='modal-txt4'><strong class="mt-2">Particulars : </strong> {common.particulars}</div>
                         </div>
 
                         <button class="btnscore" ><span onClick={(e) => this.HandleBoldRubricOnRemedyClick(common)} title={`Score: ${common.score}`} class="scrvalue">[{common.score}]</span></button> <Progress color="primary" value={common.progressBar} className="pbar" title={`Max Index: ${common.maxIndex}, Progress Bar: ${common.progressBar} %`}>{common.maxIndex}</Progress>
@@ -1374,10 +1373,10 @@ class RepertorizePage extends React.Component {
                             {common.remedyName}
                         </span>
                         <div class="dvCommhide">
-                            <strong>Themes/Characteristics : </strong> {common.themesOrCharacteristics} <br></br><br></br>
-                            <strong class="mt-2">Generals : </strong> {common.generals} <br></br><br></br>
-                            <strong class="mt-2">Modalities : </strong> {common.modalities} <br></br><br></br>
-                            <strong class="mt-2">Particulars : </strong> {common.particulars}
+                            <div className='modal-txt1'><strong>Themes/Characteristics : </strong> {common.themesOrCharacteristics}</div>
+                            <div className='modal-txt2'><strong class="mt-2">Generals : </strong> {common.generals}</div>
+                            <div className='modal-txt3'><strong class="mt-2">Modalities : </strong> {common.modalities}</div>
+                            <div className='modal-txt4'><strong class="mt-2">Particulars : </strong> {common.particulars}</div>
                         </div>
 
                         <button class="btnscore"><span onClick={(e) => this.HandleBoldRubricOnRemedyClick(common)} title={`Score: ${common.score}`} class="scrvalue">[{common.score}]</span></button> <Progress color="primary" value={common.progressBar} className="pbar" title={`Max Index: ${common.maxIndex}, Progress Bar: ${common.progressBar} %`}>{common.maxIndex}</Progress>
@@ -1475,10 +1474,10 @@ class RepertorizePage extends React.Component {
                             {common.remedyName}
                         </span>
                         <div class="dvUncommhide">
-                            <strong>Themes/Characteristics : </strong> {common.themesOrCharacteristics} <br></br><br></br>
-                            <strong class="mt-2">Generals : </strong> {common.generals} <br></br><br></br>
-                            <strong class="mt-2">Modalities : </strong> {common.modalities} <br></br><br></br>
-                            <strong class="mt-2">Particulars : </strong> {common.particulars}
+                            <div className='modal-txt1'><strong>Themes/Characteristics : </strong> {common.themesOrCharacteristics}</div>
+                            <div className='modal-txt2'><strong class="mt-2">Generals : </strong> {common.generals}</div>
+                            <div className='modal-txt3'><strong class="mt-2">Modalities : </strong> {common.modalities}</div>
+                            <div className='modal-txt4'><strong class="mt-2">Particulars : </strong> {common.particulars}</div>
                         </div>
                         <button class="btnscore" ><span onClick={(e) => this.HandleBoldRubricOnRemedyClick(common)} title={`Score: ${common.score}`} class="scrvalue">[{common.score}]</span></button> <Progress color="primary" value={common.progressBar} className="pbar" title={`Max Index: ${common.maxIndex}, Progress Bar: ${common.progressBar} %`}>{common.maxIndex}</Progress>
                     </Typography>

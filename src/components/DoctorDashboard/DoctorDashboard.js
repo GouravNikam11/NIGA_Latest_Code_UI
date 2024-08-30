@@ -237,7 +237,7 @@ class DoctorDashboard extends React.Component {
             <div>
                 <Row>
                     <Col xs="12" md="12">
-                        <Card>
+                        <Card className="mb-2">
                             <CardBody style={{ fontWeight: "600" }} >
                                 <FormGroup style={{ marginBottom: 0 }}>
                                     <Row>
@@ -286,7 +286,7 @@ class DoctorDashboard extends React.Component {
                                         <FormLabel column sm="2" style={{ color: "#d3960d" }}>&nbsp;<i className="fa fa-male" aria-hidden="true"></i> &nbsp;&nbsp;|&nbsp;&nbsp; 0</FormLabel>
 
                                         <FormLabel column sm="2" style={{ color: "#d800ff" }}>E-Consult : </FormLabel>
-                                        <FormLabel column sm="2" style={{ color: "#d800ff" }}><i className="fa fa-laptop" aria-hidden="true"></i> &nbsp;&nbsp;|&nbsp;&nbsp; 0</FormLabel>
+                                        <FormLabel column sm="2" style={{ color: "#d800ff" }}><i className="fa fa-laptop" aria-hidden="true"></i> &nbsp;|&nbsp;&nbsp; 0</FormLabel>
 
                                         <FormLabel column sm="2" style={{ color: "#5aa2e0" }}>Total : </FormLabel>
                                         <FormLabel column sm="2" style={{ color: "#5aa2e0" }}><i className="fa fa-list-alt" aria-hidden="true"></i> &nbsp;&nbsp;|&nbsp;&nbsp; 0</FormLabel>
@@ -365,8 +365,7 @@ class DoctorDashboard extends React.Component {
                 </Row>
 
                 <div className="row ">
-                    <div className="col-sm-1"></div>
-                    <div className="col-sm-10">
+                    <div className="col-sm-12">
                         <div className="sticky" >
                             <div className="stickyc">
                                 <span className="rndv">{this.state.appointmentCount.patientAppNotArrived}</span>  Not Arrived &nbsp;&nbsp;&nbsp;&nbsp;
@@ -380,7 +379,6 @@ class DoctorDashboard extends React.Component {
 
                         </div>
                     </div>
-                    <div className="col-sm-1"></div>
                 </div>
 
                 <Modal backdrop="static" size="xl" isOpen={this.state.toggleOrderModel}
@@ -503,21 +501,11 @@ class DoctorDashboard extends React.Component {
                 </Modal>
                 <Modal size="lg" isOpen={this.state.isLastFiveDaysRemaining} toggle={this.toggleSubscriptionEndAlertModal.bind(this)} >
                     <ModalBody>
-                        <Card >
+                        <Card className="mb-0">
                             <CardHeader>Subscriptions</CardHeader>
                             <CardBody>
                           <center><b> Your subscription will expire after 5 days. Please buy new subscription to continue your valuable practice.</b></center>
                             </CardBody>
-                            <CardFooter>
-                                <Row>
-                                    <Col xs="12" md="6">
-
-                                    </Col>
-                                    <Col xs="12" md="6" style={{ textAlign: "right" }}>
-
-                                    </Col>
-                                </Row>
-                            </CardFooter>
                         </Card>
                     </ModalBody>
                     <ModalFooter>

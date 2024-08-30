@@ -179,7 +179,7 @@ class AddPatientAppointment extends Component {
                             <Button className='btn_Appointment' size="sm" onClick={this.submitForm}> <i className="fa fa-save"></i> Save </Button>
                         </Col>
                         <Col xs="12" md="6" style={{ textAlign: "right" }}>
-                            <Label style={{ fontSize: 15, margin: 0, paddingTop: 5 }}> Fields marked with an asterisk <span className="required">*</span> are mandatory</Label>
+                            <Label style={{ fontSize: 12, margin: 0, paddingTop: 5 }}> Fields marked with an asterisk <span className="required">*</span> are mandatory</Label>
                         </Col>
                     </Row>
                 </CardFooter>

@@ -125,7 +125,7 @@ class Prescription extends React.Component {
                             <Table hover>
                                 <thead>
                                     <tr>
-                                        <th style={{ width: '6%' }} class='text-center'>Seq. No.</th>
+                                        <th style={{ width: '6%' }} class='text-center'>No.</th>
                                         <th style={{ width: '25%' }}>Remedy</th>
                                         <th style={{ width: '58%' }}>Remedy Description</th>
                                         <th style={{ width: '10%' }} className='lcol'>Action</th>
@@ -136,7 +136,7 @@ class Prescription extends React.Component {
                                     {
                                         this.state.RemedyAndPresList?.map((s, index) => {
                                             return <tr key={index}>
-                                                <td >{index + 1}</td>
+                                                <td class='text-center'>{index + 1}</td>
                                                 <td>{s.remedyName}</td>
                                                 <td>{s.PrescriptionDec}</td>
                                                 <td className='lcol'>
@@ -149,9 +149,9 @@ class Prescription extends React.Component {
                                 </tbody>
                             </Table>
 
-                            <div responsive="true" className='pgdiv mt-1'>
+                            {/* <div responsive="true" className='pgdiv mt-1'> */}
                                 {/* {this.renderPaginationOrder()} */}
-                            </div>
+                            {/* </div> */}
 
 
                         </Col>
