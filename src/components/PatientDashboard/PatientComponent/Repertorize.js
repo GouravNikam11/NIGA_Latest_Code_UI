@@ -612,9 +612,15 @@ class RepertorizePage extends React.Component {
 
     }
     handleObserverKolkattaKeynoteUnCommonTable = (selectedRemedyId, selectedRequiredType, pageNumber) => {
-        
-        this.renderRubricUnCommonKolkatta(selectedRemedyId, selectedRequiredType, pageNumber);
 
+        this.renderRubricUnCommonKolkatta(selectedRemedyId, selectedRequiredType, pageNumber);
+        
+    }
+
+    handleObserverKolkattaKeynoteCommonTable = (selectedRemedyId, selectedRequiredType, pageNumber) => {
+
+        this.renderRubricCommonKolkatta(selectedRemedyId, selectedRequiredType, pageNumber);
+        
     }
 
     getauthor() {
@@ -861,10 +867,10 @@ class RepertorizePage extends React.Component {
                         {common.remedyName}
                     </span>
                     <div class="dvCommhide">
-                        <strong>Themes/Characteristics : </strong>{ReactHtmlParser(common.themesOrCharacteristics)} <br></br><br></br>
-                        <strong class="mt-2">Generals : </strong> {common.generals} <br></br><br></br>
-                        <strong class="mt-2">Modalities : </strong> {common.modalities} <br></br><br></br>
-                        <strong class="mt-2">Particulars : </strong> {common.particulars}
+                        <div className='modal-txt1'><strong>Themes/Characteristics : </strong>{ReactHtmlParser(common.themesOrCharacteristics)}</div>
+                        <div className='modal-txt2'><strong class="mt-2">Generals : </strong> {ReactHtmlParser(common.generals)}</div>
+                        <div className='modal-txt3'><strong class="mt-2">Modalities : </strong> {ReactHtmlParser(common.modalities)}</div>
+                        <div className='modal-txt4'><strong class="mt-2">Particulars : </strong> {ReactHtmlParser(common.particulars)}</div>
                     </div>
                     <button class="btnscore"><span onClick={(e) => this.HandleBoldRubricOnRemedyClick(common)} title={`Score: ${common.score}`} class="scrvalue">[{common.score}]</span></button> <Progress color="primary" value={common.progressBar} className="pbar" title={`Max Index: ${common.maxIndex}, Progress Bar: ${common.progressBar} %`}>{common.maxIndex}</Progress>
                 </td>
@@ -910,10 +916,10 @@ class RepertorizePage extends React.Component {
                         {common.remedyName}
                     </span>
                     <div class="dvUncommhide">
-                        <strong>Themes/Characteristics : </strong>{ReactHtmlParser(common.themesOrCharacteristics)}  <br></br><br></br>
-                        <strong class="mt-2">Generals : </strong> {ReactHtmlParser(common.generals)} <br></br><br></br>
-                        <strong class="mt-2">Modalities : </strong> {ReactHtmlParser(common.modalities)} <br></br><br></br>
-                        <strong class="mt-2">Particulars : </strong> {ReactHtmlParser(common.particulars)}
+                        <div className='modal-txt1'><strong>Themes/Characteristics : </strong> {ReactHtmlParser(common.themesOrCharacteristics)}</div>
+                        <div className='modal-txt2'><strong class="mt-2">Generals : </strong> {ReactHtmlParser(common.generals)}</div>
+                        <div className='modal-txt3'><strong class="mt-2">Modalities : </strong> {ReactHtmlParser(common.modalities)}</div>
+                        <div className='modal-txt4'><strong class="mt-2">Particulars : </strong> {ReactHtmlParser(common.particulars)}</div>
                     </div>
 
                     <button class="btnscore"><span onClick={(e) => this.HandleBoldRubricOnRemedyClick(common)} title={`Score: ${common.score}`} class="scrvalue">[{common.score}]</span></button> <Progress color="primary" value={common.progressBar} className="pbar" title={`Max Index: ${common.maxIndex}, Progress Bar: ${common.progressBar} %`}>{common.maxIndex}</Progress>
@@ -1120,7 +1126,16 @@ class RepertorizePage extends React.Component {
         }
 
         return filteredListNewcommonRemedyList2.map((common, index) => {
-            return <Accordion key={index} onChange={this.handleChange(index)} onClick={() => this.renderRubricCommonKolkatta(common.remedyId, "KolkattaKeynoteMethod", index)} expanded={expanded === index} >
+            const isExpanded = expanded === index;
+            return <Accordion key={index} onChange={() => this.setState({ expanded: isExpanded ? null : index, RubricListByRemedyKolkattaCommon: [] })}
+
+                expanded={isExpanded}
+                onClick={(e) => {
+                    if (!e.target.closest('td')) { // Prevents triggering on "Read More..." click
+                        console.log('onclick mainaccord==');
+                        this.renderRubricCommonKolkatta(common.remedyId, "KolkattaKeynoteMethod", 1)
+                    }
+                }}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
                     <Typography onClick={(e) => { e.stopPropagation(); }} sx={{ width: '33%', flexShrink: 0 }}>
                         {/* <span title="Data/Information Hover Popup"> */}
@@ -1178,6 +1193,17 @@ class RepertorizePage extends React.Component {
                                             )
                                         })
                                 }
+                                 <tr >
+                                    <td onClick={() => {
+                                        this.setState(prevState => ({
+                                            //  RubricListByRemedySmallRubricUnCommon: [...prevState.RubricListByRemedySmallRubricUnCommon, ...result.resultObject],
+                                            page: prevState.page + 1,
+                                            // loading: false,
+                                            // hasMore: result.resultObject.length > 0
+                                        }));
+                                        this.handleObserverKolkattaKeynoteCommonTable(common.remedyId, "KolkattaKeynoteMethod", this.state.page + 1)
+                                    }} colSpan="3">Read More...</td>
+                                </tr>
                             </tbody>
                         </table>
                     </Typography>
@@ -1220,9 +1246,18 @@ class RepertorizePage extends React.Component {
         }
 
         return filteredListNewunCommonRemedyList2.map((common, index) => {
-            return <Accordion key={index} 
-            onClick={() => this.renderRubricUnCommonKolkatta(common.remedyId, "KolkattaKeynoteMethod", index)} 
-            expanded2={expanded2 === index} onChange={this.handleChange2(index)}>
+            const isExpanded = expanded2 === index;
+            return <Accordion
+                onChange={() => this.setState({ expanded2: isExpanded ? null : index, RubricListByRemedyKolkattaUnCommon: [] })}
+
+                expanded={isExpanded}
+                key={index}
+                onClick={(e) => {
+                    if (!e.target.closest('td')) { // Prevents triggering on "Read More..." click
+                        console.log('onclick mainaccord==');
+                        this.renderRubricUnCommonKolkatta(common.remedyId, "KolkattaKeynoteMethod", 1)
+                    }
+                }}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
                     <Typography onClick={(e) => { e.stopPropagation(); }} sx={{ width: '33%', flexShrink: 0 }}>
                         {/* <span title="Data/Information Hover Popup"> */}
@@ -1279,7 +1314,7 @@ class RepertorizePage extends React.Component {
                                             )
                                         })
                                 }
-                                 <tr >
+                                <tr >
                                     <td onClick={() => {
                                         this.setState(prevState => ({
                                             //  RubricListByRemedySmallRubricUnCommon: [...prevState.RubricListByRemedySmallRubricUnCommon, ...result.resultObject],
@@ -1287,7 +1322,7 @@ class RepertorizePage extends React.Component {
                                             // loading: false,
                                             // hasMore: result.resultObject.length > 0
                                         }));
-                                        this.handleObserverKolkattaKeynoteUnCommonTable(common.remedyId, "SmallRubric", this.state.page + 1)
+                                        this.handleObserverKolkattaKeynoteUnCommonTable(common.remedyId, "KolkattaKeynoteMethod", this.state.page + 1)
                                     }} colSpan="3">Read More...</td>
                                 </tr>
                             </tbody>
@@ -1334,27 +1369,14 @@ class RepertorizePage extends React.Component {
             const isExpanded = expanded3 === index;
             return <Accordion onChange={() => this.setState({ expanded3: isExpanded ? null : index, RubricListByRemedySmallRubricCommon: [] })}
 
-                expanded={isExpanded} 
-                // onClick={() => {
-                //     this.setState({
-                //         selectedRemedyId: common.remedyId,
-                //         selectedRequiredType: "SmallRubric",
-                //         page: 1
-                //     }, () => {
-                //         console.log("State updated:", this.state);
-                //         // You can perform any actions here after the state has been updated
-                //         console.log('isExpanded =', isExpanded)
-                //         this.renderRubricCommonSmallRubric(common.remedyId, "SmallRubric", 1)
-                //     });
-                    
-                // }} 
+                expanded={isExpanded}
                 onClick={(e) => {
                     if (!e.target.closest('td')) { // Prevents triggering on "Read More..." click
                         console.log('onclick mainaccord==');
                         this.renderRubricCommonSmallRubric(common.remedyId, "SmallRubric", 1);
                     }
-                }} 
-                
+                }}
+
                 key={index}  >
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
                     <Typography onClick={(e) => { e.stopPropagation(); }} sx={{ width: '33%', flexShrink: 0 }}>
@@ -1364,10 +1386,10 @@ class RepertorizePage extends React.Component {
                             {common.remedyName}
                         </span>
                         <div class="dvCommhide">
-                            <strong>Themes/Characteristics : </strong>  {common.themesOrCharacteristics} <br></br><br></br>
-                            <strong class="mt-2">Generals : </strong> {common.generals} <br></br><br></br>
-                            <strong class="mt-2">Modalities : </strong> {common.modalities} <br></br><br></br>
-                            <strong class="mt-2">Particulars : </strong> {common.particulars}
+                            <div className='modal-txt1'><strong>Themes/Characteristics : </strong> {ReactHtmlParser(common.themesOrCharacteristics)}</div>
+                            <div className='modal-txt2'><strong class="mt-2">Generals : </strong> {ReactHtmlParser(common.generals)}</div>
+                            <div className='modal-txt3'><strong class="mt-2">Modalities : </strong> {ReactHtmlParser(common.modalities)}</div>
+                            <div className='modal-txt4'><strong class="mt-2">Particulars : </strong> {ReactHtmlParser(common.particulars)}</div>
                         </div>
 
                         <button class="btnscore"><span onClick={(e) => this.HandleBoldRubricOnRemedyClick(common)} title={`Score: ${common.score}`} class="scrvalue">[{common.score}]</span></button> <Progress color="primary" value={common.progressBar} className="pbar" title={`Max Index: ${common.maxIndex}, Progress Bar: ${common.progressBar} %`}>{common.maxIndex}</Progress>
@@ -1410,7 +1432,7 @@ class RepertorizePage extends React.Component {
                                             )
                                         })
                                 }
-                               <tr >
+                                <tr >
                                     <td onClick={() => {
                                         this.setState(prevState => ({
                                             //  RubricListByRemedySmallRubricUnCommon: [...prevState.RubricListByRemedySmallRubricUnCommon, ...result.resultObject],
@@ -1418,7 +1440,7 @@ class RepertorizePage extends React.Component {
                                             // loading: false,
                                             // hasMore: result.resultObject.length > 0
                                         }));
-                                        this.handleObserverSmallRubricUnCommonTable(common.remedyId, "SmallRubric", this.state.page + 1)
+                                        this.handleObserverSmallRubricCommonTable(common.remedyId, "SmallRubric", this.state.page + 1)
                                     }} colSpan="3">Read More...</td>
                                 </tr>
 
@@ -1470,7 +1492,7 @@ class RepertorizePage extends React.Component {
                         console.log('onclick mainaccord==');
                         this.renderRubricUnCommonSmallRubric(common.remedyId, "SmallRubric", 1);
                     }
-                }}  key={index} >
+                }} key={index} >
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
                     <Typography onClick={(e) => { e.stopPropagation(); }} sx={{ width: '33%', flexShrink: 0 }}>
                         {/* <span title="Data/Information Hover Popup"> */}
@@ -1544,17 +1566,67 @@ class RepertorizePage extends React.Component {
 
     ///render rubric in remedy common Kolkatta Key note
 
-    renderRubricCommonKolkatta = (remedyId, method, index) => {
-        CommonServices.postData({ remedyID: remedyId, requiredType: method }, `/clipboardRubrics/GetRepertorizarionRemedy`).then((result) => {
-            this.setState({ RubricListByRemedyKolkattaCommon: result.data });
+    renderRubricCommonKolkatta = (remedyId, method, page) => {
+        // CommonServices.postData({ remedyID: remedyId, requiredType: method }, `/clipboardRubrics/GetRepertorizarionRemedy`).then((result) => {
+        //     this.setState({ RubricListByRemedyKolkattaCommon: result.data });
+        // });
+
+        console.log(`/Pagination/GetRepertorizarionRemedyForAccordion?remedyID=${remedyId}&RequiredType=${method}&PageNumber=${page}&PageSize=${10}`)
+        CommonServices.getData(`/Pagination/GetRepertorizarionRemedyForAccordion?remedyID=${remedyId}&RequiredType=${method}&PageNumber=${page}&PageSize=${10}`).then((result) => {
+            if (!this.state.ListSelectSection.some(item => item.isChecked !== undefined && item.isChecked != false)) {
+                this.setState(prevState => {
+                    const newPage = prevState.page + 1;
+                    return {
+                        loading: false,
+                        hasMore: result.resultObject.length > 0,
+                        RubricListByRemedyKolkattaCommon: [...prevState.RubricListByRemedyKolkattaCommon, ...result.resultObject],
+
+                    };
+                });
+
+            }
+
+            if (result.resultObject.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId)).length > 0) {
+                this.setState(prevState => ({
+                    RubricListByRemedyKolkattaCommon: [...prevState.RubricListByRemedyKolkattaCommon, ...result.resultObject.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId))],
+                    //page: prevState.page + 1,
+                    loading: false,
+                    hasMore: result.resultObject.length > 0
+                }));
+            }
         });
+
     }
 
     ///render kolkatta uncommon
-    renderRubricUnCommonKolkatta = (remedyId, method, index) => {
-        this.setState({ RubricListByRemedyKolkattaUnCommon: [] });
-        CommonServices.postData({ remedyID: remedyId, requiredType: method }, `/clipboardRubrics/GetRepertorizarionRemedy`).then((result) => {
-            this.setState({ RubricListByRemedyKolkattaUnCommon: result.data });
+    renderRubricUnCommonKolkatta = (remedyId, method, page) => {
+        // this.setState({ RubricListByRemedyKolkattaUnCommon: [] });
+        // CommonServices.postData({ remedyID: remedyId, requiredType: method }, `/clipboardRubrics/GetRepertorizarionRemedy`).then((result) => {
+        //     this.setState({ RubricListByRemedyKolkattaUnCommon: result.data });
+        // });
+        console.log(`/Pagination/GetRepertorizarionRemedyForAccordion?remedyID=${remedyId}&RequiredType=${method}&PageNumber=${page}&PageSize=${10}`)
+        CommonServices.getData(`/Pagination/GetRepertorizarionRemedyForAccordion?remedyID=${remedyId}&RequiredType=${method}&PageNumber=${page}&PageSize=${10}`).then((result) => {
+            if (!this.state.ListSelectSection.some(item => item.isChecked !== undefined && item.isChecked != false)) {
+                this.setState(prevState => {
+                    const newPage = prevState.page + 1;
+                    return {
+                        loading: false,
+                        hasMore: result.resultObject.length > 0,
+                        RubricListByRemedyKolkattaUnCommon: [...prevState.RubricListByRemedyKolkattaUnCommon, ...result.resultObject],
+
+                    };
+                });
+
+            }
+
+            if (result.resultObject.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId)).length > 0) {
+                this.setState(prevState => ({
+                    RubricListByRemedyKolkattaUnCommon: [...prevState.RubricListByRemedyKolkattaUnCommon, ...result.resultObject.filter(item => this.state.ListSelectSection.some(selectedItem => selectedItem.isChecked && selectedItem.sectionId === item.sectionId))],
+                    //page: prevState.page + 1,
+                    loading: false,
+                    hasMore: result.resultObject.length > 0
+                }));
+            }
         });
 
     }
@@ -1566,7 +1638,7 @@ class RepertorizePage extends React.Component {
         }
         this.setState({ loading: true });
         console.log(`/Pagination/GetRepertorizarionRemedyForAccordion?remedyID=${remedyId}&RequiredType=${method}&PageNumber=${page}&PageSize=${10}`)
-        CommonServices.getData(`/Pagination/GetRepertorizarionRemedyForAccordion?remedyID=${remedyId}&RequiredType=${method}&PageNumber=${this.state.page}&PageSize=${10}`).then((result) => {
+        CommonServices.getData(`/Pagination/GetRepertorizarionRemedyForAccordion?remedyID=${remedyId}&RequiredType=${method}&PageNumber=${page}&PageSize=${10}`).then((result) => {
             if (!this.state.ListSelectSection.some(item => item.isChecked !== undefined && item.isChecked != false)) {
                 this.setState(prevState => {
                     const newPage = prevState.page + 1;
