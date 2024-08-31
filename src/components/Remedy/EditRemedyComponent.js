@@ -25,27 +25,29 @@ class EditRemedyComponent extends Component {
             EnteredBy: 'Admin',
             DeleteStatus: false,
             errors: {},
+            thermalId: null,
+            thermalNameList: [],
 
-            themesOrCharacteristics: [],
-            generals: [],
-            modalities: [],
-            particulars: [],
+            themesOrCharacteristics: '',
+            generals: '',
+            modalities: '',
+            particulars: '',
 
             editorStateThemesCharacteristics: undefined,
             editorStateGenerals: undefined,
             editorStateModalities: undefined,
             editorStateParticulars: undefined,
             commonOrUncommon: '',
-            thermalId: null,
-            thermalNameList: [],
+           
         }
         this.handleChange = this.handleChange.bind(this);
         this.submitForm = this.submitForm.bind(this);
     }
 
     handleChangeforeditorThemesCharacteristics = (rawDraftContentState) => {
-        this.setState({ themesOrCharacteristics: draftToHtml(convertToRaw(rawDraftContentState.getCurrentContent())) })
         console.log('test = ', draftToHtml(convertToRaw(rawDraftContentState.getCurrentContent())))
+        this.setState({ themesOrCharacteristics: draftToHtml(convertToRaw(rawDraftContentState.getCurrentContent())) })
+       // console.log('test = ', draftToHtml(convertToRaw(rawDraftContentState.getCurrentContent())))
     }
 
     handleChangeforeditorGenerals = (rawDraftContentState) => {
@@ -369,14 +371,35 @@ class EditRemedyComponent extends Component {
         this.getThermalNameList();
     }
     submitForm() {
+        
+      
 
         if (this.validateForm()) {
-        console.log("submit===",this.state)
-            // CommonServices.postData(this.state, `/remedy`).then((responseMessage) => {
-            //     this.props.enqueueSnackbarAction(responseMessage.data);
-            //     this.props.history.push('/ListRemedy');
+            console.log('this.state.themesOrCharacteristics=',this.state.themesOrCharacteristics)
+        console.log('this.state.editorStateThemesCharacteristics ',this.state.editorStateThemesCharacteristics)
+        console.log('this.state.editorStateGenerals ',this.state.editorStateGenerals) 
+            let  obj={
+                themesOrCharacteristics: this.state.themesOrCharacteristics==='' ? draftToHtml(convertToRaw(this.state.editorStateThemesCharacteristics.getCurrentContent())) :this.state.themesOrCharacteristics,
+                generals: this.state.generals===''? draftToHtml(convertToRaw(this.state.editorStateGenerals.getCurrentContent())) :this.state.generals,
+                modalities: this.state.modalities===''?draftToHtml(convertToRaw(this.state.editorStateGenerals.getCurrentContent())) :this.state.modalities,
+                particulars:this.state.particulars===''?draftToHtml(convertToRaw(this.state.editorStateParticulars.getCurrentContent())) :this.state.particulars,
+        
+                    remedyId: this.state.remedyId,
+                    RemedyName: this.state.RemedyName,
+                    RemedyAlias: this.state.RemedyAlias,
+                    Description: this.state.Description,
+                    EnteredBy: 'Admin',
+                    DeleteStatus: false,
+                    errors: {},
+                    thermalId: this.state.thermalId,
+                    thermalNameList: this.state.thermalNameList,
+                }
+        console.log("submit===",obj)
+            CommonServices.postData(obj, `/remedy`).then((responseMessage) => {
+                this.props.enqueueSnackbarAction(responseMessage.data);
+                this.props.history.push('/ListRemedy');
 
-            // });
+            });
             this.setState({
                 remedyId: 0,
                 RemedyName: "",
@@ -407,8 +430,8 @@ class EditRemedyComponent extends Component {
                     blocksFromHTMLThemesCharacteristics.contentBlocks,
                     blocksFromHTMLThemesCharacteristics.entityMap
                 );
-                const editorStateThemesCharacteristics = EditorState.createWithContent(contentStateThemesCharacteristics);
-                console.log("editorStateThemesCharacteristics==",editorStateThemesCharacteristics)
+                const editorStateThemesCharacteristics1 = EditorState.createWithContent(contentStateThemesCharacteristics);
+                console.log("editorStateThemesCharacteristics==",editorStateThemesCharacteristics1)
                 // this is fot editorStateGenerals
                 const blocksFromHTMLgenerals = htmlToDraft(res.generals)
                 const contentStategenerals = ContentState.createFromBlockArray(
@@ -416,7 +439,7 @@ class EditRemedyComponent extends Component {
                     blocksFromHTMLgenerals.entityMap
                 );
                 const editorStateGenerals = EditorState.createWithContent(contentStategenerals);
-               
+                console.log("editorStateGenerals==",editorStateGenerals)
                 // this is fot editorStatemodalities 
                 const blocksFromHTMLModalities = htmlToDraft(res.generals)
                 const contentStateModalities = ContentState.createFromBlockArray(
@@ -440,7 +463,7 @@ class EditRemedyComponent extends Component {
                     Description: res.description,
                     EnteredBy: 'Admin',
                     DeleteStatus: false,
-                    editorStateThemesCharacteristics: editorStateThemesCharacteristics,
+                    editorStateThemesCharacteristics: editorStateThemesCharacteristics1,
                     editorStateGenerals: editorStateGenerals,
                     editorStateModalities: editorStateModalities,
                     editorStateParticulars: editorStateParticulars,
