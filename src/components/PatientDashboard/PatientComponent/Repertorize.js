@@ -1133,6 +1133,9 @@ class RepertorizePage extends React.Component {
                 onClick={(e) => {
                     if (!e.target.closest('td')) { // Prevents triggering on "Read More..." click
                         console.log('onclick mainaccord==');
+                        this.setState({
+                            page:1
+                        })
                         this.renderRubricCommonKolkatta(common.remedyId, "KolkattaKeynoteMethod", 1)
                     }
                 }}>
@@ -1255,6 +1258,9 @@ class RepertorizePage extends React.Component {
                 onClick={(e) => {
                     if (!e.target.closest('td')) { // Prevents triggering on "Read More..." click
                         console.log('onclick mainaccord==');
+                        this.setState({
+                            page:1
+                        })
                         this.renderRubricUnCommonKolkatta(common.remedyId, "KolkattaKeynoteMethod", 1)
                     }
                 }}>
@@ -1373,6 +1379,9 @@ class RepertorizePage extends React.Component {
                 onClick={(e) => {
                     if (!e.target.closest('td')) { // Prevents triggering on "Read More..." click
                         console.log('onclick mainaccord==');
+                        this.setState({
+                            page:1
+                        })
                         this.renderRubricCommonSmallRubric(common.remedyId, "SmallRubric", 1);
                     }
                 }}
@@ -1490,6 +1499,9 @@ class RepertorizePage extends React.Component {
                 onClick={(e) => {
                     if (!e.target.closest('td')) { // Prevents triggering on "Read More..." click
                         console.log('onclick mainaccord==');
+                        this.setState({
+                            page:1
+                        })
                         this.renderRubricUnCommonSmallRubric(common.remedyId, "SmallRubric", 1);
                     }
                 }} key={index} >
