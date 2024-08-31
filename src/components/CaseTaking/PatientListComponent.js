@@ -86,21 +86,20 @@ class PatientListComponent extends Component {
                             <CardHeader className="crdhd">
                                 <Row>
 
-                                    <Col md="4">
-                                        <i className="fa fa-align-justify" style={{ marginTop: '15px' }}></i>&nbsp;
+                                    <Col md="6">
+                                        <i className="fa fa-align-justify" ></i>&nbsp;
                                         Patient List
                                     </Col>
-                                    <Col md="3"></Col>
-                                    <Col md="3">
+                                    <Col md="4">
                                         <Input type="search"
                                             placeholder="Search by Name "
                                             name='SearchText'
                                             value={this.state.SearchText}
-                                            style={{ marginTop: '7px' }}
+                                            
                                             onChange={this.handleChange.bind(this)} />
-                                    </Col>
-                                    <Col md="2">
-                                        <Link to={'/PatientEntry'} className="nav-link lnkbtn" style={{ marginTop: '8px' }}>
+                                   </Col>
+                                   <Col md="2">
+                                        <Link to={'/PatientEntry'} className="nav-link lnkbtn m-0 p-0">
                                             <Button color="primary"
                                                 style={{ textTransform: "uppercase" }}
                                             > <i className="fa fa-plus"></i> &nbsp;
@@ -140,34 +139,34 @@ class PatientListComponent extends Component {
                                                     return (
                                                         <tr key={index}>
                                                             <td>{value.patientName}</td>
-                                                            <td>{new Date(value.enteredDate).toLocaleDateString('en-GB')}</td>
-                                                            <td>{value.age}</td>
-                                                            <td>{value.mobileNo}</td>
+                                                            <td className='text-center'>{new Date(value.enteredDate).toLocaleDateString('en-GB')}</td>
+                                                            <td className='text-center'>{value.age}</td>
+                                                            <td className='text-center'>{value.mobileNo}</td>
                                                             <td style={{ textAlign: 'center' }}>{new Date(value.dateOfBirth).toLocaleDateString('en-GB')}</td>
                                                             <td style={{ textAlign: 'center' }}>{value.gender == 1 ? 'Female' : 'Male'}</td>
                                                             <td>{value.address}</td>
                                                             <td style={{ textAlign: 'center' }}>
                                                                 <button aria-pressed="true"
                                                                     style={{
-                                                                        fontSize: "12px",
+                                                                        fontSize: "11px",
                                                                         color: "white",
-                                                                        width: "90px"
+                                                                        width: "100px"
                                                                     }}
                                                                     onClick={() => this.handleClickForappointment(value.patientID, value.doctorID)}
                                                                     className="btn btn-ghost-info  active" size="md" color="primary">
-                                                                    <i className="fa fa-plus"></i><br></br>Appointment
+                                                                    <i className="fa fa-plus"></i>&nbsp;Appointment
                                                                 </button>
                                                             </td>
                                                             <td style={{ textAlign: 'center' }}>
                                                                 <button aria-pressed="true"
                                                                     style={{
-                                                                        fontSize: "12px",
+                                                                        fontSize: "11px",
                                                                         color: "white",
                                                                         width: "90px"
                                                                     }}
                                                                     onClick={() => this.handleClick(value.patientID)}
                                                                     className="btn btn-ghost-info cmpbtn active" size="md" color="primary">
-                                                                    <i className="fa fa-plus"></i><br></br>Complaint
+                                                                    <i className="fa fa-plus"></i>&nbsp;Complaint
                                                                 </button>
                                                             </td>
                                                           
@@ -175,13 +174,13 @@ class PatientListComponent extends Component {
                                                                
                                                                 <button aria-pressed="true"
                                                                     style={{
-                                                                        fontSize: "12px",
+                                                                        fontSize: "11px",
                                                                         color: "white",
-                                                                        width: "90px"
+                                                                        width: "100px"
                                                                     }}
                                                                     onClick={() => this.handleClickForPatientBackHistory(value.patientID)}
                                                                     className="btn btn-ghost-info bhbtn active" size="md" color="primary">
-                                                                    <i className="fa fa-undo"></i><br></br>Back History
+                                                                    <i className="fa fa-undo"></i>&nbsp;Back History
                                                                 </button>
                                                                
                                                             </td>

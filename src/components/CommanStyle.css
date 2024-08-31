@@ -28,9 +28,48 @@
 
 }
 
+
+.subsect{
+  font-size: 12px;
+}
+
+.modal-header, .modal-body, .modal-footer {
+  padding: 8px !important;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #0a4686 !important;
+  border-color: #0a4686 !important;
+}
+
+.btn-danger {
+  color: #fff;
+  background-color: #970302 !important;
+  border-color: #970302 !important;
+}
+
+.react-datepicker-component .react-datepicker-input{
+  height: 30px !important;
+}
+
+.react-datepicker-component .react-datepicker-input.has-value input {
+  font-size: 12px;
+}
+
+.card-body {
+  border-radius: 4px !important;
+  /* background: #eeeeeeed; */
+}
+
 .form-control {
   font-size: 12px !important;
+  border-radius: 0.25rem !important;
 }
+
+/* .btn{
+  font-size: 10px !important;
+} */
 
 
 .btn_Appointment{

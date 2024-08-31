@@ -100,7 +100,7 @@ class PatientBackHistoryComponent extends Component {
                                     </Col>
                                     <Col md="6">
                                         <span className="hthead">Case Notes : </span>
-                                        <CKEditor
+                                        <CKEditor className="mt-0"
                                             editor={ClassicEditor}
 
                                             onFocus={(event, editor) => {

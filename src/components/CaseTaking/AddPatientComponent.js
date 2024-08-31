@@ -327,7 +327,7 @@ class AddPatientComponent extends Component {
                 <CardBody>
                     <Form action="" method="post" encType="multipart/form-data" className="form-horizontal">
                         <Row>
-                            <Col xs="12" md="3">
+                            <Col xs="12" md="4">
                                 <FormGroup >
                                     <Label className="label" htmlFor="FirstName">
                                         First Name
@@ -342,7 +342,7 @@ class AddPatientComponent extends Component {
                                     <span className="error">{this.state.errors["name"]}</span>
                                 </FormGroup>
                             </Col>
-                            <Col xs="12" md="3">
+                            <Col xs="12" md="4">
                                 <FormGroup >
 
 
@@ -360,73 +360,7 @@ class AddPatientComponent extends Component {
                                 </FormGroup>
                             </Col>
 
-                            <Col xs="12" md="6">
-                                <FormGroup >
-                                    <Label className="label" htmlFor="Address1">Address  <span className="required"> *</span> :</Label>
-                                    <Input type="text"
-                                        id="Address1"
-                                        value={this.state.address1}
-                                        onChange={this.handleChange.bind(this)}
-                                        name="address1"
-                                    >
-                                    </Input>
-                                    <span className="error">{this.state.errors["address1"]}</span>
-
-
-                                </FormGroup>
-                            </Col>
-                        </Row>
-                        <Row>
-
-                            <Col xs="12" md="3">
-                                <FormGroup >
-                                    <Label className="label" htmlFor="Pin">PIN   :</Label>
-                                    <Input type="text"
-                                        id="Pin"
-                                        value={this.state.pin}
-                                        onChange={this.handleChange.bind(this)}
-                                        name="pin"
-                                    >
-                                    </Input>
-                                    {/* <span className="error">{this.state.errors["pin"]}</span> */}
-
-                                </FormGroup>
-                            </Col>
-                            <Col xs="12" md="3">
-                                <FormGroup >
-                                    <Label className="label" htmlFor="CellNo">Mobile No
-
-                                        <span className="required"> *</span> :</Label>
-                                    <Input type="number"
-                                        autoComplete="off"
-                                        id="CellNo"
-                                        value={this.state.cellPhone}
-                                        onChange={this.handleNumericFeilds.bind(this)}
-                                        name="cellPhone"
-                                    >
-                                    </Input>
-                                    <span className="error">{this.state.errors["cellPhone"]}</span>
-                                </FormGroup>
-                            </Col>
-           
-
-                            <Col xs="12" md="3">
-                                <FormGroup >
-                                    <Label className="label" htmlFor="Email">Email 
-                                    {/* <span className="required"> *</span> : */}
-                                    </Label>
-                                    <Input type="text"
-                                        id="Email"
-                                        value={this.state.email}
-                                        onChange={this.handleChange.bind(this)}
-                                        name="email"
-                                    >
-                                    </Input>
-                                    <span className="error">{this.state.errors["email"]}</span>
-                                </FormGroup>
-                            </Col>
-
-                            <Col xs="12" md="2" >
+                            <Col xs="12" md="4" >
                                 <FormGroup>
                                     <Label className="label" htmlFor="Gender">
                                         Gender
@@ -457,6 +391,101 @@ class AddPatientComponent extends Component {
 
                             </Col>
 
+                            
+                        </Row>
+
+
+                        <Row>
+
+                            <Col xs="12" md="4">
+                                <FormGroup >
+                                    <Label className="label" htmlFor="DateOfBirth">
+                                        Date Of Birth  <span className="required"> *</span> :</Label>
+                                    <DatePicker autoComplete="off"
+                                        readOnly={true}
+                                        dateFormat="DD-MM-YYYY"
+                                        minDate="2000-01-19T12:00:00.000Z"
+                                        maxDate="3000-05-19T12:00:00.000Z"
+                                        value={this.state.dateOfBirth}
+                                        onChange={this.handleDateChange.bind(this)}
+                                        name="dateOfBirth"
+                                    />
+                                    <span className="error">{this.state.errors["dateOfBirth"]}</span>
+
+                                </FormGroup>
+                            </Col>
+
+
+                            <Col xs="12" md="8">
+                                <FormGroup >
+                                    <Label className="label" htmlFor="Address1">Address  <span className="required"> *</span> :</Label>
+                                    <Input type="text"
+                                        id="Address1"
+                                        value={this.state.address1}
+                                        onChange={this.handleChange.bind(this)}
+                                        name="address1"
+                                    >
+                                    </Input>
+                                    <span className="error">{this.state.errors["address1"]}</span>
+
+
+                                </FormGroup>
+                            </Col>
+                        </Row>
+
+
+
+                        <Row>
+
+                            <Col xs="12" md="4">
+                                <FormGroup >
+                                    <Label className="label" htmlFor="CellNo">Mobile No
+
+                                        <span className="required"> *</span> :</Label>
+                                    <Input type="number"
+                                        autoComplete="off"
+                                        id="CellNo"
+                                        value={this.state.cellPhone}
+                                        onChange={this.handleNumericFeilds.bind(this)}
+                                        name="cellPhone"
+                                    >
+                                    </Input>
+                                    <span className="error">{this.state.errors["cellPhone"]}</span>
+                                </FormGroup>
+                            </Col>
+           
+                            <Col xs="12" md="4">
+                                <FormGroup >
+                                    <Label className="label" htmlFor="Pin">PIN   :</Label>
+                                    <Input type="text"
+                                        id="Pin"
+                                        value={this.state.pin}
+                                        onChange={this.handleChange.bind(this)}
+                                        name="pin"
+                                    >
+                                    </Input>
+                                    {/* <span className="error">{this.state.errors["pin"]}</span> */}
+
+                                </FormGroup>
+                            </Col>
+                            <Col xs="12" md="4">
+                                <FormGroup >
+                                    <Label className="label" htmlFor="Country">STD Code :</Label>
+                                    <Input type="select" >
+                                        <option value="0">
+                                           Value 1
+                                        </option>
+                                        <option value="0">
+                                           Value 2
+                                        </option>
+                                    </Input>
+                                </FormGroup>
+                            </Col>
+
+                            
+
+                           
+
                             {/* <Col xs="12" md="3">
                                     <FormGroup >
                                         <Label className="label" htmlFor="clinicName">Clinic Name :</Label>
@@ -483,20 +512,10 @@ class AddPatientComponent extends Component {
                                 </Col> */}
                         </Row>
                         <Row>
-                            <Col xs="12" md="3">
-                                <FormGroup >
-                                    <Label className="label" htmlFor="Country">STD Code :</Label>
-                                    <Input type="select" >
-                                        <option value="0">
-                                           Value 1
-                                        </option>
-                                        <option value="0">
-                                           Value 2
-                                        </option>
-                                    </Input>
-                                </FormGroup>
-                            </Col>
-                            <Col xs="12" md="3">
+
+                          
+                           
+                            <Col xs="12" md="4">
                                 <FormGroup >
                                     <Label className="label" htmlFor="Country">Country  <span className="required"> *</span> :</Label>
                                     <Input type="select"
@@ -515,7 +534,7 @@ class AddPatientComponent extends Component {
                                     <span className="error">{this.state.errors["countryId"]}</span>
                                 </FormGroup>
                             </Col>
-                            <Col xs="12" md="3">
+                            <Col xs="12" md="4">
                                 <FormGroup >
                                     <Label className="label" htmlFor="State">State  <span className="required"> *</span> :</Label>
                                     <Input type="select"
@@ -535,6 +554,22 @@ class AddPatientComponent extends Component {
                                     </Input>
                                     <span className="error">{this.state.errors["stateId"]}</span>
 
+                                </FormGroup>
+                            </Col>
+
+                            <Col xs="12" md="4">
+                                <FormGroup >
+                                    <Label className="label" htmlFor="Email">Email 
+                                    {/* <span className="required"> *</span> : */}
+                                    </Label>
+                                    <Input type="text"
+                                        id="Email"
+                                        value={this.state.email}
+                                        onChange={this.handleChange.bind(this)}
+                                        name="email"
+                                    >
+                                    </Input>
+                                    <span className="error">{this.state.errors["email"]}</span>
                                 </FormGroup>
                             </Col>
                           
@@ -558,28 +593,12 @@ class AddPatientComponent extends Component {
                                 </Col> */}
                         
 
-                            <Col xs="12" md="3">
-                                <FormGroup >
-                                    <Label className="label" htmlFor="DateOfBirth">
-                                        Date Of Birth  <span className="required"> *</span> :</Label>
-                                    <DatePicker autoComplete="off"
-                                        readOnly={true}
-                                        dateFormat="DD-MM-YYYY"
-                                        minDate="2000-01-19T12:00:00.000Z"
-                                        maxDate="3000-05-19T12:00:00.000Z"
-                                        value={this.state.dateOfBirth}
-                                        onChange={this.handleDateChange.bind(this)}
-                                        name="dateOfBirth"
-                                    />
-                                    <span className="error">{this.state.errors["dateOfBirth"]}</span>
-
-                                </FormGroup>
-                            </Col>
+                            
 
                         </Row>
                         <Row>
 
-                            <Col xs="12" md="3" >
+                            <Col xs="12" md="4" >
                                 <FormGroup >
                                     <Label className="label" htmlFor="AgeYear">Years :</Label>
                                     <Input type="text"
@@ -595,7 +614,7 @@ class AddPatientComponent extends Component {
                                 </FormGroup>
 
                             </Col>
-                            <Col xs="12" md="3" >
+                            <Col xs="12" md="4" >
                                 <FormGroup >
                                     <Label className="label" htmlFor="Age">Month :</Label>
                                     <Input type="text"
@@ -613,7 +632,7 @@ class AddPatientComponent extends Component {
 
 
 
-                            <Col xs="12" md="3">
+                            <Col xs="12" md="4">
                                 <FormGroup >
                                     <Label className="label" htmlFor="referredBy">Referred By :</Label>
                                     <Input type="text"
@@ -675,7 +694,7 @@ class AddPatientComponent extends Component {
                             </Button>
                         </Col>
                         <Col xs="12" md="6" style={{ textAlign: "right" }}>
-                            <Label style={{ fontSize: 15, margin: 0, paddingTop: 5 }}> Fields marked with an asterisk <span className="required">*</span> are mandatory</Label>
+                            <Label style={{ fontSize: 12, margin: 0, paddingTop: 5 }}> Fields marked with an asterisk <span className="required">*</span> are mandatory</Label>
                         </Col>
                     </Row>
 

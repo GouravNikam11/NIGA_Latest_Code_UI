@@ -300,6 +300,7 @@ class SummaryComponent extends React.Component {
                             <Col sm="12" md="3">
                                 <Input type="text"
                                     placeholder="Rubric Search..."
+                                    className="mb-1"
                                     name='searchQuery'
                                     value={this.state.searchQuery}
                                     onChange={this.handleChange.bind(this)}
@@ -336,8 +337,8 @@ class SummaryComponent extends React.Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col sm="12" md="2" className="fdiv">
-                        <Card>
+                    <Col sm="12" md="2" className="fdiv pb-0">
+                        <Card className="mb-0">
                             <CardHeader>
                                 <CardText>Sections</CardText>
                             </CardHeader>
@@ -378,8 +379,8 @@ class SummaryComponent extends React.Component {
                         </Card>
                     </Col> */}
                     {/* Subsections  */}
-                    <Col sm="12" md="4" className="sdiv">
-                        <Card>
+                    <Col sm="12" md="4" className="sdiv pb-0">
+                        <Card className="mb-0">
                             <CardHeader style={{ height: '35px' }}>
                                 <CardText className="cardtextl">Sub Sections</CardText>
                                 {this.state.SelectedSectionId !== 0 && (
@@ -393,7 +394,7 @@ class SummaryComponent extends React.Component {
                                 )}
                             </CardHeader>
 
-                            <div responsive="true" style={{ overflowY: 'scroll', height: '600px' }}>
+                            <div responsive="true" style={{  height: '600px' }}>
                                 <div responsive="true" style={{ overflowY: 'scroll', height: '560px' }}>
                                     <Table responsive hover >
                                         <tbody>
@@ -411,8 +412,8 @@ class SummaryComponent extends React.Component {
                         </Card>
                     </Col>
 
-                    <Col sm="12" md="6" className="tdiv">
-                        <Card>
+                    <Col sm="12" md="6" className="tdiv pb-0">
+                        <Card className="mb-0">
                             <CardHeader>
                                 <CardText>Rubric Details</CardText>
                             </CardHeader>
@@ -537,7 +538,7 @@ class SummaryComponent extends React.Component {
                                                                         )}
                                                                         {this.state.showInfoIcon &&
                                                                             <span className='hover-text3'>
-                                                                                <i class="fa fa-info" aria-hidden="true" style={{ marginLeft: 10, color: 'black' }}></i>
+                                                                                <i class="fa fa-info" aria-hidden="true" style={{ marginLeft: 2, color: 'black' }}></i>
                                                                                 <div class="tooltip-text3">
                                                                                     {/* Themes OR Characteristics:{item.themesORCharacteristics} Generals:{item.generals}
                                                                                     Modalities:{item.modalities}  Particulars:{item.particulars} */}
