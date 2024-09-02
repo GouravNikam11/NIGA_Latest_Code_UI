@@ -318,7 +318,7 @@ class DoctorDashboard extends React.Component {
                                 <Table responsive="sm" style={{ marginBottom: 0 }} hover bordered >
                                     <thead>
                                         <tr>
-                                            <th style={{ width: "20%", textAlign: "left" }}>Name</th>
+                                            <th style={{ width: "20%", textAlign: "center" }}>Name</th>
                                             <th style={{ width: "15%", textAlign: "center" }}>Phone</th>
                                             <th style={{ width: "15%", textAlign: "center" }}>Time</th>
                                             <th style={{ width: "15%", textAlign: "center" }}>Payment</th>
@@ -334,7 +334,7 @@ class DoctorDashboard extends React.Component {
                                                         <tr key={index}>
                                                             <td className="tbl1">
                                                                 <Link to={"/PatientDashboard/" + value.patientId + "/" + value.caseId + "/" + value.patientAppId + "/" + value.doctorId}>
-                                                                    <p style={{ color: "#007bff", textTransform: "uppercase", padding: 0, margin: 0 }}>{value.patientName}</p>
+                                                                    <p style={{ color: "#007bff", textTransform: "uppercase",textAlign: "center", padding: 0, margin: 0 }}>{value.patientName}</p>
                                                                 </Link></td>
                                                             <td className="tbl">{value.mobileNo}</td>
                                                             <td className="tbl"> {new Date(`2000-01-01T${value.appointmentTime}`).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true })}</td>

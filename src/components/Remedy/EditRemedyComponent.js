@@ -393,6 +393,7 @@ class EditRemedyComponent extends Component {
                     errors: {},
                     thermalId: this.state.thermalId,
                     thermalNameList: this.state.thermalNameList,
+                    commonOrUncommon:this.state.commonOrUncommon
                 }
         console.log("submit===",obj)
             CommonServices.postData(obj, `/remedy`).then((responseMessage) => {

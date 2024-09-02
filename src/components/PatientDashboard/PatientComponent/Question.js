@@ -6,6 +6,7 @@ import Select from "react-select";
 import navlinks from '../../Navigation/DoctorNavBar';
 import { green } from '@mui/material/colors';
 import { setIds } from '../../../store/actions/Patient';
+import ReactHtmlParser from 'react-html-parser';
 import {
     Modal,
     ModalHeader,
@@ -624,10 +625,10 @@ class ClinicalSummary extends React.Component {
                                                                                 <div class="tooltip-text3">
                                                                                     {/* Themes OR Characteristics:{item.themesORCharacteristics} Generals:{item.generals}
                                                                                     Modalities:{item.modalities}  Particulars:{item.particulars} */}
-                                                                                    <div className='modal-txt1'><strong>Themes/Characteristics : </strong> {item.themesORCharacteristics}</div>
-                                                                                    <div className='modal-txt2'><strong class="mt-2">Generals : </strong> {item.generals} </div>
-                                                                                    <div className='modal-txt3'><strong class="mt-2">Modalities : </strong> {item.modalities} </div>
-                                                                                    <div className='modal-txt4'><strong class="mt-2">Particulars : </strong> {item.particulars}</div>
+                                                                                    <div className='modal-txt1'><strong>Themes/Characteristics : </strong> {ReactHtmlParser(item.themesORCharacteristics)}</div>
+                                                                                    <div className='modal-txt2'><strong class="mt-2">Generals : </strong> {ReactHtmlParser(item.generals)} </div>
+                                                                                    <div className='modal-txt3'><strong class="mt-2">Modalities : </strong> {ReactHtmlParser(item.modalities)} </div>
+                                                                                    <div className='modal-txt4'><strong class="mt-2">Particulars : </strong> {ReactHtmlParser(item.particulars)}</div>
 
                                                                                 </div>
                                                                             </span>}
