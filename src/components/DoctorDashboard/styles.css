@@ -69,31 +69,47 @@ opacity: .7;
 }
 
 div.sticky {
-  font-size: 12px;
+  font-size: 10px;
   text-transform: uppercase;
-  background-color: #565981c2;
+  background-color: #0027529e;
   border-radius: 25px;
   position: fixed;
   border: 1px solid #8a8a91;
   bottom: 7px;
-  height: 38px;
-  width: 67%;
+  height: 30px;
+  /* width: 67%; */
   color: white;
   float: right;
-  right: 7px;
+  right: 4px;
   font-style: italic;
+  padding-left: 1px;
   }
 
   .rndv{
       border-radius: 50%;
-      padding: 7px 12px;
-        border: 1px solid #161d64;
-        background: #171c46;
+      padding: 6px 10px;
+      border: 1px solid #05274c;
+      background: #073160;
         cursor: pointer;
+        border: 1px solid #7a7aa7;
   }
 
+  .rndvtxt {
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    text-align: center;
+}
+
+.rndvlast{
+  background: #073160;
+  text-align: right !important;
+  border-radius: 15px;
+  padding: 3px 0px;
+}
+
   .stickyc{
-    margin-top: 10px;
+    margin-top: 7px;
     text-align: center;
   }
 

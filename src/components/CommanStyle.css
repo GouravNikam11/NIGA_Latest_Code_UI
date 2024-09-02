@@ -55,6 +55,7 @@
 
 .react-datepicker-component .react-datepicker-input.has-value input {
   font-size: 12px;
+  font-weight: 400;
 }
 
 .card-body {
@@ -65,6 +66,10 @@
 .form-control {
   font-size: 12px !important;
   border-radius: 0.25rem !important;
+}
+
+.table {
+  background: white;
 }
 
 /* .btn{
@@ -224,4 +229,16 @@
 .brdrds{
   border: none !important;
     border-bottom: 1px solid !important;
+}
+
+.fntico{
+    color: white;
+    width: 25px;
+    height: 25px;
+    background: #084486;
+    vertical-align: middle;
+    text-align: center;
+    border-radius: 25px;
+    padding-top: 7px;
+    font-size: 10px;
 }

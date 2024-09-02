@@ -96,7 +96,7 @@ class PatientBackHistoryComponent extends Component {
                                                 <td>Prescription</td> */}
                                             </tbody>
                                         </Table>
-                                        {this.renderPagination()}
+                                        <div className='text-center'>{this.renderPagination()}</div>
                                     </Col>
                                     <Col md="6">
                                         <span className="hthead">Case Notes : </span>

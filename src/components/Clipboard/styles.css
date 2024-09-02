@@ -53,7 +53,26 @@
 }
 
 .react-datepicker.floating {
-    right: -50px;
+    right: 0rem;
+    font-size: 10px !important;
+}
+.react-datepicker .react-datepicker-container .react-datepicker-top .display .react-datepicker-button {
+    font-size: 10px !important;
+}
+
+.react-datepicker .react-datepicker-container .react-datepicker-top .week-days .week-day {
+    font-size: 10px !important;
+}
+
+.react-datepicker .react-datepicker-container .react-datepicker-body .react-datepicker-row .react-datepicker-picker.day {
+    min-height: 25px !important;
+    width: 25px !important;
+}
+
+.react-datepicker .react-datepicker-container .react-datepicker-top {
+    text-align: center;
+    background: #959595 !important;
+    border: none !important;
 }
 
 .headerIcon{
@@ -99,7 +118,7 @@ datepicker-input {
 
 .card-body {
     padding: 10px !important;
-    background: #fbfbfbed;
+    background: #f4f4f4ed;
 }
 
 .table>p{
@@ -122,6 +141,13 @@ body {
 
 .btn {
     padding: 4px 8px 5px !important;
+    font-size: 11px !important;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    font-size: 12px !important;
 }
 
 .btn_Cancel {

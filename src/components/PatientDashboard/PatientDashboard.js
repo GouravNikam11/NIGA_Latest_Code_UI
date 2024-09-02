@@ -275,7 +275,7 @@ class PatientDashboard extends React.Component {
                 return (
                     <NavLink
                         className={classnames({ active: this.state.activeTab === tab.tabId })}
-                        style={{ backgroundColor: "#676767", color: "white", position:"absolute", right:"232px"}}
+                        style={{ background: "radial-gradient(#b7b7b7, #676767)", color: "white", position:"absolute", right:"232px"}}
                         onClick={() => {
                             this.toggle(tab.tabId);
                             store.dispatch({ type: 'SET_CHILD_OPTION', payload: {} });
@@ -291,7 +291,7 @@ class PatientDashboard extends React.Component {
                 return (
                     <NavLink
                         className={classnames({ active: this.state.activeTab === tab.tabId })}
-                        style={{ backgroundColor: "#676767", color: "white", position:"absolute", right:"116px", }}
+                        style={{ background: "radial-gradient(#b7b7b7, #676767)", color: "white", position:"absolute", right:"116px", }}
                         onClick={() => {
                             this.toggle(tab.tabId);
                             store.dispatch({ type: 'SET_CHILD_OPTION', payload: {} });
@@ -307,7 +307,7 @@ class PatientDashboard extends React.Component {
                 return (
                     <NavLink
                         className={classnames({ active: this.state.activeTab === tab.tabId })}
-                        style={{ backgroundColor: "#676767", color: "white", position:"absolute", right:"4px" }}
+                        style={{ background: "radial-gradient(#b7b7b7, #676767)", color: "white", position:"absolute", right:"4px" }}
                         onClick={() => {
                             this.toggle(tab.tabId);
                             store.dispatch({ type: 'SET_CHILD_OPTION', payload: {} });
@@ -323,7 +323,7 @@ class PatientDashboard extends React.Component {
                 return (
                     <NavLink
                         className={classnames({ active: this.state.activeTab === tab.tabId })}
-                        style={{ backgroundColor: "#676767", color: "white"}}
+                        style={{ background: "radial-gradient(#b7b7b7, #676767)", color: "white"}}
                         onClick={() => {
                             this.toggle(tab.tabId);
                             store.dispatch({ type: 'SET_CHILD_OPTION', payload: {} });

@@ -241,18 +241,21 @@ class DoctorDashboard extends React.Component {
                             <CardBody style={{ fontWeight: "600" }} >
                                 <FormGroup style={{ marginBottom: 0 }}>
                                     <Row>
-                                        <FormLabel column sm="1">Patient : </FormLabel>
-                                        <Col sm="3">
+                                        <FormLabel column sm="4"><i className="fa fa-user fntico" aria-hidden="true"></i> Patient : 
+                                            &nbsp;
                                             <Input type="search"
-                                                placeholder="Search by Name / Mobile No."
+                                            style={{width: '200px', display:'inline'}}
+                                                placeholder="Search Name / Mobile No."
                                                 name='SearchText'
                                                 value={this.state.SearchText}
                                                 onChange={this.handleChange} />
-                                        </Col>
+                                        
+                                        </FormLabel>
 
-                                        <FormLabel column sm="1">Doctor : </FormLabel>
-                                        <Col sm="3">
+                                        <FormLabel column sm="4"><i className="fa fa-user-md fntico" aria-hidden="true"></i> Doctor : 
+                                            &nbsp;
                                             <Input type="select"
+                                            style={{width: '200px', display:'inline'}}
                                                 name="DoctorId"
                                                 onChange={this.handleDoctorChange}
                                                 value={this.state.DoctorId}>
@@ -260,36 +263,29 @@ class DoctorDashboard extends React.Component {
                                                     this.renderDoctorList()
                                                 }
                                             </Input>
-                                        </Col>
+                                        </FormLabel>
 
-                                        <FormLabel column sm="2">Date : </FormLabel>
-                                        <FormLabel column sm="2"><i className="fa fa-calendar" aria-hidden="true"></i> &nbsp;&nbsp;|&nbsp;&nbsp; {(this.state.Appdate.getDate() + "-" + (this.state.Appdate.getMonth() + 1) + "-" + this.state.Appdate.getFullYear())}</FormLabel>
-
-                                    </Row>
-
-                                    <Row>
-
-                                        <FormLabel column sm="2" style={{ color: "#0d37d3" }}>Waiting : </FormLabel>
-                                        <FormLabel column sm="2" style={{ color: "#0d37d3" }}><i className="fa fa-hourglass-half" aria-hidden="true"></i> &nbsp;&nbsp;|&nbsp;&nbsp; {this.state.appointmentCount.patientAppWaiting}</FormLabel>
-
-                                        <FormLabel column sm="2" style={{ color: "#ff0000" }}>Not Arrived : </FormLabel>
-                                        <FormLabel column sm="2" style={{ color: "#ff0000" }}><i className="fa fa-ban" aria-hidden="true"></i> &nbsp;&nbsp;|&nbsp;&nbsp; {this.state.appointmentCount.patientAppNotArrived}</FormLabel>
-
-                                        <FormLabel column sm="2" style={{ color: "#00a100" }}>Completed : </FormLabel>
-                                        <FormLabel column sm="2" style={{ color: "#00a100" }}><i className="fa fa-check-square-o" aria-hidden="true"></i> &nbsp;&nbsp;|&nbsp;&nbsp; {this.state.appointmentCount.patientAppComplated}</FormLabel>
+                                        <FormLabel column sm="4"><i className="fa fa-calendar fntico" aria-hidden="true"></i> Date : 
+                                        &nbsp;
+                                        {(this.state.Appdate.getDate() + "-" + (this.state.Appdate.getMonth() + 1) + "-" + this.state.Appdate.getFullYear())}</FormLabel>
 
                                     </Row>
 
+                             
+
                                     <Row>
 
-                                        <FormLabel column sm="2" style={{ color: "#d3960d" }}>Walk-Ins : </FormLabel>
-                                        <FormLabel column sm="2" style={{ color: "#d3960d" }}>&nbsp;<i className="fa fa-male" aria-hidden="true"></i> &nbsp;&nbsp;|&nbsp;&nbsp; 0</FormLabel>
+                                        <FormLabel column sm="2" ><i className="fa fa-hourglass-half fntico" aria-hidden="true"></i> Waiting : {this.state.appointmentCount.patientAppWaiting}</FormLabel>
 
-                                        <FormLabel column sm="2" style={{ color: "#d800ff" }}>E-Consult : </FormLabel>
-                                        <FormLabel column sm="2" style={{ color: "#d800ff" }}><i className="fa fa-laptop" aria-hidden="true"></i> &nbsp;|&nbsp;&nbsp; 0</FormLabel>
+                                        <FormLabel column sm="2" ><i className="fa fa-male fntico" aria-hidden="true"></i> Walk-Ins : 0</FormLabel>
+                                        
+                                        <FormLabel column sm="2" ><i className="fa fa-ban fntico" aria-hidden="true"></i> Not Arrived : {this.state.appointmentCount.patientAppNotArrived}</FormLabel>
 
-                                        <FormLabel column sm="2" style={{ color: "#5aa2e0" }}>Total : </FormLabel>
-                                        <FormLabel column sm="2" style={{ color: "#5aa2e0" }}><i className="fa fa-list-alt" aria-hidden="true"></i> &nbsp;&nbsp;|&nbsp;&nbsp; 0</FormLabel>
+                                        <FormLabel column sm="2" ><i className="fa fa-laptop fntico" aria-hidden="true"></i> E-Consult : 0</FormLabel>
+
+                                        <FormLabel column sm="2" ><i className="fa fa-check-square-o fntico" aria-hidden="true"></i> Completed : {this.state.appointmentCount.patientAppComplated}</FormLabel>
+
+                                        <FormLabel column sm="2" ><i className="fa fa-list-alt fntico" aria-hidden="true"></i> Total : 0</FormLabel>
 
                                     </Row>
 
@@ -304,7 +300,7 @@ class DoctorDashboard extends React.Component {
                                     </Col>
                                     <Col md="4"></Col>
                                     <Col md="2">
-                                        <FormGroup style={{ marginBottom: 0, width: 100 }}>
+                                        <FormGroup style={{ marginBottom: 0, float: 'right' }}>
                                             <DatePickerInput
                                                 dateFormat="yyyy/MM/dd"
                                                 value={this.state.Appdate}
@@ -368,13 +364,13 @@ class DoctorDashboard extends React.Component {
                     <div className="col-sm-12">
                         <div className="sticky" >
                             <div className="stickyc">
-                                <span className="rndv">{this.state.appointmentCount.patientAppNotArrived}</span>  Not Arrived &nbsp;&nbsp;&nbsp;&nbsp;
-                                <span className="rndv">0</span>  Walk-Ins &nbsp;&nbsp;&nbsp;&nbsp;
-                                <span className="rndv">0</span>  Regular &nbsp;&nbsp;&nbsp;&nbsp;
-                                <span className="rndv">0</span>  Guaranteed &nbsp;&nbsp;&nbsp;&nbsp;
-                                <span className="rndv">0</span>  Video Consult &nbsp;&nbsp;&nbsp;&nbsp;
-                                <span className="rndv">{this.state.appointmentCount.patientAppComplated}</span>  Completed &nbsp;&nbsp;&nbsp;&nbsp;
-                                <span className="rndv">{this.state.appointmentCount.patientApp}</span>  Total &nbsp;&nbsp;&nbsp;&nbsp;
+                                <span className="rndv">{this.state.appointmentCount.patientAppNotArrived}</span>  <span className='rndvtxt'>Not Arrived</span>
+                                <span className="rndv">0</span>  <span className='rndvtxt'>Walk-Ins</span> 
+                                <span className="rndv">0</span>  <span className='rndvtxt'>Regular</span> 
+                                <span className="rndv">0</span>  <span className='rndvtxt'>Guaranteed</span> 
+                                <span className="rndv">0</span>  <span className='rndvtxt'>Video Consult</span> 
+                                <span className="rndv">{this.state.appointmentCount.patientAppComplated}</span>  <span className='rndvtxt'>Completed</span> 
+                                <span className='rndvlast'><span className='rndvtxt'>Total</span> <span className="rndv">{this.state.appointmentCount.patientApp}</span> </span> 
                             </div>
 
                         </div>
@@ -504,7 +500,7 @@ class DoctorDashboard extends React.Component {
                         <Card className="mb-0">
                             <CardHeader>Subscriptions</CardHeader>
                             <CardBody>
-                          <center><b> Your subscription will expire after 5 days. Please buy new subscription to continue your valuable practice.</b></center>
+                                <center>Your subscription will expire after 5 days. Please buy new subscription to continue your valuable practice.</center>
                             </CardBody>
                         </Card>
                     </ModalBody>

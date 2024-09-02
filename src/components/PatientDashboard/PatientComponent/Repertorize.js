@@ -183,23 +183,23 @@ class RepertorizePage extends React.Component {
                                 <Col sm="12" md="9" className="txtright">
                                     <span class="hthead1 txtht">Repertorization</span>
                                     &nbsp;&nbsp;
-                                    <Button size="sm" className="bt1" style={{ border: this.state.thermalId === 1 ? '2px solid green' : 'none' }} color="primary" title="EXTREME CHILLY" onClick={() => this.ChangeThermalState(1)}></Button>
+                                    <Button size="sm" className="bt1" style={{ border: this.state.thermalId === 1 ? '2px solid #20a8d8 !important' : 'none' }} color="primary" title="EXTREME CHILLY" onClick={() => this.ChangeThermalState(1)}></Button>
                                     &nbsp;&nbsp;
-                                    <Button size="sm" className="bt2" style={{ border: this.state.thermalId === 2 ? '2px solid green' : 'none' }} color="primary" title="CHILLY" onClick={() => this.ChangeThermalState(2)}></Button>
+                                    <Button size="sm" className="bt2" style={{ border: this.state.thermalId === 2 ? '2px solid #20a8d8 !important' : 'none' }} color="primary" title="CHILLY" onClick={() => this.ChangeThermalState(2)}></Button>
                                     &nbsp;&nbsp;
-                                    <Button size="sm" className="bt3" style={{ border: this.state.thermalId === 3 ? '2px solid green' : 'none' }} color="primary" title="AMBITHERMAL" onClick={() => this.ChangeThermalState(3)}></Button>
+                                    <Button size="sm" className="bt3" style={{ border: this.state.thermalId === 3 ? '2px solid #20a8d8 !important' : 'none' }} color="primary" title="AMBITHERMAL" onClick={() => this.ChangeThermalState(3)}></Button>
                                     &nbsp;&nbsp;
-                                    <Button size="sm" className="bt4" style={{ border: this.state.thermalId === 4 ? '2px solid green' : 'none' }} color="primary" title="HOT" onClick={() => this.ChangeThermalState(4)}></Button>
+                                    <Button size="sm" className="bt4" style={{ border: this.state.thermalId === 4 ? '2px solid #20a8d8 !important' : 'none' }} color="primary" title="HOT" onClick={() => this.ChangeThermalState(4)}></Button>
                                     &nbsp;&nbsp;
-                                    <Button size="sm" className="bt5" style={{ border: this.state.thermalId === 5 ? '2px solid green' : 'none' }} color="primary" title="EXTREME HOT" onClick={() => this.ChangeThermalState(5)}></Button>
+                                    <Button size="sm" className="bt5" style={{ border: this.state.thermalId === 5 ? '2px solid #20a8d8 !important' : 'none' }} color="primary" title="EXTREME HOT" onClick={() => this.ChangeThermalState(5)}></Button>
                                     &nbsp;&nbsp;
                                     <Button size="sm" className="bt6" color="primary" title="N/A" onClick={() => this.ChangeThermalState('')}>N/A</Button>
                                     &nbsp;&nbsp;
                                     <Button size="sm" className="btn4" color="primary" onClick={() => this.ChangeTabReset(1)}>Reset</Button>
                                     &nbsp;&nbsp;
-                                    <Button size="sm" className="btn5" style={{ border: this.state.ShowDivCommonUnCommon === 2 ? '2px solid green' : 'none' }} color="primary" onClick={() => this.ChangeTab(2)}>Kolkatta Keynote Method</Button>
+                                    <Button size="sm" className="btn5" style={{ border: this.state.ShowDivCommonUnCommon === 2 ? '2px solid #20a8d8 !important' : 'none' }} color="primary" onClick={() => this.ChangeTab(2)}>Kolkatta Keynote Method</Button>
                                     &nbsp;&nbsp;
-                                    <Button size="sm" className="btnr btn6" style={{ border: this.state.ShowDivCommonUnCommon === 3 ? '2px solid green' : 'none' }} color="primary" onClick={() => this.ChangeTab(3)} >Small Rubric</Button>
+                                    <Button size="sm" className="btnr btn6" style={{ border: this.state.ShowDivCommonUnCommon === 3 ? '2px solid #20a8d8 !important' : 'none' }} color="primary" onClick={() => this.ChangeTab(3)} >Small Rubric</Button>
                                 </Col>
                             </Row>
                         </Col>
@@ -1131,7 +1131,7 @@ class RepertorizePage extends React.Component {
 
                 expanded={isExpanded}
                 onClick={(e) => {
-                    if (!e.target.closest('td')) { // Prevents triggering on "Read More..." click
+                    if (!e.target.closest('td')) { // Prevents triggering on "Load More..." click
                         console.log('onclick mainaccord==');
                         this.setState({
                             page:1
@@ -1205,7 +1205,7 @@ class RepertorizePage extends React.Component {
                                             // hasMore: result.resultObject.length > 0
                                         }));
                                         this.handleObserverKolkattaKeynoteCommonTable(common.remedyId, "KolkattaKeynoteMethod", this.state.page + 1)
-                                    }} colSpan="3">Read More...</td>
+                                    }} colSpan="3">Load More...</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1256,7 +1256,7 @@ class RepertorizePage extends React.Component {
                 expanded={isExpanded}
                 key={index}
                 onClick={(e) => {
-                    if (!e.target.closest('td')) { // Prevents triggering on "Read More..." click
+                    if (!e.target.closest('td')) { // Prevents triggering on "Load More..." click
                         console.log('onclick mainaccord==');
                         this.setState({
                             page:1
@@ -1329,7 +1329,7 @@ class RepertorizePage extends React.Component {
                                             // hasMore: result.resultObject.length > 0
                                         }));
                                         this.handleObserverKolkattaKeynoteUnCommonTable(common.remedyId, "KolkattaKeynoteMethod", this.state.page + 1)
-                                    }} colSpan="3">Read More...</td>
+                                    }} colSpan="3">Load More...</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1377,7 +1377,7 @@ class RepertorizePage extends React.Component {
 
                 expanded={isExpanded}
                 onClick={(e) => {
-                    if (!e.target.closest('td')) { // Prevents triggering on "Read More..." click
+                    if (!e.target.closest('td')) { // Prevents triggering on "Load More..." click
                         console.log('onclick mainaccord==');
                         this.setState({
                             page:1
@@ -1450,7 +1450,7 @@ class RepertorizePage extends React.Component {
                                             // hasMore: result.resultObject.length > 0
                                         }));
                                         this.handleObserverSmallRubricCommonTable(common.remedyId, "SmallRubric", this.state.page + 1)
-                                    }} colSpan="3">Read More...</td>
+                                    }} colSpan="3">Load More...</td>
                                 </tr>
 
                             </tbody>
@@ -1497,7 +1497,7 @@ class RepertorizePage extends React.Component {
                 this.setState({ expanded4: isExpanded ? null : index, RubricListByRemedySmallRubricUnCommon: [], page: 1 })}
                 expanded={isExpanded}
                 onClick={(e) => {
-                    if (!e.target.closest('td')) { // Prevents triggering on "Read More..." click
+                    if (!e.target.closest('td')) { // Prevents triggering on "Load More..." click
                         console.log('onclick mainaccord==');
                         this.setState({
                             page:1
@@ -1564,7 +1564,7 @@ class RepertorizePage extends React.Component {
                                             // hasMore: result.resultObject.length > 0
                                         }));
                                         this.handleObserverSmallRubricUnCommonTable(common.remedyId, "SmallRubric", this.state.page + 1)
-                                    }} colSpan="3">Read More...</td>
+                                    }} colSpan="3">Load More...</td>
                                 </tr>
                             </tbody>
                         </table>
