@@ -150,10 +150,17 @@ class PatientBackHistory extends Component {
         return currentPageRecords.map((s, index) => {
             return <tr key={index}>
                 {/* <td>{s.appointmentDate}</td> */}
-                <td onClick={() => this.handlegetrubricbyPatientAppid(s)} style={{ textAlign: 'center' }}>{new Date(s.appointmentDate).toLocaleDateString('en-GB')}</td>
+                {/* <td onClick={() => this.handlegetrubricbyPatientAppid(s)} style={{ textAlign: 'center' }}>{new Date(s.appointmentDate).toLocaleDateString('en-GB')}</td>
                 <td onClick={() => this.handlegetrubricbyPatientAppid(s)} style={{ textAlign: 'center' }}>{s.appointmentTime}</td>
                 <td onClick={() => this.handlegetPrescriptionbyPatientAppid(s)} style={{ textAlign: 'center' }}>Prescription</td>
+                <td style={{ textAlign: 'center' }}><Button>Nots</Button></td> */}
+
+
+                <td  style={{ textAlign: 'center' }}>{new Date(s.appointmentDate).toLocaleDateString('en-GB')}</td>
+                <td  style={{ textAlign: 'center' }}>{s.appointmentTime}</td>
+                <td  style={{ textAlign: 'center' }}>Prescription</td>
                 <td style={{ textAlign: 'center' }}><Button>Nots</Button></td>
+
 
 
             </tr>
