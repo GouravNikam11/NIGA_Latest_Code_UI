@@ -29,6 +29,7 @@ const AdverseEffect = React.lazy(() => import('./PatientComponent/AdverseEffect'
 const Repertorize = React.lazy(() => import('./PatientComponent/Repertorize'));
 const Prescription = React.lazy(() => import('./PatientComponent/Prescription'));
 const AddAppointmentHistoryNotes = React.lazy(() => import('../AppointmentHistoryNotes/AddAppointmentHistoryNotes'))
+const PatientBackHistory = React.lazy(() => import('./PatientComponent/PatientBackHistory'));
 
 class PatientDashboard extends React.Component {
     state = {
@@ -36,6 +37,7 @@ class PatientDashboard extends React.Component {
         activeTab: 4,
         patientId: "",
         caseId: "",
+        previousFU:0,
         navigationTabs: [
             {
                 tabId: 1,
@@ -135,7 +137,22 @@ class PatientDashboard extends React.Component {
         console.log("selectedRubrics after patient", this.props)
         console.log("selectedRubrics after patient", this.props.state.selectedRubrics)
         // this.props.state.selectedRubrics=selectedRubrics
+        this.GetPatientBackHostoryById(Id);
 
+    }
+
+    GetPatientBackHostoryById(Id) {
+        debugger;
+        if (Id != undefined) {
+            CommonServices.getDataById(Id, `/CaseDetails/GetPatientBackHostoryById`).then((res) => {
+                debugger
+                console.log("for ids PatientBackHostory", res.length)
+
+                this.setState({
+                    previousFU:res.length
+                });
+            });
+        }
     }
 
     componentDidUpdate() {
@@ -299,7 +316,7 @@ class PatientDashboard extends React.Component {
                             store.dispatch({ type: 'SHOW_LAB_IMAGING', payload: false });
                             store.dispatch({ type: 'SHOW_ADD_APPOINTMENT', payload: false });
                         }} >
-                        &nbsp;&nbsp;<i className="fa fa-repeat"></i>&nbsp;&nbsp;{tab.tabName} <span className="numbadge1">11</span>
+                        &nbsp;&nbsp;<i className="fa fa-repeat"></i>&nbsp;&nbsp;{tab.tabName} <span className="numbadge1">{this.state.previousFU}</span>
                     </NavLink>
                 )
             }
@@ -390,7 +407,7 @@ class PatientDashboard extends React.Component {
                                 <MateriaMedica remedyIdToMM={this.state.remedyId} />
                                 <AdverseEffect />
                                 <Repertorize updatePassedId={this.updatePassedId} />
-
+                                <PatientBackHistory patientId={this.state.patientId}/>
                                 <Prescription patientId={this.state.patientId} caseId={this.state.caseId} doctorId={this.props.match.params.doctorId} patientAppId={this.props.match.params.patientAppId} />
                             </React.Suspense>
                         </TabContent>
