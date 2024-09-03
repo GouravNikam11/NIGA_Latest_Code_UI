@@ -42,8 +42,8 @@ class PatientBackHistory extends Component {
 
     componentDidMount() {
         debugger
-        var Id = this.props.patientId
-        this.GetPatientBackHostoryById(Id);
+        // var Id = this.props.patientId
+        // this.GetPatientBackHostoryById(Id);
     }
 
 
@@ -124,42 +124,42 @@ class PatientBackHistory extends Component {
     }
 
 
-    GetPatientBackHostoryById(Id) {
-        debugger;
-        if (Id != undefined) {
-            CommonServices.getDataById(Id, `/CaseDetails/GetPatientBackHostoryById`).then((res) => {
-                debugger
-                console.log("for ids PatientBackHostory", res)
+    // GetPatientBackHostoryById(Id) {
+    //     debugger;
+    //     if (Id != undefined) {
+    //         CommonServices.getDataById(Id, `/CaseDetails/GetPatientBackHostoryById`).then((res) => {
+    //             debugger
+    //             console.log("for ids PatientBackHostory", res)
 
-                this.setState({
-                    PatientBackHostory: res,
-                    previousFU:res.length
-                });
-            });
-        }
-    }
+    //             this.setState({
+    //                 PatientBackHostory: res,
+    //                 previousFU:res.length
+    //             });
+    //         });
+    //     }
+    // }
 
 
 
     renderpatientbackhostory = () => {
         debugger
-        let PatientBackHostory = this.state.PatientBackHostory;
+        let PatientBackHostory = this.props.patientBackHostory;
         const { currentPage, pageSize } = this.state;
         const currentPageRecords = PatientBackHostory.slice(((currentPage - 1) * pageSize), (currentPage) * pageSize);
 
         return currentPageRecords.map((s, index) => {
             return <tr key={index}>
                 {/* <td>{s.appointmentDate}</td> */}
-                {/* <td onClick={() => this.handlegetrubricbyPatientAppid(s)} style={{ textAlign: 'center' }}>{new Date(s.appointmentDate).toLocaleDateString('en-GB')}</td>
+                <td onClick={() => this.handlegetrubricbyPatientAppid(s)} style={{ textAlign: 'center' }}>{new Date(s.appointmentDate).toLocaleDateString('en-GB')}</td>
                 <td onClick={() => this.handlegetrubricbyPatientAppid(s)} style={{ textAlign: 'center' }}>{s.appointmentTime}</td>
                 <td onClick={() => this.handlegetPrescriptionbyPatientAppid(s)} style={{ textAlign: 'center' }}>Prescription</td>
-                <td style={{ textAlign: 'center' }}><Button>Nots</Button></td> */}
+                <td style={{ textAlign: 'center' }}><Button>Nots</Button></td>
 
 
-                <td  style={{ textAlign: 'center' }}>{new Date(s.appointmentDate).toLocaleDateString('en-GB')}</td>
+                {/* <td  style={{ textAlign: 'center' }}>{new Date(s.appointmentDate).toLocaleDateString('en-GB')}</td>
                 <td  style={{ textAlign: 'center' }}>{s.appointmentTime}</td>
                 <td  style={{ textAlign: 'center' }}>Prescription</td>
-                <td style={{ textAlign: 'center' }}><Button>Nots</Button></td>
+                <td style={{ textAlign: 'center' }}><Button>Nots</Button></td> */}
 
 
 
@@ -169,7 +169,7 @@ class PatientBackHistory extends Component {
 
     renderPagination = () => {
         debugger
-        const totalRecords = (this.state.PatientBackHostory.length);
+        const totalRecords = (this.props.patientBackHostory.length);
         return (
             (totalRecords > 9) &&
             <Pagination
@@ -217,13 +217,7 @@ class PatientBackHistory extends Component {
             console.log("after set from api this.props.state.selectedRubrics", this.props.history)
             //  this.props.history.push('/PatientDashboard/' + s.patientId + "/" + 1075 +"/"+s.patientAppId+"/"+s.doctorId);
 
-            this.props.history.push({
-                pathname: '/PatientDashboard/' + s.patientId + '/' + s.caseId + '/' + s.patientAppId + '/' + s.doctorId,
-                state: {
-                    selectedRubrics: this.props.state.selectedRubrics,
-                    TabIdFromPatientHistory: 8
-                },
-            });
+            this.props.UpdatePatientDashboard(8, s.patientId , s.caseId , s.patientAppId ,  s.doctorId);
         });
     };
 

@@ -38,6 +38,7 @@ class PatientDashboard extends React.Component {
         patientId: "",
         caseId: "",
         previousFU:0,
+        PatientBackHostory:[],
         navigationTabs: [
             {
                 tabId: 1,
@@ -104,6 +105,22 @@ class PatientDashboard extends React.Component {
         }
     };
 
+
+
+    UpdatePatientDashboard = (id) => {
+        // this.props.history.push({
+        //     pathname: '/PatientDashboard/' + patientId + '/' + caseId + '/' + patientAppId + '/' + doctorId,
+        //     state: {
+        //         selectedRubrics: this.props.state.selectedRubrics,
+        //         TabIdFromPatientHistory: id
+        //     },
+        // });
+        this.setState({
+            activeTab: id,
+           
+        });
+    };
+
     async componentDidMount() {
         this.props.getIntensities();
         store.dispatch({ type: 'SET_CHILD_OPTION', payload: {} });
@@ -146,9 +163,10 @@ class PatientDashboard extends React.Component {
         if (Id != undefined) {
             CommonServices.getDataById(Id, `/CaseDetails/GetPatientBackHostoryById`).then((res) => {
                 debugger
-                console.log("for ids PatientBackHostory", res.length)
+                console.log("for ids PatientBackHostory", res)
 
                 this.setState({
+                    PatientBackHostory: res,
                     previousFU:res.length
                 });
             });
@@ -213,75 +231,6 @@ class PatientDashboard extends React.Component {
 
         return array;
     }
-
-
-
-
-
-
-
-
-    // async getQuestionSection() {
-    //     debugger;
-    //     CommonServices.getData(`/questionsection`).then(async (temp) => {
-    //         console.log('questionsection========', temp)
-    //         var copyTableData = temp;
-    //         let array = []
-    //         let promises = new Promise((resolve, reject) => {
-    //             copyTableData.forEach(async (element, index) => {
-    //                 debugger;
-    //                 console.log('index == ', index);
-    //                 console.log('element == ', element);
-    //                 let child =await this.navquestiongroup(element.questionSectionId) ;
-    //                 console.log('child == ', child);
-    //                 let obj = {
-    //                     "ID": parseInt(element.questionSectionId),
-    //                     "name": element.questionSectionName,
-    //                     "icon": 'icon-list',
-    //                     "children": child
-    //                 }
-    //                 array.push(obj);
-    //                 console.log('array == ', index === copyTableData.length - 1)
-    //                 index === copyTableData.length - 1 && resolve();
-    //             });
-    //         });
-    //         promises.then(() => {
-    //             console.log('result === ', array);
-    //             let navarray = [{
-    //                 "name": "Existance",
-    //                 "icon": 'icon-notebook',
-    //                 "children": array
-    //             }]
-    //             console.log('array === ', array)
-    //             console.log('navarray === ', navarray)
-    //             // navlinks.items = navarray     
-    //             store.dispatch({ type: SET_EXISTANCE, existance: [...navarray] })
-    //         })
-    //     });
-    // }
-    // navquestiongroup(questionSectionId) {
-    //     let res = CommonServices.getDataById(questionSectionId, `/questiongroup/GetQuestionGroupByExistanceId`).then((res) => {
-    //         debugger
-    //         var copyTableData = res;
-    //         let array = []
-    //         copyTableData.forEach(element => {
-    //             let obj = {
-    //                 "ID": element.questionGroupId,
-    //                 "name": element.questionGroupName,
-    //                 "url": '/PatientDashboard/' + this.state.patientId + "/" + this.state.caseId + "/" + this.props.match.params.patientAppId + "/" + this.props.match.params.doctorId + "/" + questionSectionId + "/" + element.questionGroupId,
-    //                 "icon": 'icon-arrow-right',
-    //             }
-    //             array.push(obj)
-    //         });
-    //         return array;
-    //     });
-    //     return res;
-    // }
-
-
-
-
-
 
 
     renderNavigationTabs() {
@@ -407,7 +356,7 @@ class PatientDashboard extends React.Component {
                                 <MateriaMedica remedyIdToMM={this.state.remedyId} />
                                 <AdverseEffect />
                                 <Repertorize updatePassedId={this.updatePassedId} />
-                                <PatientBackHistory patientId={this.state.patientId}/>
+                                <PatientBackHistory UpdatePatientDashboard={this.UpdatePatientDashboard} patientId={this.state.patientId} patientBackHostory={this.state.PatientBackHostory} history={this.props.history}/>
                                 <Prescription patientId={this.state.patientId} caseId={this.state.caseId} doctorId={this.props.match.params.doctorId} patientAppId={this.props.match.params.patientAppId} />
                             </React.Suspense>
                         </TabContent>
