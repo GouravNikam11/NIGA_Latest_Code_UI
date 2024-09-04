@@ -24,7 +24,7 @@
     font-size: 12px;
     /* font-family: 'Times New Roman'; */
     color:red;
-    text-transform: uppercase;
+    text-transform: capitalize !important;
 
 }
 .grade4css{

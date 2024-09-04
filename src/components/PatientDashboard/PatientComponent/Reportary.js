@@ -527,7 +527,7 @@ class SummaryComponent extends React.Component {
                                                                         <span onClick={() => this.handleAddRubricClick(item.remedyId)}
                                                                          className={item.gradeNo == 1 ? 'grade1css' : item.gradeNo == 2 ? 'grade2css' : item.gradeNo == 3 ? 'grade3css' : item.gradeNo == 4 && 'grade4css'}>
                                                                         {item.fontColor === 'Red'
-                                                                            ? item.remedyAlias.toUpperCase()
+                                                                            ? item.remedyAlias
                                                                             : item.remedyAlias}
                                                                         </span>
                                                                         
