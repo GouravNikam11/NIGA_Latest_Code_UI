@@ -426,7 +426,12 @@ class EditRemedyComponent extends Component {
                 debugger;
                 console.log("remedy==",res)
                 // this is fot editorStateThemesCharacteristics
-                const blocksFromHTMLThemesCharacteristics = htmlToDraft(res.themesOrCharacteristics)
+                const themesOrCharacteristics = res.themesOrCharacteristics || '';
+                const generals = res.generals || '';
+                const modalities = res.modalities || '';
+                const particulars = res.particulars || '';
+                
+                const blocksFromHTMLThemesCharacteristics = htmlToDraft(themesOrCharacteristics)
                 const contentStateThemesCharacteristics = ContentState.createFromBlockArray(
                     blocksFromHTMLThemesCharacteristics.contentBlocks,
                     blocksFromHTMLThemesCharacteristics.entityMap
@@ -434,7 +439,7 @@ class EditRemedyComponent extends Component {
                 const editorStateThemesCharacteristics1 = EditorState.createWithContent(contentStateThemesCharacteristics);
                 console.log("editorStateThemesCharacteristics==",editorStateThemesCharacteristics1)
                 // this is fot editorStateGenerals
-                const blocksFromHTMLgenerals = htmlToDraft(res.generals)
+                const blocksFromHTMLgenerals = htmlToDraft(generals)
                 const contentStategenerals = ContentState.createFromBlockArray(
                     blocksFromHTMLgenerals.contentBlocks,
                     blocksFromHTMLgenerals.entityMap
@@ -442,7 +447,7 @@ class EditRemedyComponent extends Component {
                 const editorStateGenerals = EditorState.createWithContent(contentStategenerals);
                 console.log("editorStateGenerals==",editorStateGenerals)
                 // this is fot editorStatemodalities 
-                const blocksFromHTMLModalities = htmlToDraft(res.generals)
+                const blocksFromHTMLModalities = htmlToDraft(modalities)
                 const contentStateModalities = ContentState.createFromBlockArray(
                     blocksFromHTMLModalities.contentBlocks,
                     blocksFromHTMLModalities.entityMap
@@ -450,7 +455,7 @@ class EditRemedyComponent extends Component {
                 const editorStateModalities = EditorState.createWithContent(contentStateModalities);
 
                 // this is fot editorStatemodalities 
-                const blocksFromHTMLparticulars = htmlToDraft(res.particulars)
+                const blocksFromHTMLparticulars = htmlToDraft(particulars)
                 const contentStateparticulars = ContentState.createFromBlockArray(
                     blocksFromHTMLparticulars.contentBlocks,
                     blocksFromHTMLparticulars.entityMap

@@ -197,7 +197,7 @@ class RepertorizePage extends React.Component {
                                     &nbsp;&nbsp;
                                     <Button size="sm" className="btn4" color="primary" onClick={() => this.ChangeTabReset(1)}>Reset</Button>
                                     &nbsp;&nbsp;
-                                    <Button size="sm" className="btn5" style={{ border: this.state.ShowDivCommonUnCommon === 2 ? '2px solid #20a8d8 !important' : 'none' }} color="primary" onClick={() => this.ChangeTab(2)}>Kolkatta Keynote Method</Button>
+                                    <Button size="sm" className="btn5" style={{ border: this.state.ShowDivCommonUnCommon === 2 ? '2px solid #20a8d8 !important' : 'none' }} color="primary" onClick={() => this.ChangeTab(2)}>Keynote Method</Button>
                                     &nbsp;&nbsp;
                                     <Button size="sm" className="btnr btn6" style={{ border: this.state.ShowDivCommonUnCommon === 3 ? '2px solid #20a8d8 !important' : 'none' }} color="primary" onClick={() => this.ChangeTab(3)} >Small Rubric</Button>
                                 </Col>
