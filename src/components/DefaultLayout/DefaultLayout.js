@@ -67,11 +67,14 @@ class DefaultLayout extends Component {
       <div className="app">
         <AppHeader fixed>
           <Suspense fallback={this.loading()}>
-            <DefaultHeader onLogout={e => this.signOut(e)} />
+            <DefaultHeader onLogout={e => this.signOut(e)} 
+            ishideshowsidebar={this.props.ishideshowsidebar}/>
           </Suspense>
         </AppHeader>
-        <div className="app-body">
-          <AppSidebar fixed display="lg">
+        <div className="app-body" >
+          {
+           this.props.ishideshowsidebar && 
+            <AppSidebar fixed display="lg" >
             <AppSidebarHeader />
             <AppSidebarForm />
             {(localStorage.getItem("RoleName") == UserRoles.Admin) && (
@@ -81,13 +84,15 @@ class DefaultLayout extends Component {
             )}
             {(localStorage.getItem("RoleName") == UserRoles.Doctor) && (this.props.existance.length > 0) && (
               <Suspense>
-                <AppSidebarNav onClick={(e) => this.itemClick(e)}
+                <AppSidebarNav onClick={(e) => this.itemClick(e)} 
                   navConfig={{ items: [...this.props.existance] }} {...this.props} router={router} />
               </Suspense>
             )}
             <AppSidebarFooter />
             <AppSidebarMinimizer />
           </AppSidebar>
+          }
+        
           <main className="main">
             {/* <AppBreadcrumb appRoutes={routes} router={router} /> */}
             <Container fluid>
@@ -128,6 +133,7 @@ class DefaultLayout extends Component {
 
 const mapStateToProps = (state) => ({
   existance: state.patient.existance,
+  ishideshowsidebar:state.doctor.ishideshowsidebar
 
 });
 const mapDispatchToProps = {

@@ -8,6 +8,8 @@ import logo from '../../assets/img/brand/logo.png'
 import sygnet from '../../assets/img/brand/sygnet.png'
 import { UserRoles } from '../../Constants/UserRoles'
 import avtr from '../../assets/img/avatars/users.jpg'
+import store from '../../store';
+import { connect, useDispatch } from 'react-redux';
 const propTypes = {
   children: PropTypes.node,
 };
@@ -18,7 +20,11 @@ class DefaultHeader extends Component {
   
 
  
-
+  handleSidebarToggle() {
+    console.log('Sidebar toggler clicked!',this.props);
+   // store.dispatch({ type: 'HIDE_SHOW_SIDE_BAR', payload: !this.props.ishideshowsidebar });
+    // Add your custom logic here, e.g., toggle sidebar visibility
+  }
 
   render() {
     debugger
@@ -35,8 +41,10 @@ class DefaultHeader extends Component {
           full={{ src: logo, width: 185, height: 45, alt: 'Homeo Centrum Logo' }}
           minimized={{ src: sygnet, width: 50, height: 50, alt: 'Homeo Centrum Logo' }}
         />
-
-        <AppSidebarToggler className="d-md-down-none" display="lg" />
+<span onClick={this.handleSidebarToggle} >
+<AppSidebarToggler className="d-md-down-none" display="lg" />
+</span>
+       
 
  
 
@@ -155,5 +163,10 @@ class DefaultHeader extends Component {
 
 DefaultHeader.propTypes = propTypes;
 DefaultHeader.defaultProps = defaultProps;
+const mapStateToProps = (state) => ({
+ // existance: state.patient.existance,
+  ishideshowsidebar:state.doctor.ishideshowsidebar
 
-export default DefaultHeader;
+});
+
+export default connect(mapStateToProps, null)(DefaultHeader); 

@@ -1,9 +1,10 @@
-import { GET_DOCTORS, GET_DOCTOR, SET_PARENT_OPTION, SET_CHILD_OPTION } from '../actions/types';
+import { GET_DOCTORS, GET_DOCTOR, SET_PARENT_OPTION, SET_CHILD_OPTION,HIDE_SHOW_SIDE_BAR } from '../actions/types';
 const initialState = {
     doctors: {},
     doctor: {},
     parentObject: {},
-    childObject: {}
+    childObject: {},
+    ishideshowsidebar:false,
 }
 
 export default (state = initialState, action) => {
@@ -28,6 +29,11 @@ export default (state = initialState, action) => {
                 ...state,
                 childObject: action.payload
             }
+            case HIDE_SHOW_SIDE_BAR:
+                return {
+                    ...state,
+                    ishideshowsidebar: action.payload
+                }
         default:
             return state;
     }
