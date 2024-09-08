@@ -450,7 +450,7 @@ class ClinicalSummary extends React.Component {
                                 {
                                     this.state.QuestionORBodyPartRubric?.map((s, index) => {
                                         const { Intensities } = this.props.intensity;
-                                        return <div class="col-md-4"> <table class="table table-hover mt-2"><tr class="rubric" > <td key={index}><i className="fa fa-angle-double-right" aria-hidden="true"></i> &nbsp;
+                                        return <div class="col-md-4"> <table class="table table-hover mt-2"><tr class="rubric" > <td key={index}>&nbsp;
                                             <span className='rubnm'
                                                 onClick={() => {
                                                     console.log(s)

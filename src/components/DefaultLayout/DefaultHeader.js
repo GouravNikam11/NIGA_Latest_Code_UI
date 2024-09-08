@@ -41,37 +41,18 @@ class DefaultHeader extends Component {
           full={{ src: logo, width: 185, height: 45, alt: 'Homeo Centrum Logo' }}
           minimized={{ src: sygnet, width: 50, height: 50, alt: 'Homeo Centrum Logo' }}
         />
-<span onClick={this.handleSidebarToggle} >
+<span class="d-md-down-none navbar-toggler" style={{marginTop:'-25px'}} onClick={()=> 
+  {
+    store.dispatch({ type: 'HIDE_SHOW_SIDE_BAR', payload: !this.props.ishideshowsidebar })}} >
 <AppSidebarToggler className="d-md-down-none" display="lg" />
 </span>
        
-
+{/* <AppSidebarToggler className="d-md-down-none" display="lg" /> */}
  
 
-        {/* <Nav className="d-md-down-none topmenus" navbar>
-
-        <NavItem className="px-3">
-          <NavLink to="" className="nav-link">Dashboard</NavLink>
-        </NavItem><NavItem className="px-3">
-            <NavLink to="" className="nav-link">Appointments</NavLink>
-          </NavItem><NavItem className="px-3">
-            <NavLink to="#" className="nav-link">New Patient</NavLink>
-          </NavItem><NavItem className="px-3">
-            <NavLink to="#" className="nav-link">Patient List</NavLink>
-          </NavItem><NavItem className="px-3">
-            <NavLink to="#" className="nav-link">Billing</NavLink>
-          </NavItem><NavItem className="px-3">
-            <NavLink to="#" className="nav-link">Reports</NavLink>
-          </NavItem><NavItem className="px-3">
-            <NavLink to="#" className="nav-link">E-Consult</NavLink>
-          </NavItem>
-        </Nav> */}
-
+     
        <Nav className="d-md-down-none topmenus" navbar>
               {isDoctor ? (
-                
-                
-
                 <>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <NavItem className="px-3">
@@ -114,25 +95,6 @@ class DefaultHeader extends Component {
       </Nav>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
         <Nav className="ml-autos" navbar>
 
           <NavItem className="d-md-down-none">
@@ -148,7 +110,9 @@ class DefaultHeader extends Component {
             <DropdownMenu right>
               <DropdownItem><i className="fa fa-user"></i> Profile</DropdownItem>
               <DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem>
-              <DropdownItem onClick={e => this.props.onLogout(e)}><i className="fa fa-lock"></i> Logout</DropdownItem>
+              <DropdownItem onClick={e => {  document.body.classList.remove('sidebar-lg-show');
+                                    store.dispatch({ type: 'HIDE_SHOW_SIDE_BAR', payload: false })
+                this.props.onLogout(e)}}><i className="fa fa-lock"></i> Logout</DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
 

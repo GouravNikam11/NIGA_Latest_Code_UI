@@ -62,7 +62,7 @@ import EditBodyPartComponent from './components/BodyPart/EditBodyPartComponent';
 import ListIntensityComponent from './components/Intensity/ListIntensityComponent';
 import AddIntensityComponent from './components/Intensity/AddIntensityComponent';
 import EditIntensityComponent from './components/Intensity/EditIntensityComponent';
-import { ListClinicalQuestionsComponent } from './components/ClinicalQuestions/ListClinicalQuestionsComponent';
+import  ListClinicalQuestionsComponent  from './components/ClinicalQuestions/ListClinicalQuestionsComponent';
 import AddClinicalQuestionsComponent from './components/ClinicalQuestions/AddClinicalQuestionsComponent';
 import { EditClinicalQuestionsComponent } from './components/ClinicalQuestions/EditClinicalQuestionsComponent';
 
@@ -233,7 +233,7 @@ const routes = [
   { path: '/EditQuestionSection/:id', name: 'Edit Existance', component: EditQuestionSectionComponent },
 
   /* NigaRepertory */
-  // { path: '/ListNigaRepertoryComponent', name: 'Niga Repertory', component: ListNigaRepertoryComponent },
+   //{ path: '/ListNigaRepertoryComponent', name: 'Niga Repertory', component: ListNigaRepertoryComponent },
   // {path:'/ListNigaRepertoryAuthorAndRemedyDetailsComponent/:id/:remedyid/:remedyName/:remedyAlias',name:'Materia Medica Details',component:ListNigaRepertoryAuthorAndRemedyDetailsComponent},
 
   /*Author Section*/

@@ -237,7 +237,12 @@ class PatientDashboard extends React.Component {
         const { navigationTabs } = this.state;
         return navigationTabs.map((tab, index) => {
 
-            if (index === 6) {
+            // if(index===1){
+            //     store.dispatch({ type: 'HIDE_SHOW_SIDE_BAR', payload: !this.props.ishideshowsidebar })
+            // }
+            
+            
+          if (index === 6) {
                 return (
                     <NavLink
                         className={classnames({ active: this.state.activeTab === tab.tabId })}
@@ -318,6 +323,14 @@ class PatientDashboard extends React.Component {
                                 store.dispatch({ type: 'SET_PARENT_OPTION', payload: {} });
                                 store.dispatch({ type: 'SHOW_LAB_IMAGING', payload: false });
                                 store.dispatch({ type: 'SHOW_ADD_APPOINTMENT', payload: false });
+                                if(tab.tabId ===1){
+                                    document.body.classList.add('sidebar-lg-show');
+                                    store.dispatch({ type: 'HIDE_SHOW_SIDE_BAR', payload: true })
+                                }else{
+                                    document.body.classList.remove('sidebar-lg-show');
+                                    store.dispatch({ type: 'HIDE_SHOW_SIDE_BAR', payload: false })
+                                }
+                                
                             }} >
                             {tab.tabName}
                         </NavLink>
@@ -382,7 +395,8 @@ const mapStateToProps = (state) => (
         patient: state.patient.patient,
         state: state.rubrics,
         showLabAndImaging: state.patient.showLabAndImaging,
-        showAddAppointment: state.patient.showAddAppointment
+        showAddAppointment: state.patient.showAddAppointment,
+        ishideshowsidebar:state.doctor.ishideshowsidebar
     });
 
 const mapDispatchToProps = {
