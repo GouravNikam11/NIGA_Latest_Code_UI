@@ -80,8 +80,8 @@ class ForgotPassword extends Component {
 
                         <Row>
                             <Col sm="12" className="text-center pb-2 pt-3">
-                                <Button color="primary" style={{ backgroundColor: "#20a8d8", textTransform: "uppercase" }} type="submit" className="paddg"
-                                    onClick={this.submitForm.bind(this)}>&nbsp; <i className="fa fa-user"></i>  &nbsp; submit &nbsp;</Button>
+                                <Button color="primary" style={{ backgroundColor: "#20a8d8", textTransform: "uppercase", borderRadius: '40px', width: '100%' }}  type="submit" className='paddg'
+                                    onClick={this.submitForm.bind(this)}>&nbsp; <i className="fa fa-user"></i>  &nbsp; Submit &nbsp;</Button>
                             </Col>
 
                             <Col sm="12" className="text-center pb-2 pt-3">

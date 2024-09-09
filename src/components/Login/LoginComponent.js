@@ -88,6 +88,7 @@ class LoginComponent extends Component {
                                     value={this.state.Password === null ? '' : this.state.Password}
                                 />
                             </Col>
+                            
                         </Form.Group>
                         <Row>
                             <Col sm="12" className="text-center pb-1 pt-1">
@@ -97,8 +98,8 @@ class LoginComponent extends Component {
                         </Row>
 
                         <Row>
-                            <Col sm="12" className="text-center pb-2 pt-1">
-                                <Link to={"/ForgotpasswordComponent"} className='lgtext' style={{fontSize: '12px', color: 'black'}}>Forgot Password ?</Link>
+                            <Col sm="12" className="text-right pb-2 pt-1">
+                                <Link to={"/ForgotpasswordComponent"} className='lgtext' style={{fontSize: '12px', color: 'black'}}>Forgot Password? </Link>
                             </Col>
                         </Row>
                         <Row>

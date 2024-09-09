@@ -66,7 +66,7 @@ class AddUserComponent extends Component {
                 <Form onSubmit={this.handleClick} className="mres wid801" style={{ height: '100vh', overflowY: 'scroll'}}>
                     <center> <img src="/static/media/logo.fe659025.png" width="175" height="50" alt="Homeo Centrum Logo" /></center>
                    <br></br>
-                        <h4 className="text-center pb-1 pt-1 clrcode">ACCOUNT CREDENTIALS</h4>
+                        <h4 className="text-center pb-1 pt-1 clrcode">Account Credentials</h4>
                     
                         <Row>
                         
