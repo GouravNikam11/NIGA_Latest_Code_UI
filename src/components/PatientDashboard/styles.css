@@ -860,6 +860,12 @@ hr {
     border-color: gray !important;
 }
 
+.actbtntab{
+    font-weight: 500;
+    color: white !important;
+    background: radial-gradient(#429dbe, #193a5f) !important;
+  }
+
 .quest {
     color: rgb(8, 71, 140);
     font-weight: 500;
@@ -869,7 +875,7 @@ hr {
 }
 
 .rubnm {
-    color: rgb(8, 71, 140);
+    /* color: rgb(8, 71, 140); */
     font-weight: 500;
     font-size: 12px;
     cursor: pointer;

@@ -402,7 +402,7 @@ class ClinicalSummary extends React.Component {
 
                 <Row>
                     <Col sm="12" md="12">
-                        <span class="hthead1"><span style={{ fontWeight: '700' }}>{Object.keys(this.props.parentObject).length > 0 ? this.props.parentObject.name : ''}</span> - {Object.keys(this.props.childObject).length > 0 ? this.props.childObject.name : ''}</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="hthead1"><span style={{ fontWeight: '700' }}>{Object.keys(this.props.parentObject).length > 0 ? this.props.parentObject.name : ''}</span> {Object.keys(this.props.childObject).length > 0 ? this.props.childObject.name : ''}</span> &nbsp;
                         <span>
                             {
                                 this.state.optionList1?.map((s, index) => {

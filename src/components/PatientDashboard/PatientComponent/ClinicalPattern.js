@@ -392,12 +392,12 @@ class HomeComponent extends React.Component {
                 <Row>
                     <Col sm="12" md="12">
                         <Card>
-                            <CardHeader className="p-1 mt-1">
+                            <CardHeader className="p-1 ">
                                 <CardText>
                                     {
                                         this.state.TabItem.map((r, index) => {
                                             return <span class="" key={index} >
-                                                <Button size="sm" className="btntab" color="primary" onClick={() => {
+                                                <Button size="sm" className="btntab mb-0" color="primary" onClick={() => {
                                                     this.TabKeywordById(r.label)
                                                 }}>
                                                     {/* <span size="sm" className=""
@@ -448,7 +448,7 @@ class HomeComponent extends React.Component {
                                                                         const { Intensities } = this.props.intensity;
 
                                                                         return <tr class="rubric" key={index} >
-                                                                            <td><span
+                                                                            <td><span className='rubnm'
                                                                                 onClick={() => {
                                                                                     this.toggleOrderModal(); // Calling the first method
                                                                                     this.popup(r);   // Calling the second method
@@ -489,7 +489,7 @@ class HomeComponent extends React.Component {
                                                                                 const { Intensities } = this.props.intensity;
                                                                                 return <tr class="rubric" key={index} >
                                                                                     <td>
-                                                                                        <span
+                                                                                        <span className='rubnm'
                                                                                             onClick={() => {
                                                                                                 this.toggleOrderModal(); // Calling the first method
                                                                                                 this.popup(r);   // Calling the second method
@@ -734,16 +734,15 @@ class HomeComponent extends React.Component {
                                                         <td className='p-2'>{this.state.investigations}</td>
                                                         <td className='p-2'>{this.state.allopathicMedicines}</td>
                                                         <td className='p-2'>{this.state.examiniations}</td>
-                                                        <span>
-                                                            {
-                                                                this.state.diagnosisSystemList.map((s, index) => {
-                                                                    return <span key={index}>
-
-                                                                        <td className='p-2'>{s.diagnosisSystemName}</td>
-                                                                    </span>
-                                                                })
-                                                            }
-                                                        </span>
+                                                        <td className='p-2'>
+                                                            <span>
+                                                                {
+                                                                    this.state.diagnosisSystemList.map((s, index) => {
+                                                                        return <span key={index}>{s.diagnosisSystemName} </span>
+                                                                    })
+                                                                }
+                                                            </span>
+                                                        </td>
                                                     </tr>
                                                 </table>
 
