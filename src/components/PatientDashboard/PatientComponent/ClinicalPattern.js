@@ -277,7 +277,7 @@ class HomeComponent extends React.Component {
 
     TabKeywordById = (String) => {
         debugger
-        this.setState({ activeTabLabel: String });  // Set the clicked tab as active
+        this.setState({ activeTabLabel: String,  activeKeywordId: null,  });  // Set the clicked tab as active
         console.log('String==', String)
 
         if (String !== undefined) {

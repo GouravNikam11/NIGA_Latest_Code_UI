@@ -178,7 +178,8 @@ class ClinicalSummary extends React.Component {
         //debugger
         this.setState({
             QuestionORBodyPartRubric: [],
-            activeSubgroupId: questionSubgroupId // Set the clicked subgroup as active
+            activeSubgroupId: questionSubgroupId, // Set the clicked subgroup as active
+            activeBodyPartId: null, 
         })
         if (questionSubgroupId !== undefined) {
             let requesttype = string == "LOCATION" ? "Bodypart" : "Question"
