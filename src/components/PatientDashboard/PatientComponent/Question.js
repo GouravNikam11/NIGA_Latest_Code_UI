@@ -61,6 +61,8 @@ class ClinicalSummary extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            activeSubgroupId: null,  // Track the active questionSubgroupId
+            activeBodyPartId: null,  // Track the active questionKeyWordBodyPartID
             id: 0,
             QuestionList: this.props.GetQuestionsBySelectedIdforclinicalquestion,
             optionList: [],
@@ -175,7 +177,8 @@ class ClinicalSummary extends React.Component {
     TabKeywordById = (questionSubgroupId, string) => {
         //debugger
         this.setState({
-            QuestionORBodyPartRubric: []
+            QuestionORBodyPartRubric: [],
+            activeSubgroupId: questionSubgroupId // Set the clicked subgroup as active
         })
         if (questionSubgroupId !== undefined) {
             let requesttype = string == "LOCATION" ? "Bodypart" : "Question"
@@ -206,7 +209,8 @@ class ClinicalSummary extends React.Component {
     TabRubricById = (questionKeyWordBodyPartID) => {
         //debugger
         this.setState({
-            QuestionORBodyPartRubric: []
+            QuestionORBodyPartRubric: [],
+            activeBodyPartId: questionKeyWordBodyPartID // Set the clicked body part as active
         })
         if (questionKeyWordBodyPartID !== undefined) {
 
@@ -319,6 +323,8 @@ class ClinicalSummary extends React.Component {
 
 
     render() {
+        const { activeSubgroupId } = this.state;
+        const { activeBodyPartId } = this.state;
         return (
             <TabPane tabId={1} >
                 <div style={{ display: 'none' }}>
@@ -407,7 +413,8 @@ class ClinicalSummary extends React.Component {
                             {
                                 this.state.optionList1?.map((s, index) => {
                                     return <span key={index}>
-                                        <Button size="sm" className="btntab" color="primary" onClick={() => {
+                                        <Button size="sm" 
+                                       className={`btntab ${activeSubgroupId === s.questionSubgroupId ? 'actbtntab' : ''}`} color="primary" onClick={() => {
                                             this.TabKeywordById(s.questionSubgroupId, s.questionSubgroup1)
                                         }}>{s.questionSubgroup1}</Button>
                                     </span>
@@ -437,7 +444,8 @@ class ClinicalSummary extends React.Component {
                                                 {s.questionKeyWordBodyPart},</span> &nbsp; */}
 
 
-                                                <Button size="sm" className="btntab" color="primary" onClick={() => {
+                                                <Button size="sm" 
+                                                 className={`btntab ${activeBodyPartId === s.questionKeyWordBodyPartID ? 'actbtntab' : ''}`} color="primary" onClick={() => {
                                                     this.TabRubricById(s.questionKeyWordBodyPartID)
                                                 }}>{s.questionKeyWordBodyPart}</Button>    
                                         </span>

@@ -57,6 +57,8 @@ class HomeComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            activeTabLabel: null,  // Track the active tab label
+            activeKeywordId: null,   // Track the active keyword for styling
             diagnosisSystemList: [],
             toggleOrderModel: false,
             allopathicMedicines: "",
@@ -206,6 +208,8 @@ class HomeComponent extends React.Component {
     DiagnosisChanged(e) {
         debugger
         this.setState({
+            activeTabLabel: null,  // Track the active tab label
+            activeKeywordId: null, 
             allopathicMedicines: '',
             diagnosisID: 0,
             diagnosisName: '',
@@ -273,6 +277,7 @@ class HomeComponent extends React.Component {
 
     TabKeywordById = (String) => {
         debugger
+        this.setState({ activeTabLabel: String });  // Set the clicked tab as active
         console.log('String==', String)
 
         if (String !== undefined) {
@@ -332,6 +337,7 @@ class HomeComponent extends React.Component {
     KeyWordClikToRubric = (Id) => {
         debugger
         this.setState({
+            activeKeywordId: Id, // Set the clicked keyword as active
             isloding: true,
             specificKeywordId: Id
         })
@@ -356,6 +362,8 @@ class HomeComponent extends React.Component {
     }
 
     render() {
+        const { activeKeywordId } = this.state;
+        const { activeTabLabel } = this.state;
         return (
             <TabPane tabId={2}>
                 <Row>
@@ -397,7 +405,8 @@ class HomeComponent extends React.Component {
                                     {
                                         this.state.TabItem.map((r, index) => {
                                             return <span class="" key={index} >
-                                                <Button size="sm" className="btntab mb-0" color="primary" onClick={() => {
+                                                <Button size="sm" 
+                                              className={`btntab mb-0 ${activeTabLabel === r.label ? 'actbtntab' : ''}`} color="primary" onClick={() => {
                                                     this.TabKeywordById(r.label)
                                                 }}>
                                                     {/* <span size="sm" className=""
@@ -432,7 +441,8 @@ class HomeComponent extends React.Component {
                                                                         }}
                                                                     >{r.keyword},</label> */}
 
-                                                                    <Button size="sm" className="btntab" color="primary" onClick={() => {
+                                                                    <Button size="sm" 
+                                                                    className={`btntab ${activeKeywordId === r.keywordId ? 'actbtntab' : ''}`} color="primary" onClick={() => {
                                                                         this.KeyWordClikToRubric(r.keywordId)
                                                                     }}>{r.keyword}</Button>    
 
