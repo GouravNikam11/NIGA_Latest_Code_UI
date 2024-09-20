@@ -417,6 +417,13 @@ hr {
     word-wrap: break-word;
 }
 
+.divstN {
+    border: none;
+    width: 100%;
+    padding: 6px;
+    border-radius: 5px;
+    background: white;
+}
 
 .divst0 {
     border: 1px solid gainsboro;
@@ -672,13 +679,13 @@ hr {
 .inicon {
     width: 25px;
     cursor: pointer;
-    margin-top: -6px;
+    margin-top: 5px;
     margin-right: 5px;
 }
 
 .inbr {
     top: 0px;
-    margin-top: 8px;
+    margin-top: 4px;
     right: 2.5% !important;
     position: absolute;
 }
@@ -2552,4 +2559,20 @@ hr {
     font-size: 11px;
     margin-top: 5px;
     text-align: justify;
+  }
+
+  .crdtbls{
+    width: 25% !important;
+    word-break: break-all !important;
+  }
+
+  .inlnfx2{
+    width: 30% !important;
+  }
+
+  .inlnfx2{
+    display: inline !important;
+    position: absolute !important;
+    width: 70% !important;
+    margin-left: 10px !important;
   }

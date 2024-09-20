@@ -206,10 +206,16 @@ class RepertorizePage extends React.Component {
                     </Row>
 
                     <Row>
-                        <div className="col-md-3-half" style={{ padding: 0 }}>
-                            <div className="divst1">
-                                <span class="hthead1">Rubrics For Repertorization ({this.props.state.selectedRubrics?.length}) :  <div className="inbr"><img src={srticon} className="inicon" alt="Sort" title="Sort" /> <Button size="sm" className="btnr" color="primary" onClick={() => this.handleAddRubricClick(4)}>Add Rubric</Button></div></span><br />
-                                <div responsive="true" style={{ overflowY: 'scroll', height: '846px' }}>
+                        <div className="col-md-3-half fdiv">
+                        <Card className="mb-0">
+                            <CardHeader  style={{ height: '35px' }}>
+                                <CardText className="cardtextl">Rubrics For Repertorization ({this.props.state.selectedRubrics?.length}) :</CardText>
+                                <div className="inbr"><img src={srticon} className="inicon" alt="Sort" title="Sort" /> <Button size="sm" className="btnr" color="primary" onClick={() => this.handleAddRubricClick(4)}>Add Rubric</Button></div>
+                            </CardHeader>
+
+                            <div className="divstN1">
+                                
+                                <div responsive="true" style={{ overflowY: 'scroll', height: '846px', borderRadius: '5px' }}>
 
                                     <span class="divdet">
                                         <div class="table-responsive">
@@ -359,195 +365,224 @@ class RepertorizePage extends React.Component {
                                     </span>
                                 </div>
                             </div>
+                        </Card>
                         </div>
 
-                        <div className="col-md-7">
+                        <div className="col-md-7 ">
                             <Row>
-                                <Col sm="12" md="6" style={{ padding: 0 }}>
-                                    <div className="divst2">
-                                        <span class="hthead1">Common :
-                                            <Input type="text" className="textr" placeholder="Find Remedy" name='searchText'
-                                                onChange={this.handleSearchDefaultCommon}
-                                            /></span><br />
+                                <Col sm="12" md="6" className="sdiv">
 
-                                        {/* For By Default */}
-                                        {this.state.ShowDivCommonUnCommon === 1 && (
-                                            <div responsive="true" style={{ overflowY: 'scroll', height: '290px' }}>
-                                                <span class="divdet">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-hover">
-                                                            <tbody>
-                                                                {
-                                                                    this.renderCommonTable()
-                                                                }
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </span>
-                                            </div>
-                                        )}
+                                    <Card className="mb-0">
+                                        <CardHeader  style={{ height: '35px' }}>
+                                            <CardText className="cardtextl">Common :</CardText>
+                                            <Input type="text" className="cardsearch" placeholder="Find Remedy" name='searchText' onChange={this.handleSearchDefaultCommon}/>
+                                        </CardHeader>
+                                        <div className="divstN1">
+                                            
 
-                                        {/* For Kolkatta Keynote Method */}
-                                        {this.state.ShowDivCommonUnCommon === 2 && (
-                                            <div responsive="true" style={{ overflowY: 'scroll', height: '290px' }}>
-                                                <span class="divdet">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-hover">
-                                                            <tbody>
-                                                                {
-                                                                    this.renderKolkattaKeynoteCommonTable()
-                                                                }
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </span>
-                                            </div>
-                                        )}
-                                        {/* For Small Rubrics */}
-                                        {this.state.ShowDivCommonUnCommon === 3 && (
-                                            <div responsive="true" style={{ overflowY: 'scroll', height: '290px' }}>
-                                                <span class="divdet">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-hover">
-                                                            <tbody>
-                                                                {this.renderSmallRubricCommonTable()}
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </span>
-                                            </div>
-                                        )}
+                                            {/* For By Default */}
+                                            {this.state.ShowDivCommonUnCommon === 1 && (
+                                                <div responsive="true" style={{ overflowY: 'scroll', height: '290px', borderRadius: '5px' }}>
+                                                    <span class="divdet">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-hover">
+                                                                <tbody>
+                                                                    {
+                                                                        this.renderCommonTable()
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                            )}
 
-                                    </div>
+                                            {/* For Kolkatta Keynote Method */}
+                                            {this.state.ShowDivCommonUnCommon === 2 && (
+                                                <div responsive="true" style={{ overflowY: 'scroll', height: '290px' }}>
+                                                    <span class="divdet">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-hover">
+                                                                <tbody>
+                                                                    {
+                                                                        this.renderKolkattaKeynoteCommonTable()
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                            )}
+                                            {/* For Small Rubrics */}
+                                            {this.state.ShowDivCommonUnCommon === 3 && (
+                                                <div responsive="true" style={{ overflowY: 'scroll', height: '290px' }}>
+                                                    <span class="divdet">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-hover">
+                                                                <tbody>
+                                                                    {this.renderSmallRubricCommonTable()}
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                            )}
+
+                                        </div>
+                                    </Card>
+
                                 </Col>
-                                <Col sm="12" md="6" style={{ padding: 0 }}>
-                                    <div className="divst2">
-                                        <span class="hthead1">Uncommon :   <Input type="text" className="textr" placeholder="Find Remedy" name='searchText'
-                                            onChange={this.handleSearchDefaultUnCommon} /></span><br />
+                                <Col sm="12" md="6" className="sdiv" >
 
-                                        {/* For By Default */}
-                                        {this.state.ShowDivCommonUnCommon === 1 && (
-                                            <div responsive="true" style={{ overflowY: 'scroll', height: '290px' }}>
-                                                <span class="divdet">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-hover">
-                                                            <tbody>
-                                                                {
-                                                                    this.renderUnCommonTable()
-                                                                }
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </span>
-                                            </div>
-                                        )}
-                                        {/* For Kolkatta Keynote Method */}
-                                        {this.state.ShowDivCommonUnCommon === 2 && (
-                                            <div responsive="true" style={{ overflowY: 'scroll', height: '290px' }}>
-                                                <span class="divdet">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-hover">
-                                                            <tbody>
-                                                                {
-                                                                    this.renderKolkattaKeynoteUnCommonTable()
-                                                                }
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </span>
-                                            </div>
-                                        )}
-                                        {/* For Small Rubrics */}
-                                        {this.state.ShowDivCommonUnCommon === 3 && (
-                                            <div responsive="true" style={{ overflowY: 'scroll', height: '290px' }}>
-                                                <span class="divdet">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-hover">
-                                                            <tbody>
-                                                                {this.renderSmallRubricUnCommonTable()}
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </span>
-                                            </div>
-                                        )}
-                                    </div>
+                                    <Card className="mb-0">
+                                        <CardHeader  style={{ height: '35px' }}>
+                                            <CardText className="cardtextl">Uncommon :</CardText>
+                                            <Input type="text" className="cardsearch" placeholder="Find Remedy" name='searchText' onChange={this.handleSearchDefaultUnCommon}/>
+                                        </CardHeader>
+                                        <div className="divstN1">
+
+                                            {/* For By Default */}
+                                            {this.state.ShowDivCommonUnCommon === 1 && (
+                                                <div responsive="true" style={{ overflowY: 'scroll', height: '290px', borderRadius: '5px' }}>
+                                                    <span class="divdet">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-hover">
+                                                                <tbody>
+                                                                    {
+                                                                        this.renderUnCommonTable()
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                            )}
+                                            {/* For Kolkatta Keynote Method */}
+                                            {this.state.ShowDivCommonUnCommon === 2 && (
+                                                <div responsive="true" style={{ overflowY: 'scroll', height: '290px' }}>
+                                                    <span class="divdet">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-hover">
+                                                                <tbody>
+                                                                    {
+                                                                        this.renderKolkattaKeynoteUnCommonTable()
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                            )}
+                                            {/* For Small Rubrics */}
+                                            {this.state.ShowDivCommonUnCommon === 3 && (
+                                                <div responsive="true" style={{ overflowY: 'scroll', height: '290px' }}>
+                                                    <span class="divdet">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-hover">
+                                                                <tbody>
+                                                                    {this.renderSmallRubricUnCommonTable()}
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </Card>
                                 </Col>
                             </Row>
 
                             <Row>
-                                <Col sm="12" md="12" style={{ padding: 0 }}>
-                                    <div className="divst2" style={{ height: '550px', padding: '0px' }}>
-                                        <span class="hthead1">&nbsp; Differential Materia Medica
-                                            {/* <Input type="text" className="textr" placeholder="Find Author" name='searchText' /> */}
-                                            <Input onChange={this.SearchDiffMMRemedy} style={{ margin: '3px' }} type="text" className="textr" placeholder="Find Remedy" name='searchText' /></span>
+                                <Col sm="12" md="12" className="sdiv">
+                                    <Card className="mb-0">
+                                        <CardHeader  style={{ height: '35px' }}>
+                                            <CardText className="cardtextl">Differential Materia Medica :</CardText>
+                                            <Input onChange={this.SearchDiffMMRemedy}  type="text" className="cardsearch" placeholder="Find Remedy" name='searchText' />
+                                        </CardHeader>
+                                        <div className="divst2" style={{ height: '502px', padding: '0px' }}>
+                                            
+                                            <Tabs onSelect={this.handleCommonUncommonTabClick} fill className="custtab">
+                                                <Tab eventKey={1} activeKey={this.state.selectedCommonUnCommonTab} title="COMMON">
+                                                    <Tabs activeKey={this.state.selectedAuthorId} onSelect={this.handleTabClick} fill>
+                                                        {
+                                                            this.renderauthorTable()
+                                                        }
 
-                                        <Tabs onSelect={this.handleCommonUncommonTabClick} fill className="custtab">
-                                            <Tab eventKey={1} activeKey={this.state.selectedCommonUnCommonTab} title="COMMON">
-                                                <Tabs activeKey={this.state.selectedAuthorId} onSelect={this.handleTabClick} fill>
-                                                    {
-                                                        this.renderauthorTable()
-                                                    }
+                                                    </Tabs>
+                                                </Tab>
+                                                <Tab eventKey={2} activeKey={this.state.selectedCommonUnCommonTab} defaultActiveKey={this.state.selectedCommonUnCommonTab} title="UNCOMMON">
+                                                    <Tabs activeKey={this.state.selectedAuthorId} onSelect={this.handleTabClick} fill>
+                                                        {
+                                                            this.renderauthorTable()
+                                                        }
 
-                                                </Tabs>
-                                            </Tab>
-                                            <Tab eventKey={2} activeKey={this.state.selectedCommonUnCommonTab} defaultActiveKey={this.state.selectedCommonUnCommonTab} title="UNCOMMON">
-                                                <Tabs activeKey={this.state.selectedAuthorId} onSelect={this.handleTabClick} fill>
-                                                    {
-                                                        this.renderauthorTable()
-                                                    }
-
-                                                </Tabs>
-                                            </Tab>
-                                        </Tabs>
-                                    </div>
+                                                    </Tabs>
+                                                </Tab>
+                                            </Tabs>
+                                        </div>
+                                    </Card>
                                 </Col>
                             </Row>
                         </div>
 
-                        <div className="col-md-1-half" style={{ padding: 0 }}>
-                            <div className="divst3" >
-                                <span class="hthead1">Select Section</span>
-                                <div responsive="true" style={{ overflowY: 'scroll', height: '260px', borderBottom: '1px solid gainsboro' }}>
+                        <div className="col-md-1-half" >
+                            <Row>
+                                <Col sm="12" md="12" className="tdiv">
+                                    <Card className="mb-0">
+                                        <CardHeader  style={{ height: '35px' }}>
+                                            <CardText className="cardtextl">Sections :</CardText>
+                                        </CardHeader>
+                                        <div className="divstN1" >
+                                            <div responsive="true" style={{ overflowY: 'scroll', height: '260px', borderBottom: '1px solid gainsboro', borderRadius: '5px' }}>
 
-                                    <span class="divdet">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover">
-                                                <tbody>
-                                                    {
-                                                        this.renderSelectSectionTable()
-                                                    }
-                                                </tbody>
-                                            </table>
+                                                <span class="divdet">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover">
+                                                            <tbody>
+                                                                {
+                                                                    this.renderSelectSectionTable()
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </span>
+                                            </div>
+                                            <span class="text-center">
+                                                <div style={{ paddingTop: '8px' }}>
+                                                    {this.renderButtonsSelectGradeInSelectSection()}
+                                                </div>
+                                            </span>
                                         </div>
-                                    </span>
-                                </div>
-                                <span class="text-center">
-                                    <div style={{ paddingTop: '8px' }}>
-                                        {this.renderButtonsSelectGradeInSelectSection()}
-                                    </div>
-                                </span>
-                            </div>
+                                    </Card>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col sm="12" md="12" className="tdiv">
+                                    <Card className="mb-0">
+                                        <CardHeader  style={{ height: '35px' }}>
+                                            <CardText className="cardtextl">Headings :</CardText>
+                                        </CardHeader>
+                                        <div className="divstN1" >
+                                            <div responsive="true" style={{ overflowY: 'scroll', height: '505px', borderRadius: '5px' }}>
 
-                            <div className="divst3" style={{ marginTop: '6px' }}>
-                                <span class="hthead1">Select Heading </span><br />
-                                <div responsive="true" style={{ overflowY: 'scroll', height: '505px' }}>
+                                                <span class="divdet">
+                                                    <div class="table-responsive">
 
-                                    <span class="divdet">
-                                        <div class="table-responsive">
+                                                        <table class="table table-hover">
+                                                            <tbody>
+                                                                {
+                                                                    this.renderSelectHeadingTable()
+                                                                }
+                                                            </tbody>
+                                                        </table>
 
-                                            <table class="table table-hover">
-                                                <tbody>
-                                                    {
-                                                        this.renderSelectHeadingTable()
-                                                    }
-                                                </tbody>
-                                            </table>
-
+                                                    </div>
+                                                </span>
+                                            </div>
                                         </div>
-                                    </span>
-                                </div>
-                            </div>
+                                    </Card>
+                                </Col>
+                            </Row>
                         </div>
 
                     </Row>
@@ -761,7 +796,7 @@ class RepertorizePage extends React.Component {
 
         let authourList = this.state.authourList;
         return authourList.map((author, index) => (
-            <Tab eventKey={author.authorId} title={author.authorName} style={{ overflowY: 'scroll', height: '450px' }}>
+            <Tab eventKey={author.authorId} title={author.authorName} style={{ overflowY: 'scroll', height: '434px' }}>
                 {this.renderTabContent()}
             </Tab>
         ));
@@ -796,7 +831,7 @@ class RepertorizePage extends React.Component {
             return (<tr><td>No data found</td></tr>)
         }
         return (
-            <div responsive="true" style={{ height: '430px' }}>
+            <div responsive="true" style={{ height: '400px' }}>
                 {this.state.NewDifferentialMateriaMedica.map((item, index) => (
                     <div key={index}>
                         <span className="divdet">  <strong>{item.remedyName}</strong></span> [{item.score}]

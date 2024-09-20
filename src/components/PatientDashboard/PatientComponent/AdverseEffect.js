@@ -190,7 +190,7 @@ this.GetAllopathicDrug();
                                 </Row> */}
 
                                 <Row className="mt-2">
-                                    <Col sm="4" md="4">
+                                    <Col sm="4" md="4" className="fdiv">
                                         <Table responsive="sm" >
                                             <thead>
                                                 <tr>
@@ -221,7 +221,7 @@ this.GetAllopathicDrug();
                                         </Table>
                                     </Col>
 
-                                    <Col sm="4" md="4">
+                                    <Col sm="4" md="4" className="sdiv">
                                         <Table responsive="sm" >
                                             <thead>
                                                 <tr>
@@ -251,7 +251,7 @@ this.GetAllopathicDrug();
                                         </Table>
                                     </Col>
 
-                                    <Col sm="4" md="4">
+                                    <Col sm="4" md="4" className="tdiv">
                                         <Table responsive="sm" >
                                             <thead>
                                                 <tr>

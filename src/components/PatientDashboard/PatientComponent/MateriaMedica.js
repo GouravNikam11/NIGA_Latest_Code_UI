@@ -217,28 +217,26 @@ class ClinicalSummary extends React.Component {
                         <Col xs="12" md="12">
 
                             <Row>
-                                <Col sm="12" md="4">
-                                    {/* <Input type="text"
-                                        placeholder="Search..."
-                                    /> */}
-                                    <AsyncPaginate isClearable
-                                        labelKey="value"
-                                        labelValue="RemedyId"
-                                        placeholder="Search remedy"
-                                        value={this.state.RemedyIds}
-                                        loadOptions={this.loadRemedies}
-                                        onChange={this.RemedyChanged.bind(this)}
-                                    />
-                                </Col>
-
-                                <Col sm="12" md="8">
+                                <Col sm="12" md="12">
                                     <Row>
-                                        <Col md="4" className='tright'>
-                                            <FormLabel className='hthead1'><i className="fa fa-user"></i> | Author  </FormLabel>
+                                        <Col md="4">
+                                            <FormLabel className='hthead1 inlnfx1'><i className="fa fa-medkit"></i> | Remedy  </FormLabel>
+                                      
+                                            <AsyncPaginate isClearable
+                                                className="inlnfx2"
+                                                labelKey="value"
+                                                labelValue="RemedyId"
+                                                placeholder="Search remedy"
+                                                value={this.state.RemedyIds}
+                                                loadOptions={this.loadRemedies}
+                                                onChange={this.RemedyChanged.bind(this)}
+                                            />
                                         </Col>
-
-                                        <Col md="8">
-                                            <Form.Control as="select"
+                          
+                                        <Col md="4">
+                                            <FormLabel className='hthead1 inlnfx1'><i className="fa fa-user"></i> | Author  </FormLabel>
+                                
+                                            <Form.Control className="inlnfx2" as="select"
                                                 onChange={this.handleSectionChanges.bind(this)}
                                                 value={this.state.authorId}>
                                                 <option value="0">
@@ -249,6 +247,7 @@ class ClinicalSummary extends React.Component {
                                                 }
                                             </Form.Control>
                                         </Col>
+                                        <Col md="4"></Col>
                                     </Row>
                                 </Col>
                             </Row>
@@ -259,7 +258,7 @@ class ClinicalSummary extends React.Component {
                                         <Col md="6">
                                             {/* <FormLabel className='hthead1'>Remedy : &nbsp;&nbsp;</FormLabel> */}
 
-                                            <FormLabel className='hthead1' name="RemedyName"
+                                            <FormLabel className='hthead' name="RemedyName"
                                             >{this.state.RemedyName}</FormLabel>
                                         </Col>
 
@@ -298,53 +297,59 @@ class ClinicalSummary extends React.Component {
 
                             <Row className="mt-0">
                                 <Col md="12">
-                                    <Row>
-                                        <Col sm="6">
-                                        <span size="sm" style={{ color: '#08478c', fontWeight: '700' }}>Information : </span>
-                                        </Col>
-                                        <Col sm="6" className="text-right">
-                                        <span className="zoombtn" onClick={() => this.handleZoomOut()}><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                        <span className="zoombtn" onClick={() => this.handleZoomIn()}><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                        </Col>
-                                    </Row>
 
-                                    <hr />
+                                    <Card className="mb-2">
+                                        <CardHeader style={{ height: '35px' }}>
+                                            <CardText className="cardtextl w-100">
+                                                <table style={{ width: '100%' , marginTop: '-8px'}} >
+                                                        <tr>
+                                                            <td className='text-left crdtbls'><span class="hthead1" size="sm" >Information :</span></td>
+                                                            <td className='text-left crdtbls'></td>
+                                                            <td className='text-left crdtbls'></td>
+                                                            <td className='text-center crdtbls'><span className="zoombtn" onClick={() => this.handleZoomOut()}><i class="fa fa-minus" aria-hidden="true"></i></span></td>
+                                                            <td className='text-center crdtbls' style={{ paddingRight : '10px'}}><span className="zoombtn" onClick={() => this.handleZoomIn()}><i class="fa fa-plus" aria-hidden="true"></i></span></td>
+                                                        </tr>
+                                                </table>
+                                            </CardText>
+                                        </CardHeader>
 
-                                    <div responsive="true" className="divst0 divscroll">
-                                       
-                                        {this.state.authorId !== '' && this.state.remedyId != '' ?
-                                            <Row>
-                                                <Col sm="12" className='medica'>
-                                                    {
-                                                        this.state.lstRemedy.map((r, index) => {
-                                                            return <Row key={index}>
-                                                                <Col>
-                                                                    <div
-                                                                        style={{
-                                                                            transform: `scale(${this.state.zoomLevel.toFixed(2)})`,
-                                                                            transformOrigin: '0 0', // Ensures the scaling is consistent
-                                                                            transition: 'transform 0.2s', // Smooth transition,
-                                                                           
-                                                                        }}
-                                                                    >
-                                                                        {ReactHtmlParser(r.materiaMedicaDetail1)}
-                                                                </div>
-                                                                </Col>
-                                                            </Row>
-                                                        })
-                                                    }
-                                                </Col>
-                                            </Row> :
+                                        <div responsive="true" className="divst0 divscroll">
+                                            {this.state.authorId !== '' && this.state.remedyId != '' ?
+                                                <Row>
+                                                    <Col sm="12" className='medica'>
+                                                        {
+                                                            this.state.lstRemedy.map((r, index) => {
+                                                                return <Row key={index}>
+                                                                    <Col>
+                                                                        <div
+                                                                            style={{
+                                                                                transform: `scale(${this.state.zoomLevel.toFixed(2)})`,
+                                                                                transformOrigin: '0 0', // Ensures the scaling is consistent
+                                                                                transition: 'transform 0.2s', // Smooth transition,
+                                                                            
+                                                                            }}
+                                                                        >
+                                                                            {ReactHtmlParser(r.materiaMedicaDetail1)}
+                                                                    </div>
+                                                                    </Col>
+                                                                </Row>
+                                                            })
+                                                        }
+                                                    </Col>
+                                                </Row> :
 
-                                            <Row>
-                                                <Col sm="12" className='medica'>
-                                                    Please Select Author
-                                                </Col>
-                                            </Row>
-                                        }
-                                       
+                                                <Row>
+                                                    <Col sm="12" className='medica'>
+                                                        Please Select Author
+                                                    </Col>
+                                                </Row>
+                                            }
+                                        </div>
 
-                                    </div>
+                                    </Card>
+                             
+
+                                    
 
                                     
                                     

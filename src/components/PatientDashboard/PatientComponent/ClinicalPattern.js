@@ -379,10 +379,10 @@ class HomeComponent extends React.Component {
                                 />
 
                             </Col>
-                            <Col sm="12" md="7" className="txtleft mt-1">
-                                <span style={{ fontWeight: 500 }}> {this.state.diagnosisName} </span>- <span>{this.state.diagnosisNameAlias}</span>
+                            <Col sm="12" md="6" className="txtleft mt-1">
+                                <span style={{ fontWeight: 500 }}> {this.state.diagnosisName} </span> - <span>{this.state.diagnosisNameAlias}</span>
                             </Col>
-                            <Col sm="12" md="2" className="txtright mt-1">
+                            <Col sm="12" md="3" className="txtright mt-1">
                                 <span> <b> {this.state.miasm}</b> </span>
                             </Col>
                         </FormGroup>
@@ -392,7 +392,7 @@ class HomeComponent extends React.Component {
                 <Row>
                     <Col sm="12" md="12">
                         <Card>
-                            <CardHeader className="p-1 ">
+                            <CardHeader className="p-1 " style={{ height: '35px' }}>
                                 <CardText>
                                     {
                                         this.state.TabItem.map((r, index) => {
@@ -414,368 +414,395 @@ class HomeComponent extends React.Component {
                             </CardHeader>
                             <CardBody className="pt-1">
                                 <Row>
-                                    <Col sm="12" md="5" style={{ padding: 0 }}>
-                                        <div responsive="true" className="divst1">
-                                            <span class="hthead1">KEYWORDS : </span><br />
-                                            <span class="divdet">
-                                                {
-                                                    this.state.KeywordArray.map((r, index) => {
-                                                        return <span class="rubric" key={index} >
-                                                            <span>
-                                                                <label
-                                                                    size="sm" className="m-1 lbls"
-                                                                    onClick={() => {
+                                    <Col sm="12" md="5" className="fdiv">
+                                        <Card className="mb-2">
+                                            <CardHeader style={{ height: '35px' }}>
+                                                <CardText className="cardtextl">KEYWORDS :</CardText>
+                                            </CardHeader>
+                                            <div responsive="true" className="divstN" style={{ minHeight: '22px' }}>
+                                                <span class="divdet">
+                                                    {
+                                                        this.state.KeywordArray.map((r, index) => {
+                                                            return <span class="" key={index} >
+                                                                <span>
+                                                                    {/* <label
+                                                                        size="sm" className="m-1 lbls"
+                                                                        onClick={() => {
+                                                                            this.KeyWordClikToRubric(r.keywordId)
+                                                                        }}
+                                                                    >{r.keyword},</label> */}
+
+                                                                    <Button size="sm" className="btntab" color="primary" onClick={() => {
                                                                         this.KeyWordClikToRubric(r.keywordId)
-                                                                    }}
-                                                                >{r.keyword},</label>
+                                                                    }}>{r.keyword}</Button>    
 
+                                                                </span>
                                                             </span>
-                                                        </span>
-                                                    })
-                                                }
-                                            </span>
-                                        </div>
-                                        <div responsive="true" className="divst1 mt-2" style={{ overflowY: 'scroll', maxHeight: '485px' }}>
-                                            <span class="hthead1">RUBRICS WITH REMEDIES : </span><br />
-                                            <span class="divdet">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        {this.state.diagnosisRemediesModels.length > 0 ?
-                                                            <tbody style={{ width: '100%', display: 'inline-table' }}>
-                                                                {
+                                                        })
+                                                    }
+                                                </span>
+                                            </div>
+                                        </Card>
 
-                                                                    this.state.diagnosisRemediesModels.map((r, index) => {
-                                                                        const { Intensities } = this.props.intensity;
+                                        <Card className="mb-0">
+                                            <CardHeader style={{ height: '35px' }}>
+                                                <CardText className="cardtextl">RUBRICS WITH REMEDIES :</CardText>
+                                            </CardHeader>
+                                            <div responsive="true" className="divstN" style={{ overflowY: 'scroll', maxHeight: '485px' }}>
+                                                <span class="divdet">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover">
+                                                            {this.state.diagnosisRemediesModels.length > 0 ?
+                                                                <tbody style={{ width: '100%', display: 'inline-table' }}>
+                                                                    {
 
-                                                                        return <tr class="rubric" key={index} >
-                                                                            <td><span className='rubnm'
-                                                                                onClick={() => {
-                                                                                    this.toggleOrderModal(); // Calling the first method
-                                                                                    this.popup(r);   // Calling the second method
-                                                                                }}
-                                                                            >{r.subSectionName}</span>
-                                                                                {/* <button class="btn-clipboard" id="10">0</button>
-                                                                                <button class="btn-clipboard" id="11">1</button>
-                                                                                <button class="btn-clipboard" id="12">2</button>
-                                                                                <button class="btn-clipboard" id="13">3</button>
-                                                                                <button class="btn-clipboard" id="14">4</button> */}
+                                                                        this.state.diagnosisRemediesModels.map((r, index) => {
+                                                                            const { Intensities } = this.props.intensity;
 
-                                                                                {Intensities.map((intensity, index) => {
-                                                                                    let id = `${r.subSectionId}${intensity.intensityNo}`;
-                                                                                    return (
-                                                                                        <button
-                                                                                            className="btn-clipboard1"
-                                                                                            id={`${r.subSectionId}${r.intensityNo}`}
-                                                                                            style={{ backgroundColor: id === this.state.id ? "green" : "" }}
-                                                                                            // onClick={() => this.updateIntensity(rubric.subSectionId, intensity.intensityNo)}
-                                                                                            onClick={() => this.selectRubrics(r, intensity.intensityNo, id)}
-                                                                                        >
-                                                                                            {intensity.intensityNo}
-                                                                                        </button>
-                                                                                    )
-                                                                                })
-                                                                                }
-                                                                            </td>
-                                                                        </tr>
-                                                                    })
-                                                                }
-                                                            </tbody>
-                                                            :
-                                                            <span>
-                                                                {this.state.isloding === false ?
-                                                                    <tbody style={{ width: '100%', display: 'inline-table' }}>
-                                                                        {
-                                                                            this.state.RubricByKeywordID.map((r, index) => {
-                                                                                const { Intensities } = this.props.intensity;
-                                                                                return <tr class="rubric" key={index} >
-                                                                                    <td>
-                                                                                        <span className='rubnm'
-                                                                                            onClick={() => {
-                                                                                                this.toggleOrderModal(); // Calling the first method
-                                                                                                this.popup(r);   // Calling the second method
-                                                                                            }}
-                                                                                        >{r.subSectionName}</span>
-                                                                                        {Intensities.map((intensity, index) => {
-                                                                                            let id = `${r.subSectionId}${intensity.intensityNo}`;
-                                                                                            return (
-                                                                                                <button
-                                                                                                    className="btn-clipboard1"
-                                                                                                    id={`${r.subSectionId}${r.intensityNo}`}
-                                                                                                    style={{ backgroundColor: id === this.state.id ? "green" : "" }}
-                                                                                                    // onClick={() => this.updateIntensity(rubric.subSectionId, intensity.intensityNo)}
-                                                                                                    onClick={() => this.selectRubrics(r, intensity.intensityNo, id)}
-                                                                                                >
-                                                                                                    {intensity.intensityNo}
-                                                                                                </button>
-                                                                                            )
-                                                                                        })
-                                                                                        }
-                                                                                    </td>
-                                                                                </tr>
-                                                                            })
-                                                                        }
-                                                                    </tbody>
-                                                                    :
-                                                                    <div style={{
-                                                                        display: 'flex',
-                                                                        alignItems: 'center',
-                                                                        justifyContent: 'center',
+                                                                            return <tr class="rubric" key={index} >
+                                                                                <td><span className='rubnm'
+                                                                                    onClick={() => {
+                                                                                        this.toggleOrderModal(); // Calling the first method
+                                                                                        this.popup(r);   // Calling the second method
+                                                                                    }}
+                                                                                >{r.subSectionName}</span>
+                                                                                    {/* <button class="btn-clipboard" id="10">0</button>
+                                                                                    <button class="btn-clipboard" id="11">1</button>
+                                                                                    <button class="btn-clipboard" id="12">2</button>
+                                                                                    <button class="btn-clipboard" id="13">3</button>
+                                                                                    <button class="btn-clipboard" id="14">4</button> */}
 
-                                                                    }}>
-                                                                        <ClipLoader
-                                                                            color="#2d292a"
-                                                                            size={80}
-                                                                        />
-                                                                    </div>
-                                                                }
-                                                            </span>
-                                                        }
-                                                    </table>
-                                                    <Modal size="lg" isOpen={this.state.toggleOrderModel} toggle={this.toggleOrderModal.bind(this)} >
-                                                        <ModalBody>
-                                                            {/* <Row>
-                                                        <Col md="12">
-                                                            {this.state.RemedyAndAuthor.map((item, index) => {
-                                                                return (
-                                                                    <span key={index}>
-                                                                        <span
-                                                                            style={{
-                                                                                fontFamily: item.fontName,
-                                                                                color: item.fontColor,
-                                                                                fontStyle: item.fontStyle,
-                                                                            }}
-                                                                            to="#">
-                                                                            <span>
-                                                                                {item.remedyAlias}, &nbsp;</span> </span>
-                                                                    </span>
-                                                                )
-                                                            })}
-                                                        </Col>
-                                                    </Row> */}
-
-
-
-
-                                                            <div responsive="true" >
-                                                                <Row>
-                                                                    <Col md="12" className="txtright">
-
-                                                                        <div>
-                                                                            <span className="auth"
-                                                                                onClick={() => this.ToggleAuthorAlias()}
-                                                                            ><i class="fa fa-user" aria-hidden="true"></i></span>
-                                                                            <span className="auth"
-                                                                                onClick={() => this.ToggleAuthorInformation()}
-                                                                            ><i class="fa fa-info" aria-hidden="true"></i></span>
-                                                                        </div>
-
-                                                                        <div class="hover-text1"><span className=""><img src={engs} className="langicon" alt="English" /></span>
-                                                                            <span class="tooltip-text1 bottom">
-                                                                                <div class="">
-                                                                                    {
-                                                                                        this.state.englishArray.length > 0 ?
-                                                                                            this.state.englishArray.map((c, index) => {
-                                                                                                return <tr key={index}>
-                                                                                                    <td>{c.subSectionDetails}</td>
-                                                                                                </tr>
-                                                                                            }) :
-                                                                                            <tr>
-                                                                                                <td colSpan="4">No data to display</td>
-                                                                                            </tr>}
-                                                                                </div>
-                                                                            </span>
-                                                                        </div>
-
-                                                                        <div class="hover-text2"><span className=""><img src={mart} className="langicon" alt="Marathi" /></span>
-                                                                            <span class="tooltip-text2 bottom">
-                                                                                <div class="">
-                                                                                    {
-                                                                                        this.state.marathiArray.length > 0 ?
-                                                                                            this.state.marathiArray.map((c, index) => {
-                                                                                                return <tr key={index}>
-                                                                                                    <td>{c.subSectionDetails}</td>
-                                                                                                </tr>
-                                                                                            }) :
-                                                                                            <tr>
-                                                                                                <td colSpan="4">No data to display</td>
-                                                                                            </tr>}
-                                                                                </div>
-                                                                            </span>
-                                                                        </div>
-                                                                    </Col>
-                                                                </Row>
-
-                                                                <Row style={{ padding: '6px' }}>
-                                                                    <Col md="12" className="txtleft">
-                                                                        <strong className="h6">{this.state.RubricNameForPopUp}</strong>
-                                                                        <hr></hr>
-                                                                        <strong className="h6">
+                                                                                    {Intensities.map((intensity, index) => {
+                                                                                        let id = `${r.subSectionId}${intensity.intensityNo}`;
+                                                                                        return (
+                                                                                            <button
+                                                                                                className="btn-clipboard1"
+                                                                                                id={`${r.subSectionId}${r.intensityNo}`}
+                                                                                                style={{ backgroundColor: id === this.state.id ? "green" : "" }}
+                                                                                                // onClick={() => this.updateIntensity(rubric.subSectionId, intensity.intensityNo)}
+                                                                                                onClick={() => this.selectRubrics(r, intensity.intensityNo, id)}
+                                                                                            >
+                                                                                                {intensity.intensityNo}
+                                                                                            </button>
+                                                                                        )
+                                                                                    })
+                                                                                    }
+                                                                                </td>
+                                                                            </tr>
+                                                                        })
+                                                                    }
+                                                                </tbody>
+                                                                :
+                                                                <span>
+                                                                    {this.state.isloding === false ?
+                                                                        <tbody style={{ width: '100%', display: 'inline-table' }}>
                                                                             {
-                                                                                this.state.referencerubric.length > 0 ?
-                                                                                    this.state.referencerubric.map((c, index) => {
-                                                                                        return <a href='#' className="crref"><tr key={index}>
-                                                                                            <td >{c.refSubSectionName}</td>
-                                                                                        </tr></a>
-                                                                                    }) :
-                                                                                    <tr>
-                                                                                        <td colSpan="4">No data to display</td>
+                                                                                this.state.RubricByKeywordID.map((r, index) => {
+                                                                                    const { Intensities } = this.props.intensity;
+                                                                                    return <tr class="rubric" key={index} >
+                                                                                        <td>
+                                                                                            <span className='rubnm'
+                                                                                                onClick={() => {
+                                                                                                    this.toggleOrderModal(); // Calling the first method
+                                                                                                    this.popup(r);   // Calling the second method
+                                                                                                }}
+                                                                                            >{r.subSectionName}</span>
+                                                                                            {Intensities.map((intensity, index) => {
+                                                                                                let id = `${r.subSectionId}${intensity.intensityNo}`;
+                                                                                                return (
+                                                                                                    <button
+                                                                                                        className="btn-clipboard1"
+                                                                                                        id={`${r.subSectionId}${r.intensityNo}`}
+                                                                                                        style={{ backgroundColor: id === this.state.id ? "green" : "" }}
+                                                                                                        // onClick={() => this.updateIntensity(rubric.subSectionId, intensity.intensityNo)}
+                                                                                                        onClick={() => this.selectRubrics(r, intensity.intensityNo, id)}
+                                                                                                    >
+                                                                                                        {intensity.intensityNo}
+                                                                                                    </button>
+                                                                                                )
+                                                                                            })
+                                                                                            }
+                                                                                        </td>
                                                                                     </tr>
-                                                                            }</strong>
-                                                                        <hr></hr>
-                                                                        <strong className="h6">Remedy Count : {this.state.isRemedyLoad ? `(${this.state.remedyCount})` : <ClipLoader
-                                                                            color="#2d292a"
-                                                                            size={12}
-                                                                        />} </strong>
-                                                                        <hr></hr>
-                                                                        {this.state.isRemedyLoad ?
+                                                                                })
+                                                                            }
+                                                                        </tbody>
+                                                                        :
+                                                                        <div style={{
+                                                                            display: 'flex',
+                                                                            alignItems: 'center',
+                                                                            justifyContent: 'center',
+
+                                                                        }}>
+                                                                            <ClipLoader
+                                                                                color="#2d292a"
+                                                                                size={80}
+                                                                            />
+                                                                        </div>
+                                                                    }
+                                                                </span>
+                                                            }
+                                                        </table>
+                                                        <Modal size="lg" isOpen={this.state.toggleOrderModel} toggle={this.toggleOrderModal.bind(this)} >
+                                                            <ModalBody>
+                                                                {/* <Row>
+                                                            <Col md="12">
+                                                                {this.state.RemedyAndAuthor.map((item, index) => {
+                                                                    return (
+                                                                        <span key={index}>
+                                                                            <span
+                                                                                style={{
+                                                                                    fontFamily: item.fontName,
+                                                                                    color: item.fontColor,
+                                                                                    fontStyle: item.fontStyle,
+                                                                                }}
+                                                                                to="#">
+                                                                                <span>
+                                                                                    {item.remedyAlias}, &nbsp;</span> </span>
+                                                                        </span>
+                                                                    )
+                                                                })}
+                                                            </Col>
+                                                        </Row> */}
+
+
+
+
+                                                                <div responsive="true" >
+                                                                    <Row>
+                                                                        <Col md="12" className="txtright">
+
                                                                             <div>
-                                                                                {this.state.RemedyDtailsList.length > 0 ?
-                                                                                    <div>
-                                                                                        {this.state.RemedyDtailsList?.map((item, index) => {
-                                                                                            {/* <Link to={"/PatientDashboard/" + this.props.patientId + "/" + this.props.caseId + "/" + this.props.patientAppId + "/" + this.props.doctorId} */ }
-                                                                                            const NewTab = 5
-                                                                                            return (
-                                                                                                <span key={index} style={{ display: 'inline-block' }} class="remhov">
-                                                                                                    {/* { */}
-                                                                                                    {/* item.remediesModels.map((author, index) => {
-                                                                                                return  */}
-                                                                                                    {/* <span > */}
-                                                                                                    {/* <Link to={`/PatientDashboard/${this.props.patientId}/${this.props.caseId}/${this.props.patientAppId}/${this.props.doctorId}/${NewTab}`} */}
-
-
-                                                                                                    <Link to={`#`}
-                                                                                                        style={{
-                                                                                                            textDecoration: 'none'
-                                                                                                        }}>
-                                                                                                        <span onClick={() => this.handleAddRubricClick(item.remedyId)}>
-                                                                                                            {/* {item.remedyAlias} */}
-                                                                                                            <span className={item.gradeNo == 1 ? 'grade1css' : item.gradeNo == 2 ? 'grade2css' : item.gradeNo == 3 ? 'grade3css' : item.gradeNo == 4 && 'grade4css'}>
-                                                                                                                {item.fontColor === 'Red'
-                                                                                                                    ? item.remedyAlias.toUpperCase()
-                                                                                                                    : item.remedyAlias}
-                                                                                                            </span>
-
-                                                                                                            {/* {this.state.ShowAuthorAlias && `(${item.authorAlias}),`} */}
-                                                                                                            {this.state.ShowAuthorAlias && (
-                                                                                                                <span style={{ color: 'black', fontSize: "12px" }}>
-                                                                                                                    ({item.authorAlias}),
-                                                                                                                </span>
-                                                                                                            )}
-                                                                                                            {this.state.showInfoIcon &&
-                                                                                                                <span className='hover-text3'>
-                                                                                                                    <i class="fa fa-info" aria-hidden="true" style={{ marginLeft: 10, color: 'black' }}></i>
-                                                                                                                    <div class="tooltip-text3">
-                                                                                                                        {/* Themes OR Characteristics:{item.themesORCharacteristics} Generals:{item.generals}
-                                                                                    Modalities:{item.modalities}  Particulars:{item.particulars} */}
-                                                                                                                        <div className='modal-txt1'><strong>Themes/Characteristics : </strong> {ReactHtmlParser(item.themesORCharacteristics)}</div> 
-                                                                                                                        <div className='modal-txt2'><strong class="mt-2">Generals : </strong> {ReactHtmlParser(item.generals)} </div>
-                                                                                                                        <div className='modal-txt3'><strong class="mt-2">Modalities : </strong> {ReactHtmlParser(item.modalities)} </div>
-                                                                                                                        <div className='modal-txt4'><strong class="mt-2">Particulars : </strong> {ReactHtmlParser(item.particulars)}</div>
-
-                                                                                                                    </div>
-                                                                                                                </span>}
-
-                                                                                                        </span>
-                                                                                                    </Link>
-                                                                                                    {/* </span> */}
-                                                                                                    {/* }) */}
-                                                                                                    {/* } */}
-                                                                                                </span>
-                                                                                            )
-                                                                                        })}
-                                                                                    </div>
-                                                                                    : <div >
-                                                                                        <span >Data Not Found</span>
-                                                                                    </div>
-                                                                                }
-                                                                            </div> :
-                                                                            <div style={{
-                                                                                display: 'flex',
-                                                                                alignItems: 'center',
-                                                                                justifyContent: 'center',
-
-                                                                            }}>
-                                                                                <ClipLoader
-                                                                                    color="#2d292a"
-                                                                                    size={50}
-                                                                                />
+                                                                                <span className="auth"
+                                                                                    onClick={() => this.ToggleAuthorAlias()}
+                                                                                ><i class="fa fa-user" aria-hidden="true"></i></span>
+                                                                                <span className="auth"
+                                                                                    onClick={() => this.ToggleAuthorInformation()}
+                                                                                ><i class="fa fa-info" aria-hidden="true"></i></span>
                                                                             </div>
-                                                                        }
 
-                                                                    </Col>
-                                                                </Row>
-                                                            </div>
+                                                                            <div class="hover-text1"><span className=""><img src={engs} className="langicon" alt="English" /></span>
+                                                                                <span class="tooltip-text1 bottom">
+                                                                                    <div class="">
+                                                                                        {
+                                                                                            this.state.englishArray.length > 0 ?
+                                                                                                this.state.englishArray.map((c, index) => {
+                                                                                                    return <tr key={index}>
+                                                                                                        <td>{c.subSectionDetails}</td>
+                                                                                                    </tr>
+                                                                                                }) :
+                                                                                                <tr>
+                                                                                                    <td colSpan="4">No data to display</td>
+                                                                                                </tr>}
+                                                                                    </div>
+                                                                                </span>
+                                                                            </div>
+
+                                                                            <div class="hover-text2"><span className=""><img src={mart} className="langicon" alt="Marathi" /></span>
+                                                                                <span class="tooltip-text2 bottom">
+                                                                                    <div class="">
+                                                                                        {
+                                                                                            this.state.marathiArray.length > 0 ?
+                                                                                                this.state.marathiArray.map((c, index) => {
+                                                                                                    return <tr key={index}>
+                                                                                                        <td>{c.subSectionDetails}</td>
+                                                                                                    </tr>
+                                                                                                }) :
+                                                                                                <tr>
+                                                                                                    <td colSpan="4">No data to display</td>
+                                                                                                </tr>}
+                                                                                    </div>
+                                                                                </span>
+                                                                            </div>
+                                                                        </Col>
+                                                                    </Row>
+
+                                                                    <Row style={{ padding: '6px' }}>
+                                                                        <Col md="12" className="txtleft">
+                                                                            <strong className="h6">{this.state.RubricNameForPopUp}</strong>
+                                                                            <hr></hr>
+                                                                            <strong className="h6">
+                                                                                {
+                                                                                    this.state.referencerubric.length > 0 ?
+                                                                                        this.state.referencerubric.map((c, index) => {
+                                                                                            return <a href='#' className="crref"><tr key={index}>
+                                                                                                <td >{c.refSubSectionName}</td>
+                                                                                            </tr></a>
+                                                                                        }) :
+                                                                                        <tr>
+                                                                                            <td colSpan="4">No data to display</td>
+                                                                                        </tr>
+                                                                                }</strong>
+                                                                            <hr></hr>
+                                                                            <strong className="h6">Remedy Count : {this.state.isRemedyLoad ? `(${this.state.remedyCount})` : <ClipLoader
+                                                                                color="#2d292a"
+                                                                                size={12}
+                                                                            />} </strong>
+                                                                            <hr></hr>
+                                                                            {this.state.isRemedyLoad ?
+                                                                                <div>
+                                                                                    {this.state.RemedyDtailsList.length > 0 ?
+                                                                                        <div>
+                                                                                            {this.state.RemedyDtailsList?.map((item, index) => {
+                                                                                                {/* <Link to={"/PatientDashboard/" + this.props.patientId + "/" + this.props.caseId + "/" + this.props.patientAppId + "/" + this.props.doctorId} */ }
+                                                                                                const NewTab = 5
+                                                                                                return (
+                                                                                                    <span key={index} style={{ display: 'inline-block' }} class="remhov">
+                                                                                                        {/* { */}
+                                                                                                        {/* item.remediesModels.map((author, index) => {
+                                                                                                    return  */}
+                                                                                                        {/* <span > */}
+                                                                                                        {/* <Link to={`/PatientDashboard/${this.props.patientId}/${this.props.caseId}/${this.props.patientAppId}/${this.props.doctorId}/${NewTab}`} */}
+
+
+                                                                                                        <Link to={`#`}
+                                                                                                            style={{
+                                                                                                                textDecoration: 'none'
+                                                                                                            }}>
+                                                                                                            <span onClick={() => this.handleAddRubricClick(item.remedyId)}>
+                                                                                                                {/* {item.remedyAlias} */}
+                                                                                                                <span className={item.gradeNo == 1 ? 'grade1css' : item.gradeNo == 2 ? 'grade2css' : item.gradeNo == 3 ? 'grade3css' : item.gradeNo == 4 && 'grade4css'}>
+                                                                                                                    {item.fontColor === 'Red'
+                                                                                                                        ? item.remedyAlias.toUpperCase()
+                                                                                                                        : item.remedyAlias}
+                                                                                                                </span>
+
+                                                                                                                {/* {this.state.ShowAuthorAlias && `(${item.authorAlias}),`} */}
+                                                                                                                {this.state.ShowAuthorAlias && (
+                                                                                                                    <span style={{ color: 'black', fontSize: "12px" }}>
+                                                                                                                        ({item.authorAlias}),
+                                                                                                                    </span>
+                                                                                                                )}
+                                                                                                                {this.state.showInfoIcon &&
+                                                                                                                    <span className='hover-text3'>
+                                                                                                                        <i class="fa fa-info" aria-hidden="true" style={{ marginLeft: 10, color: 'black' }}></i>
+                                                                                                                        <div class="tooltip-text3">
+                                                                                                                            {/* Themes OR Characteristics:{item.themesORCharacteristics} Generals:{item.generals}
+                                                                                        Modalities:{item.modalities}  Particulars:{item.particulars} */}
+                                                                                                                            <div className='modal-txt1'><strong>Themes/Characteristics : </strong> {ReactHtmlParser(item.themesORCharacteristics)}</div> 
+                                                                                                                            <div className='modal-txt2'><strong class="mt-2">Generals : </strong> {ReactHtmlParser(item.generals)} </div>
+                                                                                                                            <div className='modal-txt3'><strong class="mt-2">Modalities : </strong> {ReactHtmlParser(item.modalities)} </div>
+                                                                                                                            <div className='modal-txt4'><strong class="mt-2">Particulars : </strong> {ReactHtmlParser(item.particulars)}</div>
+
+                                                                                                                        </div>
+                                                                                                                    </span>}
+
+                                                                                                            </span>
+                                                                                                        </Link>
+                                                                                                        {/* </span> */}
+                                                                                                        {/* }) */}
+                                                                                                        {/* } */}
+                                                                                                    </span>
+                                                                                                )
+                                                                                            })}
+                                                                                        </div>
+                                                                                        : <div >
+                                                                                            <span >Data Not Found</span>
+                                                                                        </div>
+                                                                                    }
+                                                                                </div> :
+                                                                                <div style={{
+                                                                                    display: 'flex',
+                                                                                    alignItems: 'center',
+                                                                                    justifyContent: 'center',
+
+                                                                                }}>
+                                                                                    <ClipLoader
+                                                                                        color="#2d292a"
+                                                                                        size={50}
+                                                                                    />
+                                                                                </div>
+                                                                            }
+
+                                                                        </Col>
+                                                                    </Row>
+                                                                </div>
 
 
 
-                                                        </ModalBody>
-                                                        <ModalFooter>
-                                                            <Button color="danger" onClick={this.toggleOrderModal.bind(this)}><i className="fa fa-ban"></i> Cancel</Button>
-                                                        </ModalFooter>
-                                                    </Modal>
+                                                            </ModalBody>
+                                                            <ModalFooter>
+                                                                <Button color="danger" onClick={this.toggleOrderModal.bind(this)}><i className="fa fa-ban"></i> Cancel</Button>
+                                                            </ModalFooter>
+                                                        </Modal>
 
-                                                </div>
-                                            </span>
-                                        </div>
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        </Card>
                                     </Col>
-                                    <Col sm="12" md="7" style={{ padding: 0 }}>
-                                        <div responsive="true" className="divst2" style={{ overflowY: 'scroll', }}>
-                                            {/* <span class="hthead1">DETAILS : </span><br /> */}
-                                            <span class="">
-
-                                                <table style={{ width: '100%' }} className='table-bordered'>
-                                                    <tr>
-                                                        <td style={{ width: '25%' }} className='text-center'><span class="hthead1" size="sm" style={{ color: '#5682b0', lineHeight: 2 }}>INVESTIGATION</span></td>
-                                                        <td style={{ width: '25%' }} className='text-center'><span class="hthead1" size="sm" style={{ color: '#849270', lineHeight: 2 }}>ALLOPATHIC RX</span></td>
-                                                        <td style={{ width: '25%' }} className='text-center'><span class="hthead1" size="sm" style={{ color: '#f2c54f', lineHeight: 2 }}>EXAMINATION</span></td>
-                                                        <td style={{ width: '25%' }} className='text-center'><span class="hthead1" size="sm" style={{ color: '#f2374f', lineHeight: 2 }}>SYSTEMS</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className='p-2'>{this.state.investigations}</td>
-                                                        <td className='p-2'>{this.state.allopathicMedicines}</td>
-                                                        <td className='p-2'>{this.state.examiniations}</td>
-                                                        <td className='p-2'>
-                                                            <span>
-                                                                {
-                                                                    this.state.diagnosisSystemList.map((s, index) => {
-                                                                        return <span key={index}>{s.diagnosisSystemName} </span>
-                                                                    })
-                                                                }
-                                                            </span>
-                                                        </td>
-                                                    </tr>
+                                    <Col sm="12" md="7" className="tdiv">
+                                        <Card className="mb-2">
+                                            <CardHeader style={{ height: '35px' }}>
+                                                <CardText className="cardtextl w-100">
+                                                <table style={{ width: '100%' , marginTop: '-5px'}} >
+                                                        <tr>
+                                                            <td className='text-center crdtbls'><span class="hthead1" size="sm" style={{ color: '#5682b0', lineHeight: 2 }}>INVESTIGATION</span></td>
+                                                            <td className='text-center crdtbls'><span class="hthead1" size="sm" style={{ color: '#849270', lineHeight: 2 }}>ALLOPATHIC RX</span></td>
+                                                            <td className='text-center crdtbls'><span class="hthead1" size="sm" style={{ color: '#c79f37', lineHeight: 2 }}>EXAMINATION</span></td>
+                                                            <td className='text-center crdtbls'><span class="hthead1" size="sm" style={{ color: '#f2374f', lineHeight: 2 }}>SYSTEMS</span></td>
+                                                        </tr>
                                                 </table>
+                                                </CardText>
+                                            </CardHeader>
+                                            <div responsive="true" className="divstN" style={{ overflowY: 'scroll', }}>
+                                                {/* <span class="hthead1">DETAILS : </span><br /> */}
+                                                <span class="">
 
-                                                {/* <table>
-                                                    <tr>
-                                                        <td><span size="sm" style={{ color: '#5682b0' }}>INVESTIGATION</span></td>
-                                                        <td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
-                                                        <td>{this.state.investigations}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span size="sm" style={{ color: '#849270' }}>ALLOPATHIC RX</span></td>
-                                                        <td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
-                                                        <td>{this.state.allopathicMedicines}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span size="sm" style={{ color: '#f2c54f' }}>EXAMINATION</span></td>
-                                                        <td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
-                                                        <td>{this.state.examiniations}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span size="sm" style={{ color: '#f2c54f' }}>SYSTEMS</span></td>
-                                                        <td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
-                                                        <td>{this.state.examiniations}</td>
-                                                    </tr>
-                                                </table> */}
+                                                    <table style={{ width: '100%' }} className='table-bordered'>
+                                                      
+                                                        <tr>
+                                                            <td className='p-1 crdtbls'>{this.state.investigations}</td>
+                                                            <td className='p-1 crdtbls'>{this.state.allopathicMedicines}</td>
+                                                            <td className='p-1 crdtbls'>{this.state.examiniations}</td>
+                                                            <td className='p-1 crdtbls'>
+                                                                <span>
+                                                                    {
+                                                                        this.state.diagnosisSystemList.map((s, index) => {
+                                                                            return <span key={index}>{s.diagnosisSystemName} </span>
+                                                                        })
+                                                                    }
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
 
-                                            </span>
+                                                    {/* <table>
+                                                        <tr>
+                                                            <td><span size="sm" style={{ color: '#5682b0' }}>INVESTIGATION</span></td>
+                                                            <td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
+                                                            <td>{this.state.investigations}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><span size="sm" style={{ color: '#849270' }}>ALLOPATHIC RX</span></td>
+                                                            <td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
+                                                            <td>{this.state.allopathicMedicines}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><span size="sm" style={{ color: '#f2c54f' }}>EXAMINATION</span></td>
+                                                            <td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
+                                                            <td>{this.state.examiniations}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><span size="sm" style={{ color: '#f2c54f' }}>SYSTEMS</span></td>
+                                                            <td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
+                                                            <td>{this.state.examiniations}</td>
+                                                        </tr>
+                                                    </table> */}
 
-                                        </div>
-                                        <div responsive="true" className="divst2 mt-2" style={{ overflowY: 'scroll', height: '420px' }}>
-                                            <span class="hthead1">THERAPEUTICS : </span><br />
-                                            <span class="divdet">{ReactHtmlParser(this.state.therapeutics)}</span>
-                                        </div>
+                                                </span>
+
+                                            </div>
+                                        </Card>
+
+                                        <Card className="mb-0">
+                                            <CardHeader style={{ height: '35px' }}>
+                                                <CardText className="cardtextl">THERAPEUTICS :</CardText>
+                                            </CardHeader>
+                                            <div responsive="true" className="divstN" style={{ overflowY: 'scroll', height: '420px' }}>
+                                                <span class="divdet">{ReactHtmlParser(this.state.therapeutics)}</span>
+                                            </div>
+                                        </Card>
                                     </Col>
                                 </Row>
                             </CardBody>
