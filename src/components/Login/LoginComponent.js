@@ -68,7 +68,7 @@ class LoginComponent extends Component {
                         
                         <Form.Group as={Row} controlId="fromUserName" className="mt-2">
                             <Form.Label column sm="12">
-                                Username<br />
+                                User Name<br />
                             </Form.Label>
                             <Col sm="12">
                                 <Form.Control type="text" className="brdrds" placeholder="Enter User Name"

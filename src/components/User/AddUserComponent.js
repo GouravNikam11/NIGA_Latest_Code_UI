@@ -45,6 +45,7 @@ class AddUserComponent extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
+       
     }
 
     renderCountryList = () => {
@@ -73,7 +74,7 @@ class AddUserComponent extends Component {
                             <Col sm="4">
                             <Form.Group as={Row} controlId="fromUserName" >
                             <Form.Label column sm="12" className='col-form-lbl lbls'>
-                                Username<br />
+                            User Name<br />
                             </Form.Label>
                      
                             <Col sm="12">
@@ -319,7 +320,7 @@ class AddUserComponent extends Component {
      * @param  event 
      */
     handleChange(event) {
-        this.setState({ [event.target.name]: event.target.value });
+            this.setState({ [event.target.name]: event.target.value.replace(/\s+/g, '')});
     }
 
     /**

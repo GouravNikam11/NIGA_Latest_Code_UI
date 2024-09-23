@@ -57,6 +57,7 @@ class HomeComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            zoomLevel: 1,
             activeTabLabel: null,  // Track the active tab label
             activeKeywordId: null,   // Track the active keyword for styling
             diagnosisSystemList: [],
@@ -273,7 +274,34 @@ class HomeComponent extends React.Component {
 
     }
 
+    handleZoomIn = () => {
+        if (this.state.zoomLevel == 1.5) {
+            console.log("zoom", this.state.zoomLevel)
+        }
+        else {
+            console.log("zoom", this.state.zoomLevel)
+            this.setState(prevState => ({
+                zoomLevel: Math.round((prevState.zoomLevel + 0.1) * 100) / 100
+            }));
+        }
 
+    };
+
+    // Method to handle zoom out
+    handleZoomOut = () => {
+        if (this.state.zoomLevel == 0.9) {
+            console.log("zoom", this.state.zoomLevel)
+        }
+        else {
+
+            this.setState(prevState => ({
+                zoomLevel: prevState.zoomLevel > 0.1
+                    ? Math.round((prevState.zoomLevel - 0.1) * 100) / 100
+                    : 0.1 // Prevent zoom level going below 0.1
+            }));
+        }
+
+    };
 
     TabKeywordById = (String) => {
         debugger
@@ -807,10 +835,26 @@ class HomeComponent extends React.Component {
 
                                         <Card className="mb-0">
                                             <CardHeader style={{ height: '35px' }}>
-                                                <CardText className="cardtextl">THERAPEUTICS :</CardText>
+                                                <CardText className="cardtextl w-100">
+                                                <table style={{ width: '100%', marginTop: '-8px' }} >
+                                                    <tr>
+                                                        <td className='text-left crdtbls'><span class="hthead1" size="sm" >THERAPEUTICS :</span></td>
+                                                        <td className='text-left crdtbls'></td>
+                                                        <td className='text-left crdtbls'></td>
+                                                        <td className='text-center crdtbls'><span className="zoombtn" onClick={() => this.handleZoomOut()}><i class="fa fa-minus" aria-hidden="true"></i></span></td>
+                                                        <td className='text-center crdtbls' style={{ paddingRight: '10px' }}><span className="zoombtn" onClick={() => this.handleZoomIn()}><i class="fa fa-plus" aria-hidden="true"></i></span></td>
+                                                    </tr>
+                                                </table>
+                                                </CardText>
                                             </CardHeader>
-                                            <div responsive="true" className="divstN" style={{ overflowY: 'scroll', height: '420px' }}>
-                                                <span class="divdet">{ReactHtmlParser(this.state.therapeutics)}</span>
+                                            
+                                            <div responsive="true" className="divstN" style={{ 
+                                                 transform: `scale(${this.state.zoomLevel.toFixed(2)})`,
+                                                 transformOrigin: '0 0', // Ensures the scaling is consistent
+                                                 transition: 'transform 0.2s', // Smooth transition,
+
+                                             }}>
+                                                <span >{ReactHtmlParser(this.state.therapeutics)}</span>
                                             </div>
                                         </Card>
                                     </Col>
