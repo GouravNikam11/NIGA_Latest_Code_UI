@@ -847,14 +847,19 @@ class HomeComponent extends React.Component {
                                                 </table>
                                                 </CardText>
                                             </CardHeader>
-                                            
-                                            <div responsive="true" className="divstN" style={{ 
-                                                 transform: `scale(${this.state.zoomLevel.toFixed(2)})`,
-                                                 transformOrigin: '0 0', // Ensures the scaling is consistent
-                                                 transition: 'transform 0.2s', // Smooth transition,
+                                            <div responsive="true" className="divstN divscroll">
+                                                <span>
+                                                    <div className='medica'>
+                                                        <div responsive="true" className="divstN" style={{ 
+                                                            transform: `scale(${this.state.zoomLevel.toFixed(2)})`,
+                                                            transformOrigin: '0 0', // Ensures the scaling is consistent
+                                                            transition: 'transform 0.2s', // Smooth transition,
 
-                                             }}>
-                                                <span >{ReactHtmlParser(this.state.therapeutics)}</span>
+                                                        }}>
+                                                            <span >{ReactHtmlParser(this.state.therapeutics)}</span>
+                                                        </div>
+                                                    </div>
+                                                </span>
                                             </div>
                                         </Card>
                                     </Col>

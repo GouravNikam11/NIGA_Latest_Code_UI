@@ -314,8 +314,8 @@ class ClinicalSummary extends React.Component {
 
                                         <div responsive="true" className="divst0 divscroll">
                                             {this.state.authorId !== '' && this.state.remedyId != '' ?
-                                                <Row>
-                                                    <Col sm="12" className='medica'>
+                                                <span>
+                                                    <div className='medica'>
                                                         <div style={{
                                                             transform: `scale(${this.state.zoomLevel.toFixed(2)})`,
                                                             transformOrigin: '0 0', // Ensures the scaling is consistent
@@ -336,14 +336,14 @@ class ClinicalSummary extends React.Component {
 
                                                         </div>
 
-                                                    </Col>
-                                                </Row> :
+                                                    </div>
+                                                </span> :
 
-                                                <Row>
-                                                    <Col sm="12" className='medica'>
+                                                <span>
+                                                    <div className='medica'>
                                                         Please Select Author
-                                                    </Col>
-                                                </Row>
+                                                    </div>
+                                                </span>
                                             }
                                         </div>
 
