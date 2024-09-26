@@ -13,6 +13,7 @@ import {
 } from '../../store/actions/notification';
 
 import bgs from '../../assets/img/hm44.png'
+import { FaEye, FaEyeSlash } from 'react-icons/fa';  // FontAwesome icons
 /**
  * Created Date     :       20 Dec 2019
  * Purpose          :       To validate  username and password.
@@ -29,22 +30,24 @@ class LoginComponent extends Component {
             UserName: '',
             Password: '',
             isAuthenticateUser: false,
-            colors: ['orange', 'red', 'blue', 'purple']
+            colors: ['orange', 'red', 'blue', 'purple'],
+            showPassword: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.togglePasswordVisibility = this.togglePasswordVisibility.bind(this);
     }
     componentDidMount() {
         debugger
-        console.log('window======',window.location.search)
-       
-      
-            let search = window.location.search;
-            let userId = search.substring(8,);
-            this.IsValidAccount(userId);
-     
-       
-      
+        console.log('window======', window.location.search)
+
+
+        let search = window.location.search;
+        let userId = search.substring(8,);
+        this.IsValidAccount(userId);
+
+
+
     }
     setRedirect = () => {
         this.setState({
@@ -61,11 +64,11 @@ class LoginComponent extends Component {
      */
     render() {
         return (
-            <div className="Signup " style={{ backgroundImage: 'url(' + bgs + ')', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%' , height: '100vh', paddingTop: '6rem' }}>
+            <div className="Signup " style={{ backgroundImage: 'url(' + bgs + ')', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', height: '100vh', paddingTop: '6rem' }}>
                 <Col>
                     <Form onSubmit={this.handleClick} className="mres wid50">
-                   <center> <img src="/static/media/logo.fe659025.png" width="240" height="60" alt="Homeo Centrum Logo" /></center>
-                        
+                        <center> <img src="/static/media/logo.fe659025.png" width="240" height="60" alt="Homeo Centrum Logo" /></center>
+
                         <Form.Group as={Row} controlId="fromUserName" className="mt-2">
                             <Form.Label column sm="12">
                                 User Name<br />
@@ -81,29 +84,35 @@ class LoginComponent extends Component {
                             <Form.Label column sm="12">
                                 Password
                             </Form.Label>
-                            <Col sm="12">
-                                <Form.Control type="password" className="brdrds" placeholder="Enter Password"
+                            <Col sm="12" className="password-input">
+                                <Form.Control type={this.state.showPassword ? 'text' : 'password'} className="brdrds" placeholder="Enter Password"
                                     name="Password"
                                     onChange={this.handleChange}
                                     value={this.state.Password === null ? '' : this.state.Password}
                                 />
+                                <span
+                                    onClick={this.togglePasswordVisibility}
+                                    style={{ cursor: 'pointer', position: 'absolute', right: 20, top: 5 }}
+                                >
+                                    {this.state.showPassword ? <FaEyeSlash color='#20a8d8' size={18} /> : <FaEye color='#20a8d8' size={18} />}
+                                </span>
                             </Col>
-                            
+
                         </Form.Group>
                         <Row>
                             <Col sm="12" className="text-center pb-1 pt-1">
                                 <Button color="primary" style={{ backgroundColor: "#20a8d8", textTransform: "uppercase", borderRadius: '40px', width: '100%' }} type="submit" className="paddg">&nbsp; <i className="fa fa-sign-in"></i>  &nbsp; Login &nbsp;</Button>
                             </Col>
-                            
+
                         </Row>
 
                         <Row>
                             <Col sm="12" className="text-right pb-2 pt-1">
-                                <Link to={"/ForgotpasswordComponent"} className='lgtext' style={{fontSize: '12px', color: 'black'}}>Forgot Password? </Link>
+                                <Link to={"/ForgotpasswordComponent"} className='lgtext' style={{ fontSize: '12px', color: 'black' }}>Forgot Password? </Link>
                             </Col>
                         </Row>
                         <Row>
-                        
+
                             <Col sm="12" className="text-center pb-2 pt-1">
                                 New User Registration? <Link to={"/AddUser"} className='lgtext'>Register</Link>
                             </Col>
@@ -135,6 +144,10 @@ class LoginComponent extends Component {
         this.setState({ [event.target.name]: event.target.value });
     }
 
+    togglePasswordVisibility() {
+        this.setState({ showPassword: !this.state.showPassword })
+    }
+
     /**
      * Method to submit form.
      * @param {*} event 
@@ -144,10 +157,8 @@ class LoginComponent extends Component {
         if (this.state.UserName == "" && this.state.Password == "") {
             alert("Please check user name or password")
         }
-        else if(this.state.UserName == "" )
-        {   alert("Please enter user name ")}
-        else if(this.state.UserName == "" )
-        {   alert("Please enter password ")}
+        else if (this.state.UserName == "") { alert("Please enter user name ") }
+        else if (this.state.UserName == "") { alert("Please enter password ") }
         else {
             const response = await this.props.login(this.state)
             if (response.status == "200") {

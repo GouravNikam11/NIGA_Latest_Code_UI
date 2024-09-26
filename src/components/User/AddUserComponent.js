@@ -9,7 +9,7 @@ import {
     closeSnackbar
 } from '../../store/actions/notification';
 import bgs from '../../assets/img/regss.png'
-
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 /**
  * Created Date     :   19 Dec 2019.
  * Purpose          :   Component is used to add new user.
@@ -38,14 +38,17 @@ class AddUserComponent extends Component {
             MobileNo: '',
             EmailId: '',
             RoleId: 16,
-
+            showPassword: false,
+            showConfirmPassword: false,
             UserNameError: '',
             PasswordError: '',
             CountryError: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
-       
+        this.toggleShowPassword = this.toggleShowPassword.bind(this);
+        this.toggleShowConfirmPassword = this.toggleShowConfirmPassword.bind(this);
+
     }
 
     renderCountryList = () => {
@@ -57,76 +60,97 @@ class AddUserComponent extends Component {
         })
     }
 
+    toggleShowPassword() {
+        this.setState({ showPassword: !this.state.showPassword });
+    }
+
+    toggleShowConfirmPassword() {
+        this.setState({ showConfirmPassword: !this.state.showConfirmPassword });
+    }
     /**
      * html rendor method for adding new user.
      */
     render() {
         return (
-            <div className="Signup" style={{ backgroundImage: 'url(' + bgs + ')', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%' , height: '100vh' }}>
+            <div className="Signup" style={{ backgroundImage: 'url(' + bgs + ')', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', height: '100vh' }}>
                 <Col className="mres11">
-                <Form onSubmit={this.handleClick} className="mres wid801" style={{ height: '100vh', overflowY: 'scroll'}}>
-                    <center> <img src="/static/media/logo.fe659025.png" width="175" height="50" alt="Homeo Centrum Logo" /></center>
-                   <br></br>
+                    <Form onSubmit={this.handleClick} className="mres wid801" style={{ height: '100vh', overflowY: 'scroll' }}>
+                        <center> <img src="/static/media/logo.fe659025.png" width="175" height="50" alt="Homeo Centrum Logo" /></center>
+                        <br></br>
                         <h4 className="text-center pb-1 pt-1 clrcode">Account Credentials</h4>
-                    
-                        <Row>
-                        
-                            <Col sm="4">
-                            <Form.Group as={Row} controlId="fromUserName" >
-                            <Form.Label column sm="12" className='col-form-lbl lbls'>
-                            User Name<br />
-                            </Form.Label>
-                     
-                            <Col sm="12">
-                                <Form.Control type="text" placeholder="Enter Username" className='form-cnt brdrds brds'
-                                    name="UserName"
-                                    onChange={this.handleChange}
-                                    value={this.state.UserName === null ? '' : this.state.UserName} />
-                            </Col>
 
-                         </Form.Group>
+                        <Row>
+
+                            <Col sm="4">
+                                <Form.Group as={Row} controlId="fromUserName" >
+                                    <Form.Label column sm="12" className='col-form-lbl lbls'>
+                                        User Name<br />
+                                    </Form.Label>
+
+                                    <Col sm="12">
+                                        <Form.Control type="text" placeholder="Enter Username" className='form-cnt brdrds brds'
+                                            name="UserName"
+                                            maxLength={15}
+                                            onChange={this.handleChange}
+                                            value={this.state.UserName === null ? '' : this.state.UserName} />
+                                    </Col>
+
+                                </Form.Group>
                             </Col>
                             <Col sm="4">
                                 <Form.Group as={Row} controlId="formPassword" >
                                     <Form.Label column sm="12" className='col-form-lbl lbls'>
                                         Password<br />
                                     </Form.Label>
-                                    <Col sm="12">
-                                        <Form.Control type="password" placeholder="Enter Password" className='form-cnt brdrds brds'
+                                    <Col sm="12" className="password-input">
+                                        <Form.Control type={this.state.showPassword ? 'text' : 'password'} placeholder="Enter Password" className='form-cnt brdrds brds'
                                             name="UserPassword"
+                                            maxLength={15}
                                             onChange={this.handleChange}
                                             value={this.state.UserPassword === null ? '' : this.state.UserPassword}
                                         />
+                                        <span
+                                            onClick={this.toggleShowPassword}
+                                            style={{ cursor: 'pointer', position: 'absolute', right: 20, top: 3 }}
+                                        >
+                                            {this.state.showPassword ? <FaEyeSlash color='#20a8d8' size={18} /> : <FaEye color='#20a8d8' size={18} />}
+                                        </span>
                                     </Col>
                                 </Form.Group>
                             </Col>
                             <Col sm="4">
                                 <Form.Group as={Row} controlId="formReEnterPassword"  >
                                     <Form.Label column sm="12" className='col-form-lbl lbls'>
-                                    Confirm Password<br />
+                                        Confirm Password<br />
                                     </Form.Label>
-                                    <Col sm="12">
-                                        <Form.Control type="password" placeholder="Enter Password Again" className='form-cnt brdrds brds'
+                                    <Col sm="12" className="password-input">
+                                        <Form.Control type={this.state.showConfirmPassword ? 'text' : 'password'} placeholder="Enter Password Again" className='form-cnt brdrds brds'
                                             name="ReenterPassword"
+                                            maxLength={15}
                                             onChange={this.handleChange}
                                             value={this.state.ReenterPassword === null ? '' : this.state.ReenterPassword} />
+                                        <span
+                                            onClick={this.toggleShowConfirmPassword}
+                                            style={{ cursor: 'pointer', position: 'absolute', right: 20, top: 3 }}
+                                        >
+                                            {this.state.showConfirmPassword ? <FaEyeSlash color='#20a8d8' size={18} /> : <FaEye color='#20a8d8' size={18} />}
+                                        </span>
                                     </Col>
                                 </Form.Group>
                             </Col>
-                            
                         </Row>
-                 
 
-                  
+
+
 
                         <h4 className="text-center pb-1 pt-1 clrcode">Basic information </h4>
 
                         <Row>
-                        
+
                             <Col sm="2">
                                 <Form.Group as={Row} controlId="formTitle" className='frmgrp'>
                                     <Form.Label column sm="12" className='col-form-lbl lbls'>
-                                    Title<br />
+                                        Title<br />
                                     </Form.Label>
                                     <Col sm="12">
                                         <Form.Control as="select" className='form-cnt brdrds brds'
@@ -137,6 +161,7 @@ class AddUserComponent extends Component {
                                             <option value="1">Mr.</option>
                                             <option value="2">Mrs.</option>
                                             <option value="3">Dr.</option>
+                                            <option value="4">Miss.</option>
                                         </Form.Control>
                                     </Col>
                                 </Form.Group>
@@ -144,8 +169,8 @@ class AddUserComponent extends Component {
 
                             <Col sm="5">
                                 <Form.Group as={Row} controlId="formFirstName" className='frmgrp' >
-                                <Form.Label column sm="12" className='col-form-lbl lbls'>
-                                    First Name<br />
+                                    <Form.Label column sm="12" className='col-form-lbl lbls'>
+                                        First Name<br />
                                     </Form.Label>
                                     <Col sm="12">
                                         <Form.Control type="text" placeholder="Enter First Name" className='form-cnt brdrds brds'
@@ -158,8 +183,8 @@ class AddUserComponent extends Component {
 
                             <Col sm="5">
                                 <Form.Group as={Row} controlId="formLastName" className='frmgrp'>
-                                <Form.Label column sm="12" className='col-form-lbl lbls'>
-                                    Last Name<br />
+                                    <Form.Label column sm="12" className='col-form-lbl lbls'>
+                                        Last Name<br />
                                     </Form.Label>
                                     <Col sm="12">
                                         <Form.Control type="text" placeholder="Enter Last Name" className='form-cnt brdrds brds'
@@ -173,11 +198,11 @@ class AddUserComponent extends Component {
                         </Row>
 
                         <Row>
-                        
+
                             <Col sm="6">
                                 <Form.Group as={Row} controlId="formCompany" >
-                                <Form.Label column sm="12" className='col-form-lbl lbls'>
-                                    Company<br />
+                                    <Form.Label column sm="12" className='col-form-lbl lbls'>
+                                        Company<br />
                                     </Form.Label>
                                     <Col sm="12">
                                         <Form.Control type="text" placeholder="Enter Company" className='form-cnt brdrds brds'
@@ -190,8 +215,8 @@ class AddUserComponent extends Component {
 
                             <Col sm="6">
                                 <Form.Group as={Row} controlId="formCountry" >
-                                <Form.Label column sm="12" className='col-form-lbl lbls'>
-                                    Country<br />
+                                    <Form.Label column sm="12" className='col-form-lbl lbls'>
+                                        Country<br />
                                     </Form.Label>
                                     <Col sm="12">
                                         <Form.Control as="select" className='form-cnt brdrds brds'
@@ -209,20 +234,20 @@ class AddUserComponent extends Component {
 
                         </Row>
 
-               
-                 
-                        
-                       
 
-                
+
+
+
+
+
                         <h4 className="text-center pb-1 pt-1 clrcode">Contact information </h4>
 
                         <Row>
-                        
+
                             <Col sm="12">
                                 <Form.Group as={Row} controlId="formMobile" className='frmgrp'>
-                                <Form.Label column sm="12" className='col-form-lbl lbls'>
-                                    Mobile No.<br />
+                                    <Form.Label column sm="12" className='col-form-lbl lbls'>
+                                        Mobile No.<br />
                                     </Form.Label>
                                     <Col sm="12">
                                         <Form.Control type="text" placeholder="Enter Mobile No." className='form-cnt brdrds brds'
@@ -236,8 +261,8 @@ class AddUserComponent extends Component {
                             <Col sm="6">
 
                                 <Form.Group as={Row} controlId="formEmail">
-                                <Form.Label column sm="12" className='col-form-lbl lbls'>
-                                    Email<br />
+                                    <Form.Label column sm="12" className='col-form-lbl lbls'>
+                                        Email<br />
                                     </Form.Label>
                                     <Col sm="12">
                                         <Form.Control type="text" placeholder="Enter Email" className='form-cnt brdrds brds'
@@ -252,8 +277,8 @@ class AddUserComponent extends Component {
                             <Col sm="6">
 
                                 <Form.Group as={Row} controlId="formReenterEmail">
-                                <Form.Label column sm="12" className='col-form-lbl lbls'>
-                                    Confirm Email<br />
+                                    <Form.Label column sm="12" className='col-form-lbl lbls'>
+                                        Confirm Email<br />
                                     </Form.Label>
                                     <Col sm="12">
                                         <Form.Control type="text" placeholder="Enter Email Again" className='form-cnt brdrds brds'
@@ -267,10 +292,10 @@ class AddUserComponent extends Component {
 
                         </Row>
 
-                       
 
-                    
-                        
+
+
+
 
                         <hr />
 
@@ -280,18 +305,18 @@ class AddUserComponent extends Component {
                                     <Button color="primary" style={{ borderRadius: '40px', width: '80%', backgroundColor: "#20a8d8", textTransform: "uppercase", margin: 10 }} className="paddg" type="submit">&nbsp; <i className="fa fa-user"></i>  &nbsp; Create an account &nbsp;</Button>
                                 </Col>
                                 <Col sm="6" className="text-center ">
-                                    <Button className='btn_Cancel paddg'  style={{ borderRadius: '40px', width: '80%', textTransform: "uppercase", margin: 10 }} onClick={() => this.props.history.push('/Login')}>&nbsp; <i className="fa fa-close"></i>  &nbsp; Cancel &nbsp;</Button>
-                                    <br/>
+                                    <Button className='btn_Cancel paddg' style={{ borderRadius: '40px', width: '80%', textTransform: "uppercase", margin: 10 }} onClick={() => this.props.history.push('/Login')}>&nbsp; <i className="fa fa-close"></i>  &nbsp; Cancel &nbsp;</Button>
+                                    <br />
                                 </Col>
                             </Row>
                         </Col>
-                        <br/>
+                        <br />
                     </Form>
-                    <br/>
+                    <br />
                 </Col>
-                
+
             </div>
-            
+
         )
     }
 
@@ -300,14 +325,14 @@ class AddUserComponent extends Component {
      */
     async componentDidMount() {
         debugger
-         this.GetCountries();
+        this.GetCountries();
     }
 
     async GetCountries() {
         CommonServices.getData(`/country`).then((response) => {
-            console.log('country===',response);
+            console.log('country===', response);
             this.setState({
-            
+
                 countryList: response
             })
         })
@@ -320,7 +345,7 @@ class AddUserComponent extends Component {
      * @param  event 
      */
     handleChange(event) {
-            this.setState({ [event.target.name]: event.target.value.replace(/\s+/g, '')});
+        this.setState({ [event.target.name]: event.target.value.replace(/\s+/g, '') });
     }
 
     /**
@@ -331,6 +356,9 @@ class AddUserComponent extends Component {
     handleClick(event) {
         debugger
         event.preventDefault();
+        let mobileNumberRegex = /^\d{10}$/;
+        let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
         if (this.state.UserName == "") {
             alert("Please enter user name");
         }
@@ -339,6 +367,33 @@ class AddUserComponent extends Component {
         }
         else if (this.state.UserPassword != this.state.ReenterPassword) {
             alert("Password not matched with confirmed password");
+        }
+        else if (this.state.FirstName === "") {
+            alert("Please enter first name");
+        }
+        else if (this.state.LastName === "") {
+            alert("Please enter last name");
+        }
+        else if (this.state.CompanyName === "") {
+            alert("Please enter company name");
+        }
+        else if (this.state.Title === "") {
+            alert("Please select title");
+        }
+        else if (this.state.CountryId === "") {
+            alert("Please select country");
+        }
+        else if (this.state.MobileNo === "") {
+            alert("Please enter mobile number");
+        }
+        else if (!mobileNumberRegex.test(this.state.MobileNo)) {
+            alert("Please enter a valid mobile number");
+        }
+        else if (!emailRegex.test(this.state.EmailId)) {
+            alert("Please enter a valid email");
+        }
+        else if (!emailRegex.test(this.state.ReEnterEmail)) {
+            alert("Please enter a valid confirm email");
         }
         else if (this.state.EmailId != "") {
             if (this.state.EmailId != this.state.ReEnterEmail) {
