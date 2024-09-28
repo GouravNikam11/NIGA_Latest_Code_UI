@@ -44,7 +44,12 @@ class DefaultHeader extends Component {
 <span class="d-md-down-none navbar-toggler" style={{marginTop:'-25px'}} onClick={()=> 
   {
     store.dispatch({ type: 'HIDE_SHOW_SIDE_BAR', payload: !this.props.ishideshowsidebar })}} >
-<AppSidebarToggler className="d-md-down-none" display="lg" />
+      {
+    (localStorage.getItem("RoleName") === UserRoles.Admin) ? (
+      <AppSidebarToggler className="d-md-down-none" display="lg" />
+    ) : null
+  }
+{/* <AppSidebarToggler  display="lg" /> */}
 </span>
        
 {/* <AppSidebarToggler className="d-md-down-none" display="lg" /> */}

@@ -153,7 +153,7 @@ class PatientBackHistory extends Component {
                 <td onClick={() => this.handlegetrubricbyPatientAppid(s)} style={{ textAlign: 'center' }}>{new Date(s.appointmentDate).toLocaleDateString('en-GB')}</td>
                 <td onClick={() => this.handlegetrubricbyPatientAppid(s)} style={{ textAlign: 'center' }}>{s.appointmentTime}</td>
                 <td onClick={() => this.handlegetPrescriptionbyPatientAppid(s)} style={{ textAlign: 'center' }}>Prescription</td>
-                <td style={{ textAlign: 'center' }}><Button>Nots</Button></td>
+                <td style={{ textAlign: 'center' }}><Button>Notes</Button></td>
 
 
                 {/* <td  style={{ textAlign: 'center' }}>{new Date(s.appointmentDate).toLocaleDateString('en-GB')}</td>
