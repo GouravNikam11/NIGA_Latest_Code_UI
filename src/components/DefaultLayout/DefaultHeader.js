@@ -8,6 +8,7 @@ import logo from '../../assets/img/brand/logo.png'
 import sygnet from '../../assets/img/brand/sygnet.png'
 import { UserRoles } from '../../Constants/UserRoles'
 import avtr from '../../assets/img/avatars/users.jpg'
+import avtr1 from '../../assets/img/avatars/users1.png'
 import store from '../../store';
 import { connect, useDispatch } from 'react-redux';
 const propTypes = {
@@ -58,18 +59,22 @@ class DefaultHeader extends Component {
      
        <Nav className="d-md-down-none topmenus" navbar>
               {isDoctor ? (
+
+
+
+
                 <>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <NavItem className="px-3">
+                  <NavItem className="px-3 ">
                     <NavLink to="/DoctorDashboard" className="nav-link nvlink"><i class="fa fa-home" aria-hidden="true"></i> Dashboard</NavLink>
                   </NavItem>
                   <NavItem className="px-3">
                     <NavLink to="/AddPatientAppointment" className="nav-link nvlink"><i class="fa fa-pencil-square" aria-hidden="true"></i> Appointments</NavLink>
                   </NavItem>
-                  <NavItem className="px-3">
+                  <NavItem className="px-3 ">
                     <NavLink to="/PatientEntry" className="nav-link nvlink"><i class="fa fa-user-plus" aria-hidden="true"></i> New Patient</NavLink>
                   </NavItem>
-                  <NavItem className="px-3">
+                  <NavItem className="px-3 ">
                     <NavLink to="/PatientList" className="nav-link nvlink"><i class="fa fa-users" aria-hidden="true"></i> Patient List</NavLink>
                   </NavItem>
                   <NavItem className="px-3">
@@ -81,7 +86,14 @@ class DefaultHeader extends Component {
                   <NavItem className="px-3">
                     <NavLink to="#" className="nav-link nvlink"><i class="fa fa-user-md" aria-hidden="true"></i> E-Consult</NavLink>
                   </NavItem>
+
+
+
+               
+
                 </>
+
+                
 
                 
 
@@ -98,6 +110,9 @@ class DefaultHeader extends Component {
                 //builder.hide("primarySidebar", true)
               }
       </Nav>
+
+
+
 
 
         <Nav className="ml-autos" navbar>
@@ -122,6 +137,38 @@ class DefaultHeader extends Component {
           </UncontrolledDropdown>
 
         </Nav>
+
+        {isDoctor ? (
+        <>
+          <UncontrolledDropdown nav direction="down" className='doctor-menu'>
+            <DropdownToggle nav>
+              <img src={avtr1} className="img-avatar" alt="img"/>
+            </DropdownToggle>
+            <DropdownMenu right>
+              <DropdownItem>
+                <NavLink to="/PatientEntry" className="nav-link nvlink"><i class="fa fa-user-plus" aria-hidden="true"></i> New Patient</NavLink>
+              </DropdownItem>
+              <DropdownItem>
+                <NavLink to="/PatientList" className="nav-link nvlink"><i class="fa fa-users" aria-hidden="true"></i> Patient List</NavLink>
+              </DropdownItem>
+              <DropdownItem>
+                <NavLink to="/DoctorDashboard" className="nav-link nvlink"><i class="fa fa-home" aria-hidden="true"></i> Dashboard</NavLink>
+              </DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>
+        </>
+      ) : (
+      // Render other items for non-doctor users
+      <>
+        
+      </>
+      )
+
+      }
+
+      {
+      //builder.hide("primarySidebar", true)
+      }
 
         {/* <AppAsideToggler className="d-md-down-none" /> */}
         {/*<AppAsideToggler className="d-lg-none" mobile />*/}

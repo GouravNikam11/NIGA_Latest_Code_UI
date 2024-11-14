@@ -28,6 +28,14 @@
 
 }
 
+.app-header .nav-item{
+  list-style: none;
+}
+
+.doctor-menu{
+  display: none;
+}
+
 
 .subsect{
   font-size: 12px;

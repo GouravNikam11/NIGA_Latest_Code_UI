@@ -20,13 +20,19 @@
     font-style: italic;
 
 }
+
+
 .grade3css{
     font-size: 12px;
     /* font-family: 'Times New Roman'; */
     color:red;
-    text-transform: capitalize !important;
-
 }
+
+.grade3css::first-letter{
+    text-transform: capitalize !important;
+}
+
+
 .grade4css{
     font-size: 12px;
     /* font-family: 'Times New Roman'; */
@@ -135,6 +141,10 @@ ul.quick_actions {
     .patient_action.pull-right {
         float: left !important;
     }
+
+    .doctor-menu{
+        display: block;
+      }
 }
 
 @media screen and (max-width: 990px) {

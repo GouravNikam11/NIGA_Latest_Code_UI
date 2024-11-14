@@ -105,7 +105,7 @@ export class ListSubSectionComponent extends Component {
         if (this.state.SubSectionList.resultObject?.length === 0) {
             return (
                 <tr>
-                    <td colSpan={7} style={{ textAlign: 'center' }}>
+                    <td colSpan={8} style={{ textAlign: 'center' }}>
                         <Row>
                             <Col>
                                 <label>No matching subsections found.</label>
@@ -129,12 +129,9 @@ export class ListSubSectionComponent extends Component {
                     isSearchable={true}
 
                 /></td>
-                {/* <td><Button color="primary"
-                    style={{ textTransform: "uppercase" }}>
-                    Submit
-                </Button></td> */}
-                {/* <td>{s.description}</td> */}
-                {/* <td>{s.sectionId}</td> */}
+              
+                <td>{s.description}</td>
+                <td>{s.sectionId}</td>
                 <td>{s.parentSubSectionId}</td>
                 <td>Parent Sub Section Name</td>
                 <td className='lcol'>
@@ -149,6 +146,10 @@ export class ListSubSectionComponent extends Component {
                         onClick={() => this.deleteSubSection(s.subSectionId)}
                     >
                         <i className="fa fa-trash"></i>
+                    </Button>
+
+                    <Button style={{ marginLeft: 8 }} variant="dark">
+                        <i className="fa fa-arrow-right"></i>
                     </Button>
                 </td>
             </tr>
@@ -295,11 +296,10 @@ export class ListSubSectionComponent extends Component {
                         <thead>
                             <tr>
                                 <th className='fcol'>#</th>
-                                <th>SubSection Name</th>
-                                <th>SubSection Name Alias</th>
-                                {/* <th>Button</th> */}
-                                {/* <th>Description</th> */}
-                                {/* <th>Section Id</th> */}
+                                <th>Sub Section Name</th>
+                                <th style={{ width: "16%" }}>Sub Section Name Alias</th>
+                                <th>Description</th>
+                                <th>Section Id</th>
                                 <th>Parent Sub Section Id</th>
                                 <th>Parent Sub Section</th>
                                 <th className='lcol'>Action</th>
@@ -309,7 +309,7 @@ export class ListSubSectionComponent extends Component {
                             {
                                 isLoading ?
                                     <tr >
-                                        <td colSpan={7} style={{ textAlign: 'center' }}>
+                                        <td colSpan={8} style={{ textAlign: 'center' }}>
                                             <Row>
                                                 <Col>
                                                     <Spinner
