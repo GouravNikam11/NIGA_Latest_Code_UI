@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import CommonServices from '../../Services/CommonServices';
 import { connect } from 'react-redux';
 import Pagination from "react-js-pagination";
+import Select from "react-select";
 
 import {
     enqueueSnackbar as enqueueSnackbarAction,
@@ -32,6 +33,9 @@ export class ListSubSectionComponent extends Component {
             currentPage: 1,
             pageSize: 25,
             searchQuery: '',
+            parentsubSectionsList: [],
+            selectedparentsubsectionOptions: '',
+            selectedparentsubsectionId: 0
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleChangeforsearch = this.handleChangeforsearch.bind(this);
@@ -116,10 +120,23 @@ export class ListSubSectionComponent extends Component {
             <tr key={index}>
                 <td className='fcol'>{s.subSectionId}</td>
                 <td>{s.subSectionName}</td>
-                <td>{s.subSectionNameAlias}</td>
-                <td>{s.description}</td>
-                <td>{s.sectionId}</td>
+                {/* <td>{s.subSectionNameAlias}</td> */}
+                <td >  <Select
+                    options={this.state.parentsubSectionsList}
+                    placeholder="Select Parent SunSection:"
+                    value={this.state.selectedparentsubsectionOptions}
+                    onChange={(item) => this.handleSelect(item, s)}
+                    isSearchable={true}
+
+                /></td>
+                {/* <td><Button color="primary"
+                    style={{ textTransform: "uppercase" }}>
+                    Submit
+                </Button></td> */}
+                {/* <td>{s.description}</td> */}
+                {/* <td>{s.sectionId}</td> */}
                 <td>{s.parentSubSectionId}</td>
+                <td>Parent Sub Section Name</td>
                 <td className='lcol'>
                     <Link to={"/EditSubSection/" + s.subSectionId}>
                         <Button onClick={() => this.editSubSection(s.subSectionId)}>
@@ -135,6 +152,7 @@ export class ListSubSectionComponent extends Component {
                     </Button>
                 </td>
             </tr>
+
         ));
     }
 
@@ -149,13 +167,70 @@ export class ListSubSectionComponent extends Component {
                 activePage={this.state.currentPage}
                 itemsCountPerPage={this.state.pageSize}
                 totalItemsCount={totalRecords}
-               // pageRangeDisplayed={this.state.pageSize}
+                // pageRangeDisplayed={this.state.pageSize}
                 pageRangeDisplayed={20}
                 // onChange={this.getSubSection(pageNumber)}
                 onChange={(pageNumber) => { this.getSubSection(pageNumber, this.state.searchQuery) }}
             />
         )
     }
+
+
+    GetParentSubsections(sectionId) {
+        CommonServices.getDataById(sectionId, `/DropdownList/GetSubsectionBySection`).then((res) => {
+            debugger;
+            console.log("res", res)
+            var copyTableData = res;
+            let array = []
+            copyTableData.forEach(element => {
+                //console.log("printed====>>>>", element)
+                //debugger;
+                let obj = {
+                    value: element.subSectionId,
+                    label: element.subSectionName
+                }
+                array.push(obj)
+            });
+            this.setState({
+                parentsubSectionsList: array
+            })
+        });
+
+    }
+
+    handleSelect(data, s) {
+        // console.log('data', data)
+        // console.log('s', s)
+        this.setState({
+            selectedparentsubsectionOptions: data,
+            selectedparentsubsectionId: data.value
+        })
+        debugger
+        let Obj = {
+            "subSectionId": s.subSectionId,
+            "sectionId": this.state.searchSectionId,
+            "parentSubSectionId": data.value,
+            "subSectionName": s.subSectionName,
+            "subSectionNameAlias": s.subSectionNameAlias,
+            "description": s.description,
+            "enteredBy": localStorage.getItem("UserId"),
+            "changedBy": localStorage.getItem("UserId"),
+            "deleteStatus": false,
+            "referencerubric": [],
+            "subSectionLanguageDetails": []
+        }
+        console.log('Obj==', Obj)
+        debugger
+        CommonServices.postData([Obj], `/subsection`).then((responseMessage) => {
+            debugger
+            console.log('responseMessage==', responseMessage)
+            //this.props.enqueueSnackbarAction(responseMessage.data);
+            // alert(responseMessage.data);
+            //this.props.history.push('/ListSubSection');
+        });
+
+    }
+
 
     render() {
         const { isLoading } = this.state;
@@ -222,9 +297,11 @@ export class ListSubSectionComponent extends Component {
                                 <th className='fcol'>#</th>
                                 <th>SubSection Name</th>
                                 <th>SubSection Name Alias</th>
-                                <th>Description</th>
-                                <th>Section Id</th>
+                                {/* <th>Button</th> */}
+                                {/* <th>Description</th> */}
+                                {/* <th>Section Id</th> */}
                                 <th>Parent Sub Section Id</th>
+                                <th>Parent Sub Section</th>
                                 <th className='lcol'>Action</th>
                             </tr>
                         </thead>
@@ -250,6 +327,7 @@ export class ListSubSectionComponent extends Component {
                                     </tr>
                                     :
                                     this.renderSubsectionTable()
+
                             }
 
                         </tbody>
@@ -344,16 +422,14 @@ export class ListSubSectionComponent extends Component {
 
 
     handleChange(e) {
-
-
-
-
-        
         this.setState({
             [e.target.name]: e.target.value,
             isLoading: true
         }, () => {
             this.getSubSection(1, this.state.searchQuery)
+            this.GetParentSubsections(this.state.searchSectionId)
+
+
         })
     }
 
@@ -367,13 +443,13 @@ export class ListSubSectionComponent extends Component {
 
         const { name, value } = e.target;
 
-    // Split the input value by spaces
-    const words = value.split(' ');
+        // Split the input value by spaces
+        const words = value.split(' ');
 
-    // Join the words with the desired pattern
-    const formattedValue = words.join(' - ');
+        // Join the words with the desired pattern
+        const formattedValue = words.join(' - ');
 
-debugger
+        debugger
         this.setState({
             searchQuery: formattedValue,
             SubSectionList: []
