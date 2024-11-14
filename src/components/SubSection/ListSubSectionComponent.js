@@ -178,9 +178,9 @@ export class ListSubSectionComponent extends Component {
                             <i className="fa fa-trash"></i>
                         </Button>
 
-                        <Button style={{ marginLeft: 8 }} variant="dark">
+                        {/* <Button style={{ marginLeft: 8 }} variant="dark">
                             <i className="fa fa-arrow-right"></i>
-                        </Button>
+                        </Button> */}
                     </td>
                 </tr>
             )
@@ -250,7 +250,7 @@ export class ListSubSectionComponent extends Component {
                 itemsCountPerPage={this.state.pageSize}
                 totalItemsCount={totalRecords}
                 // pageRangeDisplayed={this.state.pageSize}
-                pageRangeDisplayed={20}
+                pageRangeDisplayed={15}
                 // onChange={this.getSubSection(pageNumber)}
                 onChange={(pageNumber) => { this.getSubSection(pageNumber, this.state.searchQuery) }}
             />
