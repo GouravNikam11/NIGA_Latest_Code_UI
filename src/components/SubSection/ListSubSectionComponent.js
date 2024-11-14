@@ -5,6 +5,7 @@ import CommonServices from '../../Services/CommonServices';
 import { connect } from 'react-redux';
 import Pagination from "react-js-pagination";
 import Select from "react-select";
+import AsyncPaginate from "react-select-async-paginate";
 
 import {
     enqueueSnackbar as enqueueSnackbarAction,
@@ -34,7 +35,8 @@ export class ListSubSectionComponent extends Component {
             pageSize: 25,
             searchQuery: '',
             parentsubSectionsList: [],
-            selectedparentsubsectionOptions: '',
+            selectedparentsubsectionOptions: [],
+            //selectedOptionsBySubsection: {},  // Store selected options by each subSectionId
             selectedparentsubsectionId: 0
         }
         this.handleChange = this.handleChange.bind(this);
@@ -88,20 +90,34 @@ export class ListSubSectionComponent extends Component {
     // }
 
 
-    renderSubsectionTable = () => {
-        // const { SubSectionList, currentPage, pageSize, searchQuery } = this.state;
-        // Apply search filtering
-        // let filteredSubsectionList = this.state.SubSectionList?.resultObject;
-        // if (searchQuery) {
-        //     filteredSubsectionList = SubSectionList?.resultObject.filter(s =>
-        //         s.subSectionName.toLowerCase().includes(searchQuery.toLowerCase())
-        //     );
-        // }
-        // const currentPageRecords = filteredSubsectionList.slice(
-        //     (currentPage - 1) * pageSize,
-        //     currentPage * pageSize
-        // );
+    loadSymptomsOptions = (search, prevOptions) => {
+        const options = [];
+        var subsectionList = this.state.parentsubSectionsList; 
+        subsectionList.map(x => options.push({ value: x.subSectionId, label: x.subSectionName }));
+        let filteredOptions;
+        if (!search) {
+            filteredOptions = options;
+        }
+        else {
+            const searchLower = search.toLowerCase();
+            filteredOptions = options.filter(({ label }) =>
+                label.toLowerCase().includes(searchLower)
+            );
+        }
+        const hasMore = filteredOptions.length > prevOptions.length + 10;
+        const slicedOptions = filteredOptions.slice(
+            prevOptions.length,
+            prevOptions.length + 10
+        );
+        return {
+            options: slicedOptions,
+            hasMore
+        };
+    }
 
+
+    renderSubsectionTable = () => {
+       // const counterDiagnosisSymptoms = this.state.selectedparentsubsectionId;
         if (this.state.SubSectionList.resultObject?.length === 0) {
             return (
                 <tr>
@@ -116,12 +132,16 @@ export class ListSubSectionComponent extends Component {
             );
         }
 
-        return this.state.SubSectionList?.resultObject?.map((s, index) => (
-            <tr key={index}>
-                <td className='fcol'>{s.subSectionId}</td>
-                <td>{s.subSectionName}</td>
+
+
+        return this.state.SubSectionList?.resultObject?.map((s,index)=>{
+            let updateditem ={...s,aliesvalue:{}}
+            return(
+                <tr key={index}>
+                <td className='fcol'>{updateditem.subSectionId}</td>
+                <td>{updateditem.subSectionName}</td>
                 {/* <td>{s.subSectionNameAlias}</td> */}
-                <td >  <Select
+                {/* <td >  <Select
                     options={this.state.parentsubSectionsList}
                     placeholder="Select Parent SunSection:"
                     value={this.state.selectedparentsubsectionOptions}
@@ -129,21 +149,30 @@ export class ListSubSectionComponent extends Component {
                     isSearchable={true}
 
                 /></td>
-              
-                <td>{s.description}</td>
-                <td>{s.sectionId}</td>
-                <td>{s.parentSubSectionId}</td>
+               */}
+                <td><AsyncPaginate isClearable
+                    placeholder="Select one or more subsection"
+                    // key={counterDiagnosisSymptoms}
+                    // cacheOptions={counterDiagnosisSymptoms}
+                    closeMenuOnSelect={false}
+                    value={updateditem.aliesvalue}
+                    loadOptions={this.loadSymptomsOptions.bind(this)}
+                    onChange={(item) => this.handleSelect(item, updateditem)}
+                /></td>
+                {/* <td>{s.description}</td> */}
+                <td>{updateditem.sectionId}</td>
+                <td>{updateditem.parentSubSectionId}</td>
                 <td>Parent Sub Section Name</td>
                 <td className='lcol'>
-                    <Link to={"/EditSubSection/" + s.subSectionId}>
-                        <Button onClick={() => this.editSubSection(s.subSectionId)}>
+                    <Link to={"/EditSubSection/" + updateditem.subSectionId}>
+                        <Button onClick={() => this.editSubSection(updateditem.subSectionId)}>
                             <i className="fa fa-pencil"></i>
                         </Button>
                     </Link>
                     <Button
                         style={{ marginLeft: 8 }}
                         variant="danger"
-                        onClick={() => this.deleteSubSection(s.subSectionId)}
+                        onClick={() => this.deleteSubSection(updateditem.subSectionId)}
                     >
                         <i className="fa fa-trash"></i>
                     </Button>
@@ -153,8 +182,59 @@ export class ListSubSectionComponent extends Component {
                     </Button>
                 </td>
             </tr>
+            )
+        })
 
-        ));
+
+        // return this.state.SubSectionList?.resultObject?.map((s, index) => (
+
+        //     <tr key={index}>
+        //         <td className='fcol'>{s.subSectionId}</td>
+        //         <td>{s.subSectionName}</td>
+        //         {/* <td>{s.subSectionNameAlias}</td> */}
+        //         {/* <td >  <Select
+        //             options={this.state.parentsubSectionsList}
+        //             placeholder="Select Parent SunSection:"
+        //             value={this.state.selectedparentsubsectionOptions}
+        //             onChange={(item) => this.handleSelect(item, s)}
+        //             isSearchable={true}
+
+        //         /></td>
+        //        */}
+        //         <td><AsyncPaginate isClearable
+        //             placeholder="Select one or more subsection"
+        //             key={counterDiagnosisSymptoms}
+        //             cacheOptions={counterDiagnosisSymptoms}
+        //             closeMenuOnSelect={false}
+        //             value={this.state.selectedparentsubsectionOptions}
+        //             loadOptions={this.loadSymptomsOptions.bind(this)}
+        //             onChange={(item) => this.handleSelect(item, s)}
+        //         /></td>
+        //         {/* <td>{s.description}</td> */}
+        //         <td>{s.sectionId}</td>
+        //         <td>{s.parentSubSectionId}</td>
+        //         <td>Parent Sub Section Name</td>
+        //         <td className='lcol'>
+        //             <Link to={"/EditSubSection/" + s.subSectionId}>
+        //                 <Button onClick={() => this.editSubSection(s.subSectionId)}>
+        //                     <i className="fa fa-pencil"></i>
+        //                 </Button>
+        //             </Link>
+        //             <Button
+        //                 style={{ marginLeft: 8 }}
+        //                 variant="danger"
+        //                 onClick={() => this.deleteSubSection(s.subSectionId)}
+        //             >
+        //                 <i className="fa fa-trash"></i>
+        //             </Button>
+
+        //             <Button style={{ marginLeft: 8 }} variant="dark">
+        //                 <i className="fa fa-arrow-right"></i>
+        //             </Button>
+        //         </td>
+        //     </tr>
+
+        // ));
     }
 
 
@@ -181,31 +261,43 @@ export class ListSubSectionComponent extends Component {
         CommonServices.getDataById(sectionId, `/DropdownList/GetSubsectionBySection`).then((res) => {
             debugger;
             console.log("res", res)
-            var copyTableData = res;
-            let array = []
-            copyTableData.forEach(element => {
-                //console.log("printed====>>>>", element)
-                //debugger;
-                let obj = {
-                    value: element.subSectionId,
-                    label: element.subSectionName
-                }
-                array.push(obj)
-            });
+            // var copyTableData = res;
+            // let array = []
+            // copyTableData.forEach(element => {
+            //     //console.log("printed====>>>>", element)
+            //     //debugger;
+            //     let obj = {
+            //         value: element.subSectionId,
+            //         label: element.subSectionName
+            //     }
+            //     array.push(obj)
+            // });
             this.setState({
-                parentsubSectionsList: array
+                parentsubSectionsList: res
             })
         });
 
     }
 
     handleSelect(data, s) {
-        // console.log('data', data)
-        // console.log('s', s)
+        debugger
+        const updatedList = this.state.SubSectionList.resultObject.map(item => {
+            if (item.subSectionId === s.subSectionId) {
+                // Update the aliesvalue for the selected item
+                return { ...item, aliesvalue: data };
+            }
+            return item; // Return unchanged items
+        });
+    
+        // Update state to trigger a re-render
         this.setState({
+            SubSectionList: {
+                ...this.state.SubSectionList,
+                resultObject: updatedList
+            },
             selectedparentsubsectionOptions: data,
             selectedparentsubsectionId: data.value
-        })
+        });
         debugger
         let Obj = {
             "subSectionId": s.subSectionId,
@@ -298,7 +390,7 @@ export class ListSubSectionComponent extends Component {
                                 <th className='fcol'>#</th>
                                 <th>Sub Section Name</th>
                                 <th style={{ width: "16%" }}>Sub Section Name Alias</th>
-                                <th>Description</th>
+                                {/* <th>Description</th> */}
                                 <th>Section Id</th>
                                 <th>Parent Sub Section Id</th>
                                 <th>Parent Sub Section</th>
