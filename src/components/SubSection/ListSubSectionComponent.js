@@ -92,7 +92,7 @@ export class ListSubSectionComponent extends Component {
 
     loadSymptomsOptions = (search, prevOptions) => {
         const options = [];
-        var subsectionList = this.state.parentsubSectionsList; 
+        var subsectionList = this.state.parentsubSectionsList;
         subsectionList.map(x => options.push({ value: x.subSectionId, label: x.subSectionName }));
         let filteredOptions;
         if (!search) {
@@ -117,7 +117,8 @@ export class ListSubSectionComponent extends Component {
 
 
     renderSubsectionTable = () => {
-       // const counterDiagnosisSymptoms = this.state.selectedparentsubsectionId;
+        debugger
+        const counterDiagnosisSymptoms = this.state.selectedparentsubsectionId;
         if (this.state.SubSectionList.resultObject?.length === 0) {
             return (
                 <tr>
@@ -134,14 +135,14 @@ export class ListSubSectionComponent extends Component {
 
 
 
-        return this.state.SubSectionList?.resultObject?.map((s,index)=>{
-            let updateditem ={...s,aliesvalue:{}}
-            return(
+        return this.state.SubSectionList?.resultObject?.map((updateditem, index) => {
+            //let updateditem = { ...s, aliesvalue: {} }
+            return (
                 <tr key={index}>
-                <td className='fcol'>{updateditem.subSectionId}</td>
-                <td>{updateditem.subSectionName}</td>
-                {/* <td>{s.subSectionNameAlias}</td> */}
-                {/* <td >  <Select
+                    <td className='fcol'>{updateditem.subSectionId}</td>
+                    <td>{updateditem.subSectionName}</td>
+                    {/* <td>{s.subSectionNameAlias}</td> */}
+                    {/* <td >  <Select
                     options={this.state.parentsubSectionsList}
                     placeholder="Select Parent SunSection:"
                     value={this.state.selectedparentsubsectionOptions}
@@ -150,38 +151,38 @@ export class ListSubSectionComponent extends Component {
 
                 /></td>
                */}
-                <td><AsyncPaginate isClearable
-                    placeholder="Select one or more subsection"
-                    // key={counterDiagnosisSymptoms}
-                    // cacheOptions={counterDiagnosisSymptoms}
-                    closeMenuOnSelect={false}
-                    value={updateditem.aliesvalue}
-                    loadOptions={this.loadSymptomsOptions.bind(this)}
-                    onChange={(item) => this.handleSelect(item, updateditem)}
-                /></td>
-                {/* <td>{s.description}</td> */}
-                <td>{updateditem.sectionId}</td>
-                <td>{updateditem.parentSubSectionId}</td>
-                <td>Parent Sub Section Name</td>
-                <td className='lcol'>
-                    <Link to={"/EditSubSection/" + updateditem.subSectionId}>
-                        <Button onClick={() => this.editSubSection(updateditem.subSectionId)}>
-                            <i className="fa fa-pencil"></i>
+                    <td><AsyncPaginate isClearable
+                        placeholder="Select one or more subsection"
+                        key={counterDiagnosisSymptoms}
+                        cacheOptions={counterDiagnosisSymptoms}
+                        closeMenuOnSelect={false}
+                        value={updateditem.aliesvalue}
+                        loadOptions={this.loadSymptomsOptions.bind(this)}
+                        onChange={(item) => this.handleSelect(item, updateditem)}
+                    /></td>
+                    {/* <td>{s.description}</td> */}
+                    <td>{updateditem.sectionId}</td>
+                    <td>{updateditem.parentSubSectionId}</td>
+                    <td>Parent Sub Section Name</td>
+                    <td className='lcol'>
+                        <Link to={"/EditSubSection/" + updateditem.subSectionId}>
+                            <Button onClick={() => this.editSubSection(updateditem.subSectionId)}>
+                                <i className="fa fa-pencil"></i>
+                            </Button>
+                        </Link>
+                        <Button
+                            style={{ marginLeft: 8 }}
+                            variant="danger"
+                            onClick={() => this.deleteSubSection(updateditem.subSectionId)}
+                        >
+                            <i className="fa fa-trash"></i>
                         </Button>
-                    </Link>
-                    <Button
-                        style={{ marginLeft: 8 }}
-                        variant="danger"
-                        onClick={() => this.deleteSubSection(updateditem.subSectionId)}
-                    >
-                        <i className="fa fa-trash"></i>
-                    </Button>
 
-                    <Button style={{ marginLeft: 8 }} variant="dark">
-                        <i className="fa fa-arrow-right"></i>
-                    </Button>
-                </td>
-            </tr>
+                        <Button style={{ marginLeft: 8 }} variant="dark">
+                            <i className="fa fa-arrow-right"></i>
+                        </Button>
+                    </td>
+                </tr>
             )
         })
 
@@ -288,16 +289,21 @@ export class ListSubSectionComponent extends Component {
             }
             return item; // Return unchanged items
         });
-    
+
         // Update state to trigger a re-render
-        this.setState({
+        this.setState((prevState) => ({
             SubSectionList: {
-                ...this.state.SubSectionList,
+                ...prevState.SubSectionList,
                 resultObject: updatedList
             },
             selectedparentsubsectionOptions: data,
             selectedparentsubsectionId: data.value
+        }), () => {
+            // Callback function to check updated state
+            debugger
+            console.log('Updated SubSectionList:', this.state.SubSectionList);
         });
+        console.log(this.state.SubSectionList)
         debugger
         let Obj = {
             "subSectionId": s.subSectionId,
@@ -317,7 +323,24 @@ export class ListSubSectionComponent extends Component {
         CommonServices.postData([Obj], `/subsection`).then((responseMessage) => {
             debugger
             console.log('responseMessage==', responseMessage)
-            //this.props.enqueueSnackbarAction(responseMessage.data);
+            this.props.enqueueSnackbarAction(responseMessage.data);
+            const updatedList = this.state.SubSectionList.resultObject.map(item => {
+                if (item.subSectionId === s.subSectionId) {
+                    // Update the aliesvalue for the selected item
+                    return { ...item, parentSubSectionId: data.value, aliesvalue: {} };
+                }
+                return item; // Return unchanged items
+            });
+            this.setState((prevState) => ({
+                SubSectionList: {
+                    ...prevState.SubSectionList,
+                    resultObject: updatedList
+                },
+            }), () => {
+                // Callback function to check updated state
+                debugger
+                console.log('Updated SubSectionList:', this.state.SubSectionList);
+            });
             // alert(responseMessage.data);
             //this.props.history.push('/ListSubSection');
         });
@@ -326,6 +349,7 @@ export class ListSubSectionComponent extends Component {
 
 
     render() {
+        debugger
         const { isLoading } = this.state;
         return (
             <div>
@@ -445,8 +469,16 @@ export class ListSubSectionComponent extends Component {
 
             CommonServices.getData(`/Pagination/GetSubSectionBySectionIdAndQueryString?sectionId=${this.state.searchSectionId}${searchQuery ? `&queryString=${searchQuery}` : ''}&PageNumber=${pageNumber}&PageSize=${this.state.pageSize}`).then((temp) => {
                 console.log("new GetSubSectionsWithPagination", temp)
+                debugger
+                const updatedArray = {
+                    ...temp,
+                    resultObject: temp.resultObject.map(item => ({
+                        ...item,
+                        aliesvalue: {}
+                    }))
+                };
                 this.setState({
-                    SubSectionList: temp,
+                    SubSectionList: updatedArray,
                     isLoading: false
                 })
             });
@@ -518,6 +550,7 @@ export class ListSubSectionComponent extends Component {
             [e.target.name]: e.target.value,
             isLoading: true
         }, () => {
+            debugger
             this.getSubSection(1, this.state.searchQuery)
             this.GetParentSubsections(this.state.searchSectionId)
 
