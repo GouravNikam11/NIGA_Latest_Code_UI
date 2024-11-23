@@ -19,6 +19,7 @@ import {
     NavLink
 } from 'reactstrap';
 import CommonServices from '../../Services/CommonServices';
+import { reject, result } from 'lodash';
 //========================================================================//
 
 /**
@@ -38,12 +39,12 @@ export class ViewRemedialRubricsComponent extends Component {
             isDatafetched: false,
             RubricRemedy: [],
             SearchText: '',
-            RemedyName:'',
-            ThemesCharacteristics:'',
-            Generals:'',
-            Modalities:'',
-            Perticulars:'',
-            GetRemedyId:this.props.match.params.id
+            RemedyName: '',
+            ThemesCharacteristics: '',
+            Generals: '',
+            Modalities: '',
+            Perticulars: '',
+            GetRemedyId: this.props.match.params.id
         };
     }
 
@@ -109,9 +110,9 @@ export class ViewRemedialRubricsComponent extends Component {
                                 <strong> SubSections</strong>
                             </CardHeader>
                             <CardBody>
-                                <Table style={{background: '#f0f3f5'}}>
+                                <Table style={{ background: '#f0f3f5' }}>
                                     <thead>
-                                        <tr><td style={{width:'15%'}}><strong>Remedy Name</strong></td><td style={{width:'2%'}}>:</td><td>{this.state.RemedyName}</td></tr>
+                                        <tr><td style={{ width: '15%' }}><strong>Remedy Name</strong></td><td style={{ width: '2%' }}>:</td><td>{this.state.RemedyName}</td></tr>
                                         <tr><td><strong>Themes/ Characteristics</strong></td><td>:</td><td>{this.state.ThemesCharacteristics}</td></tr>
                                         <tr><td><strong>Generals</strong></td><td>:</td><td>{this.state.Generals}</td></tr>
                                         <tr><td><strong>Modalities</strong></td><td>:</td><td>{this.state.Modalities}</td></tr>
@@ -119,7 +120,7 @@ export class ViewRemedialRubricsComponent extends Component {
                                     </thead>
                                 </Table>
                                 <Table>
-                                    
+
                                     <tbody>
                                         {
                                             this.state.isDatafetched == true ?
@@ -134,16 +135,16 @@ export class ViewRemedialRubricsComponent extends Component {
                                                                         color: value.fontColor,
                                                                         fontStyle: value.fontStyle
                                                                     }}>{value.subSectionName} <div class="fltr" style={{ width: '4.5rem' }}><div class="fltcnt"></div>
-                                                                        
-                                                                        </div> </h6>
+
+                                                                    </div> </h6>
                                                             </td>
                                                             <td className='text-right' title='Score'><strong>[{value.remedyCount}]</strong> &nbsp;&nbsp;&nbsp;</td>
                                                             <td className='text-center' style={{ width: '5%' }} title='Small Rubric ?'>
-                                                                <input class="form-check-input" type="checkbox" value="" id="" checked={value.isSmallRubric}onClick={() => this.Checkissmallrubric(value.rubricRemedyId, !value.isSmallRubric)} />
+                                                                <input class="form-check-input" type="checkbox" value="" id="" checked={value.isSmallRubric} onClick={() => this.Checkissmallrubric(value.rubricRemedyId, !value.isSmallRubric)} />
                                                                 <label class="form-check-label" for="smallrub">S.R.</label>
                                                             </td>
                                                             <td className='text-center' style={{ width: '5%' }} title='Confirmative Rubric ?'>
-                                                                <input class="form-check-input" type="checkbox" value="" id="" checked={value.isConformationRubric}onClick={() => this.CheckisConformationRubric(value.rubricRemedyId, !value.isConformationRubric)}/>
+                                                                <input class="form-check-input" type="checkbox" value="" id="" checked={value.isConformationRubric} onClick={() => this.CheckisConformationRubric(value.rubricRemedyId, !value.isConformationRubric)} />
                                                                 <label class="form-check-label" for="confrub">C.R.</label>
                                                             </td>
                                                         </tr>
@@ -160,12 +161,12 @@ export class ViewRemedialRubricsComponent extends Component {
                                                         <br />
                                                         <br />
                                                         &nbsp; &nbsp; &nbsp; Loading...
-                                                </td>
+                                                    </td>
                                                 </tr>
                                         }
                                     </tbody>
 
-                                   
+
 
                                 </Table>
                             </CardBody>
@@ -180,18 +181,20 @@ export class ViewRemedialRubricsComponent extends Component {
      * Get Remedy Details
      */
     GetRemedyDetails = remedyId => {
-      
+
         CommonServices.getDataById(remedyId, `/RubricRemedy/GetRubricRemedyDetails`).then((result) => {
             debugger;
-            console.log("/RubricRemedy/GetRubricRemedyDetails",result)
+            console.log("/RubricRemedy/GetRubricRemedyDetails", result)
             if (result != undefined) {
                 console.log(result);
-                this.setState({ isDatafetched: true, RubricRemedy: result.rubricRemedyViewsList,
-                    RemedyName:result.remedyName,
-                    ThemesCharacteristics:result.themesOrCharacteristics,
-                    Generals:result.generals,
-                    Modalities:result.modalities,
-                    Perticulars:result.particulars});
+                this.setState({
+                    isDatafetched: true, RubricRemedy: result.rubricRemedyViewsList,
+                    RemedyName: result.remedyName,
+                    ThemesCharacteristics: result.themesOrCharacteristics,
+                    Generals: result.generals,
+                    Modalities: result.modalities,
+                    Perticulars: result.particulars
+                });
             }
             else {
                 this.setState({ isDatafetched: false });
@@ -199,19 +202,51 @@ export class ViewRemedialRubricsComponent extends Component {
         })
     }
 
-    Checkissmallrubric = (rubricRemedyId,isSmallRubric) => {
-        debugger
-        CommonServices.getData(`/RubricRemedy/UpdateIsSmallRubric/${rubricRemedyId}/${isSmallRubric}`).then((result) => {
-        //  window.location.reload();
-        this.GetRemedyDetails(this.state.GetRemedyId)
+    Checkissmallrubric = (rubricRemedyId, isSmallRubric) => {
+        new Promise((resolve, reject) => {
+            let updateArray = [...this.state.RubricRemedy];
+            updateArray.find((item) => {
+                if (item.rubricRemedyId === rubricRemedyId) {
+                    item.isSmallRubric = !item.isSmallRubric;
+                }
+            });
+            this.setState({ RubricRemedy: updateArray }, () => {
+                console.log('Updated RubricRemedy:', this.state.RubricRemedy);
+                resolve(true)
+            });
+
+
+        }).then((result) => {
+            debugger
+            CommonServices.getData(`/RubricRemedy/UpdateIsSmallRubric/${rubricRemedyId}/${isSmallRubric}`).then((result) => {
+                //  window.location.reload();
+                // this.GetRemedyDetails(this.state.GetRemedyId)
+            });
         });
     }
-    
-    CheckisConformationRubric = (rubricRemedyId,isConformationRubric) => {
-        debugger
-        CommonServices.getData(`/RubricRemedy/UpdateIsConfirmationRubric/${rubricRemedyId}/${isConformationRubric}`).then((result) => {
-         // window.location.reload();
-         this.GetRemedyDetails(this.state.GetRemedyId)
+
+    CheckisConformationRubric = (rubricRemedyId, isConformationRubric) => {
+
+        new Promise((resolve, reject) => {
+            let updateArray = [...this.state.RubricRemedy];
+            updateArray.find((item) => {
+                if (item.rubricRemedyId === rubricRemedyId) {
+                    item.isConformationRubric = !item.isConformationRubric;
+                }
+            });
+            this.setState({ RubricRemedy: updateArray }, () => {
+                console.log('Updated RubricRemedy:', this.state.RubricRemedy);
+                resolve(true)
+            });
+
+
+        }).then((result) => {
+            debugger
+            CommonServices.getData(`/RubricRemedy/UpdateIsConfirmationRubric/${rubricRemedyId}/${isConformationRubric}`).then((result) => {
+                // window.location.reload();
+                //this.GetRemedyDetails(this.state.GetRemedyId)
+            });
         });
+        
     }
 }

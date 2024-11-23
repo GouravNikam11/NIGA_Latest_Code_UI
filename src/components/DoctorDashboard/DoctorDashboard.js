@@ -326,7 +326,7 @@ class DoctorDashboard extends React.Component {
                                             <th style={{ width: "20%", textAlign: "center" }}>Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    {/* <tbody>
                                         {
                                             patients ?
                                                 patients.map((value, index) => {
@@ -352,7 +352,101 @@ class DoctorDashboard extends React.Component {
                                                     )
                                                 }) : null
                                         }
-                                    </tbody>
+                                    </tbody> */}
+
+
+<tbody>
+    {patients
+        ? patients.map((value, index) => {
+              return (
+                  <tr key={index}>
+                      <td className="tbl1">
+                          {value.status === "Completed" ? (
+                              <p
+                                  style={{
+                                      color: "gray",
+                                      textTransform: "uppercase",
+                                      textAlign: "center",
+                                      padding: 0,
+                                      margin: 0,
+                                      cursor: "default",
+                                  }}
+                              >
+                                  {value.patientName}
+                              </p>
+                          ) : (
+                              <Link
+                                  to={
+                                      "/PatientDashboard/" +
+                                      value.patientId +
+                                      "/" +
+                                      value.caseId +
+                                      "/" +
+                                      value.patientAppId +
+                                      "/" +
+                                      value.doctorId
+                                  }
+                              >
+                                  <p
+                                      style={{
+                                          color: "#007bff",
+                                          textTransform: "uppercase",
+                                          textAlign: "center",
+                                          padding: 0,
+                                          margin: 0,
+                                      }}
+                                  >
+                                      {value.patientName}
+                                  </p>
+                              </Link>
+                          )}
+                      </td>
+                      <td className="tbl">{value.mobileNo}</td>
+                      <td className="tbl">
+                          {new Date(`2000-01-01T${value.appointmentTime}`).toLocaleTimeString([], {
+                              hour: "numeric",
+                              minute: "2-digit",
+                              hour12: true,
+                          })}
+                      </td>
+                      <td className="tbl"></td>
+                      <td className="tbl">{value.status}</td>
+                      <td className="tbl2" style={{ textAlign: "center" }}>
+                          <Link
+                              to={
+                                  "/PatientDashboard/" +
+                                  value.patientId +
+                                  "/" +
+                                  value.caseId +
+                                  "/" +
+                                  value.patientAppId +
+                                  "/" +
+                                  value.doctorId
+                              }
+                          >
+                              <Button style={{ fontSize: "12px" }} size="md" color="primary">
+                                  <i className="fa fa-plus-square"></i> ADD SYMPTOM
+                              </Button>{" "}
+                              &nbsp;
+                          </Link>
+                          <Link to={"/EditPatientAppointment/" + value.patientAppId}>
+                              <Button
+                                  onClick={() => this.editPatientApp(value.patientAppId)}
+                                  style={{ fontSize: "12px" }}
+                                  size="md"
+                                  color="danger"
+                              >
+                                  <i className="fa fa-pencil-square"></i> EDIT
+                              </Button>{" "}
+                              &nbsp;
+                          </Link>
+                      </td>
+                  </tr>
+              );
+          })
+        : null}
+</tbody>
+
                                 </Table>
                             </CardBody>
                         </Card>
@@ -583,6 +677,7 @@ class DoctorDashboard extends React.Component {
                 Status: res.status,
                 DeleteStatus: false
             })
+            this.GetAllCases()
         });
     }
 
